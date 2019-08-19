@@ -1,0 +1,19 @@
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a [routerLink]="['/']">Home</a></li>
+        <li class="breadcrumb-item active" aria-current="page">{{badgeSet.name}}</li>
+    </ol>
+</nav>
+
+<h1>{{badgeSet.name}}</h1>
+
+<p>
+    <app-badge-set-statuses [badgeSet]="badgeSet"></app-badge-set-statuses>
+</p>
+
+<markdown ngPreserveWhitespaces [data]="badgeSet.description"></markdown>
+
+<section>
+    <h3>Badges</h3>
+    <app-badge-list [badges]="badgeSet.badges"></app-badge-list>
+</section>

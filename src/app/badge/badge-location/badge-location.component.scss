@@ -1,0 +1,26 @@
+@import "~src/mixins";
+
+app-game-map {
+    display: block;
+}
+
+.loc {
+    background-color: $gray-200;
+    border: $gray-400 1px solid;
+    border-radius: 3px;
+    padding: 0 4px;
+
+    .x:after,
+    .y:after {
+        content: ','
+    }
+
+    :not(:first-child) {
+        margin-left: 0.5em;
+    }
+}
+
+.multiple-locations {
+    color: $text-muted;
+    font-style: italic;
+}

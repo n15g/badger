@@ -1,0 +1,24 @@
+<h1>Badger</h1>
+
+<p class="lead">A badge database and tracker application for City of Heroes.</p>
+
+<section>
+    <h3>Badge Sets</h3>
+    <p>Different servers have different sets of badges.</p>
+
+    <ul class="badge-sets list-unstyled" *ngFor="let badgeSet of badgeSets | badgeSetSort">
+        <li>
+            <div class="card">
+                <div class="card-body">
+                    <h5>
+                        <a class="card-title" [routerLink]="['/badge-set', badgeSet.key]">{{badgeSet.name}}</a>
+                        <app-badge-set-statuses [badgeSet]="badgeSet"></app-badge-set-statuses>
+                    </h5>
+                    <h6 class="card-subtitle mb-2 text-muted">
+                        <markdown [data]="badgeSet.description"></markdown>
+                    </h6>
+                </div>
+            </div>
+        </li>
+    </ul>
+</section>

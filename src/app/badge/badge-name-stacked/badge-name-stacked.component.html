@@ -1,0 +1,3 @@
+<div class="badge-names">
+    <div *ngFor="let name of (badge | badgeNames)" [ngClass]="name.classes">{{name.value}}</div>
+</div>

@@ -1,0 +1,5 @@
+<span class="badge-names">
+    <span *ngFor="let name of (badge | badgeNames); let isLast = last">
+        <span [ngClass]="name.classes">{{name.value}}</span>
+    </span>
+</span>

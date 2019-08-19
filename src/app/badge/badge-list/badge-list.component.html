@@ -1,0 +1,32 @@
+<table class="badge-list table">
+    <thead>
+    <tr>
+        <th>Icon</th>
+        <th>Type</th>
+        <th>Name</th>
+        <th class="badge-description">Description</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let badge of orderedBadges">
+        <td class="badge-image">
+            <app-badge-images [badge]="badge"></app-badge-images>
+        </td>
+
+        <td class="badge-type">
+            {{badge.type | badgeType}}
+        </td>
+
+
+        <td class="badge-name">
+            <a [routerLink]="['/badge-set', badge.badgeSetKey, 'badge', badge.key]">
+                <app-badge-name-stacked [badge]="badge"></app-badge-name-stacked>
+            </a>
+        </td>
+
+        <td class="badge-description">
+            <app-badge-description [badge]="badge"></app-badge-description>
+        </td>
+    </tr>
+    </tbody>
+</table>

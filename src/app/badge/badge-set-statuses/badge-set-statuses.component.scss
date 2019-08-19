@@ -1,0 +1,7 @@
+.badge-set-statuses {
+    font-size: smaller;
+
+    :not(:first-child) {
+        margin-left: 0.5em;
+    }
+}
