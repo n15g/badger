@@ -1,7 +1,7 @@
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a [routerLink]="['/']">Home</a></li>
-        <li class="breadcrumb-item"><a [routerLink]="['/badge-set', badgeSet.key]">{{badgeSet.name}}</a></li>
+        <li class="breadcrumb-item"><a [routerLink]="['/', serverGroup.key]">{{serverGroup.name}}</a></li>
         <li class="breadcrumb-item active" aria-current="page">{{badge.canonicalName}}</li>
     </ol>
 </nav>
@@ -10,4 +10,3 @@
     <app-badge-name-inline [badge]="badge"></app-badge-name-inline>
 </h3>
 
-<pre>{{badge | json}}</pre>

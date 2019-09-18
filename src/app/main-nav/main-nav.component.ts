@@ -1,6 +1,6 @@
 import {Component} from "@angular/core";
 import {ContentDbService} from "../content-db/content-db.service";
-import {IBadgeSet} from "../content-db/badge-set/badge-set.interface";
+import {IServerGroup} from "coh-content-db";
 
 @Component({
     selector: "app-main-nav",
@@ -8,9 +8,9 @@ import {IBadgeSet} from "../content-db/badge-set/badge-set.interface";
     styleUrls: ["./main-nav.component.scss"]
 })
 export class MainNavComponent {
-    public badgeSets: IBadgeSet[];
+    public serverGroups: IServerGroup[];
 
     constructor(contentDbService: ContentDbService) {
-        this.badgeSets = contentDbService.getBadgeSets();
+        this.serverGroups = contentDbService.getServerGroups();
     }
 }

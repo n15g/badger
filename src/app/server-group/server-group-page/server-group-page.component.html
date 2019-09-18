@@ -1,0 +1,19 @@
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a [routerLink]="['/']">Home</a></li>
+        <li class="breadcrumb-item active" aria-current="page">{{serverGroup.name}}</li>
+    </ol>
+</nav>
+
+<h1>{{serverGroup.name}}</h1>
+
+<p>
+    <server-group-statuses [serverGroup]="serverGroup"></server-group-statuses>
+</p>
+
+<markdown ngPreserveWhitespaces [data]="serverGroup.description"></markdown>
+
+<section>
+    <h3>Badges</h3>
+    <app-badge-list [badges]="serverGroup.badges"></app-badge-list>
+</section>

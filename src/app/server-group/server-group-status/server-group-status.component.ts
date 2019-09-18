@@ -1,19 +1,19 @@
 import {Component, Input} from '@angular/core';
-import {BadgeSetStatus} from "../../content-db/badge-set/badge-set-status.enum";
+import {ServerGroupStatus} from "coh-content-db";
 
 @Component({
-    selector: 'app-badge-set-status',
-    templateUrl: './badge-set-status.component.html',
-    styleUrls: ['./badge-set-status.component.scss']
+    selector: 'server-group-status',
+    templateUrl: './server-group-status.component.html',
+    styleUrls: ['./server-group-status.component.scss']
 })
-export class BadgeSetStatusComponent {
-    @Input() public status: BadgeSetStatus;
+export class ServerGroupStatusComponent {
+    @Input() public status: ServerGroupStatus;
 
     public getClass() {
         switch (this.status) {
-            case BadgeSetStatus.INCOMPLETE:
+            case ServerGroupStatus.WORK_IN_PROGRESS:
                 return "badge-warning";
-            case BadgeSetStatus.SUNSET:
+            case ServerGroupStatus.SUNSET:
                 return "badge-danger";
             default:
                 return "badge-secondary";
@@ -22,9 +22,9 @@ export class BadgeSetStatusComponent {
 
     public getTitle() {
         switch (this.status) {
-            case BadgeSetStatus.INCOMPLETE:
+            case ServerGroupStatus.WORK_IN_PROGRESS:
                 return "This badge set is currently missing content";
-            case BadgeSetStatus.SUNSET:
+            case ServerGroupStatus.SUNSET:
                 return "This badge set is part of a codebase that has reached end-of-life.";
             default:
                 return "";

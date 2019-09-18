@@ -6,16 +6,16 @@
     <h3>Badge Sets</h3>
     <p>Different servers have different sets of badges.</p>
 
-    <ul class="badge-sets list-unstyled" *ngFor="let badgeSet of badgeSets | badgeSetSort">
+    <ul class="server-groups list-unstyled" *ngFor="let serverGroup of serverGroups | serverGroupSort">
         <li>
             <div class="card">
                 <div class="card-body">
                     <h5>
-                        <a class="card-title" [routerLink]="['/badge-set', badgeSet.key]">{{badgeSet.name}}</a>
-                        <app-badge-set-statuses [badgeSet]="badgeSet"></app-badge-set-statuses>
+                        <a class="card-title" [routerLink]="['/', serverGroup.key]">{{serverGroup.name}}</a>
+                        <server-group-statuses [serverGroup]="serverGroup"></server-group-statuses>
                     </h5>
                     <h6 class="card-subtitle mb-2 text-muted">
-                        <markdown [data]="badgeSet.description"></markdown>
+                        <markdown [data]="serverGroup.description"></markdown>
                     </h6>
                 </div>
             </div>

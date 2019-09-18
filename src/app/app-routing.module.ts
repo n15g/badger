@@ -1,15 +1,15 @@
 import {NgModule} from "@angular/core";
 import {RouterModule, Routes} from "@angular/router";
 import {HomeComponent} from "./home/home.component";
-import {BadgeSetPageComponent} from "./badge/badge-set-page/badge-set-page.component";
-import {BadgeSetResolver} from "./badge/badge-set.resolver";
 import {BadgeResolver} from "./badge/badge.resolver";
 import {BadgePageComponent} from "./badge/badge-page/badge-page.component";
+import {ServerGroupPageComponent} from "./server-group/server-group-page/server-group-page.component";
+import {ServerGroupResolver} from "./server-group/server-group.resolver";
 
 const routes: Routes = [
     {path: "", component: HomeComponent, data: {title: "Badger"}},
-    {path: "badge-set/:badgeSetKey", component: BadgeSetPageComponent, resolve: {badgeSet: BadgeSetResolver}},
-    {path: "badge-set/:badgeSetKey/badge/:badgeKey", component: BadgePageComponent, resolve: {badgeSet: BadgeSetResolver, badge: BadgeResolver}}
+    {path: ":serverGroupKey", component: ServerGroupPageComponent, resolve: {serverGroup: ServerGroupResolver}},
+    {path: ":serverGroupKey/badge/:badgeKey", component: BadgePageComponent, resolve: {serverGroup: ServerGroupResolver, badge: BadgeResolver}}
 ];
 
 @NgModule({

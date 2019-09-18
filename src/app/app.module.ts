@@ -7,12 +7,7 @@ import {FormsModule} from "@angular/forms";
 import {HomeComponent} from "./home/home.component";
 import {MainNavComponent} from "./main-nav/main-nav.component";
 import {TestComponent} from "./test/test.component";
-import {BadgeSetPageComponent} from "./badge/badge-set-page/badge-set-page.component";
-import {BadgeSetResolver} from "./badge/badge-set.resolver";
 import {MarkdownModule} from "ngx-markdown";
-import {BadgeSetStatusComponent} from "./badge/badge-set-status/badge-set-status.component";
-import {BadgeSetStatusesComponent} from "./badge/badge-set-statuses/badge-set-statuses.component";
-import {BadgeSetSortPipe} from "./badge/badge-set-sort.pipe";
 import {BadgeListComponent} from "./badge/badge-list/badge-list.component";
 import {BadgeImagesComponent} from "./badge/badge-images/badge-images.component";
 import {BadgeNameStackedComponent} from "./badge/badge-name-stacked/badge-name-stacked.component";
@@ -24,6 +19,11 @@ import {GameMapComponent} from "./game-map/game-map/game-map.component";
 import {BadgeLocationComponent} from "./badge/badge-location/badge-location.component";
 import {BadgeTypePipe} from "./badge/badge-type.pipe";
 import {BadgeDescriptionComponent} from "./badge/badge-description/badge-description.component";
+import {ServerGroupPageComponent} from "./server-group/server-group-page/server-group-page.component";
+import {ServerGroupSortPipe} from "./server-group/server-group-sort.pipe";
+import {ServerGroupStatusComponent} from "./server-group/server-group-status/server-group-status.component";
+import {ServerGroupStatusesComponent} from "./server-group/server-group-statuses/server-group-statuses.component";
+import {ServerGroupResolver} from "./server-group/server-group.resolver";
 
 @NgModule({
     declarations: [
@@ -35,10 +35,10 @@ import {BadgeDescriptionComponent} from "./badge/badge-description/badge-descrip
         BadgeNamesPipe,
         BadgeNameStackedComponent,
         BadgePageComponent,
-        BadgeSetPageComponent,
-        BadgeSetSortPipe,
-        BadgeSetStatusComponent,
-        BadgeSetStatusesComponent,
+        ServerGroupPageComponent,
+        ServerGroupSortPipe,
+        ServerGroupStatusComponent,
+        ServerGroupStatusesComponent,
         BadgeTypePipe,
         GameMapComponent,
         HomeComponent,
@@ -54,7 +54,7 @@ import {BadgeDescriptionComponent} from "./badge/badge-description/badge-descrip
     ],
     providers: [
         BadgeResolver,
-        BadgeSetResolver
+        ServerGroupResolver
     ],
     bootstrap: [AppComponent]
 })

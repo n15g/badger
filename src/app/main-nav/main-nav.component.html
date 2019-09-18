@@ -22,7 +22,7 @@
                     Badges
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarBadgesDropdown">
-                    <a *ngFor="let badgeSet of badgeSets | badgeSetSort" class="dropdown-item" [routerLink]="['/badge-set', badgeSet.key]">{{badgeSet.name}}</a>
+                    <a *ngFor="let serverGroup of serverGroups | serverGroupSort" class="dropdown-item" [routerLink]="['/', serverGroup.key]">{{serverGroup.name}}</a>
                 </div>
             </li>
         </ul>

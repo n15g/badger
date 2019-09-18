@@ -1,18 +1,17 @@
 import {ActivatedRouteSnapshot, Resolve, RouterStateSnapshot} from "@angular/router";
 import {Injectable} from "@angular/core";
 import {ContentDbService} from "../content-db/content-db.service";
-import {IBadge} from "coh-content-db";
+import {IServerGroup} from "coh-content-db";
 
 @Injectable()
-export class BadgeResolver implements Resolve<IBadge> {
+export class ServerGroupResolver implements Resolve<IServerGroup> {
 
     constructor(private contentDbService: ContentDbService) {
     }
 
-    public resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): IBadge {
+    public resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): IServerGroup {
         const serverGroupKey = route.params["serverGroupKey"];
-        const badgeKey = route.params["badgeKey"];
 
-        return this.contentDbService.getBadge(serverGroupKey, badgeKey);
+        return this.contentDbService.getServerGroup(serverGroupKey);
     }
 }

@@ -1,5 +1,5 @@
 <span class="badge-location">
-    <app-game-map [mapKey]="badge.mapKey"></app-game-map>
+    <app-game-map [serverGroupKey]="badge.serverGroup.key" [mapKey]="badge.mapKey"></app-game-map>
     <span class="loc" *ngIf="badge.location; else multiple">
         <span class="x">{{badge.location[0]}}</span>
         <span class="y">{{badge.location[1]}}</span>

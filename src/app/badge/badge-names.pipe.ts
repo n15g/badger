@@ -1,7 +1,7 @@
 import {Pipe, PipeTransform} from "@angular/core";
 import * as _ from "lodash";
-import {AlternateNameType} from "../content-db/badge-set/alternate-name-type.enum";
-import {IAlternateName, IBadge} from "../content-db/badge-set/badge.interface";
+import {oc} from "ts-optchain";
+import {AlternateNameType, IAlternateName, IBadge} from "coh-content-db";
 
 const BADGE_NAME_CLASS = "badge-name";
 const MALE_CLASS = "male";
@@ -22,11 +22,13 @@ const SORT_ORDER = [
 export class BadgeNamesPipe implements PipeTransform {
 
     public transform(value: IBadge, args?: any): IBadgeName[] {
-        if (!value.alternateNames.length) {
+        const alternateNames = oc(value).alternateNames([]);
+
+        if (!alternateNames.length) {
             return [{type: null, value: value.canonicalName, classes: [BADGE_NAME_CLASS]}];
         }
 
-        return _(value.alternateNames)
+        return _(alternateNames)
             .sortBy(alternateName => {
                 return _.indexOf(SORT_ORDER, alternateName.type);
             })

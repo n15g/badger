@@ -8,7 +8,7 @@
     </tr>
     </thead>
     <tbody>
-    <tr *ngFor="let badge of orderedBadges">
+    <tr *ngFor="let badge of filteredBadges">
         <td class="badge-image">
             <app-badge-images [badge]="badge"></app-badge-images>
         </td>
@@ -19,7 +19,7 @@
 
 
         <td class="badge-name">
-            <a [routerLink]="['/badge-set', badge.badgeSetKey, 'badge', badge.key]">
+            <a [routerLink]="['/', badge.serverGroup.key, 'badge', badge.key]">
                 <app-badge-name-stacked [badge]="badge"></app-badge-name-stacked>
             </a>
         </td>

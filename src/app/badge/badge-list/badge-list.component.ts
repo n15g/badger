@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from "@angular/core";
 import * as _ from "lodash";
-import {IBadge} from "../../content-db/badge-set/badge.interface";
+import {IBadge} from "coh-content-db";
 
 @Component({
     selector: "app-badge-list",
@@ -10,15 +10,14 @@ import {IBadge} from "../../content-db/badge-set/badge.interface";
 export class BadgeListComponent implements OnInit {
     @Input() public badges: IBadge[];
 
-    public orderedBadges: IBadge[];
+    public filteredBadges: IBadge[];
 
     public ngOnInit(): void {
         this.updateList();
     }
 
     private updateList(): void {
-        this.orderedBadges = _(this.badges)
-            .sortBy(badge => badge.canonicalIndex)
+        this.filteredBadges = _(this.badges)
             .value();
     }
 }

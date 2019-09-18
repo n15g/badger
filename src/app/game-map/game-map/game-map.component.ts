@@ -1,6 +1,6 @@
 import {Component, Input, OnChanges} from "@angular/core";
 import {ContentDbService} from "../../content-db/content-db.service";
-import {IGameMap} from "../../content-db/game-map/game-map.interface";
+import {IGameMap} from "coh-content-db";
 
 @Component({
     selector: "app-game-map",
@@ -8,6 +8,7 @@ import {IGameMap} from "../../content-db/game-map/game-map.interface";
     styleUrls: ["./game-map.component.scss"]
 })
 export class GameMapComponent implements OnChanges {
+    @Input() public readonly serverGroupKey: string;
     @Input() public readonly mapKey: string;
     public map: IGameMap;
 
@@ -15,6 +16,6 @@ export class GameMapComponent implements OnChanges {
     }
 
     public ngOnChanges(): void {
-        this.map = this.contentDb.getMap(this.mapKey);
+        this.map = this.contentDb.getGameMap(this.serverGroupKey, this.mapKey);
     }
 }

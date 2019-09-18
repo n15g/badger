@@ -1,6 +1,6 @@
 import {Component, OnInit} from "@angular/core";
 import {ContentDbService} from "../content-db/content-db.service";
-import {IBadgeSet} from "../content-db/badge-set/badge-set.interface";
+import {IServerGroup} from "coh-content-db";
 
 @Component({
     selector: "app-home",
@@ -8,12 +8,12 @@ import {IBadgeSet} from "../content-db/badge-set/badge-set.interface";
     styleUrls: ["./home.component.scss"]
 })
 export class HomeComponent implements OnInit {
-    public badgeSets: IBadgeSet[];
+    public serverGroups: IServerGroup[];
 
     constructor(private contentDb: ContentDbService) {
     }
 
     public ngOnInit(): void {
-        this.badgeSets = this.contentDb.getBadgeSets();
+        this.serverGroups = this.contentDb.getServerGroups();
     }
 }

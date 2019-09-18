@@ -1,3 +1,3 @@
 <div class="badge-images">
-    <img *ngFor="let imageName of badge.imageNames" [src]="'/assets/badge/' + imageName" [alt]="badge.canonicalName">
+    <img *ngFor="let image of images" [src]="image" [alt]="badge.canonicalName">
 </div>

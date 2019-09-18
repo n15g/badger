@@ -1,6 +1,6 @@
 import {Pipe, PipeTransform} from "@angular/core";
 import * as _ from "lodash";
-import {BadgeType} from "../content-db/badge-type.enum";
+import {BadgeType} from "coh-content-db";
 
 @Pipe({
     name: "badgeType"

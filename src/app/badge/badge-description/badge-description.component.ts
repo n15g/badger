@@ -1,5 +1,5 @@
 import {Component, Input} from "@angular/core";
-import {IBadge} from "../../content-db/badge-set/badge.interface";
+import {IBadge} from "coh-content-db";
 
 @Component({
     selector: "app-badge-description",
