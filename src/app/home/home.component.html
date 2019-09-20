@@ -1,24 +1,25 @@
-<h1>Badger</h1>
+<div class="container">
+    <h1>Badger</h1>
 
-<p class="lead">A badge database and tracker application for City of Heroes.</p>
+    <p class="lead">A badge database and tracker application for City of Heroes.</p>
 
-<section>
-    <h3>Badge Sets</h3>
-    <p>Different servers have different sets of badges.</p>
+    <section>
+        <h3>Servers</h3>
 
-    <ul class="server-groups list-unstyled" *ngFor="let serverGroup of serverGroups | serverGroupSort">
-        <li>
-            <div class="card">
-                <div class="card-body">
-                    <h5>
-                        <a class="card-title" [routerLink]="['/', serverGroup.key]">{{serverGroup.name}}</a>
-                        <server-group-statuses [serverGroup]="serverGroup"></server-group-statuses>
-                    </h5>
-                    <h6 class="card-subtitle mb-2 text-muted">
-                        <markdown [data]="serverGroup.description"></markdown>
-                    </h6>
+        <ul class="server-groups list-unstyled" *ngFor="let serverGroup of serverGroups | serverGroupSort">
+            <li>
+                <div class="card col-md-4 col-sm-12">
+                    <div class="card-body">
+                        <h5>
+                            <a class="card-title" [routerLink]="['/', serverGroup.key]">{{serverGroup.name}}</a>
+                            <server-group-statuses [serverGroup]="serverGroup"></server-group-statuses>
+                        </h5>
+                        <h6 class="card-subtitle mb-2 text-muted">
+                            <markdown [data]="serverGroup.description"></markdown>
+                        </h6>
+                    </div>
                 </div>
-            </div>
-        </li>
-    </ul>
-</section>
+            </li>
+        </ul>
+    </section>
+</div>

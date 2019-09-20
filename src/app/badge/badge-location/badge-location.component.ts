@@ -1,11 +1,19 @@
 import {Component, Input} from "@angular/core";
-import {IBadge} from "coh-content-db";
+import {IServerGroup, PlaqueType} from "coh-content-db";
 
 @Component({
-    selector: "app-badge-location",
+    selector: "badge-location",
     templateUrl: "./badge-location.component.html",
     styleUrls: ["./badge-location.component.scss"]
 })
 export class BadgeLocationComponent {
-    @Input() public badge: IBadge;
+    @Input() public data: LocationData;
+}
+
+interface LocationData {
+    serverGroup: IServerGroup,
+    mapKey?: string,
+    location?: number[],
+    vidiotMapsKey?: string,
+    plaqueType?: PlaqueType
 }

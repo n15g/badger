@@ -30,4 +30,15 @@ export class ServerGroupStatusComponent {
                 return "";
         }
     }
+
+    public getText() {
+        switch (this.status) {
+            case ServerGroupStatus.WORK_IN_PROGRESS:
+                return "Work in progress";
+            case ServerGroupStatus.SUNSET:
+                return "Sunset";
+            default:
+                return status;
+        }
+    }
 }

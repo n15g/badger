@@ -1,11 +1,14 @@
-<span class="badge-location">
-    <app-game-map [serverGroupKey]="badge.serverGroup.key" [mapKey]="badge.mapKey"></app-game-map>
-    <span class="loc" *ngIf="badge.location; else multiple">
-        <span class="x">{{badge.location[0]}}</span>
-        <span class="y">{{badge.location[1]}}</span>
-        <span class="z">{{badge.location[2]}}</span>
-    </span>
-    <ng-template #multiple>
-        <span class="multiple-locations">Multiple locations</span>
-    </ng-template>
-</span>
+<div class="badge-location">
+    <div>
+        <app-game-map [serverGroupKey]="data.serverGroup.key" [mapKey]="data.mapKey"></app-game-map>
+        <badge-vidiot-icon [data]="data"></badge-vidiot-icon>
+    </div>
+    <div>
+        <span class="loc" *ngIf="data.location; else multiple">
+            {{data.location[0] | coordinate}} {{data.location[1] | coordinate}} {{data.location[2] | coordinate}}
+        </span>
+        <ng-template #multiple>
+            <span class="multiple-locations">Multiple locations</span>
+        </ng-template>
+    </div>
+</div>

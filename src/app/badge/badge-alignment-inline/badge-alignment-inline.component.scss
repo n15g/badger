@@ -1,0 +1,24 @@
+@import "~src/mixins";
+
+.badge-alignment {
+    .separator:after {
+        margin: 0 4px;
+        content: "/";
+    }
+
+    .alignment {
+        color: #eeeeee;
+
+        &.hero {
+            color: $hero;
+        }
+
+        &.villain {
+            color: $villain;
+        }
+
+        &.praetorian {
+            color: $praetorian;
+        }
+    }
+}

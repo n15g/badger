@@ -1,12 +1,69 @@
-<nav aria-label="breadcrumb">
-    <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a [routerLink]="['/']">Home</a></li>
-        <li class="breadcrumb-item"><a [routerLink]="['/', serverGroup.key]">{{serverGroup.name}}</a></li>
-        <li class="breadcrumb-item active" aria-current="page">{{badge.canonicalName}}</li>
-    </ol>
-</nav>
+<div class="container">
 
-<h3>
-    <app-badge-name-inline [badge]="badge"></app-badge-name-inline>
-</h3>
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a [routerLink]="['/']">Home</a></li>
+            <li class="breadcrumb-item"><a [routerLink]="['/', serverGroup.key]">{{serverGroup.name}}</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{{badge.canonicalName}}</li>
+        </ol>
+    </nav>
 
+    <div class="row">
+        <div class="order-1 col-12  order-md-0 col-md-8">
+            <h3 class="d-none d-md-block">
+                <badge-name-inline [badge]="badge"></badge-name-inline>
+            </h3>
+
+            <blockquote class="blockquote">
+                <footer class="blockquote-footer">{{badge.badgeText}}</footer>
+            </blockquote>
+
+            <h4 *ngIf="badge.notes">Notes</h4>
+            <div *ngIf="badge.notes" class="notes">{{badge.notes}}</div>
+
+            <table *ngIf="badge.partials" class="table table-striped table-bordered">
+                <tbody>
+                <tr *ngFor="let partial of badge.partials">
+                    <td *ngIf="partial.type === 'PLAQUE'">
+                        <badge-location [data]="partial"></badge-location>
+                    </td>
+                    <td *ngIf="partial.inscription">
+                        <blockquote class="blockquote">
+                            <footer class="blockquote-footer">{{partial.inscription}}</footer>
+                        </blockquote>
+                    </td>
+                    <td *ngIf="partial.notes">{{partial.notes}}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="order-0 col-12 order-md-1 col-md-4">
+            <table class="table table-striped table-bordered infobox">
+                <tbody>
+                <tr>
+                    <td class="header">
+                        <badge-name-stacked class="d-block d-md-none" [badge]="badge"></badge-name-stacked>
+                        <badge-images [badge]="badge"></badge-images>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <dl>
+                            <dt>Alignment</dt>
+                            <dd>
+                                <badge-alignment-stacked [badge]="badge"></badge-alignment-stacked>
+                            </dd>
+
+                            <dt *ngIf="badge.mapKey">Location</dt>
+                            <dd *ngIf="badge.mapKey" class="location">
+                                <badge-location [data]="badge"></badge-location>
+                            </dd>
+                        </dl>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

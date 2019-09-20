@@ -1,31 +1,37 @@
-<table class="badge-list table">
+<table class="badge-list table table-bordered table-striped">
     <thead>
     <tr>
-        <th>Icon</th>
-        <th>Type</th>
+        <th></th>
         <th>Name</th>
+        <th>Alignment</th>
+        <th>Type</th>
         <th class="badge-description">Description</th>
     </tr>
     </thead>
     <tbody>
     <tr *ngFor="let badge of filteredBadges">
         <td class="badge-image">
-            <app-badge-images [badge]="badge"></app-badge-images>
+            <a [routerLink]="['/', badge.serverGroup.key, 'badge', badge.key]">
+                <badge-images [badge]="badge"></badge-images>
+            </a>
+        </td>
+
+        <td class="badge-name">
+            <a [routerLink]="['/', badge.serverGroup.key, 'badge', badge.key]">
+                <badge-name-stacked [badge]="badge"></badge-name-stacked>
+            </a>
+        </td>
+
+        <td class="alignment">
+            <badge-alignment-inline [badge]="badge"></badge-alignment-inline>
         </td>
 
         <td class="badge-type">
             {{badge.type | badgeType}}
         </td>
 
-
-        <td class="badge-name">
-            <a [routerLink]="['/', badge.serverGroup.key, 'badge', badge.key]">
-                <app-badge-name-stacked [badge]="badge"></app-badge-name-stacked>
-            </a>
-        </td>
-
         <td class="badge-description">
-            <app-badge-description [badge]="badge"></app-badge-description>
+            <badge-description [badge]="badge"></badge-description>
         </td>
     </tr>
     </tbody>

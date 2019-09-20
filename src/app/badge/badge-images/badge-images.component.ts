@@ -4,7 +4,7 @@ import {DomSanitizer} from "@angular/platform-browser";
 import * as _ from 'lodash';
 
 @Component({
-    selector: "app-badge-images",
+    selector: "badge-images",
     templateUrl: "./badge-images.component.html",
     styleUrls: ["./badge-images.component.scss"]
 })

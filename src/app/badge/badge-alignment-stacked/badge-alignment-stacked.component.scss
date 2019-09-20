@@ -1,0 +1,22 @@
+@import "~src/mixins";
+
+.badge-alignment {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    color: #dddddd;
+
+    .hero {
+        color: $hero;
+    }
+
+    .villain {
+        color: $villain;
+    }
+
+    .praetorian {
+        color: $praetorian;
+    }
+}

@@ -3,7 +3,7 @@ import * as _ from "lodash";
 import {IBadge} from "coh-content-db";
 
 @Component({
-    selector: "app-badge-list",
+    selector: "badge-list",
     templateUrl: "./badge-list.component.html",
     styleUrls: ["./badge-list.component.scss"]
 })

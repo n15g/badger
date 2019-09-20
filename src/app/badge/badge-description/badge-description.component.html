@@ -1,5 +1,5 @@
 <div *ngIf="badge.type === 'EXPLORATION'">
-    <app-badge-location [badge]="badge"></app-badge-location>
+    <badge-location [data]="badge"></badge-location>
 </div>
 <div *ngIf="badge.acquisition">
     <markdown [data]="badge.acquisition"></markdown>

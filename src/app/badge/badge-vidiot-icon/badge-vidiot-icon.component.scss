@@ -1,0 +1,29 @@
+.vidiot {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 24px;
+    height: 24px;
+    font-size: 12px;
+    font-weight: 600;
+    text-shadow: 0 0 5px white, 0 0 5px white, 0 0 5px white, 0 0 5px white;
+
+    &.badge {
+        background: url("/assets/vidiot-badge.svg") no-repeat;
+        background-size: auto;
+    }
+
+    &.wall-plaque {
+        background: url("/assets/vidiot-wall-plaque.svg") no-repeat;
+        background-size: auto;
+    }
+
+    &.monument {
+        background: url("/assets/vidiot-monument.svg") no-repeat;
+        background-size: auto;
+    }
+
+    &:after {
+        content: attr(data-content);
+    }
+}

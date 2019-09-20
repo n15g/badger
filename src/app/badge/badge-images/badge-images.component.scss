@@ -1,7 +1,11 @@
 .badge-images {
-    display: flex;
+    display: inline-flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
+
+    img {
+        margin: 4px;
+    }
 }

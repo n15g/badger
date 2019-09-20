@@ -1,10 +1,14 @@
+@import "./_mixins.scss";
+
+a {
+    font-weight: bolder;
+}
+
 section {
     margin-top: 64px;
 }
 
-
 .badge-name {
-
     font-weight: 600;
 
     &.hero {

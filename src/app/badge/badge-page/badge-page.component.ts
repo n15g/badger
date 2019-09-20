@@ -4,7 +4,7 @@ import {Title} from "@angular/platform-browser";
 import {IBadge, IServerGroup} from "coh-content-db";
 
 @Component({
-    selector: "app-badge-page",
+    selector: "badge-page",
     templateUrl: "./badge-page.component.html",
     styleUrls: ["./badge-page.component.scss"]
 })
