@@ -1,3 +1,5 @@
+@import "~src/mixins";
+
 .badge-images {
     display: inline-flex;
     flex-direction: row;
@@ -7,5 +9,11 @@
 
     img {
         margin: 4px;
+    }
+
+    .missing {
+        font-weight: lighter;
+        font-style: italic;
+        color: $text-muted;
     }
 }

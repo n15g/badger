@@ -6,17 +6,21 @@
     justify-content: center;
     align-items: center;
 
-    color: #dddddd;
+    color: $inactive-text;
+    user-select: none;
 
     .hero {
         color: $hero;
+        user-select: text;
     }
 
     .villain {
         color: $villain;
+        user-select: text;
     }
 
     .praetorian {
         color: $praetorian;
+        user-select: text;
     }
 }

@@ -1,3 +1,6 @@
 <div class="badge-names">
-    <div *ngFor="let name of (badge | badgeNames)" [ngClass]="name.classes">{{name.value}}</div>
+    <div *ngFor="let name of (badge.names | alternates)" class="badge-name" [ngClass]="name.classes">
+        {{name.value}}
+        <fa-icon *ngIf="name | sexIcon" [icon]="name | sexIcon"></fa-icon>
+    </div>
 </div>

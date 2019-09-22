@@ -4,7 +4,7 @@
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a [routerLink]="['/']">Home</a></li>
             <li class="breadcrumb-item"><a [routerLink]="['/', serverGroup.key]">{{serverGroup.name}}</a></li>
-            <li class="breadcrumb-item active" aria-current="page">{{badge.canonicalName}}</li>
+            <li class="breadcrumb-item active" aria-current="page">{{badge | badgeName}}</li>
         </ol>
     </nav>
 
@@ -14,12 +14,14 @@
                 <badge-name-inline [badge]="badge"></badge-name-inline>
             </h3>
 
-            <blockquote class="blockquote">
-                <footer class="blockquote-footer">{{badge.badgeText}}</footer>
-            </blockquote>
+            <p>
+                <badge-text [badge]="badge"></badge-text>
+            </p>
+
+            <p *ngIf="badge.acquisition" class="acquisition">{{badge.acquisition}}</p>
 
             <h4 *ngIf="badge.notes">Notes</h4>
-            <div *ngIf="badge.notes" class="notes">{{badge.notes}}</div>
+            <markdown *ngIf="badge.notes" class="notes" [data]="badge.notes"></markdown>
 
             <table *ngIf="badge.partials" class="table table-striped table-bordered">
                 <tbody>
@@ -27,7 +29,7 @@
                     <td *ngIf="partial.type === 'PLAQUE'">
                         <badge-location [data]="partial"></badge-location>
                     </td>
-                    <td *ngIf="partial.inscription">
+                    <td *ngIf="partial.inscription" class="d-none d-md-table-cell">
                         <blockquote class="blockquote">
                             <footer class="blockquote-footer">{{partial.inscription}}</footer>
                         </blockquote>
@@ -58,6 +60,11 @@
                             <dt *ngIf="badge.mapKey">Location</dt>
                             <dd *ngIf="badge.mapKey" class="location">
                                 <badge-location [data]="badge"></badge-location>
+                            </dd>
+
+                            <dt *ngIf="badge.links">Links</dt>
+                            <dd *ngIf="badge.links">
+                                <links-stacked [links]="badge.links"></links-stacked>
                             </dd>
                         </dl>
                     </td>

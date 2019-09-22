@@ -1,45 +1,11 @@
 @import "./_mixins.scss";
 
-a {
-    font-weight: bolder;
-}
-
 section {
     margin-top: 64px;
 }
 
-.badge-name {
-    font-weight: 600;
-
-    &.hero {
-        color: $hero;
-    }
-
-    &.villain {
-        color: $villain;
-    }
-
-    &.praetorian {
-        color: $praetorian;
-    }
-
-    &.male:after {
-        background-image: url('assets/male.svg');
-        background-repeat: no-repeat;
-        display: inline-block;
-        width: 1em;
-        height: 1.5ex;
-        content: "";
-        margin-left: 0.25em;
-    }
-
-    &.female:after {
-        background-image: url('assets/female.svg');
-        background-repeat: no-repeat;
-        display: inline-block;
-        width: 1em;
-        height: 1.8ex;
-        content: "";
-        margin-left: 0.25em;
-    }
+.blockquote {
+    margin-left: 0.5em;
+    padding-left: 1em;
+    border-left: 0.2em solid lighten($primary, 20%);
 }

@@ -1,7 +1,12 @@
+@import "~src/variables";
+
+$text-color: $gray-900;
 $link-color: #2C3E50;
 
-$hero: #5e83e9;
-$villain: #ac3328;
-$praetorian: #f4c532;
+$hero: #4a85d3;
+$villain: #8b2a22;
+$praetorian: #cfad23;
 
 $breadcrumb-divider: quote("|");
+
+$inactive-text: #dddddd;

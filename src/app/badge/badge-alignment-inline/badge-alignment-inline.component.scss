@@ -7,18 +7,22 @@
     }
 
     .alignment {
-        color: #eeeeee;
+        color: $inactive-text;
+        user-select: none;
 
         &.hero {
             color: $hero;
+            user-select: text;
         }
 
         &.villain {
             color: $villain;
+            user-select: text;
         }
 
         &.praetorian {
             color: $praetorian;
+            user-select: text;
         }
     }
 }

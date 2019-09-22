@@ -1,0 +1,19 @@
+.links {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    .link {
+        &.paragon-wiki:before {
+            content: ' ';
+            background: url("/assets/paragon-wiki.png") center center no-repeat;
+            display: inline-block;
+            background-size: contain;
+            height: 32px;
+            width: 32px;
+            position: relative;
+            top: 8px;
+        }
+    }
+}

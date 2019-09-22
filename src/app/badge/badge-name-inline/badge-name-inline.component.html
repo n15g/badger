@@ -1,5 +1,8 @@
 <span class="badge-names">
-    <span *ngFor="let name of (badge | badgeNames); let isLast = last">
-        <span [ngClass]="name.classes">{{name.value}}</span>
+    <span *ngFor="let name of (badge.names | alternates)">
+        <span class="badge-name" [ngClass]="name.classes">
+            {{name.value}}
+            <fa-icon *ngIf="name | sexIcon" [icon]="name | sexIcon"></fa-icon>
+        </span>
     </span>
 </span>

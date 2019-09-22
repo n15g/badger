@@ -1,5 +1,5 @@
 import {BadgeTypePipe} from "./badge-type.pipe";
-import {BadgeType} from "../content-db/badge-type.enum";
+import {BadgeType} from "coh-content-db";
 
 const pipe = new BadgeTypePipe();
 

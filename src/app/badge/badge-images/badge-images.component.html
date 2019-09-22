@@ -1,3 +1,15 @@
 <span class="badge-images">
-    <img *ngFor="let image of images" [src]="image" [alt]="badge.canonicalName">
+    <ng-container *ngIf="badge.imageKeys; else none">
+        <ng-container *ngFor="let imageKey of badge.imageKeys">
+            <img *ngIf="imageKey; else missing" [src]="getSrc(imageKey.value)" [alt]="imageKey.value" (error)="imageKey = null">
+        </ng-container>
+    </ng-container>
+
+    <ng-template #none>
+        <span class="missing">No icon yet!</span>
+    </ng-template>
+
+    <ng-template #missing>
+        <span class="missing">Icon missing!</span>
+    </ng-template>
 </span>
