@@ -1,9 +1,37 @@
-.infobox {
-    .header {
-        text-align: center;
+@import "~src/mixins";
+
+badge-page {
+    .infobox {
+        .header {
+            text-align: center;
+        }
+
+        .location {
+            text-align: center;
+
+
+        }
     }
 
-    .location {
-        text-align: center;
+    .badge-location {
+        flex-direction: column !important;
+    }
+
+    .partials-list {
+        td {
+            vertical-align: middle;
+            text-align: center;
+        }
+
+        th {
+            text-align: center;
+        }
+
+        @include media-breakpoint-down(sm) {
+            .badge-type,
+            .badge-description {
+                display: none;
+            }
+        }
     }
 }

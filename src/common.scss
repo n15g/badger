@@ -9,3 +9,18 @@ section {
     padding-left: 1em;
     border-left: 0.2em solid lighten($primary, 20%);
 }
+
+.bad-link {
+    color: $red;
+}
+
+.smart-link {
+    &:before {
+        content: '['
+    }
+
+    &:after {
+        content: ']';
+    }
+
+}

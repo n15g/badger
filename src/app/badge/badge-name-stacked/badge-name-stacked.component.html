@@ -1,6 +1,13 @@
 <div class="badge-names">
-    <div *ngFor="let name of (badge.names | alternates)" class="badge-name" [ngClass]="name.classes">
-        {{name.value}}
-        <fa-icon *ngIf="name | sexIcon" [icon]="name | sexIcon"></fa-icon>
-    </div>
+    <ng-container *ngVar="(badge.names | alternates) as names">
+        <ng-container *ngIf="names.length else missing">
+            <div *ngFor="let name of names" class="badge-name" [ngClass]="name.classes">
+                {{name.value}}
+                <fa-icon *ngIf="name | sexIcon" [icon]="name | sexIcon"></fa-icon>
+            </div>
+        </ng-container>
+    </ng-container>
+    <ng-template #missing>
+        <div class="bad-link">{{badge.key}}</div>
+    </ng-template>
 </div>

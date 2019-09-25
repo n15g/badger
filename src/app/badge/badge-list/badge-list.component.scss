@@ -11,6 +11,8 @@
     }
 
     @include media-breakpoint-down(sm) {
+        .badge-alignment,
+        .badge-type,
         .badge-description {
             display: none;
         }

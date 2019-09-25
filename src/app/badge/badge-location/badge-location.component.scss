@@ -1,19 +1,34 @@
 @import "~src/mixins";
 
-.loc {
-    background-color: $gray-200;
-    border: $gray-400 1px solid;
-    border-radius: 3px;
-    padding: 0 4px;
-    font-family: monospace;
-    white-space: nowrap;
-}
+.badge-location {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
 
-.multiple-locations {
-    color: $text-muted;
-    font-style: italic;
-}
+    .loc {
+        background-color: $gray-200;
+        border: $gray-400 1px solid;
+        border-radius: 3px;
+        padding: 0 4px;
+        font-family: monospace;
+        white-space: nowrap;
+    }
 
-app-game-map {
-    margin-right: 12px;
+    .multiple-locations {
+        color: $text-muted;
+        font-style: italic;
+    }
+
+    .coordinates {
+        margin-right: 8px;
+    }
+
+    app-game-map {
+        margin-right: 8px;
+    }
+
+    badge-vidiot-icon {
+        margin-right: 8px;
+    }
 }

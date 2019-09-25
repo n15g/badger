@@ -4,3 +4,6 @@
 <div *ngIf="badge.acquisition">
     {{badge.acquisition}}
 </div>
+<div *ngIf="badge.type==='HISTORY'">
+    <badge-location *ngFor="let partial of badge.partials" [data]="partial"></badge-location>
+</div>

@@ -21,11 +21,41 @@
             <p *ngIf="badge.acquisition" class="acquisition">{{badge.acquisition}}</p>
 
             <h4 *ngIf="badge.notes">Notes</h4>
-            <markdown *ngIf="badge.notes" class="notes" [data]="badge.notes"></markdown>
+            <p *ngIf="badge.notes" class="notes" [innerHTML]="badge.notes | markdown | smartLinks:{serverGroup: serverGroup}"></p>
 
-            <table *ngIf="badge.partials" class="table table-striped table-bordered">
+            <!-- Partials -->
+            <table *ngIf="badge.partials" class="partials-list table table-striped table-bordered">
                 <tbody>
                 <tr *ngFor="let partial of badge.partials">
+                    <ng-container *ngIf="partial.badgeKey | badge :{serverGroup: serverGroup} as referencedBadge">
+                        <td class="badge-icon">
+                            <a *ngIf="!referencedBadge.unknown" [routerLink]="['/', referencedBadge.serverGroup.key, 'badge', referencedBadge.key]">
+                                <badge-images [badge]="referencedBadge"></badge-images>
+                            </a>
+                        </td>
+
+                        <td class="badge-name">
+                            <a *ngIf="!referencedBadge.unknown else badgeName" [routerLink]="['/', referencedBadge.serverGroup.key, 'badge', referencedBadge.key]">
+                                <ng-container *ngTemplateOutlet="badgeName"></ng-container>
+                            </a>
+                            <ng-template #badgeName>
+                                <badge-name-stacked [badge]="referencedBadge"></badge-name-stacked>
+                            </ng-template>
+                        </td>
+
+                        <td class="badge-type">
+                            <a [routerLink]="['/', referencedBadge.serverGroup.key, 'badge', referencedBadge.key]">
+                                {{referencedBadge.type | badgeType}}
+                            </a>
+                        </td>
+
+                        <td class="badge-description">
+                            <a [routerLink]="['/', referencedBadge.serverGroup.key, 'badge', referencedBadge.key]">
+                                <badge-description [badge]="referencedBadge"></badge-description>
+                            </a>
+                        </td>
+                    </ng-container>
+
                     <td *ngIf="partial.type === 'PLAQUE'">
                         <badge-location [data]="partial"></badge-location>
                     </td>

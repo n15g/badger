@@ -13,7 +13,7 @@ export class BadgeNamePipe implements PipeTransform {
     }
 
     public transform(badge: IBadge, args?: any): string {
-        const names = this.alternates.transform(oc(badge).names([]));
+        const names = this.alternates.transform(oc(badge).names([{value: badge.key}]));
 
         return _(names)
             .map((name) => name.value)

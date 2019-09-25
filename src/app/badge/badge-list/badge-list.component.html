@@ -1,16 +1,16 @@
 <table class="badge-list table table-bordered table-striped">
     <thead>
     <tr>
-        <th></th>
-        <th>Name</th>
-        <th>Alignment</th>
-        <th>Type</th>
+        <th class="badge-icon"></th>
+        <th class="badge-name">Name</th>
+        <th class="badge-alignment">Alignment</th>
+        <th class="badge-type">Type</th>
         <th class="badge-description">Description</th>
     </tr>
     </thead>
     <tbody>
     <tr *ngFor="let badge of filteredBadges">
-        <td class="badge-image">
+        <td class="badge-icon">
             <a [routerLink]="['/', badge.serverGroup.key, 'badge', badge.key]">
                 <badge-images [badge]="badge"></badge-images>
             </a>
@@ -22,7 +22,7 @@
             </a>
         </td>
 
-        <td class="alignment">
+        <td class="badge-alignment">
             <a [routerLink]="['/', badge.serverGroup.key, 'badge', badge.key]">
                 <badge-alignment-inline [badge]="badge"></badge-alignment-inline>
             </a>
@@ -35,9 +35,7 @@
         </td>
 
         <td class="badge-description">
-            <a [routerLink]="['/', badge.serverGroup.key, 'badge', badge.key]">
-                <badge-description [badge]="badge"></badge-description>
-            </a>
+            <badge-description [badge]="badge"></badge-description>
         </td>
     </tr>
     </tbody>
