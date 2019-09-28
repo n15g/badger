@@ -1,5 +1,6 @@
 import {Component, Input} from "@angular/core";
-import {IBadge} from "coh-content-db";
+import {BadgePartialType, IBadge} from "coh-content-db";
+import * as _ from 'lodash';
 
 @Component({
     selector: "badge-description",
@@ -8,4 +9,8 @@ import {IBadge} from "coh-content-db";
 })
 export class BadgeDescriptionComponent {
     @Input() public badge: IBadge;
+
+    public hasPlusOneInvention(): boolean {
+        return _.some(this.badge.partials, (partial) => partial.type === BadgePartialType.INVENTION_PLUS_ONE);
+    }
 }

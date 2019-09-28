@@ -27,5 +27,4 @@ export class BadgePageComponent implements OnInit {
             this.title.setTitle(`${this.badgeName.transform(this.badge)} | ${this.serverGroup.name} | Badger`);
         });
     }
-
 }

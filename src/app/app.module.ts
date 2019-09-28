@@ -21,13 +21,17 @@ import {BadgeTypePipe} from "./badge/badge-type.pipe";
 import {BadgeVidiotIconComponent} from './badge/badge-vidiot-icon/badge-vidiot-icon.component';
 import {BrowserModule} from "@angular/platform-browser";
 import {CoordinatePipe} from "./badge/coordinate.pipe";
+import {EnhancementCategoryPipe} from "./common/enhancement-category.pipe";
 import {FontAwesomeModule} from "@fortawesome/angular-fontawesome";
 import {FormsModule} from "@angular/forms";
 import {GameMapComponent} from "./game-map/game-map/game-map.component";
 import {HomeComponent} from "./home/home.component";
+import {InventionPartialsPipe} from "./badge/invention-partials.pipe";
+import {InventionTypesComponent} from "./badge/invention-types/invention-types.component";
 import {LinksStackedComponent} from './common/links-stacked/links-stacked.component';
 import {MainNavComponent} from "./main-nav/main-nav.component";
 import {MarkdownModule} from "ngx-markdown";
+import {NgVarDirective} from "./common/ng-var.directive";
 import {ServerGroupPageComponent} from "./server-group/server-group-page/server-group-page.component";
 import {ServerGroupResolver} from "./server-group/server-group.resolver";
 import {ServerGroupSortPipe} from "./server-group/server-group-sort.pipe";
@@ -35,7 +39,7 @@ import {ServerGroupStatusComponent} from "./server-group/server-group-status/ser
 import {ServerGroupStatusesComponent} from "./server-group/server-group-statuses/server-group-statuses.component";
 import {SexIconPipe} from "./badge/sex-icon.pipe";
 import {SmartLinksPipe} from "./common/smart-links.pipe";
-import {NgVarDirective} from "./common/ng-var.directive";
+import {EnhancementCategoriesPipe} from "./common/enhancement-categories.pipe";
 
 @NgModule({
     declarations: [
@@ -57,8 +61,12 @@ import {NgVarDirective} from "./common/ng-var.directive";
         BadgeTypePipe,
         BadgeVidiotIconComponent,
         CoordinatePipe,
+        EnhancementCategoryPipe,
+        EnhancementCategoriesPipe,
         GameMapComponent,
         HomeComponent,
+        InventionPartialsPipe,
+        InventionTypesComponent,
         LinksStackedComponent,
         MainNavComponent,
         NgVarDirective,
@@ -78,11 +86,14 @@ import {NgVarDirective} from "./common/ng-var.directive";
     ],
     providers: [
         AlternatesPipe,
-        BadgePipe,
         BadgeNamePipe,
+        BadgePipe,
         BadgeResolver,
+        EnhancementCategoryPipe,
+        EnhancementCategoriesPipe,
+        InventionPartialsPipe,
         ServerGroupResolver,
-        SmartLinksPipe
+        SmartLinksPipe,
     ],
     bootstrap: [AppComponent]
 })

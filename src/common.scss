@@ -10,11 +10,20 @@ section {
     border-left: 0.2em solid lighten($primary, 20%);
 }
 
+.main-breadcrumb {
+    @include media-breakpoint-down(xs) {
+        display: none;
+    }
+}
+
 .bad-link {
     color: $red;
 }
 
-.smart-link {
+.ref {
+    white-space: nowrap;
+    font-weight: 600;
+
     &:before {
         content: '['
     }
@@ -22,5 +31,110 @@ section {
     &:after {
         content: ']';
     }
+}
 
+.enhancement-category-name {
+    &.accuracy {
+        color: $enh-accuracy;
+    }
+
+    &.confuse {
+        color: $enh-confuse;
+    }
+
+    &.damage {
+        color: $enh-damage;
+    }
+
+    &.defense-buff {
+        color: $enh-defense-buff;
+    }
+
+    &.defense-debuff {
+        color: $enh-defense-debuff;
+    }
+
+    &.endurance-modification {
+        color: $enh-endurance-modification;
+    }
+
+    &.endurance-reduction {
+        color: $enh-endurance-reduction;
+    }
+
+    &.fear {
+        color: $enh-fear;
+    }
+
+    &.fly-speed {
+        color: $enh-fly-speed;
+    }
+
+    &.healing {
+        color: $enh-healing;
+    }
+
+    &.hold {
+        color: $enh-hold;
+    }
+
+    &.immobilize {
+        color: $enh-immobilize;
+    }
+
+    &.intangibility {
+        color: $enh-intangibility;
+    }
+
+    &.interrupt-duration {
+        color: $enh-interrupt-duration;
+    }
+
+    &.jump {
+        color: $enh-jump;
+    }
+
+    &.knockback {
+        color: $enh-knockback;
+    }
+
+    &.range {
+        color: $enh-range;
+    }
+
+    &.recharge-reduction {
+        color: $enh-recharge-reduction;
+    }
+
+    &.resist-damage {
+        color: $enh-resist-damage;
+    }
+
+    &.run-speed {
+        color: $enh-run-speed;
+    }
+
+    &.sleep {
+        color: $enh-sleep;
+    }
+
+    &.slow {
+        color: $enh-slow;
+    }
+
+    &.stun {
+        color: $enh-stun;
+    }
+
+    &.taunt {
+        color: $enh-taunt;
+    }
+
+    &.to-hit-buff {
+        color: $enh-to-hit-buff;
+    }
+
+    &.to-hit-debuff {
+        color: $enh-to-hit-debuff;
+    }
 }

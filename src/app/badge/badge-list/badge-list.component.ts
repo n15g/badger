@@ -1,11 +1,12 @@
-import {Component, Input, OnInit} from "@angular/core";
+import {Component, Input, OnInit, ViewEncapsulation} from "@angular/core";
 import * as _ from "lodash";
 import {IBadge} from "coh-content-db";
 
 @Component({
     selector: "badge-list",
     templateUrl: "./badge-list.component.html",
-    styleUrls: ["./badge-list.component.scss"]
+    styleUrls: ["./badge-list.component.scss"],
+    encapsulation: ViewEncapsulation.None
 })
 export class BadgeListComponent implements OnInit {
     @Input() public badges: IBadge[];

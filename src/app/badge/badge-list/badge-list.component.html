@@ -23,15 +23,11 @@
         </td>
 
         <td class="badge-alignment">
-            <a [routerLink]="['/', badge.serverGroup.key, 'badge', badge.key]">
-                <badge-alignment-inline [badge]="badge"></badge-alignment-inline>
-            </a>
+            <badge-alignment-inline [badge]="badge"></badge-alignment-inline>
         </td>
 
         <td class="badge-type">
-            <a [routerLink]="['/', badge.serverGroup.key, 'badge', badge.key]">
-                {{badge.type | badgeType}}
-            </a>
+            {{badge.type | badgeType}}
         </td>
 
         <td class="badge-description">

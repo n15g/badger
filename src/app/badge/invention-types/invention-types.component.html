@@ -1,0 +1,6 @@
+<ng-container *ngFor="let enh of inventionTypes | enhancementCategories; let index = index">
+    <span class="enhancement-category-name ref"
+          [ngClass]="enh.class"
+          [title]="enh.name">{{enh.name}}</span>{{index < inventionTypes.length - 2 ? ", " : ""}}
+    {{index === inventionTypes.length - 2 ? "or" : "" }}
+</ng-container>

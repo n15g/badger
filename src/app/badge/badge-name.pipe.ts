@@ -19,5 +19,4 @@ export class BadgeNamePipe implements PipeTransform {
             .map((name) => name.value)
             .join("/");
     }
-
 }

@@ -15,4 +15,8 @@ describe("BadgeTypePipe", () => {
     it("should format [DAY_JOB] to [Day Job]", () => {
         expect(pipe.transform(BadgeType.DAY_JOB)).toEqual("Day Job");
     });
+
+    it("should format [PVP] to [PvP]", () => {
+        expect(pipe.transform(BadgeType.PVP)).toEqual("PvP");
+    });
 });
