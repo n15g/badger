@@ -10,9 +10,10 @@
 
     <div class="row">
         <div class="order-1 col-12  order-md-0 col-md-8">
-            <h3 class="d-none d-md-block">
+            <h2 class="d-none d-md-block">
                 <badge-name-inline [badge]="badge"></badge-name-inline>
-            </h3>
+            </h2>
+            <hr>
 
             <p>
                 <badge-text [badge]="badge"></badge-text>
@@ -20,70 +21,81 @@
 
             <p *ngIf="badge.acquisition" class="acquisition">{{badge.acquisition}}</p>
 
-            <h4 *ngIf="badge.effect">Effect</h4>
-            <p *ngIf="badge.effect" class="effect" [innerHTML]="badge.effect"></p>
+            <ng-container *ngIf="badge.effect">
+                <h3>Effect</h3>
+                <hr>
+                <p class="effect" [innerHTML]="badge.effect"></p>
+            </ng-container>
 
-            <h4 *ngIf="badge.notes">Notes</h4>
-            <p *ngIf="badge.notes" class="notes" [innerHTML]="badge.notes | markdown | smartLinks:{serverGroup: serverGroup}"></p>
+            <ng-container *ngIf="badge.notes">
+                <h3>Notes</h3>
+                <hr>
+                <p class="notes markdown" [innerHTML]="badge.notes | markdown | smartLinks:{serverGroup: serverGroup}"></p>
+            </ng-container>
+
 
             <!-- Partials -->
-            <h4 *ngIf="badge.partials">Requirements</h4>
-            <table *ngIf="badge.partials" class="partials-list table table-striped table-bordered">
-                <tbody>
-                <tr *ngFor="let partial of badge.partials">
+            <ng-container *ngIf="badge.partials">
+                <h3>Requirements</h3>
+                <hr>
+                <table class="partials-list table table-striped table-bordered">
+                    <tbody>
+                    <tr *ngFor="let partial of badge.partials">
 
-                    <!-- BADGES -->
-                    <ng-container *ngIf="partial.badgeKey | badge :{serverGroup: serverGroup} as referencedBadge">
-                        <td class="badge-icon">
-                            <a *ngIf="!referencedBadge.unknown" [routerLink]="['/', referencedBadge.serverGroup.key, 'badge', referencedBadge.key]">
-                                <badge-images [badge]="referencedBadge"></badge-images>
-                            </a>
+                        <!-- BADGES -->
+                        <ng-container *ngIf="partial.badgeKey | badge :{serverGroup: serverGroup} as referencedBadge">
+                            <td class="badge-icon">
+                                <a *ngIf="!referencedBadge.unknown" [routerLink]="['/', referencedBadge.serverGroup.key, 'badge', referencedBadge.key]">
+                                    <badge-images [badge]="referencedBadge"></badge-images>
+                                </a>
+                            </td>
+
+                            <td class="badge-name">
+                                <a *ngIf="!referencedBadge.unknown else badgeName" [routerLink]="['/', referencedBadge.serverGroup.key, 'badge', referencedBadge.key]">
+                                    <ng-container *ngTemplateOutlet="badgeName"></ng-container>
+                                </a>
+                                <ng-template #badgeName>
+                                    <badge-name-stacked [badge]="referencedBadge"></badge-name-stacked>
+                                </ng-template>
+                            </td>
+
+                            <td class="badge-type">
+                                <a [routerLink]="['/', referencedBadge.serverGroup.key, 'badge', referencedBadge.key]">
+                                    {{referencedBadge.type | badgeType}}
+                                </a>
+                            </td>
+
+                            <td class="badge-description">
+                                <a [routerLink]="['/', referencedBadge.serverGroup.key, 'badge', referencedBadge.key]">
+                                    <badge-description [badge]="referencedBadge"></badge-description>
+                                </a>
+                            </td>
+                        </ng-container>
+
+
+                        <!-- PLAQUES-->
+                        <td *ngIf="partial.type === 'PLAQUE'">
+                            <badge-location [data]="partial"></badge-location>
                         </td>
-
-                        <td class="badge-name">
-                            <a *ngIf="!referencedBadge.unknown else badgeName" [routerLink]="['/', referencedBadge.serverGroup.key, 'badge', referencedBadge.key]">
-                                <ng-container *ngTemplateOutlet="badgeName"></ng-container>
-                            </a>
-                            <ng-template #badgeName>
-                                <badge-name-stacked [badge]="referencedBadge"></badge-name-stacked>
-                            </ng-template>
+                        <td *ngIf="partial.inscription" class="d-none d-md-table-cell">
+                            <blockquote class="blockquote">
+                                <footer class="blockquote-footer">{{partial.inscription}}</footer>
+                            </blockquote>
                         </td>
+                        <td *ngIf="partial.notes">{{partial.notes}}</td>
 
-                        <td class="badge-type">
-                            <a [routerLink]="['/', referencedBadge.serverGroup.key, 'badge', referencedBadge.key]">
-                                {{referencedBadge.type | badgeType}}
-                            </a>
+                        <!-- INVENTIONS -->
+                        <td *ngIf="partial.type === 'INVENTION'">
+                            Craft {{partial.count}} level {{partial.inventionLevel}}
+                            <invention-types [inventionTypes]="partial.inventionTypes"></invention-types>
+                            enhancement{{partial.count > 1 ? "s" : ""}}.
                         </td>
+                        <td *ngIf="partial.type === 'INVENTION_PLUS_ONE'">Plus one more of either level.</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </ng-container>
 
-                        <td class="badge-description">
-                            <a [routerLink]="['/', referencedBadge.serverGroup.key, 'badge', referencedBadge.key]">
-                                <badge-description [badge]="referencedBadge"></badge-description>
-                            </a>
-                        </td>
-                    </ng-container>
-
-
-                    <!-- PLAQUES-->
-                    <td *ngIf="partial.type === 'PLAQUE'">
-                        <badge-location [data]="partial"></badge-location>
-                    </td>
-                    <td *ngIf="partial.inscription" class="d-none d-md-table-cell">
-                        <blockquote class="blockquote">
-                            <footer class="blockquote-footer">{{partial.inscription}}</footer>
-                        </blockquote>
-                    </td>
-                    <td *ngIf="partial.notes">{{partial.notes}}</td>
-
-                    <!-- INVENTIONS -->
-                    <td *ngIf="partial.type === 'INVENTION'">
-                        Craft {{partial.count}} level {{partial.inventionLevel}}
-                        <invention-types [inventionTypes]="partial.inventionTypes"></invention-types>
-                        enhancement{{partial.count > 1 ? "s" : ""}}.
-                    </td>
-                    <td *ngIf="partial.type === 'INVENTION_PLUS_ONE'">Plus one more of either level.</td>
-                </tr>
-                </tbody>
-            </table>
         </div>
 
         <div class="order-0 col-12 order-md-1 col-md-4">
