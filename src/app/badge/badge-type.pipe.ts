@@ -8,8 +8,13 @@ import {BadgeType} from "coh-content-db";
 export class BadgeTypePipe implements PipeTransform {
 
     public transform(value: BadgeType, args?: any): string {
-        return value === BadgeType.PVP
-            ? "PvP"
-            : _.startCase(_.lowerCase(_.replace(value, "_", " ")));
+        switch (value) {
+            case BadgeType.PVP:
+                return "PvP";
+            case BadgeType.AE:
+                return "AE";
+            default:
+                return _.startCase(_.lowerCase(_.replace(value, "_", " ")));
+        }
     }
 }

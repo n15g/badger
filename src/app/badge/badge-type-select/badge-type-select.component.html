@@ -1,0 +1,4 @@
+<select [(ngModel)]="type" class="form-control">
+    <option value="">-- Type --</option>
+    <option *ngFor="let type of types" [value]="type">{{type | badgeType}}</option>
+</select>

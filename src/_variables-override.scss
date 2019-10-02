@@ -41,3 +41,19 @@ $enh-to-hit-debuff: #b98f4a;
 $breadcrumb-divider: quote("|");
 
 $table-cell-padding: 0.25rem;
+
+$pagination-bg: $white;
+$pagination-color: $primary;
+
+$pagination-border-color: $gray-200;
+$pagination-border-width: 1px;
+
+$pagination-active-bg: $primary;
+$pagination-active-color: $white;
+
+$pagination-hover-bg: $primary;
+$pagination-hover-color: $white;
+
+$pagination-disabled-bg: $gray-200;
+$pagination-disabled-color: lighten($primary, 50%);
+$pagination-disabled-border-color: $gray-200;

@@ -1,3 +1,12 @@
+<form class="filters form-inline">
+    <badge-type-select [(type)]="type"></badge-type-select>
+    <game-map-select [serverGroup]="serverGroup" [(mapKey)]="mapKey"></game-map-select>
+    <input type="text" placeholder="Search..." class="form-control search" [(ngModel)]="queryStr" [ngModelOptions]="{standalone: true}"/>
+    <badge-sort-select [(sort)]="sort"></badge-sort-select>
+</form>
+
+<ng-container *ngTemplateOutlet="pagination"></ng-container>
+
 <table class="badge-list table table-bordered table-striped">
     <thead>
     <tr>
@@ -9,30 +18,62 @@
     </tr>
     </thead>
     <tbody>
-    <tr *ngFor="let badge of filteredBadges">
-        <td class="badge-icon">
-            <a [routerLink]="['/', badge.serverGroup.key, 'badge', badge.key]">
-                <badge-images [badge]="badge"></badge-images>
-            </a>
-        </td>
+    <ng-container *ngIf="badges.length; else noMatches">
+        <tr *ngFor="let badge of badges">
+            <td class="badge-icon">
+                <a [routerLink]="['/', badge.serverGroup.key, 'badge', badge.key]">
+                    <badge-images [badge]="badge"></badge-images>
+                </a>
+            </td>
 
-        <td class="badge-name">
-            <a [routerLink]="['/', badge.serverGroup.key, 'badge', badge.key]">
-                <badge-name-stacked [badge]="badge"></badge-name-stacked>
-            </a>
-        </td>
+            <td class="badge-name">
+                <a [routerLink]="['/', badge.serverGroup.key, 'badge', badge.key]">
+                    <badge-name-stacked [badge]="badge"></badge-name-stacked>
+                </a>
+            </td>
 
-        <td class="badge-alignment">
-            <badge-alignment-inline [badge]="badge"></badge-alignment-inline>
-        </td>
+            <td class="badge-alignment">
+                <badge-alignment-inline [badge]="badge"></badge-alignment-inline>
+            </td>
 
-        <td class="badge-type">
-            {{badge.type | badgeType}}
-        </td>
+            <td class="badge-type">
+                {{badge.type | badgeType}}
+            </td>
 
-        <td class="badge-description">
-            <badge-description [badge]="badge"></badge-description>
-        </td>
-    </tr>
+            <td class="badge-description">
+                <badge-description [badge]="badge"></badge-description>
+            </td>
+        </tr>
+    </ng-container>
+    <ng-template #noMatches>
+        <tr>
+            <td class="no-matches" colspan="5">No badges match your current filters.</td>
+        </tr>
+    </ng-template>
     </tbody>
 </table>
+
+<ng-container *ngTemplateOutlet="pagination"></ng-container>
+
+<div>{{totalItems}} badges total ({{serverGroup.badges.length - totalItems}} filtered)</div>
+
+<ng-template #pagination>
+    <div class="form-inline">
+        <pagination [totalItems]="totalItems" [(ngModel)]="page" [maxSize]="5" [itemsPerPage]="itemsPerPage" (numPages)="pageCount = $event"></pagination>
+        <ul class="pagination">
+            <li>
+                <div class="form-text page-count">{{pageCount}} Page(s)</div>
+            </li>
+            <li>
+                <select class="form-control" [(ngModel)]="itemsPerPage">
+                    <option value="10">10 items per page</option>
+                    <option value="20">20 items per page</option>
+                    <option value="50">50 items per page</option>
+                    <option value="100">100 items per page</option>
+                    <option value="500">500 items per page</option>
+                    <option value="">All</option>
+                </select>
+            </li>
+        </ul>
+    </div>
+</ng-template>

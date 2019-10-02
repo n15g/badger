@@ -1,5 +1,13 @@
 @import "~src/mixins";
 
+.filters {
+    margin-bottom: 8px;
+
+    input.search {
+        margin-right: 48px;
+    }
+}
+
 .badge-list {
     td {
         vertical-align: middle;
@@ -23,4 +31,17 @@
             height: 32px;
         }
     }
+
+    .no-matches {
+        color: $text-muted;
+        font-style: italic;
+    }
+}
+
+pagination {
+    margin-right: 8px;
+}
+
+.page-count {
+    margin-right: 8px;
 }

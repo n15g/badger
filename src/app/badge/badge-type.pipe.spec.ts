@@ -19,4 +19,8 @@ describe("BadgeTypePipe", () => {
     it("should format [PVP] to [PvP]", () => {
         expect(pipe.transform(BadgeType.PVP)).toEqual("PvP");
     });
+
+    it("should format [AE] to [AE]", () => {
+        expect(pipe.transform(BadgeType.AE)).toEqual("AE");
+    });
 });

@@ -1,0 +1,4 @@
+<select [(ngModel)]="mapKey" class="form-control">
+    <option value="">-- Map --</option>
+    <option *ngFor="let map of maps" [value]="map.key">{{map.name}}</option>
+</select>
