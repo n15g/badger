@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {CohContentDb, IBadge, IGameMap, IServerGroup} from "coh-content-db";
-import {Homecoming, HomecomingBadges} from "coh-content-db-homecoming";
+import {Homecoming, HomecomingBadges, HomecomingChangelog} from "coh-content-db-homecoming";
 
 @Injectable({
     providedIn: 'root'
@@ -12,6 +12,7 @@ export class ContentDbService {
         this.contentDb = new CohContentDb();
         this.contentDb.load(new Homecoming());
         this.contentDb.load(new HomecomingBadges());
+        this.contentDb.load(new HomecomingChangelog());
     }
 
     public getServerGroups(): IServerGroup[] {

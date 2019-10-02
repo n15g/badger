@@ -23,6 +23,7 @@ import {BadgeTypePipe} from "./badge/badge-type.pipe";
 import {BadgeTypeSelectComponent} from "./badge/badge-type-select/badge-type-select.component";
 import {BadgeVidiotIconComponent} from './badge/badge-vidiot-icon/badge-vidiot-icon.component';
 import {BrowserModule} from "@angular/platform-browser";
+import {ChangelogPageComponent} from './changelog/changelog-page.component';
 import {CoordinatePipe} from "./badge/coordinate.pipe";
 import {EnhancementCategoriesPipe} from "./common/enhancement-categories.pipe";
 import {EnhancementCategoryPipe} from "./common/enhancement-category.pipe";
@@ -42,6 +43,7 @@ import {MarkdownModule} from "ngx-markdown";
 import {NgVarDirective} from "./common/ng-var.directive";
 import {PagePipe} from "./common/page.pipe";
 import {PaginationModule} from "ngx-bootstrap/pagination";
+import {ReversePipe} from "./common/reverse.pipe";
 import {ServerGroupPageComponent} from "./server-group/server-group-page/server-group-page.component";
 import {ServerGroupResolver} from "./server-group/server-group.resolver";
 import {ServerGroupSortPipe} from "./server-group/server-group-sort.pipe";
@@ -72,6 +74,7 @@ import {SmartLinksPipe} from "./common/smart-links.pipe";
         BadgeTypePipe,
         BadgeTypeSelectComponent,
         BadgeVidiotIconComponent,
+        ChangelogPageComponent,
         CoordinatePipe,
         EnhancementCategoriesPipe,
         EnhancementCategoryPipe,
@@ -87,6 +90,7 @@ import {SmartLinksPipe} from "./common/smart-links.pipe";
         MainNavComponent,
         NgVarDirective,
         PagePipe,
+        ReversePipe,
         ServerGroupPageComponent,
         ServerGroupSortPipe,
         ServerGroupStatusComponent,
@@ -115,6 +119,7 @@ import {SmartLinksPipe} from "./common/smart-links.pipe";
         FilterBadgeTypePipe,
         InventionPartialsPipe,
         PagePipe,
+        ReversePipe,
         ServerGroupResolver,
         SmartLinksPipe,
     ],

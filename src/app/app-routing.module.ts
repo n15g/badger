@@ -5,9 +5,11 @@ import {BadgeResolver} from "./badge/badge.resolver";
 import {BadgePageComponent} from "./badge/badge-page/badge-page.component";
 import {ServerGroupPageComponent} from "./server-group/server-group-page/server-group-page.component";
 import {ServerGroupResolver} from "./server-group/server-group.resolver";
+import {ChangelogPageComponent} from "./changelog/changelog-page.component";
 
 const routes: Routes = [
     {path: "", component: HomeComponent, data: {title: "Badger"}},
+    {path: "changelog", component: ChangelogPageComponent},
     {path: ":serverGroupKey", component: ServerGroupPageComponent, resolve: {serverGroup: ServerGroupResolver}},
     {path: ":serverGroupKey/badge/:badgeKey", component: BadgePageComponent, resolve: {serverGroup: ServerGroupResolver, badge: BadgeResolver}}
 ];

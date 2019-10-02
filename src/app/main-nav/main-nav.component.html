@@ -25,6 +25,14 @@
                     <a *ngFor="let serverGroup of serverGroups | serverGroupSort" class="dropdown-item" [routerLink]="['/', serverGroup.key]">{{serverGroup.name}}</a>
                 </div>
             </li>
+            <li class="nav-item">
+                <a class="nav-link"
+                   routerLink="/changelog"
+                   routerLinkActive="active"
+                   [routerLinkActiveOptions]="{exact: true}">
+                    Changelog
+                </a>
+            </li>
         </ul>
     </div>
 </nav>

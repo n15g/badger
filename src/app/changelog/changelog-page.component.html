@@ -1,0 +1,23 @@
+<div class="container">
+    <h1>Badger Changelog</h1>
+    <hr/>
+    <div *ngFor="let item of appChangelog | keyvalue | reverse">
+        <h5>{{item.key}}</h5>
+        <ul>
+            <li *ngFor="let note of item.value" [innerHTML]="note | markdown"></li>
+        </ul>
+    </div>
+
+    <h1>Server Group Changelogs</h1>
+    <hr/>
+    <ng-container *ngFor="let serverGroup of serverGroups | serverGroupSort">
+        <h3>{{serverGroup.name}}</h3>
+        <hr/>
+        <div *ngFor="let item of serverGroup.changelog | keyvalue | reverse">
+            <h5>{{item.key}}</h5>
+            <ul>
+                <li *ngFor="let note of item.value" [innerHTML]="note | markdown"></li>
+            </ul>
+        </div>
+    </ng-container>
+</div>
