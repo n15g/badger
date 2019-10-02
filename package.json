@@ -4,10 +4,12 @@
     "scripts": {
         "ng": "ng",
         "start": "ng serve",
-        "build": "ng build --aot",
+        "build": "ng build --prod --aot --base-href \"https://n15g.github.io/badger/\" --deploy-url \"https://n15g.github.io/badger/\" --rebase-root-relative-css-urls=true",
+        "pages": "ngh --branch=gh-pages",
         "test": "ng test",
         "lint": "ng lint"
     },
+    "repository": "https://github.com/n15g/badger",
     "private": true,
     "dependencies": {
         "@angular/animations": "~8.0.0",
@@ -44,6 +46,7 @@
         "@types/jasminewd2": "~2.0.3",
         "@types/lodash": "^4.14.137",
         "@types/node": "~8.9.4",
+        "angular-cli-ghpages": "^0.6.0",
         "codelyzer": "^5.0.0",
         "jasmine-core": "~3.4.0",
         "jasmine-spec-reporter": "~4.2.1",

@@ -13,6 +13,6 @@ export class BadgeImagesComponent {
     public getSrc(imageKey: string) {
         const path = _.replace(imageKey, /\./g, "/");
 
-        return `/assets/badge/${path}.png`;
+        return `./assets/badge/${path}.png`;
     }
 }
