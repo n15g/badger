@@ -4,7 +4,6 @@ import {SessionStorage} from "ngx-store";
 import {FilterBadgeTypePipe} from "../filter-badge-type.pipe";
 import {FilterBadgeMapPipe} from "../filter-badge-map.pipe";
 import {FilterBadgeSearchPipe} from "../filter-badge-search.pipe";
-import {PagePipe} from "../../common/page.pipe";
 import {BadgeSortPipe, BadgeSortType} from "../badge-sort.pipe";
 
 @Component({
@@ -23,8 +22,7 @@ export class BadgeListComponent implements OnInit {
     constructor(private filterBadgeType: FilterBadgeTypePipe,
                 private filterBadgeMap: FilterBadgeMapPipe,
                 private filterBadgeSearch: FilterBadgeSearchPipe,
-                private badgeSort: BadgeSortPipe,
-                private pagePipe: PagePipe) {
+                private badgeSort: BadgeSortPipe) {
     }
 
     @SessionStorage("badge-list.type")
@@ -37,6 +35,7 @@ export class BadgeListComponent implements OnInit {
     set type(value: BadgeType) {
         this._type = value;
         this.update();
+        this._page = 1;
     }
 
     @SessionStorage("badge-list.mapKey")
@@ -49,6 +48,7 @@ export class BadgeListComponent implements OnInit {
     set mapKey(value: string) {
         this._mapKey = value;
         this.update();
+        this._page = 1;
     }
 
     @SessionStorage("badge-list.queryStr")
@@ -61,6 +61,7 @@ export class BadgeListComponent implements OnInit {
     set queryStr(value: string) {
         this._queryStr = value;
         this.update();
+        this._page = 1;
     }
 
     @SessionStorage("badge-list.page")
@@ -110,8 +111,6 @@ export class BadgeListComponent implements OnInit {
         badges = this.badgeSort.transform(badges, this._sort);
 
         this.totalItems = badges.length;
-
-        badges = this.pagePipe.transform(badges, this._page, this._itemsPerPage);
 
         this.badges = badges;
     }

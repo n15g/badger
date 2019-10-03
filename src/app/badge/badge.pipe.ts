@@ -10,24 +10,14 @@ export class BadgePipe implements PipeTransform {
     constructor(private contentDb: ContentDbService) {
     }
 
-    public transform(badgeKey: string, args: { serverGroup: IServerGroup }): IPossiblyUnknownBadge {
+    public transform(badgeKey: string, args: { serverGroup: IServerGroup }): IBadge | null {
         const serverGroup = args.serverGroup;
 
         try {
-            return badgeKey ? this.contentDb.getBadge(serverGroup.key, badgeKey) : null;
+            return this.contentDb.getBadge(serverGroup.key, badgeKey);
         } catch {
-            return {
-                unknown: true,
-                serverGroup: serverGroup,
-                key: badgeKey,
-                type: null,
-                alignment: {h: false, v: false, p: false},
-                names: []
-            };
+            return null;
         }
     }
 }
 
-export interface IPossiblyUnknownBadge extends IBadge {
-    readonly unknown?: boolean;
-}

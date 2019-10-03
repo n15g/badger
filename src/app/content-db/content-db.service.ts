@@ -26,14 +26,10 @@ export class ContentDbService {
     }
 
     public getGameMap(serverGroupKey: string, mapKey: string): IGameMap | null {
-        const map = this.getServerGroup(serverGroupKey).getMap(mapKey);
-        if (map == null) throw new Error(`Unknown map key [${serverGroupKey}:${mapKey}]`);
-        return map;
+        return this.getServerGroup(serverGroupKey).getMap(mapKey);
     }
 
     public getBadge(serverGroupKey: string, badgeKey: string): IBadge | null {
-        const badge = this.getServerGroup(serverGroupKey).getBadge(badgeKey);
-        if (badge == null) throw new Error(`Unknown map key [${serverGroupKey}:${badgeKey}]`);
-        return badge;
+        return this.getServerGroup(serverGroupKey).getBadge(badgeKey);
     }
 }

@@ -19,7 +19,7 @@
     </thead>
     <tbody>
     <ng-container *ngIf="badges.length; else noMatches">
-        <tr *ngFor="let badge of badges">
+        <tr *ngFor="let badge of badges | page:page:itemsPerPage">
             <td class="badge-icon">
                 <a [routerLink]="['/', badge.serverGroup.key, 'badge', badge.key]">
                     <badge-images [badge]="badge"></badge-images>
