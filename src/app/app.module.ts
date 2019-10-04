@@ -24,6 +24,7 @@ import {BadgeTypeSelectComponent} from "./badge/badge-type-select/badge-type-sel
 import {BadgeVidiotIconComponent} from './badge/badge-vidiot-icon/badge-vidiot-icon.component';
 import {BrowserModule} from "@angular/platform-browser";
 import {ChangelogPageComponent} from './changelog/changelog-page.component';
+import {CharacterListPageComponent} from "./character/character-list-page/character-list-page.component";
 import {CoordinatePipe} from "./badge/coordinate.pipe";
 import {EnhancementCategoriesPipe} from "./common/enhancement-categories.pipe";
 import {EnhancementCategoryPipe} from "./common/enhancement-category.pipe";
@@ -40,6 +41,7 @@ import {InventionTypesComponent} from "./badge/invention-types/invention-types.c
 import {LinksStackedComponent} from './common/links-stacked/links-stacked.component';
 import {MainNavComponent} from "./main-nav/main-nav.component";
 import {MarkdownModule} from "ngx-markdown";
+import {ModalModule, TypeaheadModule} from "ngx-bootstrap";
 import {NgVarDirective} from "./common/ng-var.directive";
 import {PagePipe} from "./common/page.pipe";
 import {PaginationModule} from "ngx-bootstrap/pagination";
@@ -51,11 +53,23 @@ import {ServerGroupStatusComponent} from "./server-group/server-group-status/ser
 import {ServerGroupStatusesComponent} from "./server-group/server-group-statuses/server-group-statuses.component";
 import {SexIconPipe} from "./badge/sex-icon.pipe";
 import {SmartLinksPipe} from "./common/smart-links.pipe";
+import {NewCharacterModalComponent} from "./character/new-character-modal/new-character-modal.component";
+import {ServerGroupSelectComponent} from "./server-group/server-group-select/server-group-select.component";
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {ArchetypeIconComponent} from "./character/archetype-icon/archetype-icon.component";
+import {ArchetypePipe} from "./character/archetype.pipe";
+import {ServerGroupPipe} from "./server-group/server-group.pipe";
+import {WebStorageModule} from "ngx-store";
+import {CharacterResolver} from "./character/character.resolver";
+import {CharacterPageComponent} from "./character/character-page/character-page.component";
+import {CharacterSortPipe} from "./character/character-sort.pipe.ts";
 
 @NgModule({
     declarations: [
         AlternatesPipe,
         AppComponent,
+        ArchetypeIconComponent,
+        ArchetypePipe,
         BadgeAlignmentInlineComponent,
         BadgeAlignmentStackedComponent,
         BadgeDescriptionComponent,
@@ -75,6 +89,9 @@ import {SmartLinksPipe} from "./common/smart-links.pipe";
         BadgeTypeSelectComponent,
         BadgeVidiotIconComponent,
         ChangelogPageComponent,
+        CharacterListPageComponent,
+        CharacterPageComponent,
+        CharacterSortPipe,
         CoordinatePipe,
         EnhancementCategoriesPipe,
         EnhancementCategoryPipe,
@@ -88,10 +105,13 @@ import {SmartLinksPipe} from "./common/smart-links.pipe";
         InventionTypesComponent,
         LinksStackedComponent,
         MainNavComponent,
+        NewCharacterModalComponent,
         NgVarDirective,
         PagePipe,
         ReversePipe,
         ServerGroupPageComponent,
+        ServerGroupPipe,
+        ServerGroupSelectComponent,
         ServerGroupSortPipe,
         ServerGroupStatusComponent,
         ServerGroupStatusesComponent,
@@ -100,18 +120,25 @@ import {SmartLinksPipe} from "./common/smart-links.pipe";
     ],
     imports: [
         AppRoutingModule,
+        BrowserAnimationsModule,
         BrowserModule,
         FontAwesomeModule,
         FormsModule,
         MarkdownModule.forRoot(),
+        ModalModule.forRoot(),
         PaginationModule.forRoot(),
+        TypeaheadModule.forRoot(),
+        WebStorageModule,
     ],
     providers: [
         AlternatesPipe,
+        ArchetypePipe,
         BadgeNamePipe,
         BadgePipe,
         BadgeResolver,
         BadgeSortPipe,
+        CharacterResolver,
+        CharacterSortPipe,
         EnhancementCategoriesPipe,
         EnhancementCategoryPipe,
         FilterBadgeMapPipe,
@@ -120,8 +147,12 @@ import {SmartLinksPipe} from "./common/smart-links.pipe";
         InventionPartialsPipe,
         PagePipe,
         ReversePipe,
+        ServerGroupPipe,
         ServerGroupResolver,
         SmartLinksPipe,
+    ],
+    entryComponents: [
+        NewCharacterModalComponent
     ],
     bootstrap: [AppComponent]
 })

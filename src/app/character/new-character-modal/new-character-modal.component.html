@@ -1,0 +1,56 @@
+<form name="form" (ngSubmit)="done()" #form="ngForm" autocomplete="off">
+    <div class="modal-header">
+        <h4 class="modal-title pull-left">New Character</h4>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="bsModalRef.hide()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="form-group">
+            <label for="name">Name</label>
+            <input id="name"
+                   name="name"
+                   type="text"
+                   class="form-control"
+                   [(ngModel)]="name"
+                   required
+                   autofocus>
+        </div>
+
+        <div class="form-group">
+            <label>Server Group</label>
+            <server-group-select [(serverGroup)]="serverGroup"></server-group-select>
+        </div>
+
+        <div class="form-group">
+            <label for="server">Server</label>
+            <input id="server"
+                   name="server"
+                   type="text"
+                   class="form-control"
+                   [(ngModel)]="server"
+                   [typeahead]="servers"
+                   [typeaheadMinLength]="0"
+                   typeaheadOptionField="name"
+                   [isAnimated]="true"
+                   required>
+        </div>
+
+        <div class="form-group">
+            <label for="archetype">Archetype</label>
+            <div class="input-group">
+                <archetype-icon [archetype]="archetype"></archetype-icon>
+                <select id="archetype"
+                        name="archetype"
+                        class="form-control"
+                        [(ngModel)]="archetype">
+                    <option *ngFor="let archetype of archetypes" [ngValue]="archetype">{{archetype.name}}</option>
+                </select>
+            </div>
+
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="submit" class="btn btn-primary" [disabled]="!form.valid">Done</button>
+    </div>
+</form>

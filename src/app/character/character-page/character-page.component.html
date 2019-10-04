@@ -1,0 +1,22 @@
+<div class="container">
+    <nav class="main-breadcrumb" aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a [routerLink]="['/']">Home</a></li>
+            <li class="breadcrumb-item"><a [routerLink]="['/character']">My Characters</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{{serverGroup.name}}</li>
+        </ol>
+    </nav>
+
+    <h1>
+        <archetype-icon [archetype]="archetype"></archetype-icon>
+        {{character.name}}
+    </h1>
+
+
+    <markdown ngPreserveWhitespaces [data]="serverGroup.description"></markdown>
+
+    <section>
+        <h3>Badges</h3>
+        <badge-list [serverGroup]="serverGroup"></badge-list>
+    </section>
+</div>
