@@ -4,8 +4,7 @@ import * as _ from 'lodash';
 import {BadgeNamePipe} from "./badge-name.pipe";
 
 @Pipe({
-    name: "badgeSort",
-    pure: false
+    name: "badgeSort"
 })
 export class BadgeSortPipe implements PipeTransform {
 

@@ -1,6 +1,6 @@
 @import "~src/mixins";
 
-badge-list {
+character-badge-checklist {
     .filters {
         margin-bottom: 8px;
 
@@ -19,17 +19,22 @@ badge-list {
             text-align: center;
         }
 
+        tr.owned {
+            opacity: 0.3;
+            background: $gray-400;
+        }
+
+        td.badge-select {
+            input {
+                transform: scale(1.5);
+            }
+        }
+
         @include media-breakpoint-down(sm) {
             .badge-alignment,
             .badge-type,
             .badge-description {
                 display: none;
-            }
-        }
-
-        badge-images {
-            img {
-                height: 32px;
             }
         }
 

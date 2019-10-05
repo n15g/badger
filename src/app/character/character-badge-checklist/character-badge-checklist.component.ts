@@ -1,28 +1,36 @@
-import {ChangeDetectionStrategy, Component, Input, OnInit, ViewEncapsulation} from "@angular/core";
-import {BadgeType, IBadge, IServerGroup} from "coh-content-db";
+import {Component, Input, OnInit, ViewEncapsulation} from "@angular/core";
+import {BadgeType, IServerGroup} from "coh-content-db";
 import {SessionStorage} from "ngx-store";
-import {FilterBadgeTypePipe} from "../filter-badge-type.pipe";
-import {FilterBadgeMapPipe} from "../filter-badge-map.pipe";
-import {FilterBadgeSearchPipe} from "../filter-badge-search.pipe";
-import {BadgeSortPipe, BadgeSortType} from "../badge-sort.pipe";
+import {BadgeSortPipe, BadgeSortType} from "../../badge/badge-sort.pipe";
+import {FilterBadgeTypePipe} from "../../badge/filter-badge-type.pipe";
+import {FilterBadgeMapPipe} from "../../badge/filter-badge-map.pipe";
+import {FilterBadgeSearchPipe} from "../../badge/filter-badge-search.pipe";
+import {CharacterBadgesPipe, ICharacterBadge} from "../character-badges.pipe";
+import {ICharacter} from "../character";
+import {ServerGroupPipe} from "../../server-group/server-group.pipe";
+import {CharacterDbService} from "../character-db.service";
 
 @Component({
-    selector: "badge-list",
-    templateUrl: "./badge-list.component.html",
-    styleUrls: ["./badge-list.component.scss"],
-    encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush
+    selector: "character-badge-checklist",
+    templateUrl: "./character-badge-checklist.component.html",
+    styleUrls: ["./character-badge-checklist.component.scss"],
+    encapsulation: ViewEncapsulation.None
 })
-export class BadgeListComponent implements OnInit {
-    @Input() public serverGroup: IServerGroup;
-    badges: IBadge[] = [];
+export class CharacterBadgeChecklistComponent implements OnInit {
+    @Input() public character: ICharacter;
+    serverGroup: IServerGroup;
+    badges: ICharacterBadge[] = [];
+
     totalItems: number = this.badges.length;
     pageCount: number = 1;
 
-    constructor(private filterBadgeType: FilterBadgeTypePipe,
+    constructor(private serverGroupPipe: ServerGroupPipe,
+                private filterBadgeType: FilterBadgeTypePipe,
                 private filterBadgeMap: FilterBadgeMapPipe,
                 private filterBadgeSearch: FilterBadgeSearchPipe,
-                private badgeSort: BadgeSortPipe) {
+                private badgeSort: BadgeSortPipe,
+                private characterBadgesPipe: CharacterBadgesPipe,
+                private characterDb: CharacterDbService) {
     }
 
     @SessionStorage("badge-list.type")
@@ -38,7 +46,7 @@ export class BadgeListComponent implements OnInit {
         this._page = 1;
     }
 
-    @SessionStorage("badge-list.mapKey")
+    @SessionStorage("character-badge-list.mapKey")
     _mapKey: string = "";
 
     get mapKey(): string {
@@ -51,7 +59,7 @@ export class BadgeListComponent implements OnInit {
         this._page = 1;
     }
 
-    @SessionStorage("badge-list.queryStr")
+    @SessionStorage("character-badge-list.queryStr")
     _queryStr: string = "";
 
     get queryStr(): string {
@@ -64,7 +72,7 @@ export class BadgeListComponent implements OnInit {
         this._page = 1;
     }
 
-    @SessionStorage("badge-list.page")
+    @SessionStorage("character-badge-list.page")
     private _page: number = 1;
 
     get page(): number {
@@ -76,7 +84,7 @@ export class BadgeListComponent implements OnInit {
         this.update();
     }
 
-    @SessionStorage("badge-list.itemsPerPage")
+    @SessionStorage("character-badge-list.itemsPerPage")
     private _itemsPerPage: number = 50;
 
     get itemsPerPage(): number {
@@ -87,7 +95,7 @@ export class BadgeListComponent implements OnInit {
         this._itemsPerPage = value;
     }
 
-    @SessionStorage("badge-list.sort")
+    @SessionStorage("character-badge-list.sort")
     _sort: BadgeSortType = "" as BadgeSortType;
 
     get sort(): BadgeSortType {
@@ -100,6 +108,7 @@ export class BadgeListComponent implements OnInit {
     }
 
     ngOnInit(): void {
+        this.serverGroup = this.serverGroupPipe.transform(this.character.serverGroupKey);
         this.update();
     }
 
@@ -112,7 +121,7 @@ export class BadgeListComponent implements OnInit {
 
         this.totalItems = badges.length;
 
-        this.badges = badges;
+        this.badges = this.characterBadgesPipe.transform(badges, this.character);
     }
 
     clearFilters() {
@@ -121,5 +130,9 @@ export class BadgeListComponent implements OnInit {
         this.queryStr = "";
         this.page = 1;
         this.update();
+    }
+
+    collectBadge(badge: ICharacterBadge, value: boolean) {
+        this.character = this.characterDb.collectBadge(this.character, badge, value);
     }
 }

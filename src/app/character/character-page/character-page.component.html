@@ -17,6 +17,13 @@
 
     <section>
         <h3>Badges</h3>
-        <badge-list [serverGroup]="serverGroup"></badge-list>
+        <tabset>
+            <tab heading="Display" (selectTab)="activeTab = $event.heading" [active]="activeTab === 'Display'">
+                <character-badge-display [character]="character"></character-badge-display>
+            </tab>
+            <tab heading="Collect" (selectTab)="activeTab = $event.heading" [active]="activeTab === 'Collect'">
+                <character-badge-checklist [character]="character"></character-badge-checklist>
+            </tab>
+        </tabset>
     </section>
 </div>

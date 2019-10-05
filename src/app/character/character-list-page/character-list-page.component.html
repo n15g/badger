@@ -16,7 +16,7 @@
                             {{character.name}}
                         </h5>
                         <h6 class="card-subtitle mb-2 text-muted">
-                            {{character.serverGroupKey}} - {{character.server}}
+                            {{(character.serverGroupKey | serverGroup).name}} - {{character.server}}
                         </h6>
                     </div>
                 </a>

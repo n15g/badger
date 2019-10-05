@@ -1,0 +1,29 @@
+<div class="badges">
+    <label><input type="checkbox" [(ngModel)]="villain"> Villain icons</label>
+
+    <p *ngIf="!collectedBadges.length; else badges" class="text-muted">Nothing yet, go out and collect some badges!</p>
+
+    <ng-template #badges>
+        <ng-container *ngVar="collectedBadges | badgesByType as badgesByType">
+            <ng-container *ngFor="let type of types">
+                <div *ngTemplateOutlet="badgeType;context({badgeType: type, badges:badgesByType[type]})"></div>
+            </ng-container>
+        </ng-container>
+    </ng-template>
+</div>
+
+<ng-template #badgeType let-badgeType="badgeType" let-badges="badges">
+    <ng-container *ngIf="badges && badges.length">
+        <h3>{{badgeType | badgeType}} Badges</h3>
+        <div *ngFor="let badge of badges" class="badge-icon" [tooltip]="badge | badgeName" placement="bottom">
+            <ng-container *ngVar="badge | badgeImageSrc:villain as imageSrc">
+                <a [routerLink]="['/', badge.serverGroup.key, 'badge', badge.key]">
+                    <img *ngIf="imageSrc; else noImage" [src]="imageSrc" (error)="imageSrc = null" [alt]="badge | badgeName">
+                    <ng-template #noImage>
+                        <fa-icon size="3x" class="missingImage" [icon]="missingImageIcon"></fa-icon>
+                    </ng-template>
+                </a>
+            </ng-container>
+        </div>
+    </ng-container>
+</ng-template>

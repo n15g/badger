@@ -8,7 +8,7 @@
 
 <ng-container *ngTemplateOutlet="pagination"></ng-container>
 
-<table class="badge-list table table-bordered table-striped">
+<table class="badge-list table table-bordered">
     <thead>
     <tr>
         <th class="badge-icon"></th>
@@ -20,11 +20,9 @@
     </thead>
     <tbody>
     <ng-container *ngIf="badges.length; else noMatches">
-        <tr *ngFor="let badge of badges | page:page:itemsPerPage">
-            <td class="badge-icon">
-                <a [routerLink]="['/', badge.serverGroup.key, 'badge', badge.key]">
-                    <badge-images [badge]="badge"></badge-images>
-                </a>
+        <tr *ngFor="let badge of badges | page:page:itemsPerPage" [ngClass]="{owned: badge.owned}">
+            <td class="badge-select">
+                <input type="checkbox" class="form-control-lg" [(ngModel)]="badge.owned" (ngModelChange)="collectBadge(badge, $event)"/>
             </td>
 
             <td class="badge-name">

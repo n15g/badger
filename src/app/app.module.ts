@@ -41,7 +41,7 @@ import {InventionTypesComponent} from "./badge/invention-types/invention-types.c
 import {LinksStackedComponent} from './common/links-stacked/links-stacked.component';
 import {MainNavComponent} from "./main-nav/main-nav.component";
 import {MarkdownModule} from "ngx-markdown";
-import {ModalModule, TypeaheadModule} from "ngx-bootstrap";
+import {ModalModule, TabsModule, TooltipModule, TypeaheadModule} from "ngx-bootstrap";
 import {NgVarDirective} from "./common/ng-var.directive";
 import {PagePipe} from "./common/page.pipe";
 import {PaginationModule} from "ngx-bootstrap/pagination";
@@ -62,7 +62,13 @@ import {ServerGroupPipe} from "./server-group/server-group.pipe";
 import {WebStorageModule} from "ngx-store";
 import {CharacterResolver} from "./character/character.resolver";
 import {CharacterPageComponent} from "./character/character-page/character-page.component";
-import {CharacterSortPipe} from "./character/character-sort.pipe.ts";
+import {CharacterSortPipe} from "./character/character-sort.pipe";
+import {CharacterBadgesPipe} from "./character/character-badges.pipe";
+import {CharacterBadgeChecklistComponent} from "./character/character-badge-checklist/character-badge-checklist.component";
+import {BadgesByTypePipe} from "./badge/badges-by-type.pipe";
+import {CollectedOnlyPipe} from "./character/collected-only.pipe";
+import {CharacterBadgeDisplayComponent} from "./character/character-badge-display/character-badge-display.component";
+import {BadgeImageSrcPipe} from "./badge/badge-image-src.pipe";
 
 @NgModule({
     declarations: [
@@ -74,6 +80,7 @@ import {CharacterSortPipe} from "./character/character-sort.pipe.ts";
         BadgeAlignmentStackedComponent,
         BadgeDescriptionComponent,
         BadgeImagesComponent,
+        BadgeImageSrcPipe,
         BadgeLinkComponent,
         BadgeListComponent,
         BadgeLocationComponent,
@@ -82,6 +89,7 @@ import {CharacterSortPipe} from "./character/character-sort.pipe.ts";
         BadgeNameStackedComponent,
         BadgePageComponent,
         BadgePipe,
+        BadgesByTypePipe,
         BadgeSortPipe,
         BadgeSortSelectComponent,
         BadgeTextComponent,
@@ -89,9 +97,13 @@ import {CharacterSortPipe} from "./character/character-sort.pipe.ts";
         BadgeTypeSelectComponent,
         BadgeVidiotIconComponent,
         ChangelogPageComponent,
+        CharacterBadgeChecklistComponent,
+        CharacterBadgeDisplayComponent,
+        CharacterBadgesPipe,
         CharacterListPageComponent,
         CharacterPageComponent,
         CharacterSortPipe,
+        CollectedOnlyPipe,
         CoordinatePipe,
         EnhancementCategoriesPipe,
         EnhancementCategoryPipe,
@@ -127,18 +139,24 @@ import {CharacterSortPipe} from "./character/character-sort.pipe.ts";
         MarkdownModule.forRoot(),
         ModalModule.forRoot(),
         PaginationModule.forRoot(),
+        TabsModule.forRoot(),
+        TooltipModule.forRoot(),
         TypeaheadModule.forRoot(),
         WebStorageModule,
     ],
     providers: [
         AlternatesPipe,
         ArchetypePipe,
+        BadgeImageSrcPipe,
         BadgeNamePipe,
         BadgePipe,
         BadgeResolver,
+        BadgesByTypePipe,
         BadgeSortPipe,
+        CharacterBadgesPipe,
         CharacterResolver,
         CharacterSortPipe,
+        CollectedOnlyPipe,
         EnhancementCategoriesPipe,
         EnhancementCategoryPipe,
         FilterBadgeMapPipe,
