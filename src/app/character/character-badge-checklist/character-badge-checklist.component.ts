@@ -1,14 +1,15 @@
 import {Component, Input, OnInit, ViewEncapsulation} from "@angular/core";
-import {BadgeType, IServerGroup} from "coh-content-db";
+import {BadgePartialType, BadgeType, IBadgePartial, IServerGroup} from "coh-content-db";
 import {SessionStorage} from "ngx-store";
 import {BadgeSortPipe, BadgeSortType} from "../../badge/badge-sort.pipe";
 import {FilterBadgeTypePipe} from "../../badge/filter-badge-type.pipe";
 import {FilterBadgeMapPipe} from "../../badge/filter-badge-map.pipe";
 import {FilterBadgeSearchPipe} from "../../badge/filter-badge-search.pipe";
-import {CharacterBadgesPipe, ICharacterBadge} from "../character-badges.pipe";
+import {CharacterBadgesPipe, ICharacterBadge, ICharacterBadgePartial} from "../character-badges.pipe";
 import {ICharacter} from "../character";
 import {ServerGroupPipe} from "../../server-group/server-group.pipe";
 import {CharacterDbService} from "../character-db.service";
+import * as _ from "lodash";
 
 @Component({
     selector: "character-badge-checklist",
@@ -134,5 +135,13 @@ export class CharacterBadgeChecklistComponent implements OnInit {
 
     collectBadge(badge: ICharacterBadge, value: boolean) {
         this.character = this.characterDb.collectBadge(this.character, badge, value);
+    }
+
+    collectPartial(partial: IBadgePartial, value: boolean, count?: number) {
+        this.character = this.characterDb.collectPartial(this.character, partial, value, count);
+    }
+
+    getPlusOneInvention(badge: ICharacterBadge): ICharacterBadgePartial {
+        return _.find(badge.partials, (partial) => partial.type === BadgePartialType.INVENTION_PLUS_ONE);
     }
 }

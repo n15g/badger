@@ -34,5 +34,5 @@ export type CollectedBadgesEntry = {
 
 export type CollectedPartialsEntry = {
     owned: boolean;
-    count?: number;
+    craftCount?: number;
 };

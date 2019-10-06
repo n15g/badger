@@ -69,6 +69,8 @@ import {BadgesByTypePipe} from "./badge/badges-by-type.pipe";
 import {CollectedOnlyPipe} from "./character/collected-only.pipe";
 import {CharacterBadgeDisplayComponent} from "./character/character-badge-display/character-badge-display.component";
 import {BadgeImageSrcPipe} from "./badge/badge-image-src.pipe";
+import {BadgeListImagesComponent} from "./badge/badge-list-images/badge-list-images.component";
+import {BadgePartialsPipe} from "./badge/badge-partials.pipe";
 
 @NgModule({
     declarations: [
@@ -83,11 +85,13 @@ import {BadgeImageSrcPipe} from "./badge/badge-image-src.pipe";
         BadgeImageSrcPipe,
         BadgeLinkComponent,
         BadgeListComponent,
+        BadgeListImagesComponent,
         BadgeLocationComponent,
         BadgeNameInlineComponent,
         BadgeNamePipe,
         BadgeNameStackedComponent,
         BadgePageComponent,
+        BadgePartialsPipe,
         BadgePipe,
         BadgesByTypePipe,
         BadgeSortPipe,
@@ -149,6 +153,7 @@ import {BadgeImageSrcPipe} from "./badge/badge-image-src.pipe";
         ArchetypePipe,
         BadgeImageSrcPipe,
         BadgeNamePipe,
+        BadgePartialsPipe,
         BadgePipe,
         BadgeResolver,
         BadgesByTypePipe,

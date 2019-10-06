@@ -3,7 +3,6 @@ import {ICharacter} from "../character";
 import {BadgeType, IServerGroup} from "coh-content-db";
 import {ServerGroupPipe} from "../../server-group/server-group.pipe";
 import * as _ from 'lodash';
-import {faQuestionCircle} from "@fortawesome/free-solid-svg-icons/faQuestionCircle";
 import {CharacterDbService} from "../character-db.service";
 import {CharacterBadgesPipe, ICharacterBadge} from "../character-badges.pipe";
 import {CollectedOnlyPipe} from "../collected-only.pipe";
@@ -14,8 +13,6 @@ import {CollectedOnlyPipe} from "../collected-only.pipe";
     styleUrls: ['./character-badge-display.component.scss']
 })
 export class CharacterBadgeDisplayComponent implements OnInit, OnDestroy {
-
-    missingImageIcon = faQuestionCircle;
 
     @Input() public character: ICharacter;
     serverGroup: IServerGroup;

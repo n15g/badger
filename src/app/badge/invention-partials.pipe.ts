@@ -7,7 +7,7 @@ import * as _ from 'lodash';
 })
 export class InventionPartialsPipe implements PipeTransform {
 
-    public transform(partials: IBadgePartial[]): IBadgePartial[] {
+    public transform<T extends IBadgePartial>(partials: T[]): T[] {
         return _.filter(partials, (partial) => partial.type === BadgePartialType.INVENTION);
     }
 }

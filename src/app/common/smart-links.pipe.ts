@@ -24,7 +24,7 @@ export class SmartLinksPipe implements PipeTransform {
     }
 
     private getBadgeLink(serverGroup, badgeKey) {
-        const badge = this.badge.transform(badgeKey, {serverGroup});
+        const badge = this.badge.transform(badgeKey, serverGroup);
 
         return badge != null
             ? `<a href="/${serverGroup.key}/badge/${badgeKey}" class="smart-link ref">${this.badgeName.transform(badge)}</a>`

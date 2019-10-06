@@ -38,12 +38,12 @@
             <ng-container *ngIf="badge.partials">
                 <h3>Requirements</h3>
                 <hr>
-                <table class="partials-list table table-striped table-bordered">
+                <table class="partials-list table table-striped table-bordered table-responsive">
                     <tbody>
                     <tr *ngFor="let partial of badge.partials">
 
                         <!-- BADGES -->
-                        <ng-container *ngVar="partial.badgeKey | badge :{serverGroup: serverGroup} as referencedBadge">
+                        <ng-container *ngVar="partial.badgeKey | badge:serverGroup as referencedBadge">
                             <td class="badge-icon">
                                 <a *ngIf="referencedBadge != null" [routerLink]="['/', referencedBadge.serverGroup.key, 'badge', referencedBadge.key]">
                                     <badge-images [badge]="referencedBadge"></badge-images>

@@ -18,6 +18,9 @@
                         <h6 class="card-subtitle mb-2 text-muted">
                             {{(character.serverGroupKey | serverGroup).name}} - {{character.server}}
                         </h6>
+                        <p *ngVar="(character.serverGroupKey | serverGroup).badges | characterBadges:character | collectedOnly as collected">
+                            {{collected.length}} Badge{{collected.length == 1 ? "" : "s"}}
+                        </p>
                     </div>
                 </a>
             </ng-container>

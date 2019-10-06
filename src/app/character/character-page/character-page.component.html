@@ -3,7 +3,7 @@
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a [routerLink]="['/']">Home</a></li>
             <li class="breadcrumb-item"><a [routerLink]="['/character']">My Characters</a></li>
-            <li class="breadcrumb-item active" aria-current="page">{{serverGroup.name}}</li>
+            <li class="breadcrumb-item active" aria-current="page">{{character.name}}</li>
         </ol>
     </nav>
 
@@ -16,7 +16,9 @@
     <markdown ngPreserveWhitespaces [data]="serverGroup.description"></markdown>
 
     <section>
-        <h3>Badges</h3>
+        <h3 *ngVar="(character.serverGroupKey | serverGroup).badges | characterBadges:character | collectedOnly as collected">
+            {{collected.length}} Badge{{collected.length == 1 ? "" : "s"}}
+        </h3>
         <tabset>
             <tab heading="Display" (selectTab)="activeTab = $event.heading" [active]="activeTab === 'Display'">
                 <character-badge-display [character]="character"></character-badge-display>

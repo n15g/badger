@@ -29,9 +29,11 @@ export class CharacterBadgesPipe implements PipeTransform {
         const partialsData = oc(badgeData).partials({});
 
         return _.map(badge.partials, (partial) => {
+            let collectedPartial = partialsData[partial.key];
             return {
                 ...partial,
-                owned: oc(partialsData[partial.key]).owned(false)
+                owned: oc(collectedPartial).owned(false),
+                craftCount: oc(collectedPartial).craftCount(0)
             };
         });
     }
@@ -44,4 +46,5 @@ export interface ICharacterBadge extends IBadge {
 
 export interface ICharacterBadgePartial extends IBadgePartial {
     owned: boolean;
+    craftCount?: number;
 }

@@ -1,14 +1,14 @@
-<div class="badge-location">
+<span class="badge-location">
     <app-game-map [serverGroupKey]="data.serverGroup.key" [mapKey]="data.mapKey"></app-game-map>
 
-    <div class="coordinates">
+    <span class="coordinates">
         <span class="loc" *ngIf="data.location; else multiple">
             {{data.location[0] | coordinate}} {{data.location[1] | coordinate}} {{data.location[2] | coordinate}}
         </span>
         <ng-template #multiple>
             <span class="multiple-locations">Multiple locations</span>
         </ng-template>
-    </div>
+    </span>
 
     <badge-vidiot-icon [data]="data"></badge-vidiot-icon>
-</div>
+</span>
