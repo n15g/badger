@@ -2,6 +2,8 @@
 
 Badger is a badge database and tracker application for City of Heroes badge hunters.
 
+#### https://n15g.github.io/badger/
+
 I designed badger to solve a couple of issues that have cropped up in the post-sunset era:
         
 * The original badge hunting sites and tools are out of date.
@@ -32,8 +34,8 @@ npm run start
 ```
 
 #### Build
-
+Build AoT and publish to github pages.
 ```
 npm run build
-npm publish
+npm run pages
 ```
