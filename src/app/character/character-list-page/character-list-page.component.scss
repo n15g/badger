@@ -1,5 +1,25 @@
+@import "~src/mixins";
+
 .character {
     display: flex;
     flex-direction: row;
     align-items: center;
+}
+
+.card.warning {
+    background-color: lighten($warning, 40%);
+
+    .card-body {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+
+        @include media-breakpoint-down(sm) {
+            flex-direction: column;
+        }
+
+        fa-icon {
+            margin-right: 24px;
+        }
+    }
 }

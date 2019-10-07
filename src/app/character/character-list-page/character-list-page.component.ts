@@ -3,7 +3,7 @@ import {ContentDbService} from "../../content-db/content-db.service";
 import {BsModalService} from "ngx-bootstrap";
 import {NewCharacterModalComponent} from "../new-character-modal/new-character-modal.component";
 import {CharacterDbService} from "../character-db.service";
-import {faFileImport, faPlus} from "@fortawesome/free-solid-svg-icons";
+import {faExclamationTriangle, faFileImport, faPlus} from "@fortawesome/free-solid-svg-icons";
 import {CharacterImportModalComponent} from "../character-import-modal/character-import-modal.component";
 import {ICharacter} from "../character";
 
@@ -16,6 +16,7 @@ export class CharacterListPageComponent implements OnInit {
 
     addIcon = faPlus;
     importIcon = faFileImport;
+    warningIcon = faExclamationTriangle;
 
     characters: ICharacter[] = [];
 

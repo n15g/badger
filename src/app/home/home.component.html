@@ -4,22 +4,56 @@
     <p class="lead">Badge tracker for City of Heroes.</p>
 
     <section>
-        <h3>Servers</h3>
 
-        <ul class="server-groups list-unstyled" *ngFor="let serverGroup of serverGroups | serverGroupSort">
+        <p>Badger is a badge database and tracker application for City of Heroes badge hunters.</p>
+
+        <p>I designed badger to solve a couple of issues that have cropped up in the post-sunset era:</p>
+        <ul>
+            <li>The original badge hunting sites and tools are out of date.</li>
+            <li>Much of the old tools are closed source and abandoned.</li>
+            <li>There are now multiple server groups running, each with different badges available on their servers.</li>
+        </ul>
+
+        <p>
+            To that end, Badger is open source:<br/>
+            <a href="https://github.com/n15g/badger">https://github.com/n15g/badger</a>
+        </p>
+
+        <p>
+            It is also designed to handle different servers with different badges available.<br/>
+            The badge and server data are also stored in open-source git repositories under the GPL 3.0 and also published to npm, making it easy to use in other applications if you wish.<br/>
+            I actively encourage anyone who wants to use the badge data for other projects to do so.
+        </p>
+
+        <p>The currently supported server groups are:</p>
+
+        <ul class="server-groups" *ngFor="let serverGroup of serverGroups | serverGroupSort">
             <li>
-                <div class="card col-md-4 col-sm-12">
-                    <div class="card-body">
-                        <h5>
-                            <a class="card-title" [routerLink]="['/', serverGroup.key]">{{serverGroup.name}}</a>
-                            <server-group-statuses [serverGroup]="serverGroup"></server-group-statuses>
-                        </h5>
-                        <h6 class="card-subtitle mb-2 text-muted">
-                            <markdown [data]="serverGroup.description"></markdown>
-                        </h6>
-                    </div>
-                </div>
+                <a [routerLink]="['/', serverGroup.key]">{{serverGroup.name}}</a>
+                -
+                <a *ngIf="serverGroup.repository" [href]="serverGroup.repository" [innerHTML]="serverGroup.repository"></a>
+                <server-group-statuses [serverGroup]="serverGroup"></server-group-statuses>
             </li>
         </ul>
+
+        <p>
+            If anyone is interested in creating or maintaining the data for other server groups, let me know.
+        </p>
+
+        <p>
+            ...and of course, happy badging!<br/>
+            Go hunt. Kill Skuls.
+        </p>
+        <p><strong>-Keyboard Kitsune</strong></p>
+
+        <h4>Contact Meh</h4>
+        <dl>
+            <dt>Reddit</dt>
+            <dd><a href="https://www.reddit.com/user/KeyboardKitsune">u/KeyboardKitsune</a></dd>
+            <dt>Homecoming</dt>
+            <dd><code>@KeyboardKitsune</code></dd>
+            <dt>Homecoming Forums</dt>
+            <dd><a href="https://forums.homecomingservers.com/profile/40470-keyboardkitsune/">https://forums.homecomingservers.com/profile/40470-keyboardkitsune/</a></dd>
+        </dl>
     </section>
 </div>
