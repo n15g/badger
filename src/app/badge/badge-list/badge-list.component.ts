@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component, Input, OnInit, ViewEncapsulation} from "@angular/core";
+import {Component, Input, OnInit, ViewEncapsulation} from "@angular/core";
 import {BadgeType, IBadge, IServerGroup} from "coh-content-db";
 import {SessionStorage} from "ngx-store";
 import {FilterBadgeTypePipe} from "../filter-badge-type.pipe";
@@ -10,8 +10,7 @@ import {BadgeSortPipe, BadgeSortType} from "../badge-sort.pipe";
     selector: "badge-list",
     templateUrl: "./badge-list.component.html",
     styleUrls: ["./badge-list.component.scss"],
-    encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush
+    encapsulation: ViewEncapsulation.None
 })
 export class BadgeListComponent implements OnInit {
     @Input() public serverGroup: IServerGroup;

@@ -71,6 +71,8 @@ import {CharacterBadgeDisplayComponent} from "./character/character-badge-displa
 import {BadgeImageSrcPipe} from "./badge/badge-image-src.pipe";
 import {BadgeListImagesComponent} from "./badge/badge-list-images/badge-list-images.component";
 import {BadgePartialsPipe} from "./badge/badge-partials.pipe";
+import {CharacterExportModalComponent} from './character/character-export-modal/character-export-modal.component';
+import {CharacterImportModalComponent} from "./character/character-import-modal/character-import-modal.component";
 
 @NgModule({
     declarations: [
@@ -104,6 +106,8 @@ import {BadgePartialsPipe} from "./badge/badge-partials.pipe";
         CharacterBadgeChecklistComponent,
         CharacterBadgeDisplayComponent,
         CharacterBadgesPipe,
+        CharacterExportModalComponent,
+        CharacterImportModalComponent,
         CharacterListPageComponent,
         CharacterPageComponent,
         CharacterSortPipe,
@@ -175,7 +179,9 @@ import {BadgePartialsPipe} from "./badge/badge-partials.pipe";
         SmartLinksPipe,
     ],
     entryComponents: [
-        NewCharacterModalComponent
+        CharacterExportModalComponent,
+        CharacterImportModalComponent,
+        NewCharacterModalComponent,
     ],
     bootstrap: [AppComponent]
 })

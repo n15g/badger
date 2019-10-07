@@ -1,0 +1,16 @@
+<div class="modal-header">
+    <h4 class="modal-title pull-left">New Character</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="bsModalRef.hide()">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="modal-body">
+    <p>Paste the character export string here and select 'Import'.</p>
+    <p><strong>Note:</strong> This will replace the character if it already exists locally.</p>
+    <textarea class="form-control" [(ngModel)]="importString" autofocus onclick="this.focus();this.select();"></textarea>
+
+    <p *ngIf="error" class="text-danger">{{error}}</p>
+</div>
+<div class="modal-footer">
+    <button type="submit" class="btn btn-primary" (click)="doImport()">Import</button>
+</div>

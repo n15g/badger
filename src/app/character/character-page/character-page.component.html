@@ -12,11 +12,14 @@
         {{character.name}}
     </h1>
 
+    <button type="button" class="btn btn-light" (click)="exportCharacter()">
+        Export Character
+        <fa-icon [icon]="exportIcon"></fa-icon>
+    </button>
 
-    <markdown ngPreserveWhitespaces [data]="serverGroup.description"></markdown>
 
     <section>
-        <h3 *ngVar="(character.serverGroupKey | serverGroup).badges | characterBadges:character | collectedOnly as collected">
+        <h3 *ngVar="character | characterBadges | collectedOnly as collected">
             {{collected.length}} Badge{{collected.length == 1 ? "" : "s"}}
         </h3>
         <tabset>

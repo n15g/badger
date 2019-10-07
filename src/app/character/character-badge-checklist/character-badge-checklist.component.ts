@@ -114,15 +114,14 @@ export class CharacterBadgeChecklistComponent implements OnInit {
     }
 
     update(): void {
-        let badges = this.serverGroup.badges;
+        let badges = this.characterBadgesPipe.transform(this.character);
         badges = this.filterBadgeType.transform(badges, this._type);
         badges = this.filterBadgeMap.transform(badges, this._mapKey);
         badges = this.filterBadgeSearch.transform(badges, this._queryStr);
         badges = this.badgeSort.transform(badges, this._sort);
 
+        this.badges = badges;
         this.totalItems = badges.length;
-
-        this.badges = this.characterBadgesPipe.transform(badges, this.character);
     }
 
     clearFilters() {

@@ -1,18 +1,23 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ContentDbService} from "../../content-db/content-db.service";
 import {BsModalService} from "ngx-bootstrap";
 import {NewCharacterModalComponent} from "../new-character-modal/new-character-modal.component";
-import {faPlus} from "@fortawesome/free-solid-svg-icons";
 import {CharacterDbService} from "../character-db.service";
+import {faFileImport, faPlus} from "@fortawesome/free-solid-svg-icons";
+import {CharacterImportModalComponent} from "../character-import-modal/character-import-modal.component";
+import {ICharacter} from "../character";
 
 @Component({
     selector: 'character-list-page',
     templateUrl: './character-list-page.component.html',
     styleUrls: ['./character-list-page.component.scss']
 })
-export class CharacterListPageComponent {
+export class CharacterListPageComponent implements OnInit {
 
     addIcon = faPlus;
+    importIcon = faFileImport;
+
+    characters: ICharacter[] = [];
 
     constructor(private modalService: BsModalService,
                 private contentDb: ContentDbService,
@@ -21,10 +26,18 @@ export class CharacterListPageComponent {
 
     newCharacter() {
         (this.modalService.show(NewCharacterModalComponent).content as NewCharacterModalComponent)
-            .onSubmit.subscribe((char) => this.characterDb.addCharacter(char));
+            .onSubmit.subscribe((char) => this.characterDb.saveCharacter(char));
     }
 
     getCharacters() {
         return this.characterDb.getCharacters();
+    }
+
+    importCharacter() {
+        this.modalService.show(CharacterImportModalComponent);
+    }
+
+    ngOnInit(): void {
+        this.characterDb.getCharacters().subscribe((characters) => this.characters = characters);
     }
 }

@@ -3,12 +3,11 @@ import {BadgeType, IBadge} from "coh-content-db";
 import * as _ from 'lodash';
 
 @Pipe({
-    name: "filterBadgeType",
-    pure: false
+    name: "filterBadgeType"
 })
 export class FilterBadgeTypePipe implements PipeTransform {
 
-    public transform(badges: IBadge[], type?: BadgeType): IBadge[] {
+    public transform<T extends IBadge>(badges: T[], type?: BadgeType): T[] {
         return type ? _.filter(badges, (badge) => badge.type === type) : badges;
     }
 }

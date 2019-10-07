@@ -1,9 +1,11 @@
+<div>{{totalItems}} badges total ({{serverGroup.badges.length - totalItems}} filtered)</div>
+
 <form class="filters form-inline">
     <badge-type-select [(type)]="type"></badge-type-select>
     <game-map-select [serverGroup]="serverGroup" [(mapKey)]="mapKey"></game-map-select>
     <input type="text" placeholder="Search..." class="form-control search" [(ngModel)]="queryStr" [ngModelOptions]="{standalone: true}"/>
     <badge-sort-select [(sort)]="sort"></badge-sort-select>
-    <button type="button" class="btn btn-default" (click)="clearFilters()">Clear Filters</button>
+    <button type="button" class="btn btn-light" (click)="clearFilters()">Clear Filters</button>
 </form>
 
 <ng-container *ngTemplateOutlet="pagination"></ng-container>
@@ -57,8 +59,6 @@
 </div>
 
 <ng-container *ngTemplateOutlet="pagination"></ng-container>
-
-<div>{{totalItems}} badges total ({{serverGroup.badges.length - totalItems}} filtered)</div>
 
 <ng-template #pagination>
     <div class="form-inline">

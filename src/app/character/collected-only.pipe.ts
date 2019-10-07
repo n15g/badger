@@ -8,6 +8,6 @@ import {ICharacterBadge} from "./character-badges.pipe";
 export class CollectedOnlyPipe implements PipeTransform {
 
     transform(value: ICharacterBadge[]): ICharacterBadge[] {
-        return _.filter(value, value => value.owned);
+        return _.filter(value, value => !!value.owned);
     }
 }

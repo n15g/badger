@@ -3,12 +3,20 @@
 
     <section>
         <p>
-            <button type="button" class="btn btn-success" (click)="newCharacter()">New Character
-                <fa-icon [icon]="addIcon"></fa-icon>
-            </button>
+            <span class="btn-group">
+                <button type="button" class="btn btn-success" (click)="newCharacter()">
+                    New Character
+                    <fa-icon [icon]="addIcon"></fa-icon>
+                </button>
+
+                <button type="button" class="btn btn-light" (click)="importCharacter()">
+                    Import Character
+                    <fa-icon [icon]="importIcon"></fa-icon>
+                </button>
+            </span>
         </p>
         <div class="row">
-            <ng-container *ngFor="let character of getCharacters() | characterSort">
+            <ng-container *ngFor="let character of characters | characterSort">
                 <a [routerLink]="['/character', character.key]" class="character card col-md-4 col-sm-12">
                     <archetype-icon [archetype]="character.archetypeKey | archetype:(character.serverGroupKey | serverGroup)"></archetype-icon>
                     <div class="card-body">
@@ -18,7 +26,7 @@
                         <h6 class="card-subtitle mb-2 text-muted">
                             {{(character.serverGroupKey | serverGroup).name}} - {{character.server}}
                         </h6>
-                        <p *ngVar="(character.serverGroupKey | serverGroup).badges | characterBadges:character | collectedOnly as collected">
+                        <p *ngVar="character | characterBadges | collectedOnly as collected">
                             {{collected.length}} Badge{{collected.length == 1 ? "" : "s"}}
                         </p>
                     </div>

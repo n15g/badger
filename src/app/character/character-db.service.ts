@@ -1,10 +1,11 @@
 import {Injectable} from '@angular/core';
 import {CollectedBadgesEntry, ICharacter} from "./character";
 import * as _ from 'lodash';
-import {LocalStorageService, NgxStorageEvent} from "ngx-store";
+import {LocalStorageService} from "ngx-store";
 import {IBadge, IBadgePartial} from "coh-content-db";
 import {oc} from "ts-optchain";
-import {Observable} from "rxjs";
+import {BehaviorSubject, Observable} from "rxjs";
+import {map} from "rxjs/operators";
 
 const KEY = "characters";
 
@@ -12,27 +13,25 @@ const KEY = "characters";
     providedIn: 'root'
 })
 export class CharacterDbService {
+    private readonly store: BehaviorSubject<CharacterStore>;
+
     constructor(private localStorageService: LocalStorageService) {
+        this.store = new BehaviorSubject<CharacterStore>(this._loadStore());
+
+        this.localStorageService.observe(KEY, false)
+            .subscribe(() => this.store.next(this._loadStore()));
     }
 
-    public addCharacter(character: ICharacter): void {
-        const store = this.getStore();
-
-        store.content[character.key] = character;
-
-        this.saveStore(store);
+    public getCharacters(): Observable<ICharacter[]> {
+        return this.store.pipe(map((store) => _.values(store.content)));
     }
 
-    public getCharacters(): ICharacter[] {
-        return _.values(this.getStore().content);
-    }
-
-    public getCharacter(key: string): ICharacter | null {
-        return this.getStore().content[key];
+    public getCharacter(key: string): Observable<ICharacter> | null {
+        return this.store.pipe(map(() => this._getCharacter(key)));
     }
 
     public saveCharacter(character: ICharacter): ICharacter {
-        const store = this.getStore();
+        const store = this.store.value;
 
         store.content[character.key] = character;
         this.saveStore(store);
@@ -41,7 +40,7 @@ export class CharacterDbService {
     }
 
     public collectBadge(character: ICharacter, badge: IBadge, owned: boolean): ICharacter {
-        const storedCharacter = this.getCharacter(character.key);
+        const storedCharacter = this._getCharacter(character.key);
 
         if (!storedCharacter) return;
 
@@ -56,7 +55,7 @@ export class CharacterDbService {
     }
 
     public collectPartial(character: ICharacter, partial: IBadgePartial, owned: boolean, count?: number): ICharacter {
-        const storedCharacter = this.getCharacter(character.key);
+        const storedCharacter = this._getCharacter(character.key);
 
         if (!storedCharacter) return;
 
@@ -75,16 +74,16 @@ export class CharacterDbService {
         return this.saveCharacter(storedCharacter);
     }
 
-    public watch(): Observable<NgxStorageEvent> {
-        return this.localStorageService.observe(KEY, false);
-    }
-
-    private getStore(): CharacterStore {
+    private _loadStore(): CharacterStore {
         let store = this.localStorageService.get(KEY) as CharacterStore;
         if (!store) {
             return {content: {}};
         }
         return store;
+    }
+
+    private _getCharacter(key: string): ICharacter | undefined {
+        return oc(this.store.value).content[key]();
     }
 
     private saveStore(store: CharacterStore): void {

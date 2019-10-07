@@ -3,16 +3,19 @@ import * as _ from "lodash";
 import {CollectedBadgesEntry, CollectedBadgesList, ICharacter} from "./character";
 import {IBadge, IBadgePartial} from "coh-content-db";
 import {oc} from "ts-optchain";
+import {ContentDbService} from "../content-db/content-db.service";
 
 @Pipe({
     name: "characterBadges"
 })
 export class CharacterBadgesPipe implements PipeTransform {
+    constructor(private contentDb: ContentDbService) {
+    }
 
-    transform(value: IBadge[], character: ICharacter): ICharacterBadge[] {
+    transform(character: ICharacter): ICharacterBadge[] {
         const collectionData: CollectedBadgesList = oc(character).badges({});
 
-        return _(value)
+        return _(this.contentDb.getServerGroup(character.serverGroupKey).badges)
             .map((badge) => {
                 const badgeData: CollectedBadgesEntry = collectionData[badge.key];
                 return {

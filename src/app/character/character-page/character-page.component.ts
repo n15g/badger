@@ -5,8 +5,11 @@ import {ContentDbService} from "../../content-db/content-db.service";
 import {ICharacter} from "../character";
 import {IServerGroup} from "coh-content-db";
 import {IArchetype} from "coh-content-db/dist/types/archetype";
-import {TabsetComponent} from "ngx-bootstrap";
+import {BsModalService, TabsetComponent} from "ngx-bootstrap";
 import {SessionStorage} from "ngx-store";
+import {CharacterExportModalComponent} from "../character-export-modal/character-export-modal.component";
+import {faFileExport} from "@fortawesome/free-solid-svg-icons/faFileExport";
+import {CharacterDbService} from "../character-db.service";
 
 @Component({
     selector: 'character-page',
@@ -14,6 +17,8 @@ import {SessionStorage} from "ngx-store";
     styleUrls: ['./character-page.component.scss']
 })
 export class CharacterPageComponent implements OnInit {
+
+    exportIcon = faFileExport;
 
     public character: ICharacter;
     public serverGroup: IServerGroup;
@@ -26,7 +31,9 @@ export class CharacterPageComponent implements OnInit {
 
     constructor(private route: ActivatedRoute,
                 private title: Title,
-                private contentDb: ContentDbService) {
+                private modalService: BsModalService,
+                private contentDb: ContentDbService,
+                private charDb: CharacterDbService) {
     }
 
     public ngOnInit() {
@@ -35,7 +42,13 @@ export class CharacterPageComponent implements OnInit {
             this.serverGroup = this.contentDb.getServerGroup(this.character.serverGroupKey);
             this.archetype = this.serverGroup.getArchetype(this.character.archetypeKey);
             this.title.setTitle(`${this.character.name} | Badger`);
+
+            this.charDb.getCharacter(this.character.key).subscribe((character) => this.character = character);
         });
 
+    }
+
+    public exportCharacter() {
+        this.modalService.show(CharacterExportModalComponent, {initialState: {character: this.character}});
     }
 }

@@ -1,0 +1,13 @@
+<div class="modal-header">
+    <h4 class="modal-title pull-left">New Character</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="bsModalRef.hide()">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="modal-body">
+    <p>Copy and paste the following string to a file, note, or post to save the current character state. You can reimport it later using the button on the character list.</p>
+    <textarea class="form-control" [ngModel]="exportString" readonly onclick="this.focus();this.select();"></textarea>
+</div>
+<div class="modal-footer">
+    <button type="submit" class="btn btn-primary" (click)="bsModalRef.hide()">Done</button>
+</div>

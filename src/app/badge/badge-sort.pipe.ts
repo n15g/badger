@@ -11,7 +11,7 @@ export class BadgeSortPipe implements PipeTransform {
     constructor(private badgeNamePipe: BadgeNamePipe) {
     }
 
-    public transform(badges: IBadge[], sort?: BadgeSortType): IBadge[] {
+    public transform<T extends IBadge>(badges: T[], sort?: BadgeSortType): T[] {
         switch (sort) {
             case BadgeSortType.CANONICAL_DESC:
                 return _.reverse(badges);

@@ -3,7 +3,7 @@
     <game-map-select [serverGroup]="serverGroup" [(mapKey)]="mapKey"></game-map-select>
     <input type="text" placeholder="Search..." class="form-control search" [(ngModel)]="queryStr" [ngModelOptions]="{standalone: true}"/>
     <badge-sort-select [(sort)]="sort"></badge-sort-select>
-    <button type="button" class="btn btn-default" (click)="clearFilters()">Clear Filters</button>
+    <button type="button" class="btn btn-light" (click)="clearFilters()">Clear Filters</button>
 </form>
 
 <ng-container *ngTemplateOutlet="pagination"></ng-container>
