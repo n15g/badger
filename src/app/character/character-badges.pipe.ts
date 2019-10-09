@@ -13,6 +13,8 @@ export class CharacterBadgesPipe implements PipeTransform {
     }
 
     transform(character: ICharacter): ICharacterBadge[] {
+        if (character == undefined) return [];
+
         const collectionData: CollectedBadgesList = oc(character).badges({});
 
         return _(this.contentDb.getServerGroup(character.serverGroupKey).badges)

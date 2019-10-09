@@ -75,6 +75,7 @@ import {CharacterExportModalComponent} from './character/character-export-modal/
 import {CharacterImportModalComponent} from "./character/character-import-modal/character-import-modal.component";
 import {FilterBadgeAlignmentPipe} from "./badge/filter-badge-alignment.pipe";
 import {BadgeAlignmentSelectComponent} from "./badge/badge-alignment-select/badge-alignment-select.component";
+import {CharacterRenameModalComponent} from "./character/character-rename-modal/character-rename-modal.component";
 
 @NgModule({
     declarations: [
@@ -113,6 +114,7 @@ import {BadgeAlignmentSelectComponent} from "./badge/badge-alignment-select/badg
         CharacterImportModalComponent,
         CharacterListPageComponent,
         CharacterPageComponent,
+        CharacterRenameModalComponent,
         CharacterSortPipe,
         CollectedOnlyPipe,
         CoordinatePipe,
@@ -186,6 +188,7 @@ import {BadgeAlignmentSelectComponent} from "./badge/badge-alignment-select/badg
     entryComponents: [
         CharacterExportModalComponent,
         CharacterImportModalComponent,
+        CharacterRenameModalComponent,
         NewCharacterModalComponent,
     ],
     bootstrap: [AppComponent]

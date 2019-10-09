@@ -12,10 +12,20 @@
         {{character.name}}
     </h1>
 
-    <button type="button" class="btn btn-light" (click)="exportCharacter()">
-        Export Character
-        <fa-icon [icon]="exportIcon"></fa-icon>
-    </button>
+    <div class="btn-group">
+        <button type="button" class="btn btn-primary" (click)="rename()">
+            Rename
+            <fa-icon [icon]="renameIcon"></fa-icon>
+        </button>
+        <button type="button" class="btn btn-secondary" (click)="exportCharacter()">
+            Export Character
+            <fa-icon [icon]="exportIcon"></fa-icon>
+        </button>
+        <button type="button" class="btn btn-danger" (click)="delete()">
+            Delete
+            <fa-icon [icon]="deleteIcon"></fa-icon>
+        </button>
+    </div>
 
 
     <section>

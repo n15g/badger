@@ -23,7 +23,7 @@ export class CharacterDbService {
     }
 
     public getCharacters(): Observable<ICharacter[]> {
-        return this.store.pipe(map((store) => _.values(store.content)));
+        return this.store.pipe(map((store) => _.values(store.content).filter(x => x != undefined)));
     }
 
     public getCharacter(key: string): Observable<ICharacter> | null {
@@ -37,6 +37,13 @@ export class CharacterDbService {
         this.saveStore(store);
 
         return character;
+    }
+
+    public deleteCharacter(character: ICharacter): void {
+        const store = this.store.value;
+
+        delete store.content[character.key];
+        this.saveStore(store);
     }
 
     public collectBadge(character: ICharacter, badge: IBadge, owned: boolean): ICharacter {

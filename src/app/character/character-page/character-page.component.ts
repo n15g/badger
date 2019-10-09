@@ -1,5 +1,5 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {Title} from "@angular/platform-browser";
 import {ContentDbService} from "../../content-db/content-db.service";
 import {ICharacter} from "../character";
@@ -8,8 +8,9 @@ import {IArchetype} from "coh-content-db/dist/types/archetype";
 import {BsModalService, TabsetComponent} from "ngx-bootstrap";
 import {SessionStorage} from "ngx-store";
 import {CharacterExportModalComponent} from "../character-export-modal/character-export-modal.component";
-import {faFileExport} from "@fortawesome/free-solid-svg-icons/faFileExport";
 import {CharacterDbService} from "../character-db.service";
+import {faFileExport, faPencilAlt, faTrash} from "@fortawesome/free-solid-svg-icons";
+import {CharacterRenameModalComponent} from "../character-rename-modal/character-rename-modal.component";
 
 @Component({
     selector: 'character-page',
@@ -18,7 +19,9 @@ import {CharacterDbService} from "../character-db.service";
 })
 export class CharacterPageComponent implements OnInit {
 
+    renameIcon = faPencilAlt;
     exportIcon = faFileExport;
+    deleteIcon = faTrash;
 
     public character: ICharacter;
     public serverGroup: IServerGroup;
@@ -33,7 +36,8 @@ export class CharacterPageComponent implements OnInit {
                 private title: Title,
                 private modalService: BsModalService,
                 private contentDb: ContentDbService,
-                private charDb: CharacterDbService) {
+                private charDb: CharacterDbService,
+                private router: Router) {
     }
 
     public ngOnInit() {
@@ -50,5 +54,22 @@ export class CharacterPageComponent implements OnInit {
 
     public exportCharacter() {
         this.modalService.show(CharacterExportModalComponent, {initialState: {character: this.character}});
+    }
+
+    public rename() {
+        let modal = this.modalService.show(CharacterRenameModalComponent, {initialState: {name: this.character.name}}).content as CharacterRenameModalComponent;
+        modal.onSubmit.subscribe((name) => {
+            this.character.name = name;
+            this.charDb.saveCharacter(this.character);
+        });
+    }
+
+    public async delete() {
+        const confirmed = confirm(`Are you sure you want to delete ${this.character.name}?`);
+
+        if (confirmed) {
+            await this.router.navigate(["/character"]);
+            this.charDb.deleteCharacter(this.character);
+        }
     }
 }
