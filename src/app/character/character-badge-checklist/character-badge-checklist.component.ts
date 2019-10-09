@@ -143,6 +143,8 @@ export class CharacterBadgeChecklistComponent implements OnInit {
         this._type = "" as BadgeType;
         this._mapKey = "";
         this.queryStr = "";
+        this._alignment = "" as AlignmentFilterType;
+        this._sort = "" as BadgeSortType;
         this.page = 1;
         this.update();
     }
