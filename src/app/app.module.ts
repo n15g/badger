@@ -73,6 +73,8 @@ import {BadgeListIconsComponent} from "./badge/badge-list-icons/badge-list-icons
 import {BadgePartialsPipe} from "./badge/badge-partials.pipe";
 import {CharacterExportModalComponent} from './character/character-export-modal/character-export-modal.component';
 import {CharacterImportModalComponent} from "./character/character-import-modal/character-import-modal.component";
+import {FilterBadgeAlignmentPipe} from "./badge/filter-badge-alignment.pipe";
+import {BadgeAlignmentSelectComponent} from "./badge/badge-alignment-select/badge-alignment-select.component";
 
 @NgModule({
     declarations: [
@@ -81,6 +83,7 @@ import {CharacterImportModalComponent} from "./character/character-import-modal/
         ArchetypeIconComponent,
         ArchetypePipe,
         BadgeAlignmentInlineComponent,
+        BadgeAlignmentSelectComponent,
         BadgeAlignmentStackedComponent,
         BadgeDescriptionComponent,
         BadgeIconsComponent,
@@ -115,6 +118,7 @@ import {CharacterImportModalComponent} from "./character/character-import-modal/
         CoordinatePipe,
         EnhancementCategoriesPipe,
         EnhancementCategoryPipe,
+        FilterBadgeAlignmentPipe,
         FilterBadgeMapPipe,
         FilterBadgeSearchPipe,
         FilterBadgeTypePipe,
@@ -168,6 +172,7 @@ import {CharacterImportModalComponent} from "./character/character-import-modal/
         CollectedOnlyPipe,
         EnhancementCategoriesPipe,
         EnhancementCategoryPipe,
+        FilterBadgeAlignmentPipe,
         FilterBadgeMapPipe,
         FilterBadgeSearchPipe,
         FilterBadgeTypePipe,
