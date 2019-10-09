@@ -6,7 +6,7 @@ import {AppRoutingModule} from "./app-routing.module";
 import {BadgeAlignmentInlineComponent} from "./badge/badge-alignment-inline/badge-alignment-inline.component";
 import {BadgeAlignmentStackedComponent} from "./badge/badge-alignment-stacked/badge-alignment-stacked.component";
 import {BadgeDescriptionComponent} from "./badge/badge-description/badge-description.component";
-import {BadgeImagesComponent} from "./badge/badge-images/badge-images.component";
+import {BadgeIconsComponent} from "./badge/badge-icons/badge-icons.component";
 import {BadgeLinkComponent} from './badge/badge-link/badge-link.component';
 import {BadgeListComponent} from "./badge/badge-list/badge-list.component";
 import {BadgeLocationComponent} from "./badge/badge-location/badge-location.component";
@@ -68,11 +68,14 @@ import {CharacterBadgeChecklistComponent} from "./character/character-badge-chec
 import {BadgesByTypePipe} from "./badge/badges-by-type.pipe";
 import {CollectedOnlyPipe} from "./character/collected-only.pipe";
 import {CharacterBadgeDisplayComponent} from "./character/character-badge-display/character-badge-display.component";
-import {BadgeImageSrcPipe} from "./badge/badge-image-src.pipe";
-import {BadgeListImagesComponent} from "./badge/badge-list-images/badge-list-images.component";
+import {BadgeIconSrcPipe} from "./badge/badge-image-src.pipe";
+import {BadgeListIconsComponent} from "./badge/badge-list-icons/badge-list-icons.component";
 import {BadgePartialsPipe} from "./badge/badge-partials.pipe";
 import {CharacterExportModalComponent} from './character/character-export-modal/character-export-modal.component';
 import {CharacterImportModalComponent} from "./character/character-import-modal/character-import-modal.component";
+import {FilterBadgeAlignmentPipe} from "./badge/filter-badge-alignment.pipe";
+import {BadgeAlignmentSelectComponent} from "./badge/badge-alignment-select/badge-alignment-select.component";
+import {CharacterRenameModalComponent} from "./character/character-rename-modal/character-rename-modal.component";
 
 @NgModule({
     declarations: [
@@ -81,13 +84,14 @@ import {CharacterImportModalComponent} from "./character/character-import-modal/
         ArchetypeIconComponent,
         ArchetypePipe,
         BadgeAlignmentInlineComponent,
+        BadgeAlignmentSelectComponent,
         BadgeAlignmentStackedComponent,
         BadgeDescriptionComponent,
-        BadgeImagesComponent,
-        BadgeImageSrcPipe,
+        BadgeIconsComponent,
+        BadgeIconSrcPipe,
         BadgeLinkComponent,
         BadgeListComponent,
-        BadgeListImagesComponent,
+        BadgeListIconsComponent,
         BadgeLocationComponent,
         BadgeNameInlineComponent,
         BadgeNamePipe,
@@ -110,11 +114,13 @@ import {CharacterImportModalComponent} from "./character/character-import-modal/
         CharacterImportModalComponent,
         CharacterListPageComponent,
         CharacterPageComponent,
+        CharacterRenameModalComponent,
         CharacterSortPipe,
         CollectedOnlyPipe,
         CoordinatePipe,
         EnhancementCategoriesPipe,
         EnhancementCategoryPipe,
+        FilterBadgeAlignmentPipe,
         FilterBadgeMapPipe,
         FilterBadgeSearchPipe,
         FilterBadgeTypePipe,
@@ -155,7 +161,7 @@ import {CharacterImportModalComponent} from "./character/character-import-modal/
     providers: [
         AlternatesPipe,
         ArchetypePipe,
-        BadgeImageSrcPipe,
+        BadgeIconSrcPipe,
         BadgeNamePipe,
         BadgePartialsPipe,
         BadgePipe,
@@ -168,6 +174,7 @@ import {CharacterImportModalComponent} from "./character/character-import-modal/
         CollectedOnlyPipe,
         EnhancementCategoriesPipe,
         EnhancementCategoryPipe,
+        FilterBadgeAlignmentPipe,
         FilterBadgeMapPipe,
         FilterBadgeSearchPipe,
         FilterBadgeTypePipe,
@@ -181,6 +188,7 @@ import {CharacterImportModalComponent} from "./character/character-import-modal/
     entryComponents: [
         CharacterExportModalComponent,
         CharacterImportModalComponent,
+        CharacterRenameModalComponent,
         NewCharacterModalComponent,
     ],
     bootstrap: [AppComponent]

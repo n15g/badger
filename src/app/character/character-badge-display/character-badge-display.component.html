@@ -15,6 +15,6 @@
 <ng-template #badgeType let-badgeType="badgeType" let-badges="badges">
     <ng-container *ngIf="badges && badges.length">
         <h3>{{badgeType | badgeType}} - {{badges.length}} Badge{{badges.length === 1 ? "" : "s"}}</h3>
-        <badge-list-images [badges]="badges" [villain]="villain"></badge-list-images>
+        <badge-list-icons [badges]="badges" [villain]="villain"></badge-list-icons>
     </ng-container>
 </ng-template>

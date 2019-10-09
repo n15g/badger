@@ -10,6 +10,7 @@ import {ICharacter} from "../character";
 import {ServerGroupPipe} from "../../server-group/server-group.pipe";
 import {CharacterDbService} from "../character-db.service";
 import * as _ from "lodash";
+import {AlignmentFilterType, FilterBadgeAlignmentPipe} from "../../badge/filter-badge-alignment.pipe";
 
 @Component({
     selector: "character-badge-checklist",
@@ -28,6 +29,7 @@ export class CharacterBadgeChecklistComponent implements OnInit {
     constructor(private serverGroupPipe: ServerGroupPipe,
                 private filterBadgeType: FilterBadgeTypePipe,
                 private filterBadgeMap: FilterBadgeMapPipe,
+                private filterBadgeAlignmentPipe: FilterBadgeAlignmentPipe,
                 private filterBadgeSearch: FilterBadgeSearchPipe,
                 private badgeSort: BadgeSortPipe,
                 private characterBadgesPipe: CharacterBadgesPipe,
@@ -58,6 +60,18 @@ export class CharacterBadgeChecklistComponent implements OnInit {
         this._mapKey = value;
         this.update();
         this._page = 1;
+    }
+
+    @SessionStorage("badge-list.alignment")
+    private _alignment: AlignmentFilterType = "" as AlignmentFilterType;
+
+    get alignment(): AlignmentFilterType {
+        return this._alignment;
+    }
+
+    set alignment(value: AlignmentFilterType) {
+        this._alignment = value;
+        this.update();
     }
 
     @SessionStorage("character-badge-list.queryStr")
@@ -117,6 +131,7 @@ export class CharacterBadgeChecklistComponent implements OnInit {
         let badges = this.characterBadgesPipe.transform(this.character);
         badges = this.filterBadgeType.transform(badges, this._type);
         badges = this.filterBadgeMap.transform(badges, this._mapKey);
+        badges = this.filterBadgeAlignmentPipe.transform(badges, this._alignment);
         badges = this.filterBadgeSearch.transform(badges, this._queryStr);
         badges = this.badgeSort.transform(badges, this._sort);
 

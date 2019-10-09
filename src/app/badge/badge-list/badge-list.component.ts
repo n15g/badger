@@ -5,6 +5,7 @@ import {FilterBadgeTypePipe} from "../filter-badge-type.pipe";
 import {FilterBadgeMapPipe} from "../filter-badge-map.pipe";
 import {FilterBadgeSearchPipe} from "../filter-badge-search.pipe";
 import {BadgeSortPipe, BadgeSortType} from "../badge-sort.pipe";
+import {AlignmentFilterType, FilterBadgeAlignmentPipe} from "../filter-badge-alignment.pipe";
 
 @Component({
     selector: "badge-list",
@@ -21,6 +22,7 @@ export class BadgeListComponent implements OnInit {
     constructor(private filterBadgeType: FilterBadgeTypePipe,
                 private filterBadgeMap: FilterBadgeMapPipe,
                 private filterBadgeSearch: FilterBadgeSearchPipe,
+                private filterBadgeAlignmentPipe: FilterBadgeAlignmentPipe,
                 private badgeSort: BadgeSortPipe) {
     }
 
@@ -63,6 +65,18 @@ export class BadgeListComponent implements OnInit {
         this._page = 1;
     }
 
+    @SessionStorage("badge-list.alignment")
+    private _alignment: AlignmentFilterType = "" as AlignmentFilterType;
+
+    get alignment(): AlignmentFilterType {
+        return this._alignment;
+    }
+
+    set alignment(value: AlignmentFilterType) {
+        this._alignment = value;
+        this.update();
+    }
+
     @SessionStorage("badge-list.page")
     private _page: number = 1;
 
@@ -84,6 +98,7 @@ export class BadgeListComponent implements OnInit {
 
     set itemsPerPage(value: number) {
         this._itemsPerPage = value;
+        this.update();
     }
 
     @SessionStorage("badge-list.sort")
@@ -107,6 +122,7 @@ export class BadgeListComponent implements OnInit {
         badges = this.filterBadgeType.transform(badges, this._type);
         badges = this.filterBadgeMap.transform(badges, this._mapKey);
         badges = this.filterBadgeSearch.transform(badges, this._queryStr);
+        badges = this.filterBadgeAlignmentPipe.transform(badges, this._alignment);
         badges = this.badgeSort.transform(badges, this._sort);
 
         this.totalItems = badges.length;

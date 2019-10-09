@@ -10,7 +10,7 @@ import {IServerGroup} from "coh-content-db";
 })
 export class ChangelogPageComponent {
 
-    appChangelog: { [id: string]: string[] } = Changelog;
+    appChangelog: { [id: string]: string } = Changelog;
     serverGroups: IServerGroup[];
 
     constructor(private contentDb: ContentDbService) {

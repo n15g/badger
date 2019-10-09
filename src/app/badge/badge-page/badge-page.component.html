@@ -46,7 +46,7 @@
                         <ng-container *ngVar="partial.badgeKey | badge:serverGroup as referencedBadge">
                             <td class="badge-icon">
                                 <a *ngIf="referencedBadge != null" [routerLink]="['/', referencedBadge.serverGroup.key, 'badge', referencedBadge.key]">
-                                    <badge-images [badge]="referencedBadge"></badge-images>
+                                    <badge-icons [badge]="referencedBadge"></badge-icons>
                                 </a>
                             </td>
 
@@ -104,7 +104,7 @@
                 <tr>
                     <td class="header">
                         <badge-name-stacked class="d-block d-md-none" [badge]="badge"></badge-name-stacked>
-                        <badge-images [badge]="badge"></badge-images>
+                        <badge-icons [badge]="badge"></badge-icons>
                     </td>
                 </tr>
                 <tr>

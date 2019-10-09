@@ -1,0 +1,17 @@
+<form (ngSubmit)="submit()" #form="ngForm">
+    <div class="modal-header">
+        <h4 class="modal-title pull-left">Rename Character</h4>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="bsModalRef.hide()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="form-group">
+            <label for="name">Name</label>
+            <input [(ngModel)]="name" id="name" name="name" class="form-control" autofocus required>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="submit" class="btn btn-primary" [disabled]="form.invalid">Done</button>
+    </div>
+</form>

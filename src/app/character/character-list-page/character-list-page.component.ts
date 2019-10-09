@@ -30,10 +30,6 @@ export class CharacterListPageComponent implements OnInit {
             .onSubmit.subscribe((char) => this.characterDb.saveCharacter(char));
     }
 
-    getCharacters() {
-        return this.characterDb.getCharacters();
-    }
-
     importCharacter() {
         this.modalService.show(CharacterImportModalComponent);
     }
