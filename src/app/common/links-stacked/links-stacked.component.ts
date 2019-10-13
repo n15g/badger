@@ -19,6 +19,8 @@ export class LinksStackedComponent {
         const href = oc(link).href("");
         if (href.startsWith(PARAGON_WIKI)) {
             return "paragon-wiki";
+        } else if (href.startsWith("https://forums.homecomingservers.com")) {
+            return "homecoming";
         } else {
             return null;
         }

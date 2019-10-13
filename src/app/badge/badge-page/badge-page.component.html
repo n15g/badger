@@ -30,7 +30,7 @@
             <ng-container *ngIf="badge.notes">
                 <h3>Notes</h3>
                 <hr>
-                <p class="notes markdown" [innerHTML]="badge.notes | markdown | smartLinks:{serverGroup: serverGroup}"></p>
+                <p class="notes markdown" [innerHTML]="badge.notes | markdown | smartLinks:serverGroup"></p>
             </ng-container>
 
 

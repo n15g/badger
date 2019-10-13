@@ -6,6 +6,7 @@
         "start": "ng serve",
         "build": "ng build --prod --aot --base-href \"https://n15g.github.io/badger/\" --deploy-url \"https://n15g.github.io/badger/\" --rebase-root-relative-css-urls=true",
         "pages": "ngh --branch=gh-pages",
+        "link:hc": "npm link coh-content-db-homecoming",
         "test": "ng test",
         "lint": "ng lint"
     },
@@ -27,7 +28,7 @@
         "@types/pako": "^1.0.1",
         "@types/shortid": "0.0.29",
         "bootstrap": "^4.3.1",
-        "coh-content-db": "^1.1.0",
+        "coh-content-db": "^1.1.1",
         "coh-content-db-homecoming": "^0.3.0",
         "jquery": "^3.4.1",
         "js-base64": "^2.5.1",

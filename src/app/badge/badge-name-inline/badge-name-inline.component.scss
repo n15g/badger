@@ -7,6 +7,7 @@
 
     .badge-name {
         font-weight: 600;
+        white-space: nowrap;
 
         &.hero {
             color: $hero;

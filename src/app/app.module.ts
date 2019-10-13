@@ -76,6 +76,7 @@ import {CharacterImportModalComponent} from "./character/character-import-modal/
 import {FilterBadgeAlignmentPipe} from "./badge/filter-badge-alignment.pipe";
 import {BadgeAlignmentSelectComponent} from "./badge/badge-alignment-select/badge-alignment-select.component";
 import {CharacterRenameModalComponent} from "./character/character-rename-modal/character-rename-modal.component";
+import {GameMapPipe} from "./game-map/game-map.pipe";
 
 @NgModule({
     declarations: [
@@ -125,6 +126,7 @@ import {CharacterRenameModalComponent} from "./character/character-rename-modal/
         FilterBadgeSearchPipe,
         FilterBadgeTypePipe,
         GameMapComponent,
+        GameMapPipe,
         GameMapSelectComponent,
         HomeComponent,
         InventionPartialsPipe,
@@ -178,6 +180,7 @@ import {CharacterRenameModalComponent} from "./character/character-rename-modal/
         FilterBadgeMapPipe,
         FilterBadgeSearchPipe,
         FilterBadgeTypePipe,
+        GameMapPipe,
         InventionPartialsPipe,
         PagePipe,
         ReversePipe,

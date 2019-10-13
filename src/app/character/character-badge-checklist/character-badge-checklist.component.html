@@ -46,7 +46,7 @@
                         <badge-location [data]="badge"></badge-location>
                     </div>
 
-                    <div *ngIf="badge.acquisition" [innerHTML]="badge.acquisition | smartLinks:{serverGroup: badge.serverGroup}"></div>
+                    <div *ngIf="badge.acquisition" [innerHTML]="badge.acquisition | smartLinks:badge.serverGroup"></div>
 
                     <div *ngIf="badge.type==='HISTORY'">
                         <table class="table table-borderless">

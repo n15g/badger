@@ -15,5 +15,16 @@
             position: relative;
             top: 8px;
         }
+
+        &.homecoming:before {
+            content: ' ';
+            background: url("/assets/homecoming.png") center center no-repeat;
+            display: inline-block;
+            background-size: contain;
+            height: 32px;
+            width: 32px;
+            position: relative;
+            top: 8px;
+        }
     }
 }
