@@ -7,5 +7,7 @@ export const Changelog: { [id: string]: string } = {
         "* https://github.com/n15g/badger/issues/3 - The search box will now also filter invention badges by invention level.\n" +
         "* https://github.com/n15g/badger/issues/4 - Badge icons are now absolute urls instead of image reference keys.",
 
-    "0.2.1": "* https://github.com/n15g/badger/issues/10 - Clear filters button on badge search now also clears alignment and sort."
+    "0.2.1":
+        "* Update to `coh-content-db-homecoming@0.3.1`\n" +
+        "* https://github.com/n15g/badger/issues/10 - Clear filters button on badge search now also clears alignment and sort.\n"
 };
