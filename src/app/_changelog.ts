@@ -9,5 +9,8 @@ export const Changelog: { [id: string]: string } = {
 
     "0.2.1":
         "* Update to `coh-content-db-homecoming@0.3.1`\n" +
-        "* https://github.com/n15g/badger/issues/10 - Clear filters button on badge search now also clears alignment and sort.\n"
+        "* https://github.com/n15g/badger/issues/10 - Clear filters button on badge search now also clears alignment and sort.\n",
+
+    "0.2.2":
+        "* Update to `coh-content-db-homecoming@0.3.2`\n"
 };
