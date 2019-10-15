@@ -33,6 +33,16 @@ section {
     }
 }
 
+.slash-command {
+    background-color: $gray-200;
+    border: $gray-400 1px solid;
+    border-radius: 3px;
+    padding: 0 4px;
+    font-family: monospace;
+    font-size: 12px;
+    white-space: nowrap;
+}
+
 .markdown,
 markdown {
     h1 {

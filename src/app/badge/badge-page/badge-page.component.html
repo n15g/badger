@@ -124,6 +124,11 @@
                             <dd *ngIf="badge.links">
                                 <links-stacked [links]="badge.links"></links-stacked>
                             </dd>
+
+                            <ng-container *ngIf="badge.setTitleId">
+                                <dt>Set Title</dt>
+                                <dd><code class="slash-command">/settitle {{badge.setTitleId}}</code></dd>
+                            </ng-container>
                         </dl>
                     </td>
                 </tr>

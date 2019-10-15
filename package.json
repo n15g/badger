@@ -1,13 +1,14 @@
 {
     "name": "badger",
-    "version": "0.2.2",
+    "version": "0.2.3",
     "scripts": {
         "ng": "ng",
         "start": "ng serve",
         "build": "ng build --prod --aot --base-href \"https://n15g.github.io/badger/\" --deploy-url \"https://n15g.github.io/badger/\" --rebase-root-relative-css-urls=true",
         "pages": "ngh --branch=gh-pages",
         "link:hc": "npm link coh-content-db-homecoming",
-        "upgrade:hc": "npm install coh-content-db-homecoming@latest",
+        "upgrade:db": "npm install --save coh-content-db@latest",
+        "upgrade:hc": "npm install --save coh-content-db-homecoming@latest",
         "test": "ng test",
         "lint": "ng lint"
     },
@@ -29,8 +30,8 @@
         "@types/pako": "^1.0.1",
         "@types/shortid": "0.0.29",
         "bootstrap": "^4.3.1",
-        "coh-content-db": "^1.1.1",
-        "coh-content-db-homecoming": "^0.3.2",
+        "coh-content-db": "^1.1.2",
+        "coh-content-db-homecoming": "^0.3.3",
         "jquery": "^3.4.1",
         "js-base64": "^2.5.1",
         "karma-coverage-istanbul-reporter": "^2.1.0",
