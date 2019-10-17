@@ -16,5 +16,7 @@ export const Changelog: { [id: string]: string } = {
 
     "0.2.3":
         "* Update to `coh-content-db-homecoming@0.3.3`.\n" +
-        "* https://github.com/n15g/badger/issues/16 - Display `settitle` value if present.\n"
+        "* https://github.com/n15g/badger/issues/16 - Display `settitle` value if present.\n",
+    "0.2.4":
+        "Update to `coh-content-db-homecoming@0.4.0`.\n"
 };
