@@ -1,7 +1,7 @@
 import {Component, OnInit, ViewEncapsulation} from "@angular/core";
 import {ActivatedRoute} from "@angular/router";
 import {Title} from "@angular/platform-browser";
-import {IBadge, IServerGroup} from "coh-content-db";
+import {BadgePartialType, IBadge, IServerGroup} from "coh-content-db";
 import {BadgeNamePipe} from "../badge-name.pipe";
 
 @Component({
@@ -14,6 +14,8 @@ export class BadgePageComponent implements OnInit {
 
     public serverGroup: IServerGroup;
     public badge: IBadge;
+
+    public partialTypes: typeof BadgePartialType = BadgePartialType;
 
     constructor(private route: ActivatedRoute,
                 private title: Title,
