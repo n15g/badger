@@ -3,8 +3,18 @@
 
     <p class="lead">Badge tracker for City of Heroes.</p>
 
-    <section>
+    <div class="btn-group" role="group">
+        <a class="btn btn-primary" routerLink="/character">
+            Character List
+        </a>
 
+        <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Badge List</button>
+        <div class="dropdown-menu">
+            <a *ngFor="let serverGroup of serverGroups | serverGroupSort" class="dropdown-item" [routerLink]="['/', serverGroup.key]">{{serverGroup.name}}</a>
+        </div>
+    </div>
+
+    <section>
         <p>Badger is a badge database and tracker application for City of Heroes badge hunters.</p>
 
         <p>I designed badger to solve a couple of issues that have cropped up in the post-sunset era:</p>
@@ -55,5 +65,11 @@
             <dt>Homecoming Forums</dt>
             <dd><a href="https://forums.homecomingservers.com/profile/40470-keyboardkitsune/">https://forums.homecomingservers.com/profile/40470-keyboardkitsune/</a></dd>
         </dl>
+
+        <h4>Special Thanks</h4>
+        <ul>
+            <li><a href="https://forums.homecomingservers.com/profile/40956-abovethechemist/">AboveTheChemist</a> for collating most of the Homecoming badge data.</li>
+            <li><a href="https://forums.homecomingservers.com/profile/8241-piyerus/">Piyerus</a> for filling in a ton of blanks on new badges.</li>
+        </ul>
     </section>
 </div>
