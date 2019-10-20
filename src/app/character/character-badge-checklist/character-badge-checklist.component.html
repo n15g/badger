@@ -13,7 +13,7 @@
     <table class="badge-list table table-bordered">
         <thead>
         <tr>
-            <th class="badge-icon"></th>
+            <th class="badge-icon"><input type="checkbox" [(ngModel)]="selectAllModel" (ngModelChange)="selectAll($event)"></th>
             <th class="badge-name">Name</th>
             <th class="badge-alignment">Alignment</th>
             <th class="badge-type">Type</th>
@@ -22,7 +22,7 @@
         </thead>
         <tbody>
         <ng-container *ngIf="badges.length; else noMatches">
-            <tr *ngFor="let badge of badges | page:page:itemsPerPage" [ngClass]="{owned: badge.owned}">
+            <tr *ngFor="let badge of badges; trackBy:trackByBadge" [ngClass]="{owned: badge.owned}">
                 <td class="badge-select">
                     <input type="checkbox" class="form-control-lg" [(ngModel)]="badge.owned" (ngModelChange)="collectBadge(badge, $event)"/>
                 </td>

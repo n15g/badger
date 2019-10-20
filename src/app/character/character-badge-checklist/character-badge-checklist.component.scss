@@ -24,18 +24,16 @@ character-badge-checklist {
             background: $gray-400;
         }
 
-        td.badge-select {
-            input {
-                transform: scale(1.5);
-            }
-        }
-
         @include media-breakpoint-down(sm) {
             .badge-alignment,
             .badge-type,
             .badge-description {
                 display: none;
             }
+        }
+
+        input[type="checkbox"] {
+            transform: scale(1.5);
         }
 
         .no-matches {

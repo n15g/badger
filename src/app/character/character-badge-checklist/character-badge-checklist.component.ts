@@ -1,5 +1,5 @@
 import {Component, Input, OnInit, ViewEncapsulation} from "@angular/core";
-import {BadgePartialType, BadgeType, IBadgePartial, IServerGroup} from "coh-content-db";
+import {BadgePartialType, BadgeType, IBadge, IBadgePartial, IServerGroup} from "coh-content-db";
 import {SessionStorage} from "ngx-store";
 import {BadgeSortPipe, BadgeSortType} from "../../badge/badge-sort.pipe";
 import {FilterBadgeTypePipe} from "../../badge/filter-badge-type.pipe";
@@ -11,6 +11,7 @@ import {ServerGroupPipe} from "../../server-group/server-group.pipe";
 import {CharacterDbService} from "../character-db.service";
 import * as _ from "lodash";
 import {AlignmentFilterType, FilterBadgeAlignmentPipe} from "../../badge/filter-badge-alignment.pipe";
+import {PagePipe} from "../../common/page.pipe";
 
 @Component({
     selector: "character-badge-checklist",
@@ -21,16 +22,19 @@ import {AlignmentFilterType, FilterBadgeAlignmentPipe} from "../../badge/filter-
 export class CharacterBadgeChecklistComponent implements OnInit {
     @Input() public character: ICharacter;
     serverGroup: IServerGroup;
-    badges: ICharacterBadge[] = [];
+    badges: ICharacterBadge[];
 
-    totalItems: number = this.badges.length;
+    totalItems: number;
     pageCount: number = 1;
+
+    selectAllModel: boolean;
 
     constructor(private serverGroupPipe: ServerGroupPipe,
                 private filterBadgeType: FilterBadgeTypePipe,
                 private filterBadgeMap: FilterBadgeMapPipe,
                 private filterBadgeAlignmentPipe: FilterBadgeAlignmentPipe,
                 private filterBadgeSearch: FilterBadgeSearchPipe,
+                private pagePipe: PagePipe,
                 private badgeSort: BadgeSortPipe,
                 private characterBadgesPipe: CharacterBadgesPipe,
                 private characterDb: CharacterDbService) {
@@ -46,7 +50,6 @@ export class CharacterBadgeChecklistComponent implements OnInit {
     set type(value: BadgeType) {
         this._type = value;
         this.update();
-        this._page = 1;
     }
 
     @SessionStorage("character-badge-list.mapKey")
@@ -59,7 +62,6 @@ export class CharacterBadgeChecklistComponent implements OnInit {
     set mapKey(value: string) {
         this._mapKey = value;
         this.update();
-        this._page = 1;
     }
 
     @SessionStorage("badge-list.alignment")
@@ -84,7 +86,6 @@ export class CharacterBadgeChecklistComponent implements OnInit {
     set queryStr(value: string) {
         this._queryStr = value;
         this.update();
-        this._page = 1;
     }
 
     @SessionStorage("character-badge-list.page")
@@ -135,8 +136,17 @@ export class CharacterBadgeChecklistComponent implements OnInit {
         badges = this.filterBadgeSearch.transform(badges, this._queryStr);
         badges = this.badgeSort.transform(badges, this._sort);
 
-        this.badges = badges;
         this.totalItems = badges.length;
+
+        if (this._page * this.itemsPerPage > this.totalItems) {
+            this._page = 1;
+        }
+
+        badges = this.pagePipe.transform(badges, this._page, this.itemsPerPage);
+
+        this.badges = badges;
+
+        this.selectAllModel = _.every(badges, badge => badge.owned);
     }
 
     clearFilters() {
@@ -159,5 +169,14 @@ export class CharacterBadgeChecklistComponent implements OnInit {
 
     getPlusOneInvention(badge: ICharacterBadge): ICharacterBadgePartial {
         return _.find(badge.partials, (partial) => partial.type === BadgePartialType.INVENTION_PLUS_ONE);
+    }
+
+    selectAll(value: boolean) {
+        this.characterDb.collectBadgeBulk(this.character, this.badges, value);
+        this.update();
+    }
+
+    trackByBadge(index: number, badge: IBadge): string {
+        return badge.key;
     }
 }

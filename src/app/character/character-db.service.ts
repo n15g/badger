@@ -47,16 +47,24 @@ export class CharacterDbService {
     }
 
     public collectBadge(character: ICharacter, badge: IBadge, owned: boolean): ICharacter {
+        return this.collectBadgeBulk(character, [badge], owned);
+    }
+
+    public collectBadgeBulk(character: ICharacter, badges: IBadge[], owned: boolean): ICharacter {
         const storedCharacter = this._getCharacter(character.key);
 
         if (!storedCharacter) return;
 
-        const badges = oc(storedCharacter).badges({});
-        const newEntry = this.getBadgeEntry(character, badge.key);
-        newEntry.owned = owned;
+        const dbBadges = oc(storedCharacter).badges({});
 
-        badges[badge.key] = newEntry;
-        storedCharacter.badges = badges;
+        _.each(badges, badge => {
+            const newEntry = this.getBadgeEntry(character, badge.key);
+            newEntry.owned = owned;
+
+            dbBadges[badge.key] = newEntry;
+        });
+
+        storedCharacter.badges = dbBadges;
 
         return this.saveCharacter(storedCharacter);
     }
