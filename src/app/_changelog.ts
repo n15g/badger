@@ -21,7 +21,7 @@ export const Changelog: { [id: string]: string } = {
         "Update to `coh-content-db-homecoming@0.4.0`.\n",
 
     "0.3.0":
-        "* Update to `coh-content-db-homecoming@0.5.0\n" +
+        "* Update to `coh-content-db-homecoming@0.5.0`.\n" +
         "* https://github.com/n15g/badger/issues/5 - Bulk select/deselect badges.\n" +
         "* https://github.com/n15g/badger/issues/7 - Badge list doesn't remember the page number on refresh.\n" +
         "* https://github.com/n15g/badger/issues/12 - Sort by map.\n" +
