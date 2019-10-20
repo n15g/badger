@@ -1,6 +1,8 @@
 <select [(ngModel)]="sort" class="form-control">
     <option value="">-- Sort --</option>
-    <option value="CANONICAL_DESC">In-game Desc.</option>
-    <option value="NAME_ASC">Name Asc.</option>
-    <option value="NAME_DESC">Name Desc.</option>
+    <option [value]="sortType.CANONICAL_DESC">In-game Desc.</option>
+    <option [value]="sortType.NAME_ASC">Name Asc.</option>
+    <option [value]="sortType.NAME_DESC">Name Desc.</option>
+    <option [value]="sortType.MAP_ASC">Map Asc.</option>
+    <option [value]="sortType.MAP_DESC">Map Desc.</option>
 </select>

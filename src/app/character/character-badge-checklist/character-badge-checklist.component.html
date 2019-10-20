@@ -107,7 +107,8 @@
 
 <ng-template #pagination>
     <div class="form-inline">
-        <pagination [totalItems]="totalItems" [(ngModel)]="page" [maxSize]="5" [itemsPerPage]="itemsPerPage" (numPages)="pageCount = $event"></pagination>
+        <pagination [totalItems]="totalItems" [(ngModel)]="page" [maxSize]="5" [itemsPerPage]="itemsPerPage" (numPages)="pageCount = $event" boundaryLinks="true"
+                    previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;"></pagination>
         <ul class="pagination">
             <li>
                 <div class="form-text page-count">{{pageCount}} Page(s)</div>

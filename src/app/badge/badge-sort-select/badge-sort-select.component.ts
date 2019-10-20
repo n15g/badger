@@ -9,6 +9,8 @@ import {BadgeSortType} from "../badge-sort.pipe";
 export class BadgeSortSelectComponent {
     @Output() public sortChange = new EventEmitter();
 
+    sortType: typeof BadgeSortType = BadgeSortType;
+
     constructor() {
     }
 
