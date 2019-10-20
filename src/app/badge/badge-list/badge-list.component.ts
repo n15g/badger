@@ -126,10 +126,6 @@ export class BadgeListComponent implements OnInit {
 
         this.totalItems = badges.length;
 
-        if (this._page * this.itemsPerPage > this.totalItems) {
-            this._page = 1;
-        }
-
         badges = this.pagePipe.transform(badges, this._page, this.itemsPerPage);
 
         this.badges = badges;
