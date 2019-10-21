@@ -25,5 +25,9 @@ export const Changelog: { [id: string]: string } = {
         "* https://github.com/n15g/badger/issues/5 - Bulk select/deselect badges.\n" +
         "* https://github.com/n15g/badger/issues/7 - Badge list doesn't remember the page number on refresh.\n" +
         "* https://github.com/n15g/badger/issues/12 - Sort by map.\n" +
-        "* Removed some phantom table cells from the history badge display.\n"
+        "* Removed some phantom table cells from the history badge display.\n",
+
+    "1.0.0":
+        "* Update to `coh-content-db-homecoming@1.0.0`.\n" +
+        "* https://github.com/n15g/badger/issues/17 - Clicking last page in pagination reverts to first page.\n"
 };
