@@ -29,5 +29,7 @@ export const Changelog: { [id: string]: string } = {
 
     "1.0.0":
         "* Update to `coh-content-db-homecoming@1.0.0`.\n" +
-        "* https://github.com/n15g/badger/issues/17 - Clicking last page in pagination reverts to first page.\n"
+        "* https://github.com/n15g/badger/issues/17 - Clicking last page in pagination reverts to first page.\n",
+    "1.0.1":
+        "* Update to `coh-content-db-homecoming@1.0.2`.\n"
 };
