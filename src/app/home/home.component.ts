@@ -1,6 +1,7 @@
 import {Component, OnInit} from "@angular/core";
 import {ContentDbService} from "../content-db/content-db.service";
 import {IServerGroup} from "coh-content-db";
+import {faHeart} from "@fortawesome/free-solid-svg-icons";
 
 @Component({
     selector: "app-home",
@@ -9,6 +10,8 @@ import {IServerGroup} from "coh-content-db";
 })
 export class HomeComponent implements OnInit {
     public serverGroups: IServerGroup[];
+
+    public thanksIcon = faHeart;
 
     constructor(private contentDb: ContentDbService) {
     }
