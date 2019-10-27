@@ -8,10 +8,14 @@
             Character List
         </a>
 
-        <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Badge List</button>
-        <div class="dropdown-menu">
-            <a *ngFor="let serverGroup of serverGroups | serverGroupSort" class="dropdown-item" [routerLink]="['/', serverGroup.key]">{{serverGroup.name}}</a>
-        </div>
+        <a class="btn btn-primary" [routerLink]="['/', serverGroups[0].key]" *ngIf="serverGroups.length === 1; else dropdownBlock">Badge List</a>
+
+        <ng-template #dropdownBlock>
+            <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Badge List</button>
+            <div class="dropdown-menu">
+                <a *ngFor="let serverGroup of serverGroups | serverGroupSort" class="dropdown-item" [routerLink]="['/', serverGroup.key]">{{serverGroup.name}}</a>
+            </div>
+        </ng-template>
     </div>
 
     <section>
