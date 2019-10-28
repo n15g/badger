@@ -5,7 +5,7 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-12 col-md-auto d-flex align-items-center">
-                            <fa-icon size="4x" [icon]="warningIcon" class="text-warning"></fa-icon>
+                            <fa-icon size="4x" [icon]="warningIcon" class="text-warning mx-auto mb-2 mb-md-0"></fa-icon>
                         </div>
                         <div class="col-12 col-md d-flex flex-column align-items-start justify-content-center">
                             <p>All data saved in Badger is stored locally on your device. While this means you don't have to log in to anything to save character information, it does mean
@@ -18,11 +18,11 @@
         </div>
     </section>
     <section class="row mb-2">
-        <div class="col col-md-6">
+        <div class="col-12 col-md-6">
             <h1 class="text-center text-md-left">Characters</h1>
         </div>
-        <div class="col col-md-6 d-flex justify-content-center justify-content-md-end align-items-center">
-            <span class="btn-group">
+        <div class="col-12 col-md-6 d-flex justify-content-center justify-content-md-end align-items-center">
+            <span class="btn-group controls">
                 <button type="button" class="btn btn-success" (click)="newCharacter()">
                     New Character
                     <fa-icon [icon]="addIcon"></fa-icon>
@@ -38,7 +38,7 @@
 
     <section class="row">
         <ng-container *ngFor="let character of characters | characterSort">
-            <a [routerLink]="['/character', character.key]" class="col-md-4 col-sm-6 character">
+            <a [routerLink]="['/character', character.key]" class="col-12 col-md-6 col-lg-4 character">
                 <div class="card">
                     <div class="card-body d-flex justify-content-between align-items-center">
                         <archetype-icon [archetype]="character.archetypeKey | archetype:(character.serverGroupKey | serverGroup)"></archetype-icon>

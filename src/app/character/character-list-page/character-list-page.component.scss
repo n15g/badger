@@ -1,8 +1,13 @@
 @import "~src/mixins";
 
 .character{
-    padding-bottom: 15px;
-    padding-top: 15px;
+    padding-bottom: 10px;
+    padding-top: 10px;
+
+    @include media-breakpoint-up(md){
+        padding-bottom: 15px;
+        padding-top: 15px;
+    }
 
     &, .card, .text-muted{
         transition: 0.2s background-color ease, 0.2s color ease;
@@ -47,10 +52,18 @@
 
         @include media-breakpoint-down(sm) {
             flex-direction: column;
+            justify-content: center;
+            align-items: center;
         }
 
         fa-icon {
             margin-right: 24px;
         }
+    }
+}
+
+.controls{
+    @include media-breakpoint-down(sm){
+        width: 100%;
     }
 }
