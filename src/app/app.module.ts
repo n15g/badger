@@ -77,6 +77,7 @@ import {FilterBadgeAlignmentPipe} from "./badge/filter-badge-alignment.pipe";
 import {BadgeAlignmentSelectComponent} from "./badge/badge-alignment-select/badge-alignment-select.component";
 import {CharacterRenameModalComponent} from "./character/character-rename-modal/character-rename-modal.component";
 import {GameMapPipe} from "./game-map/game-map.pipe";
+import { MainFooterComponent } from './main-footer/main-footer.component';
 
 @NgModule({
     declarations: [
@@ -145,6 +146,7 @@ import {GameMapPipe} from "./game-map/game-map.pipe";
         ServerGroupStatusesComponent,
         SexIconPipe,
         SmartLinksPipe,
+        MainFooterComponent,
     ],
     imports: [
         AppRoutingModule,
