@@ -1,5 +1,25 @@
+@import "../../variables";
+@import "../../mixins";
+
 server-group-statuses {
     margin: 0 1em;
+}
+
+aside{
+    background: lighten($secondary, 30);
+    padding: 2rem 0 1rem;
+
+    @include media-breakpoint-up(md){
+        .col-md-6{
+            &:first-child{
+                border-right: 1px solid $secondary;
+            }
+
+            &:last-child{
+                padding-left: 2rem;
+            }
+        }
+    }
 }
 
 .contact {
@@ -8,14 +28,14 @@ server-group-statuses {
     }
 }
 
-.card.thanks {
+.thanks {
     display: flex;
     flex-direction: row;
     align-items: center;
     padding: 24px;
 
     fa-icon {
-        color: #dddddd;
+        color: $primary;
     }
 
     ul {
