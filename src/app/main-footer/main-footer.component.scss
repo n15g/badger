@@ -1,0 +1,10 @@
+@import "../../mixins";
+@import "../../variables";
+
+.footer{
+    padding-top: 1rem;
+    a{
+        color: $white;
+        text-decoration: underline;
+    }
+}
