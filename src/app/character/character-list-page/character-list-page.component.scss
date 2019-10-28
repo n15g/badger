@@ -1,9 +1,40 @@
 @import "~src/mixins";
 
-.character {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
+.character{
+    padding-bottom: 15px;
+    padding-top: 15px;
+
+    &, .card, .text-muted{
+        transition: 0.2s background-color ease, 0.2s color ease;
+    }
+
+    archetype-icon{
+        flex: 0 0 auto;
+    }
+
+    .content{
+        flex: 1 0 auto;
+        margin: 0 1rem;
+    }
+
+    p{
+        margin-bottom: 0;
+    }
+
+    h5{
+        font-weight: 600;
+    }
+
+    &:hover{
+        color: $white;
+        text-decoration: none;
+        .card {
+            background-color: darken($white, 40);
+        }
+        .text-muted{
+            color: darken($white, 10) !important;
+        }
+    }
 }
 
 .card.warning {

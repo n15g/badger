@@ -1,21 +1,27 @@
 <main class="container">
-    <h1>Characters</h1>
-
-    <div class="card warning">
-        <div class="card-body">
-            <div>
-                <fa-icon size="4x" [icon]="warningIcon" class="text-warning"></fa-icon>
-            </div>
-            <div>
-                <p>All data saved in Badger is stored locally on your device. While this means you don't have to log in to anything to save character information, it does mean
-                   that data is not shared between devices, and if you delete your browser cache you will lose your character data.</p>
-                <p>You can use the import/export feature if you want to back up your characters, or transfer them to another device.</p>
+    <section class="row mb-4">
+        <div class="col">
+            <div class="card warning">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-12 col-md-auto d-flex align-items-center">
+                            <fa-icon size="4x" [icon]="warningIcon" class="text-warning"></fa-icon>
+                        </div>
+                        <div class="col-12 col-md d-flex flex-column align-items-start justify-content-center">
+                            <p>All data saved in Badger is stored locally on your device. While this means you don't have to log in to anything to save character information, it does mean
+                                that data is not shared between devices, and if you delete your browser cache you will lose your character data.</p>
+                            <p class="mb-0">You can use the import/export feature if you want to back up your characters, or transfer them to another device.</p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-
-    <section>
-        <p>
+    </section>
+    <section class="row mb-2">
+        <div class="col col-md-6">
+            <h1 class="text-center text-md-left">Characters</h1>
+        </div>
+        <div class="col col-md-6 d-flex justify-content-center justify-content-md-end align-items-center">
             <span class="btn-group">
                 <button type="button" class="btn btn-success" (click)="newCharacter()">
                     New Character
@@ -27,24 +33,29 @@
                     <fa-icon [icon]="importIcon"></fa-icon>
                 </button>
             </span>
-        </p>
-        <div class="row">
-            <ng-container *ngFor="let character of characters | characterSort">
-                <a [routerLink]="['/character', character.key]" class="character card col-md-4 col-sm-12">
-                    <archetype-icon [archetype]="character.archetypeKey | archetype:(character.serverGroupKey | serverGroup)"></archetype-icon>
-                    <div class="card-body">
-                        <h5>
-                            {{character.name}}
-                        </h5>
-                        <h6 class="card-subtitle mb-2 text-muted">
-                            {{(character.serverGroupKey | serverGroup).name}} - {{character.server}}
-                        </h6>
-                        <p *ngVar="character | characterBadges | collectedOnly as collected">
-                            {{collected.length}} Badge{{collected.length == 1 ? "" : "s"}}
-                        </p>
-                    </div>
-                </a>
-            </ng-container>
         </div>
+    </section>
+
+    <section class="row">
+        <ng-container *ngFor="let character of characters | characterSort">
+            <a [routerLink]="['/character', character.key]" class="col-md-4 col-sm-6 character">
+                <div class="card">
+                    <div class="card-body d-flex justify-content-between align-items-center">
+                        <archetype-icon [archetype]="character.archetypeKey | archetype:(character.serverGroupKey | serverGroup)"></archetype-icon>
+                        <div class="content">
+                            <h5>
+                                {{character.name}}
+                            </h5>
+                            <h6 class="card-subtitle mb-2 text-muted">
+                                {{(character.serverGroupKey | serverGroup).name}} - {{character.server}}
+                            </h6>
+                            <p *ngVar="character | characterBadges | collectedOnly as collected">
+                                {{collected.length}} Badge{{collected.length == 1 ? "" : "s"}}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </ng-container>
     </section>
 </main>
