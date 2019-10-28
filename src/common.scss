@@ -1,5 +1,24 @@
 @import "./_mixins.scss";
 
+html, body{
+    height: 100%;
+}
+
+app-root{
+    display: flex;
+    flex-flow: column nowrap;
+    min-height: 100%;
+}
+
+app-main-nav,
+app-main-footer{
+    flex: 0 0 auto;
+}
+
+.main-content{
+    flex: 1 0 auto;
+}
+
 .blockquote {
     margin-left: 0.5em;
     padding-left: 1em;

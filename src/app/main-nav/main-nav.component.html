@@ -28,7 +28,7 @@
             </li>
 
             <li class="nav-item" *ngIf="serverGroups.length === 1; else dropdownNavBlock">
-                <a class="nav-link" routerLink="['/', serverGroups[0].key]">Badges</a>
+                <a class="nav-link" [routerLink]="['/', serverGroups[0].key]">Badges</a>
             </li>
 
             <ng-template #dropdownNavBlock>
