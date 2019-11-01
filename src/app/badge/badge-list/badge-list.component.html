@@ -1,24 +1,60 @@
-<div>{{totalItems}} badges total ({{serverGroup.badges.length - totalItems}} filtered)</div>
-
-<form class="filters form-inline">
-    <badge-type-select [(type)]="type"></badge-type-select>
-    <game-map-select [serverGroup]="serverGroup" [(mapKey)]="mapKey"></game-map-select>
-    <badge-alignment-select [(alignment)]="alignment"></badge-alignment-select>
-    <input type="text" placeholder="Search..." class="form-control search" [(ngModel)]="queryStr" [ngModelOptions]="{standalone: true}"/>
-    <badge-sort-select [(sort)]="sort"></badge-sort-select>
-    <button type="button" class="btn btn-light" (click)="clearFilters()">Clear Filters</button>
+<form class="filters">
+    <div class="row pb-3">
+        <div class="col">
+            {{totalItems}} badges total ({{serverGroup.badges.length - totalItems}} filtered)
+        </div>
+    </div>
+    <div id="filters">
+        <div class="row pb-3">
+            <div class="col-6 col-md-2">
+                <badge-type-select [(type)]="type"></badge-type-select>
+            </div>
+            <div class="col-6 col-md-4" *ngIf="type === badgeTypeFilter.EXPLORATION">
+                <game-map-select [serverGroup]="serverGroup" [(mapKey)]="mapKey"></game-map-select>
+            </div>
+            <div class="col-6 col-md-2">
+                <badge-alignment-select [(alignment)]="alignment"></badge-alignment-select>
+            </div>
+            <div class="col-6 col-md-2 ml-auto">
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <input type="text" placeholder="Search..." class="form-control search" [(ngModel)]="queryStr"
+                   [ngModelOptions]="{standalone: true}"/>
+        </div>
+        <div class="col-12 col-md-2 ml-auto">
+            <button type="button" class="btn btn-light btn-block" (click)="clearFilters()">Clear Filters</button>
+        </div>
+    </div>
 </form>
-
 <ng-container *ngTemplateOutlet="pagination"></ng-container>
+
 
 <div class="table-responsive">
     <table class="badge-list table table-bordered table-striped">
         <thead>
         <tr>
             <th class="badge-icon"></th>
-            <th class="badge-name">Name</th>
+            <th class="badge-name" (click)="sort(badgeSortType.NAME)">
+                <fa-icon [icon]="sortIcon" [fixedWidth]="true" *ngIf="this.sortType !== badgeSortType.NAME"></fa-icon>
+                <fa-icon [icon]="sortAsc" [fixedWidth]="true" *ngIf="this.sortType === badgeSortType.NAME && this.sortDirection === badgeSortDirection.ASC"></fa-icon>
+                <fa-icon [icon]="sortDesc" [fixedWidth]="true" *ngIf="this.sortType === badgeSortType.NAME && this.sortDirection === badgeSortDirection.DESC"></fa-icon>
+                Name
+            </th>
             <th class="badge-alignment">Alignment</th>
-            <th class="badge-type">Type</th>
+            <th class="badge-type" (click)="sort(badgeSortType.CANONICAL)">
+                <fa-icon [icon]="sortIcon" [fixedWidth]="true" *ngIf="this.sortType !== badgeSortType.CANONICAL"></fa-icon>
+                <fa-icon [icon]="sortAsc" [fixedWidth]="true" *ngIf="this.sortType === badgeSortType.CANONICAL && this.sortDirection === badgeSortDirection.ASC"></fa-icon>
+                <fa-icon [icon]="sortDesc" [fixedWidth]="true" *ngIf="this.sortType === badgeSortType.CANONICAL && this.sortDirection === badgeSortDirection.DESC"></fa-icon>
+                Type
+            </th>
+            <th class="badge-map" (click)="sort(badgeSortType.MAP)" *ngIf="type === badgeTypeFilter.EXPLORATION">
+                <fa-icon [icon]="sortIcon" [fixedWidth]="true" *ngIf="this.sortType !== badgeSortType.MAP"></fa-icon>
+                <fa-icon [icon]="sortAsc" [fixedWidth]="true" *ngIf="this.sortType === badgeSortType.MAP && this.sortDirection === badgeSortDirection.ASC"></fa-icon>
+                <fa-icon [icon]="sortDesc" [fixedWidth]="true" *ngIf="this.sortType === badgeSortType.MAP && this.sortDirection === badgeSortDirection.DESC"></fa-icon>
+                Map</th>
             <th class="badge-description">Description</th>
         </tr>
         </thead>
@@ -45,6 +81,10 @@
                     {{badge.type | badgeType}}
                 </td>
 
+                <td class="badge-map" *ngIf="type === badgeTypeFilter.EXPLORATION">
+                    {{badge.serverGroup.getMap(badge.mapKey) && badge.serverGroup.getMap(badge.mapKey).name || 'N/A'}}
+                </td>
+
                 <td class="badge-description">
                     <badge-description [badge]="badge"></badge-description>
                 </td>
@@ -62,23 +102,22 @@
 <ng-container *ngTemplateOutlet="pagination"></ng-container>
 
 <ng-template #pagination>
-    <div class="form-inline">
-        <pagination [totalItems]="totalItems" [(ngModel)]="page" [maxSize]="5" [itemsPerPage]="itemsPerPage" (numPages)="pageCount = $event" boundaryLinks="true"
-                    previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;"></pagination>
-        <ul class="pagination">
-            <li>
-                <div class="form-text page-count">{{pageCount}} Page(s)</div>
-            </li>
-            <li>
-                <select class="form-control" [(ngModel)]="itemsPerPage">
-                    <option value="10">10 items per page</option>
-                    <option value="20">20 items per page</option>
-                    <option value="50">50 items per page</option>
-                    <option value="100">100 items per page</option>
-                    <option value="500">500 items per page</option>
-                    <option value="">All</option>
-                </select>
-            </li>
-        </ul>
+    <div class="row form-inline pagination-wrapper">
+        <div class="col d-flex justify-content-start align-items-center">
+            <pagination [totalItems]="totalItems" [(ngModel)]="page" [maxSize]="5" [itemsPerPage]="itemsPerPage"
+                        (numPages)="pageCount = $event" boundaryLinks="true"
+                        previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;"></pagination>
+        </div>
+        <div class="col d-flex justify-content-end align-items-center">
+            <div class="page-count">{{pageCount}} Page(s)</div>
+            <select class="form-control" [(ngModel)]="itemsPerPage" [ngModelOptions]="{standalone: true}">
+                <option value="10">10 items per page</option>
+                <option value="20">20 items per page</option>
+                <option value="50">50 items per page</option>
+                <option value="100">100 items per page</option>
+                <option value="500">500 items per page</option>
+                <option value="">All</option>
+            </select>
+        </div>
     </div>
 </ng-template>

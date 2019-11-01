@@ -3,9 +3,8 @@
 badge-list {
     .filters {
         margin-bottom: 8px;
-
-        input.search {
-            margin-right: 48px;
+        .filter-trigger{
+            margin-left: 1rem;
         }
     }
 
@@ -17,6 +16,14 @@ badge-list {
 
         th {
             text-align: center;
+        }
+
+        .badge-map{
+            min-width: 60px;
+        }
+
+        .badge-icon{
+            min-width: 120px;
         }
 
         @include media-breakpoint-down(sm) {
@@ -39,11 +46,18 @@ badge-list {
         }
     }
 
-    pagination {
-        margin-right: 8px;
+    .pagination-wrapper{
+        margin-bottom: 1rem;
+        margin-top: 1rem;
+
+        .page-count {
+            margin-right: 1rem;
+        }
+
+        .pagination {
+            margin-bottom: 0;
+        }
     }
 
-    .page-count {
-        margin-right: 8px;
-    }
+
 }

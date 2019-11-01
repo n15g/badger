@@ -1,21 +1,30 @@
 <div class="container">
-    <nav class="main-breadcrumb" aria-label="breadcrumb">
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a [routerLink]="['/']">Home</a></li>
-            <li class="breadcrumb-item active" aria-current="page">{{serverGroup.name}}</li>
-        </ol>
-    </nav>
+    <div class="row">
+        <div class="col">
+            <nav class="main-breadcrumb" aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a [routerLink]="['/']">Home</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">{{serverGroup.name}}</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
 
-    <h1>{{serverGroup.name}}</h1>
-
-    <p>
-        <server-group-statuses [serverGroup]="serverGroup"></server-group-statuses>
-    </p>
-
-    <markdown ngPreserveWhitespaces [data]="serverGroup.description"></markdown>
+    <div class="row">
+        <div class="col-12">
+            <h2>{{serverGroup.name}} <server-group-statuses [serverGroup]="serverGroup"></server-group-statuses></h2>
+        </div>
+        <div class="col-12">
+            <markdown ngPreserveWhitespaces [data]="serverGroup.description"></markdown>
+        </div>
+    </div>
 
     <section>
-        <h3>Badges</h3>
+        <div class="row">
+            <div class="col">
+                <h3>Badges</h3>
+            </div>
+        </div>
         <badge-list [serverGroup]="serverGroup"></badge-list>
     </section>
 </div>
