@@ -1,9 +1,24 @@
 @import "~src/mixins";
+@import "~src/variables";
 
 badge-page {
     .infobox {
-        dd {
+        td{
+            padding: 0;
+        }
+        dd, dt {
             text-align: center;
+        }
+
+        dt{
+            width: 100%;
+            background-color: $secondary;
+            margin: 1rem 0 0.75rem;
+            padding: 0.25rem 0;
+            color: $white;
+            &:first-child{
+                margin-top: 0;
+            }
         }
 
         .header {
