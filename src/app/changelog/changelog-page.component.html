@@ -1,17 +1,29 @@
 <div class="container">
-    <tabset>
-        <tab [heading]="'Badger (' + getLatestVersion(appChangelog) + ')'">
-            <div *ngFor="let item of appChangelog | keyvalue | reverse">
-                <h5>{{item.key}}</h5>
-                <markdown [data]="item.value"></markdown>
-            </div>
-        </tab>
+    <div class="row">
+        <div class="col">
+            <tabset>
+                <tab>
+                    <ng-template tabHeading>
+                        Badger <small>{{getLatestVersion(appChangelog)}}</small>
+                    </ng-template>
+                    <div class="my-4" *ngFor="let item of appChangelog | keyvalue | reverse">
+                        <h5>{{item.key}}</h5>
+                        <markdown [data]="item.value"></markdown>
+                    </div>
+                </tab>
 
-        <tab *ngFor="let serverGroup of serverGroups | serverGroupSort" [heading]="serverGroup.name + ' (' + getLatestVersion(serverGroup.changelog) + ')'">
-            <div *ngFor="let item of serverGroup.changelog | keyvalue | reverse">
-                <h5>{{item.key}}</h5>
-                <markdown [data]="item.value"></markdown>
-            </div>
-        </tab>
-    </tabset>
+                <tab *ngFor="let serverGroup of serverGroups | serverGroupSort">
+                    <ng-template tabHeading>
+                        {{serverGroup.name}} <small>{{getLatestVersion(serverGroup.changelog)}}</small>
+                    </ng-template>
+                    <div class="mt-4 row" *ngFor="let item of serverGroup.changelog | keyvalue | reverse">
+                        <div class="col">
+                            <h5>{{item.key}}</h5>
+                            <markdown [data]="item.value"></markdown>
+                        </div>
+                    </div>
+                </tab>
+            </tabset>
+        </div>
+    </div>
 </div>
