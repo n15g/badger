@@ -19,7 +19,7 @@
             </h1>
         </div>
         <div class="col-12 col-md-6 text-right">
-            <div class="btn-group">
+            <div class="btn-group mb-3 mb-md-0">
                 <button type="button" class="btn btn-primary" (click)="rename()">
                     Rename
                     <fa-icon [icon]="renameIcon"></fa-icon>
@@ -35,14 +35,16 @@
             </div>
         </div>
     </div>
-    <section>
-        <tabset>
-            <tab heading="Display" (selectTab)="activeTab = $event.heading" [active]="activeTab === 'Display'">
-                <character-badge-display [character]="character"></character-badge-display>
-            </tab>
-            <tab heading="Collect" (selectTab)="activeTab = $event.heading" [active]="activeTab === 'Collect'">
-                <character-badge-checklist [character]="character"></character-badge-checklist>
-            </tab>
-        </tabset>
+    <section class="row">
+        <div class="col">
+            <tabset>
+                <tab heading="Display" (selectTab)="activeTab = $event.heading" [active]="activeTab === 'Display'">
+                    <character-badge-display [character]="character"></character-badge-display>
+                </tab>
+                <tab heading="Collect" (selectTab)="activeTab = $event.heading" [active]="activeTab === 'Collect'">
+                    <character-badge-checklist [character]="character"></character-badge-checklist>
+                </tab>
+            </tabset>
+        </div>
     </section>
 </div>
