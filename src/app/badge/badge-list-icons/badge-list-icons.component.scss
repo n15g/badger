@@ -1,14 +1,15 @@
 .badge-icon {
     display: inline-block;
-    margin: 8px 4px;
+    margin: 0.25rem;
 
     img {
         transition: transform .2s ease;
+        transform: scale(0.8) translateZ(0);
     }
 
     &:hover {
         img {
-            transform: scale(1.5);
+            transform: scale(1);
         }
     }
 }

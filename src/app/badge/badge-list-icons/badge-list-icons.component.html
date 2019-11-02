@@ -1,6 +1,6 @@
 <div *ngFor="let badge of badges" class="badge-icon" [tooltip]="badge | badgeName" placement="bottom">
     <ng-container *ngVar="badge | badgeIconSrc:villain as imageSrc">
-        <a [routerLink]="['/', badge.serverGroup.key, 'badge', badge.key]">
+        <a [routerLink]="['/', badge.serverGroup.key, 'badge', badge.key]" class="d-block">
             <img *ngIf="imageSrc; else noImage" [src]="imageSrc" (error)="imageSrc = null" [alt]="badge | badgeName">
             <ng-template #noImage>
                 <fa-icon size="3x" class="missingImage" [icon]="missingImageIcon"></fa-icon>
