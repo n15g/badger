@@ -1,19 +1,40 @@
-<form class="filters form-inline">
-    <badge-type-select [(type)]="type"></badge-type-select>
-    <game-map-select [serverGroup]="serverGroup" [(mapKey)]="mapKey"></game-map-select>
-    <badge-alignment-select [(alignment)]="alignment"></badge-alignment-select>
-    <input type="text" placeholder="Search..." class="form-control search" [(ngModel)]="queryStr" [ngModelOptions]="{standalone: true}"/>
-    <badge-sort-select [(sort)]="sort"></badge-sort-select>
-    <button type="button" class="btn btn-light" (click)="clearFilters()">Clear Filters</button>
+<form class="filters">
+    <div id="filters">
+        <div class="row py-3">
+            <div class="col-6 col-md-2">
+                <badge-type-select [(type)]="type"></badge-type-select>
+            </div>
+            <div class="col-6 col-md-4" *ngIf="type === badgeTypeFilter.EXPLORATION">
+                <game-map-select [serverGroup]="serverGroup" [(mapKey)]="mapKey"></game-map-select>
+            </div>
+            <div class="col-6 col-md-2">
+                <badge-alignment-select [(alignment)]="alignment"></badge-alignment-select>
+            </div>
+            <div class="col-6 col-md-2 ml-auto">
+                <!-- Show Only Unowned Badges -->
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <input type="text" placeholder="Search..." class="form-control search" [(ngModel)]="queryStr" [ngModelOptions]="{standalone: true}"/>
+        </div>
+        <div class="col-12 col-md-3 col-lg-2 ml-auto mt-3 mt-md-0">
+            <button type="button" class="btn btn-light" (click)="clearFilters()">Clear Filters</button>
+        </div>
+    </div>
 </form>
 
 <ng-container *ngTemplateOutlet="pagination"></ng-container>
 
 <div class="table-responsive">
-    <table class="badge-list table table-bordered">
+    <table class="badge-list table table-bordered table-striped">
         <thead>
         <tr>
-            <th class="badge-icon"><input type="checkbox" [(ngModel)]="selectAllModel" (ngModelChange)="selectAll($event)"></th>
+            <th class="badge-select">
+                <label for="owned-all"><fa-icon size="lg" [fixedWidth]="true" [icon]="selectAllModel ? check : circle"></fa-icon></label>
+                <input id="owned-all" type="checkbox" [(ngModel)]="selectAllModel" (ngModelChange)="selectAll($event)">
+            </th>
             <th class="badge-name">Name</th>
             <th class="badge-alignment">Alignment</th>
             <th class="badge-type">Type</th>
@@ -22,9 +43,10 @@
         </thead>
         <tbody>
         <ng-container *ngIf="badges.length; else noMatches">
-            <tr *ngFor="let badge of badges; trackBy:trackByBadge" [ngClass]="{owned: badge.owned}">
+            <tr *ngFor="let badge of badges; trackBy:trackByBadge; let i = index;" [ngClass]="{owned: badge.owned}">
                 <td class="badge-select">
-                    <input type="checkbox" class="form-control-lg" [(ngModel)]="badge.owned" (ngModelChange)="collectBadge(badge, $event)"/>
+                    <label for="owned-{{i}}"><fa-icon size="lg" [fixedWidth]="true" [icon]="badge.owned ? check : circle"></fa-icon></label>
+                    <input id="owned-{{i}}" type="checkbox" class="form-control-lg" [(ngModel)]="badge.owned" (ngModelChange)="collectBadge(badge, $event)"/>
                 </td>
 
                 <td class="badge-name">
