@@ -1,12 +1,13 @@
-import {Component, Input, OnInit, ViewEncapsulation} from "@angular/core";
-import {BadgeType, IBadge, IServerGroup} from "coh-content-db";
-import {SessionStorage} from "ngx-store";
-import {FilterBadgeTypePipe} from "../filter-badge-type.pipe";
-import {FilterBadgeMapPipe} from "../filter-badge-map.pipe";
-import {FilterBadgeSearchPipe} from "../filter-badge-search.pipe";
-import {BadgeSortPipe, BadgeSortType} from "../badge-sort.pipe";
-import {AlignmentFilterType, FilterBadgeAlignmentPipe} from "../filter-badge-alignment.pipe";
-import {PagePipe} from "../../common/page.pipe";
+import {Component, Input, OnInit, ViewEncapsulation} from '@angular/core';
+import {BadgeType, IBadge, IServerGroup} from 'coh-content-db';
+import {SessionStorage} from 'ngx-store';
+import {FilterBadgeTypePipe} from '../filter-badge-type.pipe';
+import {FilterBadgeMapPipe} from '../filter-badge-map.pipe';
+import {FilterBadgeSearchPipe} from '../filter-badge-search.pipe';
+import {BadgeSortDirection, BadgeSortPipe, BadgeSortType} from '../badge-sort.pipe';
+import {AlignmentFilterType, FilterBadgeAlignmentPipe} from '../filter-badge-alignment.pipe';
+import {PagePipe} from '../../common/page.pipe';
+import {faSort, faSortUp, faSortDown} from '@fortawesome/free-solid-svg-icons';
 
 @Component({
     selector: "badge-list",
@@ -15,6 +16,10 @@ import {PagePipe} from "../../common/page.pipe";
     encapsulation: ViewEncapsulation.None
 })
 export class BadgeListComponent implements OnInit {
+    public sortIcon = faSort;
+    public sortAsc = faSortUp;
+    public sortDesc = faSortDown;
+
     @Input() public serverGroup: IServerGroup;
     badges: IBadge[];
     totalItems: number;
@@ -100,16 +105,30 @@ export class BadgeListComponent implements OnInit {
         this.update();
     }
 
-    @SessionStorage("badge-list.sort")
-    _sort: BadgeSortType = "" as BadgeSortType;
+    @SessionStorage('badge-list.sort')
+    private _sort: BadgeSortType = BadgeSortType.CANONICAL;
 
-    get sort(): BadgeSortType {
+    get sortType(): BadgeSortType {
         return this._sort;
     }
 
-    set sort(value: BadgeSortType) {
-        this._sort = value;
-        this.update();
+    @SessionStorage('badge-list.sort-direction')
+    private _sort_direction: BadgeSortDirection = BadgeSortDirection.ASC;
+
+    get sortDirection(): BadgeSortDirection {
+        return this._sort_direction;
+    }
+
+    get badgeSortType() {
+        return BadgeSortType;
+    }
+
+    get badgeSortDirection() {
+        return BadgeSortDirection;
+    }
+
+    get badgeTypeFilter() {
+        return BadgeType;
     }
 
     ngOnInit(): void {
@@ -122,7 +141,7 @@ export class BadgeListComponent implements OnInit {
         badges = this.filterBadgeMap.transform(badges, this._mapKey);
         badges = this.filterBadgeSearch.transform(badges, this._queryStr);
         badges = this.filterBadgeAlignmentPipe.transform(badges, this._alignment);
-        badges = this.badgeSort.transform(badges, this._sort);
+        badges = this.badgeSort.transform(badges, this._sort, this._sort_direction);
 
         this.totalItems = badges.length;
 
@@ -141,7 +160,17 @@ export class BadgeListComponent implements OnInit {
         this.queryStr = "";
         this._alignment = "" as AlignmentFilterType;
         this._sort = "" as BadgeSortType;
+        this._sort_direction = BadgeSortDirection.ASC;
+        this._itemsPerPage = 50;
         this.page = 1;
+        this.update();
+    }
+
+    sort(sort: BadgeSortType) {
+        this._sort_direction = (this._sort !== sort || this._sort_direction === BadgeSortDirection.DESC)
+            ? BadgeSortDirection.ASC
+            : BadgeSortDirection.DESC;
+        this._sort = sort;
         this.update();
     }
 }

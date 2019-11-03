@@ -12,6 +12,8 @@ import {CharacterDbService} from "../character-db.service";
 import * as _ from "lodash";
 import {AlignmentFilterType, FilterBadgeAlignmentPipe} from "../../badge/filter-badge-alignment.pipe";
 import {PagePipe} from "../../common/page.pipe";
+import {faCircle} from '@fortawesome/free-regular-svg-icons';
+import {faCheckCircle} from '@fortawesome/free-solid-svg-icons';
 
 @Component({
     selector: "character-badge-checklist",
@@ -28,6 +30,9 @@ export class CharacterBadgeChecklistComponent implements OnInit {
     pageCount: number = 1;
 
     selectAllModel: boolean;
+
+    public circle = faCircle;
+    public check = faCheckCircle;
 
     constructor(private serverGroupPipe: ServerGroupPipe,
                 private filterBadgeType: FilterBadgeTypePipe,
@@ -121,6 +126,10 @@ export class CharacterBadgeChecklistComponent implements OnInit {
     set sort(value: BadgeSortType) {
         this._sort = value;
         this.update();
+    }
+
+    get badgeTypeFilter() {
+        return BadgeType;
     }
 
     ngOnInit(): void {

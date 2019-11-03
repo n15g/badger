@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-md navbar-dark bg-primary">
-    <a class="navbar-brand" routerLink="/">
-        <img alt="Badger" src="./assets/logo.png">
+    <a class="navbar-brand d-flex align-middle" routerLink="/">
+        <img alt="Badger" src="/assets/badger_opt.svg">
         Badger
     </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#mainNavContent" aria-controls="mainNavContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -27,14 +27,20 @@
                 </a>
             </li>
 
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarBadgesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Badges
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarBadgesDropdown">
-                    <a *ngFor="let serverGroup of serverGroups | serverGroupSort" class="dropdown-item" [routerLink]="['/', serverGroup.key]">{{serverGroup.name}}</a>
-                </div>
+            <li class="nav-item" *ngIf="serverGroups.length === 1; else dropdownNavBlock">
+                <a class="nav-link" [routerLink]="['/', serverGroups[0].key]">Badges</a>
             </li>
+
+            <ng-template #dropdownNavBlock>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarBadgesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Badges
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarBadgesDropdown">
+                        <a *ngFor="let serverGroup of serverGroups | serverGroupSort" class="dropdown-item" [routerLink]="['/', serverGroup.key]">{{serverGroup.name}}</a>
+                    </div>
+                </li>
+            </ng-template>
 
             <li class="nav-item">
                 <a class="nav-link"

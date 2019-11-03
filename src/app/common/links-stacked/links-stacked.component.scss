@@ -5,26 +5,31 @@
     align-items: center;
 
     .link {
-        &.paragon-wiki:before {
+        position: relative;
+        margin: .5rem 0;
+
+        &:before {
             content: ' ';
-            background: url("/assets/paragon-wiki.png") center center no-repeat;
             display: inline-block;
-            background-size: contain;
             height: 32px;
             width: 32px;
-            position: relative;
-            top: 8px;
+            position: absolute;
+            top: -4px;
+            left: 0;
+        }
+
+        &.paragon-wiki, &.homecoming{
+            padding-left: 35px;
+        }
+
+        &.paragon-wiki:before {
+            background: url("/assets/paragon-wiki.png") center center no-repeat;
+            background-size: contain;
         }
 
         &.homecoming:before {
-            content: ' ';
             background: url("/assets/homecoming.png") center center no-repeat;
-            display: inline-block;
             background-size: contain;
-            height: 32px;
-            width: 32px;
-            position: relative;
-            top: 8px;
         }
     }
 }

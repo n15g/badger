@@ -1,5 +1,34 @@
+@import "../../mixins";
+@import "../../variables";
+
 .navbar-brand {
     img {
         height: 30px;
+        margin-right: 1rem;
+    }
+}
+
+.nav-link{
+    margin: 0 0.75rem;
+    transition: color 0.2s ease;
+    position: relative;
+
+    &.active{
+
+        &::before{
+            content: '\203A';
+            position: absolute;
+            left: -18px;
+            top: 1px;
+            font-size: 22px;
+        }
+
+        @include media-breakpoint-up(md){
+            border-bottom: 2px solid $white;
+
+            &::before{
+                content: none;
+            }
+        }
     }
 }
