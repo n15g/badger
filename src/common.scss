@@ -1,22 +1,26 @@
 @import "./_mixins.scss";
 
-html, body{
+html, body {
     height: 100%;
 }
 
-app-root{
+app-root {
     display: flex;
     flex-flow: column nowrap;
     min-height: 100%;
 }
 
 app-main-nav,
-app-main-footer{
+app-main-footer {
     flex: 0 0 auto;
 }
 
-.main-content{
+.main-content {
     flex: 1 0 auto;
+}
+
+.clickable {
+    cursor: pointer;
 }
 
 .blockquote {

@@ -1,7 +1,7 @@
 import {Component, Input, OnInit, ViewEncapsulation} from "@angular/core";
 import {BadgePartialType, BadgeType, IBadge, IBadgePartial, IServerGroup} from "coh-content-db";
 import {SessionStorage} from "ngx-store";
-import {BadgeSortPipe, BadgeSortType} from "../../badge/badge-sort.pipe";
+import {BadgeSortDirection, BadgeSortPipe, BadgeSortType} from "../../badge/badge-sort.pipe";
 import {FilterBadgeTypePipe} from "../../badge/filter-badge-type.pipe";
 import {FilterBadgeMapPipe} from "../../badge/filter-badge-map.pipe";
 import {FilterBadgeSearchPipe} from "../../badge/filter-badge-search.pipe";
@@ -13,7 +13,7 @@ import * as _ from "lodash";
 import {AlignmentFilterType, FilterBadgeAlignmentPipe} from "../../badge/filter-badge-alignment.pipe";
 import {PagePipe} from "../../common/page.pipe";
 import {faCircle} from '@fortawesome/free-regular-svg-icons';
-import {faCheckCircle} from '@fortawesome/free-solid-svg-icons';
+import {faCheckCircle, faSort, faSortDown, faSortUp} from '@fortawesome/free-solid-svg-icons';
 
 @Component({
     selector: "character-badge-checklist",
@@ -22,6 +22,16 @@ import {faCheckCircle} from '@fortawesome/free-solid-svg-icons';
     encapsulation: ViewEncapsulation.None
 })
 export class CharacterBadgeChecklistComponent implements OnInit {
+    public circle = faCircle;
+    public check = faCheckCircle;
+    public sortIcon = faSort;
+    public sortAsc = faSortUp;
+    public sortDesc = faSortDown;
+
+    public badgeSortType: typeof BadgeSortType = BadgeSortType;
+    public badgeSortDirection: typeof BadgeSortDirection = BadgeSortDirection;
+    public badgeType: typeof BadgeType = BadgeType;
+
     @Input() public character: ICharacter;
     serverGroup: IServerGroup;
     badges: ICharacterBadge[];
@@ -30,9 +40,6 @@ export class CharacterBadgeChecklistComponent implements OnInit {
     pageCount: number = 1;
 
     selectAllModel: boolean;
-
-    public circle = faCircle;
-    public check = faCheckCircle;
 
     constructor(private serverGroupPipe: ServerGroupPipe,
                 private filterBadgeType: FilterBadgeTypePipe,
@@ -116,16 +123,18 @@ export class CharacterBadgeChecklistComponent implements OnInit {
         this._itemsPerPage = value;
     }
 
-    @SessionStorage("character-badge-list.sort")
-    _sort: BadgeSortType = "" as BadgeSortType;
+    @SessionStorage('character-badge-list.sort')
+    private _sortType: BadgeSortType = BadgeSortType.CANONICAL;
 
-    get sort(): BadgeSortType {
-        return this._sort;
+    get sortType(): BadgeSortType {
+        return this._sortType;
     }
 
-    set sort(value: BadgeSortType) {
-        this._sort = value;
-        this.update();
+    @SessionStorage('character-badge-list.sort-direction')
+    private _sortDirection: BadgeSortDirection = BadgeSortDirection.ASC;
+
+    get sortDirection(): BadgeSortDirection {
+        return this._sortDirection;
     }
 
     get badgeTypeFilter() {
@@ -143,7 +152,7 @@ export class CharacterBadgeChecklistComponent implements OnInit {
         badges = this.filterBadgeMap.transform(badges, this._mapKey);
         badges = this.filterBadgeAlignmentPipe.transform(badges, this._alignment);
         badges = this.filterBadgeSearch.transform(badges, this._queryStr);
-        badges = this.badgeSort.transform(badges, this._sort);
+        badges = this.badgeSort.transform(badges, this._sortType, this._sortDirection);
 
         this.totalItems = badges.length;
 
@@ -163,9 +172,22 @@ export class CharacterBadgeChecklistComponent implements OnInit {
         this._mapKey = "";
         this.queryStr = "";
         this._alignment = "" as AlignmentFilterType;
-        this._sort = "" as BadgeSortType;
+        this._sortType = "" as BadgeSortType;
+        this._sortDirection = BadgeSortDirection.ASC;
         this.page = 1;
         this.update();
+    }
+
+    sort(sort: BadgeSortType) {
+        this._sortDirection = (this._sortType !== sort || this._sortDirection === BadgeSortDirection.DESC)
+            ? BadgeSortDirection.ASC
+            : BadgeSortDirection.DESC;
+        this._sortType = sort;
+        this.update();
+    }
+
+    isSortedBy(type: BadgeSortType, direction?: BadgeSortDirection) {
+        return this.sortType === type && (direction == undefined || this.sortDirection === direction);
     }
 
     collectBadge(badge: ICharacterBadge, value: boolean) {

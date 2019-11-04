@@ -17,7 +17,6 @@ import {BadgePageComponent} from "./badge/badge-page/badge-page.component";
 import {BadgePipe} from "./badge/badge.pipe";
 import {BadgeResolver} from "./badge/badge.resolver";
 import {BadgeSortPipe} from "./badge/badge-sort.pipe";
-import {BadgeSortSelectComponent} from "./badge/badge-sort-select/badge-sort-select.component";
 import {BadgeTextComponent} from './badge/badge-text/badge-text.component';
 import {BadgeTypePipe} from "./badge/badge-type.pipe";
 import {BadgeTypeSelectComponent} from "./badge/badge-type-select/badge-type-select.component";
@@ -103,7 +102,6 @@ import { MainFooterComponent } from './main-footer/main-footer.component';
         BadgePipe,
         BadgesByTypePipe,
         BadgeSortPipe,
-        BadgeSortSelectComponent,
         BadgeTextComponent,
         BadgeTypePipe,
         BadgeTypeSelectComponent,
