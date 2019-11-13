@@ -41,5 +41,7 @@ export const Changelog: { [id: string]: string } = {
 
     "1.1.0":
         "* Update to `coh-content-db-homecoming@1.1.4`.\n" +
-        "* https://github.com/n15g/badger/pull/20/ - Lots of UI improvements."
+        "* https://github.com/n15g/badger/pull/20/ - Lots of UI improvements.",
+    "1.1.1":
+        "* Update to `coh-content-db-homecoming@1.1.5`.\n",
 };
