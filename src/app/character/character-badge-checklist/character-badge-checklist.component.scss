@@ -7,6 +7,11 @@ character-badge-checklist {
         input.search {
             margin-right: 48px;
         }
+
+        .show-collected-filter {
+            display: flex;
+            align-items: center;
+        }
     }
 
     .badge-list {

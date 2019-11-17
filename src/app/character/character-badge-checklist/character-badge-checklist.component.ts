@@ -100,6 +100,18 @@ export class CharacterBadgeChecklistComponent implements OnInit {
         this.update();
     }
 
+    @SessionStorage("character-badge-list.showCollected")
+    _showCollected: boolean = true;
+
+    get showCollected(): boolean {
+        return this._showCollected;
+    }
+
+    set showCollected(value: boolean) {
+        this._showCollected = value;
+        this.update();
+    }
+
     @SessionStorage("character-badge-list.page")
     private _page: number = 1;
 
@@ -154,6 +166,10 @@ export class CharacterBadgeChecklistComponent implements OnInit {
         badges = this.filterBadgeSearch.transform(badges, this._queryStr);
         badges = this.badgeSort.transform(badges, this._sortType, this._sortDirection);
 
+        if (!this._showCollected) {
+            badges = _.filter(badges, (badge) => !badge.owned);
+        }
+
         this.totalItems = badges.length;
 
         if ((this._page - 1) * this.itemsPerPage > this.totalItems) {
@@ -192,6 +208,7 @@ export class CharacterBadgeChecklistComponent implements OnInit {
 
     collectBadge(badge: ICharacterBadge, value: boolean) {
         this.character = this.characterDb.collectBadge(this.character, badge, value);
+        this.update();
     }
 
     collectPartial(partial: IBadgePartial, value: boolean, count?: number) {

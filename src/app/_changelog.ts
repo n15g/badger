@@ -45,5 +45,6 @@ export const Changelog: { [id: string]: string } = {
     "1.1.1":
         "* Update to `coh-content-db-homecoming@1.1.5`.\n",
     "1.1.2":
-        "* https://github.com/n15g/badger/issues/22 - Striped table rows clash with shaded collected badges.\n",
+        "* https://github.com/n15g/badger/issues/22 - Striped table rows clash with shaded collected badges.\n" +
+        "* https://github.com/n15g/badger/issues/19 - Filter character badge list by collected.\n",
 };
