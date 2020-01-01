@@ -14,7 +14,7 @@
 
 <ng-template #badgeType let-badgeType="badgeType" let-badges="badges">
     <ng-container *ngIf="badges && badges.length">
-        <h3 class="my-3">{{badgeType | badgeType}} <small>({{badges.length}} Badge{{badges.length === 1 ? "" : "s"}})</small></h3>
+        <h3 class="my-3">{{badgeType | badgeType}} <small *ngVar="badges | collectedCount as count">({{count}} Badge{{count === 1 ? "" : "s"}})</small></h3>
         <badge-list-icons class="d-flex flex-wrap flex-row justify-content-center mb-1" [badges]="badges" [villain]="villain"></badge-list-icons>
     </ng-container>
 </ng-template>

@@ -12,7 +12,7 @@ export class CharacterBadgesPipe implements PipeTransform {
     constructor(private contentDb: ContentDbService) {
     }
 
-    transform(character: ICharacter): ICharacterBadge[] {
+    public transform(character: ICharacter): ICharacterBadge[] {
         if (character == undefined) return [];
 
         const collectionData: CollectedBadgesList = oc(character).badges({});

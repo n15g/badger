@@ -13,8 +13,8 @@
             <h1>
                 <archetype-icon [archetype]="archetype"></archetype-icon>
                 {{character.name}}
-                <small *ngVar="character | characterBadges | collectedOnly as collected">
-                    ({{collected.length}} Badge{{collected.length == 1 ? "" : "s"}})
+                <small *ngVar="character | characterBadges | collectedCount as count">
+                    ({{count}} Badge{{count == 1 ? "" : "s"}})
                 </small>
             </h1>
         </div>

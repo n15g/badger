@@ -77,6 +77,7 @@ import {BadgeAlignmentSelectComponent} from "./badge/badge-alignment-select/badg
 import {CharacterRenameModalComponent} from "./character/character-rename-modal/character-rename-modal.component";
 import {GameMapPipe} from "./game-map/game-map.pipe";
 import { MainFooterComponent } from './main-footer/main-footer.component';
+import {CollectedCountPipe} from './character/collected-count.pipe';
 
 @NgModule({
     declarations: [
@@ -116,6 +117,7 @@ import { MainFooterComponent } from './main-footer/main-footer.component';
         CharacterPageComponent,
         CharacterRenameModalComponent,
         CharacterSortPipe,
+        CollectedCountPipe,
         CollectedOnlyPipe,
         CoordinatePipe,
         EnhancementCategoriesPipe,
@@ -173,6 +175,7 @@ import { MainFooterComponent } from './main-footer/main-footer.component';
         CharacterBadgesPipe,
         CharacterResolver,
         CharacterSortPipe,
+        CollectedCountPipe,
         CollectedOnlyPipe,
         EnhancementCategoriesPipe,
         EnhancementCategoryPipe,
