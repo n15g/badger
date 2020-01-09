@@ -51,4 +51,6 @@ export const Changelog: { [id: string]: string } = {
         '* Update to `coh-content-db@1.2.0`.\n' +
         '* Update to `coh-content-db-homecoming@1.1.6`.\n' +
         '* https://github.com/n15g/badger/issues/23 - Do not include [Bug Hunter] and [Flames of Prometheus] in badge totals.\n',
+    '1.1.4':
+        '* Update to `coh-content-db-homecoming@1.1.6`.\n'
 };
