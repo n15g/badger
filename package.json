@@ -1,6 +1,6 @@
 {
     "name": "badger",
-    "version": "1.1.6",
+    "version": "1.1.7",
     "scripts": {
         "ng": "ng",
         "start": "ng serve",
@@ -34,7 +34,7 @@
         "@types/shortid": "0.0.29",
         "bootstrap": "^4.3.1",
         "coh-content-db": "^1.2.0",
-        "coh-content-db-homecoming": "^1.1.9",
+        "coh-content-db-homecoming": "^1.1.10",
         "jquery": "^3.4.1",
         "js-base64": "^2.5.1",
         "karma-coverage-istanbul-reporter": "^2.1.0",
@@ -67,6 +67,7 @@
         "karma-chrome-launcher": "~2.2.0",
         "karma-jasmine": "~2.0.1",
         "karma-jasmine-html-reporter": "^1.4.0",
+        "semver-compare": "^1.0.0",
         "ts-node": "~7.0.0",
         "tslint": "~5.15.0",
         "typescript": "~3.4.3"

@@ -6,9 +6,9 @@
                     <ng-template tabHeading>
                         Badger <small>{{getLatestVersion(appChangelog)}}</small>
                     </ng-template>
-                    <div class="my-4" *ngFor="let item of appChangelog | keyvalue | reverse">
-                        <h5>{{item.key}}</h5>
-                        <markdown [data]="item.value"></markdown>
+                    <div class="my-4" *ngFor="let item of appChangelog | changelogSort">
+                        <h5>{{item[0]}}</h5>
+                        <markdown [data]="item[1]"></markdown>
                     </div>
                 </tab>
 
@@ -16,10 +16,10 @@
                     <ng-template tabHeading>
                         {{serverGroup.name}} <small>{{getLatestVersion(serverGroup.changelog)}}</small>
                     </ng-template>
-                    <div class="mt-4 row" *ngFor="let item of serverGroup.changelog | keyvalue | reverse">
+                    <div class="mt-4 row" *ngFor="let item of serverGroup.changelog | changelogSort">
                         <div class="col">
-                            <h5>{{item.key}}</h5>
-                            <markdown [data]="item.value"></markdown>
+                            <h5>{{item[0]}}</h5>
+                            <markdown [data]="item[1]"></markdown>
                         </div>
                     </div>
                 </tab>
