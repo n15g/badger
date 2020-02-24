@@ -33,7 +33,6 @@ export class BadgePageComponent implements OnInit {
             this.badge = data.badge;
             this.title.setTitle(`${this.badgeName.transform(this.badge)} | ${this.serverGroup.name} | Badger`);
         });
-        // console.log(this.badge);
         this.characterDb.getCharacters().subscribe((characters) =>
             this.characters = characters.filter(character =>
                 character.badges[this.badge.key] === undefined || character.badges[this.badge.key].owned !== true));
