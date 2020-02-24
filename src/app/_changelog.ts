@@ -57,5 +57,7 @@ export const Changelog: { [id: string]: string } = {
         '* Update to `coh-content-db-homecoming@1.1.9`.\n',
     '1.1.7':
         '* Update to `coh-content-db-homecoming@1.1.10`.\n',
+    '1.1.8':
+        '* https://github.com/n15g/badger/pull/24 - On badge page, display characters that need the badge.\n',
 
 };
