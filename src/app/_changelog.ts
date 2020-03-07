@@ -64,6 +64,6 @@ export const Changelog: { [id: string]: string } = {
     '1.1.10':
         '* Update to `coh-content-db-homecoming@1.1.14`.\n',
     '1.2.0':
-        '* Update to `coh-content-db-homecoming@1.2.0`.' +
+        '* Update to `coh-content-db-homecoming@1.2.0`.\n' +
         "* https://github.com/n15g/coh-content-db/issues/7 - Added support for Praetorian settitle ids.\n",
 };
