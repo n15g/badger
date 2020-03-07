@@ -86,6 +86,11 @@
                                 <dt>Set Title</dt>
                                 <dd><code class="slash-command">/settitle {{badge.setTitleId}}</code></dd>
                             </ng-container>
+
+                            <ng-container *ngIf="badge.setTitleIdPraetorian">
+                                <dt>Set Title (Praetorian)</dt>
+                                <dd><code class="slash-command">/settitle {{badge.setTitleIdPraetorian}}</code></dd>
+                            </ng-container>
                         </dl>
                     </td>
                 </tr>
