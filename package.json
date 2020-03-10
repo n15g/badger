@@ -1,6 +1,6 @@
 {
     "name": "badger",
-    "version": "1.2.0",
+    "version": "1.2.1",
     "scripts": {
         "ng": "ng",
         "start": "ng serve",
@@ -34,7 +34,7 @@
         "@types/shortid": "0.0.29",
         "bootstrap": "^4.3.1",
         "coh-content-db": "^1.4.0",
-        "coh-content-db-homecoming": "^1.2.0",
+        "coh-content-db-homecoming": "^1.2.1",
         "jquery": "^3.4.1",
         "js-base64": "^2.5.1",
         "karma-coverage-istanbul-reporter": "^2.1.0",
