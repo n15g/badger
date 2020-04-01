@@ -71,5 +71,8 @@ export const Changelog: { [id: string]: string } = {
         '* Update to `coh-content-db-homecoming@1.2.1`.\n',
     '1.2.2':
         '* Update to `coh-content-db-homecoming@1.2.2`.\n' +
-        '* Fixed map names in plaque location descriptions.\n'
+        '* Fixed map names in plaque location descriptions.\n',
+    '1.2.3':
+        '* Update to `coh-content-db@1.4.1`.\n' +
+        '* Update to `coh-content-db-homecoming@1.2.3`.\n'
 };
