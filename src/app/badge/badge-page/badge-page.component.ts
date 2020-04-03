@@ -2,9 +2,10 @@ import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {Title} from '@angular/platform-browser';
 import {BadgePartialType, IBadge, IServerGroup} from 'coh-content-db';
-import { ICharacter } from '../../character/character';
-import { CharacterDbService } from '../../character/character-db.service';
+import {ICharacter} from '../../character/character';
+import {CharacterDbService} from '../../character/character-db.service';
 import {BadgeNamePipe} from '../badge-name.pipe';
+import {oc} from 'ts-optchain';
 
 @Component({
     selector: 'badge-page',
@@ -33,8 +34,9 @@ export class BadgePageComponent implements OnInit {
             this.badge = data.badge;
             this.title.setTitle(`${this.badgeName.transform(this.badge)} | ${this.serverGroup.name} | Badger`);
         });
+
         this.characterDb.getCharacters().subscribe((characters) =>
-            this.characters = characters.filter(character =>
-                character.badges[this.badge.key] === undefined || character.badges[this.badge.key].owned !== true));
+            this.characters = characters.filter(character => oc(character).badges[this.badge.key].owned(false) === false)
+        );
     }
 }

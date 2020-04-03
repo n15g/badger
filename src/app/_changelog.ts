@@ -57,5 +57,22 @@ export const Changelog: { [id: string]: string } = {
         '* Update to `coh-content-db-homecoming@1.1.9`.\n',
     '1.1.7':
         '* Update to `coh-content-db-homecoming@1.1.10`.\n',
+    '1.1.8':
+        '* https://github.com/n15g/badger/pull/24 - On badge page, display characters that need the badge.\n',
+    '1.1.9':
+        '* Update to `coh-content-db-homecoming@1.1.11`.\n',
+    '1.1.10':
+        '* Update to `coh-content-db-homecoming@1.1.14`.\n',
 
+    '1.2.0':
+        '* Update to `coh-content-db-homecoming@1.2.0`.\n' +
+        '* https://github.com/n15g/coh-content-db/issues/7 - Added support for Praetorian settitle ids.\n',
+    '1.2.1':
+        '* Update to `coh-content-db-homecoming@1.2.1`.\n',
+    '1.2.2':
+        '* Update to `coh-content-db-homecoming@1.2.2`.\n' +
+        '* Fixed map names in plaque location descriptions.\n',
+    '1.2.3':
+        '* Update to `coh-content-db@1.4.1`.\n' +
+        '* Update to `coh-content-db-homecoming@1.2.3`.\n'
 };
