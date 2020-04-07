@@ -2,13 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import { IBadge, IServer, IServerGroup } from 'coh-content-db';
 import { IArchetype } from 'coh-content-db/dist/types/archetype';
-import { BsModalRef } from 'ngx-bootstrap';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap';
 import { oc } from 'ts-optchain';
 import { getFileHash, LogLineType, parseLog } from '../../common/log-parser';
 import { ContentDbService } from '../../content-db/content-db.service';
 import { ICharacter, newCharacter } from '../character';
 import { CharacterBadgesPipe } from '../character-badges.pipe';
 import { CharacterDbService } from '../character-db.service';
+import { CharacterLogParserHowToModalComponent } from '../character-log-parser-how-to-modal/character-log-parser-how-to-modal.component';
 
 type ThenArg<T> = T extends Promise<infer U> ? U :
     T extends ((...args: any[]) => Promise<infer V>) ? V :
@@ -65,6 +66,7 @@ export class CharacterLogParserModalComponent implements OnInit {
 
     constructor(
         public bsModalRef: BsModalRef,
+        private modalService: BsModalService,
         private characterBadgesPipe: CharacterBadgesPipe,
         private contentDb: ContentDbService,
         private charDb: CharacterDbService) {
@@ -72,6 +74,12 @@ export class CharacterLogParserModalComponent implements OnInit {
 
     public ngOnInit(): void {
         this.charDb.getCharacters().subscribe((characters) => this.characters = characters);
+    }
+
+    private openHowTo() {
+        this.close();
+        this.modalService.show(CharacterLogParserHowToModalComponent, {
+        });
     }
 
     private removeFile(hash: string) {

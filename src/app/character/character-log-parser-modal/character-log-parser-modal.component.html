@@ -1,5 +1,6 @@
 <div class="modal-header">
     <h4 class="modal-title pull-left">Log parser</h4>
+
     <button type="button" class="close pull-right" aria-label="Close" (click)="bsModalRef.hide()">
         <span aria-hidden="true">&times;</span>
     </button>
@@ -43,12 +44,15 @@
                  [style.width]="parsingProgress + '%'"
                  attr.aria-valuenow="{{parsingProgress}}"></div>
         </div>
-
         <div class="spinner-border spinner-border-sm text-info"
              role="status"
              *ngIf="isGeneratingHashes"></div>
         <button class="btn btn-primary" [disabled]="disableSubmit" (click)="submit()">
             Submit
+        </button>
+
+        <button class="btn btn-secondary" (click)="openHowTo()">
+            Help
         </button>
     </div>
 </ng-container>

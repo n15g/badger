@@ -81,6 +81,7 @@ import {CollectedCountPipe} from './character/collected-count.pipe';
 import {ChangelogSortPipe} from './changelog/changelog-sort.pipe';
 import { CharacterLogParserModalComponent } from './character/character-log-parser-modal/character-log-parser-modal.component';
 import { DragAndDropFileDirective } from './common/drag-and-drop-file.directive';
+import { CharacterLogParserHowToModalComponent } from './character/character-log-parser-how-to-modal/character-log-parser-how-to-modal.component';
 
 @NgModule({
     declarations: [
@@ -153,6 +154,7 @@ import { DragAndDropFileDirective } from './common/drag-and-drop-file.directive'
         MainFooterComponent,
         CharacterLogParserModalComponent,
         DragAndDropFileDirective,
+        CharacterLogParserHowToModalComponent,
     ],
     imports: [
         AppRoutingModule,
@@ -204,6 +206,7 @@ import { DragAndDropFileDirective } from './common/drag-and-drop-file.directive'
         CharacterRenameModalComponent,
         CharacterLogParserModalComponent,
         NewCharacterModalComponent,
+        CharacterLogParserHowToModalComponent,
     ],
     bootstrap: [AppComponent]
 })
