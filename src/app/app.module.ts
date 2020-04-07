@@ -79,6 +79,8 @@ import {GameMapPipe} from './game-map/game-map.pipe';
 import {MainFooterComponent} from './main-footer/main-footer.component';
 import {CollectedCountPipe} from './character/collected-count.pipe';
 import {ChangelogSortPipe} from './changelog/changelog-sort.pipe';
+import { CharacterLogParserModalComponent } from './character/character-log-parser-modal/character-log-parser-modal.component';
+import { DragAndDropFileDirective } from './common/drag-and-drop-file.directive';
 
 @NgModule({
     declarations: [
@@ -149,6 +151,8 @@ import {ChangelogSortPipe} from './changelog/changelog-sort.pipe';
         SexIconPipe,
         SmartLinksPipe,
         MainFooterComponent,
+        CharacterLogParserModalComponent,
+        DragAndDropFileDirective,
     ],
     imports: [
         AppRoutingModule,
@@ -198,6 +202,7 @@ import {ChangelogSortPipe} from './changelog/changelog-sort.pipe';
         CharacterExportModalComponent,
         CharacterImportModalComponent,
         CharacterRenameModalComponent,
+        CharacterLogParserModalComponent,
         NewCharacterModalComponent,
     ],
     bootstrap: [AppComponent]

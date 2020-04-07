@@ -1,0 +1,33 @@
+<div class="modal-header">
+    <h4 class="modal-title pull-left">Log parser</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="bsModalRef.hide()">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="modal-body"
+     [ngClass]="{'drag-over': dragOver}"
+     appDragAndDropFile
+     (fileDragEnter)="fileDragEnter()"
+     (fileDragLeave)="fileDragLeave()"
+     (fileDropped)="fileDropped($event)">
+    <p>Drag and drop City of Heroes log files to this window</p>
+    <table class="table table-bordered file-table">
+        <tbody>
+            <tr *ngFor="let file of fileList | keyvalue">
+                <td class="file-name">{{file.value.name}}</td>
+                <td>
+                    <button class="btn" (click)="removeFile(file.key.toString())">
+                        <fa-icon size="sm" [fixedWidth]="true" [icon]="close"></fa-icon>
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<div class="modal-footer">
+    <fa-icon *ngIf="isGeneratingHashes" class="spinner" size="lg" [fixedWidth]="true" [icon]="spinner"></fa-icon>
+    <button class="btn btn-primary" [disabled]="disableSubmit" (click)="submit()">
+
+        Submit
+    </button>
+</div>

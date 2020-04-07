@@ -1,11 +1,12 @@
-import {Component, OnInit} from '@angular/core';
-import {ContentDbService} from "../../content-db/content-db.service";
-import {BsModalService} from "ngx-bootstrap";
-import {NewCharacterModalComponent} from "../new-character-modal/new-character-modal.component";
-import {CharacterDbService} from "../character-db.service";
-import {faExclamationTriangle, faFileImport, faPlus} from "@fortawesome/free-solid-svg-icons";
-import {CharacterImportModalComponent} from "../character-import-modal/character-import-modal.component";
-import {ICharacter} from "../character";
+import { Component, OnInit } from '@angular/core';
+import { faExclamationTriangle, faFileImport, faFileUpload, faPlus } from "@fortawesome/free-solid-svg-icons";
+import { BsModalService } from "ngx-bootstrap";
+import { ContentDbService } from "../../content-db/content-db.service";
+import { ICharacter } from "../character";
+import { CharacterDbService } from "../character-db.service";
+import { CharacterImportModalComponent } from "../character-import-modal/character-import-modal.component";
+import { CharacterLogParserModalComponent } from "../character-log-parser-modal/character-log-parser-modal.component";
+import { NewCharacterModalComponent } from "../new-character-modal/new-character-modal.component";
 
 @Component({
     selector: 'character-list-page',
@@ -16,6 +17,7 @@ export class CharacterListPageComponent implements OnInit {
 
     addIcon = faPlus;
     importIcon = faFileImport;
+    logParserIcon = faFileUpload;
     warningIcon = faExclamationTriangle;
 
     characters: ICharacter[] = [];
@@ -32,6 +34,10 @@ export class CharacterListPageComponent implements OnInit {
 
     importCharacter() {
         this.modalService.show(CharacterImportModalComponent);
+    }
+
+    logParser() {
+        this.modalService.show(CharacterLogParserModalComponent);
     }
 
     ngOnInit(): void {
