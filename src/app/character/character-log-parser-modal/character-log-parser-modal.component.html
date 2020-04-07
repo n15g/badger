@@ -13,13 +13,13 @@
          (fileDragLeave)="fileDragLeave()"
          (fileDropped)="fileDropped($event)">
 
-        <div class="form-group">
-            <label>Server Group</label>
-            <server-group-select [(serverGroup)]="serverGroup"></server-group-select>
-        </div>
-
         <ng-container *ngIf="serverGroup !== undefined">
-            <p>Drag and drop City of Heroes log files to this window</p>
+            <p>Select files below or drop them into this window</p>
+            <div class="custom-file mb-3">
+                <input type="file" class="custom-file-input" id="customFile" multiple
+                (change)="onFileSelect($event)">
+                <label class="custom-file-label" for="customFile">Choose file</label>
+            </div>
             <table class="table table-bordered file-table">
                 <tbody>
                     <tr *ngFor="let file of fileList | keyvalue">
@@ -32,6 +32,12 @@
                     </tr>
                 </tbody>
             </table>
+
+            <div class="form-group">
+                <label>Select server group</label>
+                <server-group-select [(serverGroup)]="serverGroup"></server-group-select>
+            </div>
+
         </ng-container>
     </div>
     <div class="modal-footer">

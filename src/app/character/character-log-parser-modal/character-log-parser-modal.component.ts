@@ -90,12 +90,40 @@ export class CharacterLogParserModalComponent implements OnInit {
         return this.characters.find(c => c.name === characterName) === undefined;
     }
 
+    private onFileSelect(event: Event) {
+        const files = (event.target as HTMLInputElement).files;
+
+        this.fileDropped(files);
+    }
+
     private fileDragEnter() {
         this.dragOver = true;
     }
 
     private fileDragLeave() {
         this.dragOver = false;
+    }
+
+    private async fileDropped($event: FileList) {
+        this.isGeneratingHashes = true;
+        this.dragOver = false;
+        const newFiles = Array.from($event);
+
+        const newFileList = {
+            ...this.fileList
+        };
+
+        for await (const newFile of newFiles) {
+            const hash = await getFileHash(newFile);
+
+            if (newFileList[hash] === undefined) {
+                newFileList[hash] = newFile;
+            }
+        }
+
+        this.fileList = newFileList;
+
+        this.isGeneratingHashes = false;
     }
 
     private async submit() {
@@ -175,28 +203,6 @@ export class CharacterLogParserModalComponent implements OnInit {
 
     private removeCharacter(characterName: string) {
         delete this.foundBadges[characterName];
-    }
-
-    private async fileDropped($event: FileList) {
-        this.isGeneratingHashes = true;
-        this.dragOver = false;
-        const newFiles = Array.from($event);
-
-        const newFileList = {
-            ...this.fileList
-        };
-
-        for await (const newFile of newFiles) {
-            const hash = await getFileHash(newFile);
-
-            if (newFileList[hash] === undefined) {
-                newFileList[hash] = newFile;
-            }
-        }
-
-        this.fileList = newFileList;
-
-        this.isGeneratingHashes = false;
     }
 
     private save() {
