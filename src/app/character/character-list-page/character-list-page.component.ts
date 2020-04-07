@@ -37,7 +37,9 @@ export class CharacterListPageComponent implements OnInit {
     }
 
     logParser() {
-        this.modalService.show(CharacterLogParserModalComponent);
+        this.modalService.show(CharacterLogParserModalComponent, {
+            class: 'modal-lg'
+        });
     }
 
     ngOnInit(): void {

@@ -13,12 +13,6 @@
     width: 100%;
 }
 
-@keyframes spinner {
-    100% {
-        transform: rotate(360deg);
-    }
-}
-
-.spinner {
-    animation: spinner 1s linear infinite;
+.progress {
+    flex: 1 0 auto;
 }
