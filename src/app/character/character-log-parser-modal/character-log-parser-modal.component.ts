@@ -30,25 +30,25 @@ interface FoundBadges {
     styleUrls: ['./character-log-parser-modal.component.scss']
 })
 export class CharacterLogParserModalComponent implements OnInit {
-    private dragOver = false;
-    private isGeneratingHashes = false;
-    private isParsingLogs = false;
-    private hasNewFoundBadges = false;
-    private hasParsedBadges = false;
-    private parsingProgress = 0;
+    public dragOver = false;
+    public isGeneratingHashes = false;
+    public isParsingLogs = false;
+    public hasNewFoundBadges = false;
+    public hasParsedBadges = false;
+    public parsingProgress = 0;
 
     public characters: ICharacter[] = [];
 
-    private foundBadges: FoundBadges;
+    public foundBadges: FoundBadges;
 
-    private fileList: { [hash: string]: File } = {};
+    public  fileList: { [hash: string]: File } = {};
 
     public closeIcon = faTrash;
 
     public servers: IServer[];
     public archetypes: IArchetype[];
 
-    private selectedServerGroup: IServerGroup;
+    public selectedServerGroup: IServerGroup;
 
     get serverGroup(): IServerGroup {
         return this.selectedServerGroup || this.contentDb.getServerGroups()[0];
