@@ -74,5 +74,8 @@ export const Changelog: { [id: string]: string } = {
         '* Fixed map names in plaque location descriptions.\n',
     '1.2.3':
         '* Update to `coh-content-db@1.4.1`.\n' +
-        '* Update to `coh-content-db-homecoming@1.2.3`.\n'
+        '* Update to `coh-content-db-homecoming@1.2.3`.\n',
+    '1.3.0':
+        '* Update to `coh-content-db-homecoming@1.2.4`.\n' +
+        '* https://github.com/n15g/badger/pull/27 - Added a chat log parser for detecting collected badges.\n'
 };

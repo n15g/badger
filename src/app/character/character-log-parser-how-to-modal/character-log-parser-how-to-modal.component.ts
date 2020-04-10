@@ -1,9 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { BsModalRef, BsModalService } from "ngx-bootstrap";
-import { ContentDbService } from "../../content-db/content-db.service";
-import { CharacterBadgesPipe } from "../character-badges.pipe";
-import { CharacterDbService } from "../character-db.service";
-import { CharacterLogParserModalComponent } from "../character-log-parser-modal/character-log-parser-modal.component";
+import {Component} from '@angular/core';
+import {BsModalRef, BsModalService} from 'ngx-bootstrap';
+import {CharacterLogParserModalComponent} from '../character-log-parser-modal/character-log-parser-modal.component';
 
 @Component({
     selector: 'app-character-log-parser-how-to-modal',
@@ -20,7 +17,6 @@ export class CharacterLogParserHowToModalComponent {
     back() {
         this.modalService.show(CharacterLogParserModalComponent);
     }
-
 
     close() {
         this.bsModalRef.hide();
