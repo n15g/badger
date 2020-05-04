@@ -80,5 +80,7 @@ export const Changelog: { [id: string]: string } = {
         '* https://github.com/n15g/badger/pull/27 - Added a chat log parser for detecting collected badges.\n',
     '1.3.1':
         '* Fixed some pathing issues with assets in the log parser help window.\n' +
-        '* Updated the settitle.txt file to the most recent version from https://cityofbadgers.com/Download/coh%20settitles%202500.txt.'
+        '* Updated the settitle.txt file to the most recent version from https://cityofbadgers.com/Download/coh%20settitles%202500.txt.',
+    '1.3.2':
+        '* Update to `coh-content-db-homecoming@1.2.5`.\n'
 };
