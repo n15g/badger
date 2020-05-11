@@ -19,7 +19,7 @@
                 <badge-text [badge]="badge"></badge-text>
             </p>
 
-            <p *ngIf="badge.acquisition" class="acquisition">{{badge.acquisition}}</p>
+            <p *ngIf="badge.acquisition" class="acquisition" [innerHTML]="badge.acquisition | smartLinks:badge.serverGroup"></p>
 
             <ng-container *ngIf="badge.effect">
                 <h3 class="mt-5">Effect</h3>
