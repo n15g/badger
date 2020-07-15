@@ -87,4 +87,6 @@ export const Changelog: { [id: string]: string } = {
         '* https://github.com/n15g/badger/issues/29 - Smart links have bad hrefs.\n',
     '1.3.4':
         '* Update to `coh-content-db-homecoming@1.2.6`.\n',
+    '1.3.5':
+        '* Update to `coh-content-db-homecoming@1.2.7`.\n',
 };
