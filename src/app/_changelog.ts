@@ -113,5 +113,7 @@ export const Changelog: { [id: string]: string } = {
         '* Update to `coh-content-db-homecoming@1.3.9`.\n',
     '1.3.17':
         '* Update to `coh-content-db-homecoming@1.3.10`.\n',
-
+    '1.3.18':
+        '* Update to `coh-content-db-homecoming@1.3.11`.\n' +
+        '* Use Homecoming icon for links to Homecoming wiki.\n',
 };
