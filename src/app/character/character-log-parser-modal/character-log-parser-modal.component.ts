@@ -18,9 +18,9 @@ type ThenArg<T> = T extends Promise<infer U> ? U :
 interface FoundBadges {
     [characterName: string]: {
         badges: Array<IBadge>;
-        archetypeKey?: string;
-        server?: string;
-        character?: ICharacter;
+        archetypeKey: string;
+        server: string;
+        character: ICharacter;
     };
 }
 
@@ -163,14 +163,15 @@ export class CharacterLogParserModalComponent implements OnInit {
             // otherwise we won't have a character to add the badge to
             if (line.type === LogLineType.LOGIN) {
                 characterName = line.characterName;
+                console.debug("Found character", characterName);
                 const character = this.characters.find(c => c.name === characterName);
 
                 if (badgeMap[characterName] === undefined) {
                     badgeMap[characterName] = {
                         badges: [],
                         character,
-                        archetypeKey: character ? character.archetypeKey : undefined,
-                        server: character ? character.server : undefined
+                        archetypeKey: character ? character.archetypeKey : this.serverGroup.archetypes[0].key,
+                        server: character ? character.server : this.servers[0].name
                     };
                 }
             } else if (line.type === LogLineType.BADGE && typeof characterName === 'string') {
@@ -210,15 +211,14 @@ export class CharacterLogParserModalComponent implements OnInit {
             if (this.foundBadges.hasOwnProperty(characterName) === false) {
                 continue;
             }
+            console.debug("Saving badges for character", characterName);
 
             const obj = this.foundBadges[characterName];
             const character = obj.character || newCharacter(characterName, this.serverGroup.key, obj.server, obj.archetypeKey);
 
             this.charDb.saveCharacter(character);
 
-            for (const badge of obj.badges) {
-                this.charDb.collectBadge(character, badge, true);
-            }
+            this.charDb.collectBadgeBulk(character, obj.badges, true);
         }
 
         this.close();
