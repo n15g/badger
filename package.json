@@ -1,6 +1,6 @@
 {
     "name": "badger",
-    "version": "1.3.20",
+    "version": "1.3.21",
     "scripts": {
         "ng": "ng",
         "start": "ng serve",
