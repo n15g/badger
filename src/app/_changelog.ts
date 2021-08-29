@@ -122,4 +122,6 @@ export const Changelog: { [id: string]: string } = {
         '* Improvements to the log parser. (Should save much faster and handle new characters better).\n',
     '1.3.21':
         '* Update to `coh-content-db-homecoming@1.3.13`.\n',
+    '1.3.22':
+        '* Update to `coh-content-db-homecoming@1.3.14`.\n',
 };
