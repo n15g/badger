@@ -82,6 +82,7 @@ import {ChangelogSortPipe} from './changelog/changelog-sort.pipe';
 import { CharacterLogParserModalComponent } from './character/character-log-parser-modal/character-log-parser-modal.component';
 import { DragAndDropFileDirective } from './common/drag-and-drop-file.directive';
 import { CharacterLogParserHowToModalComponent } from './character/character-log-parser-how-to-modal/character-log-parser-how-to-modal.component';
+import {CharacterBadgeListIconsComponent} from './character/character-badge-list-icons/character-badge-list-icons.component';
 
 @NgModule({
     declarations: [
@@ -115,6 +116,7 @@ import { CharacterLogParserHowToModalComponent } from './character/character-log
         ChangelogSortPipe,
         CharacterBadgeChecklistComponent,
         CharacterBadgeDisplayComponent,
+        CharacterBadgeListIconsComponent,
         CharacterBadgesPipe,
         CharacterExportModalComponent,
         CharacterImportModalComponent,

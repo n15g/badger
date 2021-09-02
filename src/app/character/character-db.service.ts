@@ -1,13 +1,13 @@
 import {Injectable} from '@angular/core';
-import {CollectedBadgesEntry, ICharacter} from "./character";
+import {CollectedBadgesEntry, ICharacter} from './character';
 import * as _ from 'lodash';
-import {LocalStorageService} from "ngx-store";
-import {IBadge, IBadgePartial} from "coh-content-db";
-import {oc} from "ts-optchain";
-import {BehaviorSubject, Observable} from "rxjs";
-import {map} from "rxjs/operators";
+import {LocalStorageService} from 'ngx-store';
+import {IBadge, IBadgePartial} from 'coh-content-db';
+import {oc} from 'ts-optchain';
+import {BehaviorSubject, Observable} from 'rxjs';
+import {map} from 'rxjs/operators';
 
-const KEY = "characters";
+const KEY = 'characters';
 
 @Injectable({
     providedIn: 'root'
@@ -46,6 +46,10 @@ export class CharacterDbService {
         this.saveStore(store);
     }
 
+    public hasBadge(character: ICharacter, badge: IBadge): boolean {
+        return this.getBadgeEntry(character, badge.key).owned;
+    }
+
     public collectBadge(character: ICharacter, badge: IBadge, owned: boolean): ICharacter {
         return this.collectBadgeBulk(character, [badge], owned);
     }
@@ -53,7 +57,9 @@ export class CharacterDbService {
     public collectBadgeBulk(character: ICharacter, badges: IBadge[], owned: boolean): ICharacter {
         const storedCharacter = this._getCharacter(character.key);
 
-        if (!storedCharacter) return;
+        if (!storedCharacter) {
+            return;
+        }
 
         const dbBadges = oc(storedCharacter).badges({});
 
@@ -72,11 +78,15 @@ export class CharacterDbService {
     public collectPartial(character: ICharacter, partial: IBadgePartial, owned: boolean, count?: number): ICharacter {
         const storedCharacter = this._getCharacter(character.key);
 
-        if (!storedCharacter) return;
+        if (!storedCharacter) {
+            return;
+        }
 
         const badges = oc(storedCharacter).badges({});
         const newBadgeEntry = this.getBadgeEntry(character, partial.parent.key);
-        if (!newBadgeEntry.partials) newBadgeEntry.partials = {};
+        if (!newBadgeEntry.partials) {
+            newBadgeEntry.partials = {};
+        }
 
         const newPartialEntry = newBadgeEntry.partials[partial.key] || {owned: owned};
         newPartialEntry.owned = owned;

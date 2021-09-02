@@ -135,7 +135,7 @@
                     </div>
 
                     <div *ngIf="badge.type==='ACCOLADE'">
-                        <badge-list-icons [badges]="badge.partials | badgePartials:badge.serverGroup"></badge-list-icons>
+                        <character-badge-list-icons [character]="character" [badges]="badge.partials | badgePartials:badge.serverGroup"></character-badge-list-icons>
                     </div>
                 </td>
             </tr>

@@ -124,4 +124,7 @@ export const Changelog: { [id: string]: string } = {
         '* Update to `coh-content-db-homecoming@1.3.13`.\n',
     '1.3.22':
         '* Update to `coh-content-db-homecoming@1.3.14`.\n',
+    '1.3.23':
+        '* https://github.com/n15g/badger/issues/31 - Display collected partial badges for accolades. \n' +
+        '* Update to `coh-content-db-homecoming@1.3.15`.\n',
 };
