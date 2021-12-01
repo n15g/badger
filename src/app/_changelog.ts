@@ -133,4 +133,6 @@ export const Changelog: { [id: string]: string } = {
         '* Update to `coh-content-db-homecoming@1.3.17`.\n',
     '1.3.26':
         '* Update to `coh-content-db-homecoming@1.3.18`.\n',
+    '1.3.27':
+        '* Update to `coh-content-db-homecoming@1.3.19`.\n',
 };
