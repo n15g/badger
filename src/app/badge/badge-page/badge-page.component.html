@@ -56,17 +56,22 @@
         </div>
 
         <div class="order-0 col-12 order-md-1 col-md-4 pl-md-5">
-            <table class="table table-striped table-bordered infobox">
+            <table class="table table-striped table-bordered infobox" aria-label="Badge info">
                 <tbody>
                 <tr>
-                    <td class="header">
-                        <badge-name-stacked class="d-block d-md-none" [badge]="badge"></badge-name-stacked>
+                    <th class="header" scope="row">
+                        <badge-name-stacked class="d-block" [badge]="badge"></badge-name-stacked>
                         <badge-icons [badge]="badge"></badge-icons>
-                    </td>
+                    </th>
                 </tr>
                 <tr>
                     <td>
                         <dl>
+                            <dt>Type</dt>
+                            <dd>
+                                {{badge.type | badgeType}}
+                            </dd>
+
                             <dt>Alignment</dt>
                             <dd>
                                 <badge-alignment-stacked [badge]="badge"></badge-alignment-stacked>
@@ -103,7 +108,7 @@
                 <h3 class="mt-5">Requirements</h3>
                 <hr>
                 <div class="table-responsive">
-                    <table class="partials-list table table-striped table-bordered">
+                    <table class="partials-list table table-striped table-bordered" aria-label="Badge partials">
                         <tbody>
                         <tr *ngFor="let partial of badge.partials">
 
