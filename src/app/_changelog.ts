@@ -141,5 +141,6 @@ export const Changelog: { [id: string]: string } = {
         '* https://github.com/n15g/badger/issues/33 - Show badge type on badge details page.\n',
     '1.3.30':
         '* Update to `coh-content-db-homecoming@1.3.21`.\n',
-
+    '1.3.31':
+        '* Update to `coh-content-db-homecoming@1.3.22`.\n',
 };
