@@ -146,5 +146,6 @@ export const Changelog: { [id: string]: string } = {
     '1.3.32':
         '* https://github.com/n15g/badger/pull/34 - Update `settitle` command for new badges.\n',
     '1.3.33':
-        '* Update to `coh-content-db-homecoming@1.3.23`.\n',
+        '* Update to `coh-content-db-homecoming@1.3.23`.\n' +
+        '* https://github.com/n15g/badger/issues/35 - Fix icon for badges with new HC wiki links.',
 };
