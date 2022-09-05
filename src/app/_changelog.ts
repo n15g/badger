@@ -145,4 +145,6 @@ export const Changelog: { [id: string]: string } = {
         '* Update to `coh-content-db-homecoming@1.3.22`.\n',
     '1.3.32':
         '* https://github.com/n15g/badger/pull/34 - Update `settitle` command for new badges.\n',
+    '1.3.33':
+        '* Update to `coh-content-db-homecoming@1.3.23`.\n',
 };
