@@ -148,4 +148,6 @@ export const Changelog: { [id: string]: string } = {
     '1.3.33':
         '* Update to `coh-content-db-homecoming@1.3.23`.\n' +
         '* https://github.com/n15g/badger/issues/35 - Fix icon for badges with new HC wiki links.',
+    '1.3.34':
+        '* Update to `coh-content-db-homecoming@1.3.24`.\n',
 };
