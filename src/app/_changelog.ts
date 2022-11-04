@@ -154,4 +154,7 @@ export const Changelog: { [id: string]: string } = {
         '* Update to `coh-content-db-homecoming@1.3.25`.\n',
     '1.3.36':
         '* https://github.com/n15g/badger/issues/37 - Can now edit character server and archetype from the character page.\n',
+    '1.3.37':
+        '* Leet!\n' +
+        '* https://github.com/n15g/badger/issues/41 - Added a message to the log parser help text to indicate that you will need to log in again after enabling log parsing.\n',
 };
