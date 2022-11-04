@@ -1,16 +1,17 @@
-import {Component, OnInit, ViewChild} from "@angular/core";
-import {ActivatedRoute, Router} from "@angular/router";
-import {Title} from "@angular/platform-browser";
-import {ContentDbService} from "../../content-db/content-db.service";
-import {ICharacter} from "../character";
-import {IServerGroup} from "coh-content-db";
-import {IArchetype} from "coh-content-db/dist/types/archetype";
-import {BsModalService, TabsetComponent} from "ngx-bootstrap";
-import {SessionStorage} from "ngx-store";
-import {CharacterExportModalComponent} from "../character-export-modal/character-export-modal.component";
-import {CharacterDbService} from "../character-db.service";
-import {faFileExport, faPencilAlt, faTrash} from "@fortawesome/free-solid-svg-icons";
-import {CharacterRenameModalComponent} from "../character-rename-modal/character-rename-modal.component";
+import {Component, OnInit, ViewChild} from '@angular/core';
+import {ActivatedRoute, Router} from '@angular/router';
+import {Title} from '@angular/platform-browser';
+import {ContentDbService} from '../../content-db/content-db.service';
+import {ICharacter} from '../character';
+import {IServerGroup} from 'coh-content-db';
+import {IArchetype} from 'coh-content-db/dist/types/archetype';
+import {BsModalService, TabsetComponent} from 'ngx-bootstrap';
+import {SessionStorage} from 'ngx-store';
+import {CharacterExportModalComponent} from '../character-export-modal/character-export-modal.component';
+import {CharacterDbService} from '../character-db.service';
+import {faFileExport, faPencilAlt, faTrash} from '@fortawesome/free-solid-svg-icons';
+import {CharacterRenameModalComponent} from '../character-rename-modal/character-rename-modal.component';
+import {clone} from 'lodash';
 
 @Component({
     selector: 'character-page',
@@ -27,8 +28,8 @@ export class CharacterPageComponent implements OnInit {
     public serverGroup: IServerGroup;
     public archetype: IArchetype;
 
-    @SessionStorage("character.tab")
-    public activeTab: string = "Display";
+    @SessionStorage('character.tab')
+    public activeTab: string = 'Display';
 
     @ViewChild(TabsetComponent, {static: false}) tabs: TabsetComponent;
 
@@ -42,12 +43,15 @@ export class CharacterPageComponent implements OnInit {
 
     public ngOnInit() {
         this.route.data.subscribe(data => {
-            this.character = data["character"];
-            this.serverGroup = this.contentDb.getServerGroup(this.character.serverGroupKey);
-            this.archetype = this.serverGroup.getArchetype(this.character.archetypeKey);
-            this.title.setTitle(`${this.character.name} | Badger`);
+            this.character = data['character'];
 
-            this.charDb.getCharacter(this.character.key).subscribe((character) => this.character = character);
+            this.charDb.getCharacter(this.character.key).subscribe((character) => {
+                this.character = character;
+
+                this.serverGroup = this.contentDb.getServerGroup(this.character.serverGroupKey);
+                this.archetype = this.serverGroup.getArchetype(this.character.archetypeKey);
+                this.title.setTitle(`${this.character.name} | Badger`);
+            });
         });
 
     }
@@ -56,10 +60,14 @@ export class CharacterPageComponent implements OnInit {
         this.modalService.show(CharacterExportModalComponent, {initialState: {character: this.character}});
     }
 
-    public rename() {
-        let modal = this.modalService.show(CharacterRenameModalComponent, {initialState: {name: this.character.name}}).content as CharacterRenameModalComponent;
-        modal.onSubmit.subscribe((name) => {
-            this.character.name = name;
+    public edit() {
+        const characterClone = clone(this.character);
+        let modal = this.modalService.show(CharacterRenameModalComponent, {initialState: {character: characterClone}}).content as CharacterRenameModalComponent;
+        modal.onSubmit.subscribe((result) => {
+            this.character.name = result.name;
+            this.character.serverGroupKey = result.serverGroupKey;
+            this.character.server = result.server;
+            this.character.archetypeKey = result.archetypeKey;
             this.charDb.saveCharacter(this.character);
         });
     }
@@ -68,7 +76,7 @@ export class CharacterPageComponent implements OnInit {
         const confirmed = confirm(`Are you sure you want to delete ${this.character.name}?`);
 
         if (confirmed) {
-            await this.router.navigate(["/character"]);
+            await this.router.navigate(['/character']);
             this.charDb.deleteCharacter(this.character);
         }
     }

@@ -152,4 +152,6 @@ export const Changelog: { [id: string]: string } = {
         '* Update to `coh-content-db-homecoming@1.3.24`.\n',
     '1.3.35':
         '* Update to `coh-content-db-homecoming@1.3.25`.\n',
+    '1.3.36':
+        '* https://github.com/n15g/badger/issues/37 - Can now edit character server and archetype from the character page.\n',
 };
