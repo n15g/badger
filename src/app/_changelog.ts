@@ -159,4 +159,6 @@ export const Changelog: { [id: string]: string } = {
         '* https://github.com/n15g/badger/issues/41 - Added a message to the log parser help text to indicate that you will need to log in again after enabling log parsing.\n',
     '1.3.38':
         '* Update to `coh-content-db-homecoming@1.3.26`.\n',
+    '1.3.39':
+        '* Update to `coh-content-db-homecoming@1.3.27`.\n',
 };
