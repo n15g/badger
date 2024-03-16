@@ -9,12 +9,12 @@
     <p></p>
     <p>
         Badge detection works by taking advantage of the in-game chat log file. When one of your characters receives a new
-        badge or you select a badge title, a text line appears in the chat box, and the chat log will be saved to a file, which you then upload to the log parsing tool.
-        The chat log is not saved by default, but you can enable it via the options window as illustrated below:
+        badge or you select a badge title, a text line appears in the chat box. If you have chat logging enabled, the chat log will be saved to a file which can be uploaded to the log parsing tool.
+        Chat loggin is not enabled by default, but you can enable it via the options window as illustrated below:
     </p>
     <img alt="Settings Example" src="./assets/enable-logging.png" class="how-to-image"/>
 
-    <p>Unfortunately, this will only detect newly earned badges, and not badges you have already earned. To detect all
+    <p>Unfortunately, this will only detect newly earned badges, and not badges you have previously earned. To detect all
         badges, you will need to run the settitle binds.</p>
 
     <p>Make sure that you log into your character <i>after</i> enabling chat logging so the logs contain a record of which character to associate the badge with. Simply log
@@ -22,15 +22,15 @@
 
     <p>Follow the steps below to install and run the settitle binds</p>
     <ol>
-        <li>Download the <a href="./assets/settitle.txt" download="" class="text-secondary">settitle.txt</a> file to your City of Heroes directory</li>
+        <li>Download the <a href="./assets/settitle.txt" download="" class="text-secondary">settitle.txt</a> file to your City of Heroes directory.</li>
         <li>Copy and paste the following text into your chat box: <code>/bind_load_file "C:\&lt;CoHDirectory&gt;\settitle.txt"</code>. Replace <code>&lt;CoHDirectory&gt;</code> with the name of your City of Heroes install directory.
         </li>
     </ol>
-    <p>If you've followed all steps correctly, your existing badges will be saved to the log files and you can upload your log files into this tool.</p>
+    <p>If you've followed all steps correctly, your existing badges will be saved to your log file which you can upload into this log parsing tool.</p>
 
     <p>
-        You can find the log files in either the <code>&lt;CoHDirectory&gt;/&lt;username&gt;/logs</code> directory or
-        the <code>&lt;CoHDirectory&gt;/accounts/&lt;username&gt;/logs</code> directory, depending on the launcher used. Select the appropriate log file(s) and upload them via the log parser dialog.
+        You can find the log files in either the <code>&lt;CoHDirectory&gt;/accounts/&lt;username&gt;/logs</code> directory (if using the HC Launcher) or
+        the <code>&lt;CoHDirectory&gt;/&lt;username&gt;/logs</code> directory (for other launchers). Select the appropriate log file(s) and upload them via the log parser dialog.
     </p>
 </div>
 <div class="modal-footer">
