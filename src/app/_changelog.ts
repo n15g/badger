@@ -163,4 +163,6 @@ export const Changelog: { [id: string]: string } = {
         '* Update to `coh-content-db-homecoming@1.3.27`.\n',
     '1.3.40':
         '* Update to `coh-content-db-homecoming@1.3.28`.\n',
+    '1.3.41':
+        '* https://github.com/n15g/badger/pull/42 - Update help text for log parser.\n',
 };
