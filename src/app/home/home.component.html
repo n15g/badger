@@ -18,7 +18,7 @@
                     </button>
                     <div class="dropdown-menu">
                         <a *ngFor="let serverGroup of serverGroups | serverGroupSort" class="dropdown-item"
-                           [routerLink]="['/', serverGroup.key]">{{serverGroup.name}}</a>
+                           [routerLink]="['/', serverGroup.key]">{{ serverGroup.name }}</a>
                     </div>
                 </ng-template>
             </div>
@@ -76,7 +76,7 @@
 
             <ul class="server-groups" *ngFor="let serverGroup of serverGroups | serverGroupSort">
                 <li>
-                    <a [routerLink]="['/', serverGroup.key]">{{serverGroup.name}}</a>
+                    <a [routerLink]="['/', serverGroup.key]">{{ serverGroup.name }}</a>
                     -
                     <a *ngIf="serverGroup.repository" [href]="serverGroup.repository"
                        [innerHTML]="serverGroup.repository"></a>
@@ -111,13 +111,13 @@
                             <li><a href="https://forums.homecomingservers.com/profile/40956-abovethechemist/">AboveTheChemist</a>
                                 for collating most of the Homecoming badge data.
                             </li>
+                            <li><a href="https://github.com/Hard-Eight">Hard-Eight</a> for badge updates.
+                            </li>
                             <li><a href="https://forums.homecomingservers.com/profile/8241-piyerus/">Piyerus</a> for
-                                filling
-                                in a ton of blanks on new badges.
+                                filling in a ton of blanks on new badges.
                             </li>
                             <li><a href="https://github.com/blhylton">blhylton</a> for help with the in-game badge
-                                ordering
-                                and lots of fixes.
+                                ordering and lots of fixes.
                             </li>
                             <li><a href="https://github.com/art0rz">art0rz</a> for writing the log parser.</li>
                         </ul>
@@ -125,8 +125,15 @@
                 </div>
             </div>
             <div class="col-12 col-md-6">
-                <h4 class="text-center">Contact Meh</h4>
+                <h4 class="text-center">Contact</h4>
                 <dl>
+                    <dt>GitHub</dt>
+                    <dd>
+                        <a href="https://github.com/n15g">
+                            <fa-icon [icon]="githubIcon"></fa-icon>
+                            n15g
+                        </a>
+                    </dd>
                     <dt>Homecoming Forums</dt>
                     <dd><a href="https://forums.homecomingservers.com/profile/40470-keyboardkitsune/">https://forums.homecomingservers.com/profile/40470-keyboardkitsune/</a>
                     </dd>
