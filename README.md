@@ -216,8 +216,8 @@ ATC can provide sequential order. _Only needed if adding a new badge. Skip this 
 _Only add new .ts file if adding a whole new badge. If updating existing badge, find the appropriate .ts file and edit the required fields. For new badges, you can create a new .ts file from scratch, but it’s strongly recommended that you copy one from the most-similar badge instead._
 
 Each indented (block-quoted) line below is an example of what you should include or modify in badge .ts files (each on separate lines). A full example file without notes is included at the end. The individual sections below use different badges as examples so don’t expect consistency until the mock .ts file at the end.
-
-
+&nbsp;<BR>
+&nbsp;<BR>
 > import {ALIGNMENT\_ANY, Alternate, BadgePartialType, BadgeType, IBadgeData} from "coh-content-db";
 
 All badge files start with this line. Change the **ALIGNMENT\_ANY** tag as appropriate. Possible values: ALIGNMENT\_HERO, ALIGNMENT\_VILLAIN, ALIGNMENT\_ANY – use whichever is required to **OBTAIN** the badge.
@@ -233,34 +233,42 @@ Hopefully these are rare exceptions that never happen again.
 **BadgePartialType** is only included for badges that have other badges as requirements (Accolades)  
 
 List all flags in alphabetical order.
-
+&nbsp;<BR>
+&nbsp;<BR>
 > import {ReclusesVictory} from "../../map/recluses-victory";
 
 All zone-related badges include one or more map import lines. Accolades awarded for all exploration badges in a zone should import that zone map. History badges should import maps for every zone that has an associated history plaque. Exploration badges should import the map they’re found on. List all maps in alphabetical order. In theory, this allows users to click on links to open VidiotMaps of each zone. This isn’t actually implemented yet but we’re keeping up with it anyway.
-
+&nbsp;<BR>
+&nbsp;<BR>
 > import {AstoriasLastStand} from "../exploration/astorias-last-stand";
 
 Next, add lines to import each of the badges that are required in order to earn the badge you’re working on (if any). List all badges in alphabetical order.
-
+&nbsp;<BR>
+&nbsp;<BR>
 > ***Leave an empty line between the above imports section and the below export section.***
-
+&nbsp;<BR>
+&nbsp;<BR>
 > export const ProtectorOfInnocents: IBadgeData = {
 
 Use the Export Name for the one for the new badge you’re adding. Reminder, Export Name is Hero Male variant in CamelCase (ProperCase), no spaces or special characters.
-
+&nbsp;<BR>
+&nbsp;<BR>
 > type: BadgeType.ACHIEVEMENT,
 
 Use the appropriate badge category here. (ACCOLADE, ACCOMPLISHMENT, ACHIEVEMENT, AE, CONSIGNMENT, DAY\_JOB, DEFEAT, EVENT, EXPLORATION, GLADIATOR, HISTORY, INVENTION, OUROBOROS, PVP, VETERAN)
-
+&nbsp;<BR>
+&nbsp;<BR>
 > key: "protector-of-innocents",
 
 Enter the Key Name here. Hero Male variant, lower case, no special characters, replace space with dash (snake-case).
-
+&nbsp;<BR>
+&nbsp;<BR>
 > SetTitleId: 21,<BR>
 > SetTitleIdPraetorian: 1669,
 
 Run the SetTitle file and see where the new badge shows up in the list. Reference the badges before and after to get the Set Title ID for each. Reminder, get this from the release candidate on beta or from live. SetTitleID will almost certainly change between closed beta and release. Note that some badges have a second ID for the Praetorian version. (Hopefully rare for any new badges.)
-
+&nbsp;<BR>
+&nbsp;<BR>
 > names: \[<BR>
 > {type: Alternate.H, value: "Sensation"},<BR>
 > {type: Alternate.MV, value: "Mr. Big"},<BR>
@@ -275,19 +283,23 @@ Run the SetTitle file and see where the new badge shows up in the list. Referenc
 > \],
 
 Add the name of the badge, including any alternate forms.
-
+&nbsp;<BR>
+&nbsp;<BR>
 > alignment: ALIGNMENT\_ANY,
 
 Use the appropriate Alignment value. As mentioned previously, possible values include: ALIGNMENT\_HERO, ALIGNMENT\_VILLAIN, and ALIGNMENT\_ANY – use whichever is required to OBTAIN the badge. The two badges that use ALIGNMENT\_PRIMAL and ALIGNMENT\_PRAETORIAN are outliers and hopefully such cases won’t pop up again. Alignments in general are a little messy. We are empowered to make changes based on reasonable player feedback.
-
+&nbsp;<BR>
+&nbsp;<BR>
 > mapKey: NightWard.key,
 
 Include the related map for Exploration badges.
-
+&nbsp;<BR>
+&nbsp;<BR>
 > location: \[-411.0, 48.0, -2623.0\],
 
 Include the location coordinates for Exploration badges.
-
+&nbsp;<BR>
+&nbsp;<BR>
 > badgeText: \[<BR>
 > {type: Alternate.H, value: "Positron has awarded you this badge for achieving Security Level 10."},<BR>
 > {type: Alternate.V, value: "Arachnos has awarded you the Soldier Badge for reaching Level 10."},<BR>
@@ -306,15 +318,18 @@ Include the location coordinates for Exploration badges.
 > \],
 
 Note the above has two types of quotes. Quotation marks are used for shorter lines, but longer lines are required to be broken into multiple lines. OR you can use back-ticks instead of quotation marks and not have to break longer lines up. **So it’s always better to use back-ticks instead of quotation marks.** Feel free to fix any quotes that still use quotation marks to use back-ticks instead. (This is the key to the left of the number 1 on US keyboard layouts, shared with Tilde.)
-
+&nbsp;<BR>
+&nbsp;<BR>
 > acquisition: "Reach level 10",
 
 Short text that explains how to get the badge. Be concise and avoid spoilers.
-
+&nbsp;<BR>
+&nbsp;<BR>
 > notes: \`This includes anything craftable on Invention Worktables, Base Worktables, and Empowerment Stations (including Empowerment Buffs), as well as special crafting such as the Vanguard Crafting Table and Candy Keeper.\`,
 
 Include additional notes and spoilers here.
-
+&nbsp;<BR>
+&nbsp;<BR>
 > links: \[<BR>
 > {title: "Protector of Innocents Badge", href: "https&#65279;://homecoming.wiki/wiki/Protector\_of\_Innocents\_Badge"},<BR>
 > {title: "Soldier Badge", href: "https&#65279;://homecoming.wiki/wiki/Soldier\_Badge"},<BR>
@@ -324,14 +339,16 @@ Include additional notes and spoilers here.
 Add links to the badge’s wiki page, including alternate titles. If there are alternates, list the hero male variant first. 
 
 Be careful of special character code in the URL itself. For instance, the badge Dead Man's Tree has a URL that reads https&#65279;:/homecoming.wiki/wiki/Dead_Man%27s_Tree_Badge.  Note that the apostrophe is replaced with %27. Another example is Land, Sea & Air which has a comma and an ampersand, and its URL looks like https&#65279;://homecoming.wiki/wiki/Land%2C_Sea_%26_Air_Badge  with %2C for the comma and %26 for the ampersand. Reference [online sources](https://www.freecodecamp.org/news/url-encoded-characters-reference/) for other special characters.
-
+&nbsp;<BR>
+&nbsp;<BR>
 > icons: \[<BR>
 > {type: Alternate.H, value: "https&#65279;://n15g.github.io/coh-content-db-homecoming/images/badges/achievement/protector-of-innocents-h.png" },<BR>
 > {type: Alternate.V, value: "https&#65279;://n15g.github.io/coh-content-db-homecoming/images/badges/achievement/protector-of-innocents-v.png" }<BR>
 > \],
 
 Link to the badge image file(s) located in the docs folder. Yes, it’s the same file, even though the above URLs don’t contain “docs” in the link. GitHub Magic (TM)!
-
+&nbsp;<BR>
+&nbsp;<BR>
 > partials: \[<BR>
 > {key: AstoriasLastStand.key, type: BadgePartialType.BADGE, badgeKey: AstoriasLastStand.key},<BR>
 > {key: CairnWarder.key, type: BadgePartialType.BADGE, badgeKey: CairnWarder.key},<BR>
@@ -355,11 +372,13 @@ Link to the badge image file(s) located in the docs folder. Yes, it’s the same
 Accolades: list all badges required to earn this accolade in the Partials section in alphabetical order.
 
 History Badges: List all required plaques, including Map Key, Plaque Type (WALL\_PLAQUE or MONUMENT), location, inscription, notes, and VidiotMaps key if there is one.
-
+&nbsp;<BR>
+&nbsp;<BR>
 > };
 
 Close bracket for the whole page.
-
+&nbsp;<BR>
+&nbsp;<BR>
 ### Merging Updates
 
 Once you’re certain you’ve correctly captured all updates, go to the main page of your edited branch. There will be a box at the top of the page that says “This branch is X commits ahead of the master.” This will include a link you can click that takes you to a summary page, comparing your changes to the master version. Take this opportunity to thoroughly review your changes for correctness and completeness. Near the top of that page is a green button titled “Create Pull Request.” Click that, then you’ll have an opportunity to add notes describing your changes. Then click the green Submit button, and a merge request will be sent to Nick/KeyboardKitsune.
@@ -437,7 +456,7 @@ Grant yourself new badges not yet included in the badge grant file:
 3.  Export this file to your Repository folder and then open it with a text editor.
 4.  Look up the badge texture filenames from the piggs (located in texture_library/gui/icons/badges) for all new badges
 5.  Search badges.bin for each texture filename (just the filename, ignore the .texture extension) Example: The texture filename for the labyrinth history badge Greek Philosopher is badge\_i28\_history\_labyrinth. Search for this filename in badges.bin and you’ll find text as below: **LabyrinthHistory P2392203697 P344445814 P3379288051 badge\_i28\_history\_labyrinth**
-6. Starting at the texture filename, look to the left, ignoring the long numbers preceded by a P (which are called P-strings), to the first text string that is not a P-string. In this case, that text string is **LabyrinthHistory**, which is the internal name of the new history badge. Use **/badgegrant LabyrinthHistory** to grant yourself this badge.    
+6. Starting at the texture filename, look to the left, ignoring the long numbers preceded by a P (which are called P-strings), to the first text string that is not a P-string. In this case, that text string is **LabyrinthHistory**, which is the internal name of the new history badge. In game, use **/badgegrant LabyrinthHistory** to grant yourself this badge.    
 7.  Repeat for any new badges not yet included in the badge granting file.
 
 Now you can swap alignments and genders to check badge name and text.
