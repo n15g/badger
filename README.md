@@ -99,7 +99,7 @@ Databse is located here: [https://n15g.github.io/badger/](https://n15g.github.io
     
 *   Image editing software
     
-*   Download [Badge\_Grant\_All.txt](badge_grant_all.txt) 
+*   Download [badge-grant-all.txt](docs/badge_grant_all.txt) 
     
 *   Download [SetTitle file](https://n15g.github.io/badger/assets/settitle.txt)
     
@@ -144,7 +144,7 @@ Databse is located here: [https://n15g.github.io/badger/](https://n15g.github.io
     
 *   History Plaque inscription and type (wall or monument)
     
-*   Key Name (hero, male, lowercase, no special characters, replace space with dash (snake-case))
+*   Key Name (hero, male, lowercase, no special characters, replace space with dash (snake-case or kebab-case))
     
 *   Export Name (hero, male, CamelCase (ProperCase), no special characters or spaces)
     
@@ -175,7 +175,7 @@ You can easily obtain the image icons for new badges via the patch notes. Right 
     
 6.  Crop images as needed
     
-    1.  Open each image in an image editing program and look closely for extra “tags” that need to be cropped. Typical round badges are 48x48 pixels and often need to be trimmed. See [ExampleNeedsCropped.png](ExampleNeedsCropped.png) in this directory for examples.
+    1.  Open each image in an image editing program and look closely for extra “tags” that need to be cropped. Typical round badges are 48x48 pixels and often need to be trimmed. See [example-needs-cropped.png](docs/example-needs-cropped.png) in the docs directory for examples.
         
     2.  Crop the top/left 48x48 pixels and save the file, ensuring to retain the transparent background and .png extension.
         
@@ -215,11 +215,11 @@ ATC can provide sequential order. _Only needed if adding a new badge. Skip this 
 
 _Only add new .ts file if adding a whole new badge. If updating existing badge, find the appropriate .ts file and edit the required fields. For new badges, you can create a new .ts file from scratch, but it’s strongly recommended that you copy one from the most-similar badge instead._
 
-Each indented (block-quoted) line below is an example of what you should include or modify in badge .ts files (each on separate lines). A full example file without notes is included at the end. The individual sections below use different badges as examples so don’t expect consistency until the mock .ts file at the end.
-&nbsp;<BR>
-&nbsp;<BR>
-> import {ALIGNMENT\_ANY, Alternate, BadgePartialType, BadgeType, IBadgeData} from "coh-content-db";
+Each code snippet below is an example of what you should include or modify in badge .ts files (each on separate lines). A full example file without notes is included at the end. The individual sections below use different badges as examples so don’t expect consistency until the mock .ts file at the end.
 
+```
+import {ALIGNMENT_ANY, Alternate, BadgePartialType, BadgeType, IBadgeData} from "coh-content-db";
+```
 All badge files start with this line. Change the **ALIGNMENT\_ANY** tag as appropriate. Possible values: ALIGNMENT\_HERO, ALIGNMENT\_VILLAIN, ALIGNMENT\_ANY – use whichever is required to **OBTAIN** the badge.
 
 One accolade uses ALIGNMENT\_PRAETORIAN: https://n15g.github.io/badger/homecoming/badge/praetorias-son
@@ -230,223 +230,223 @@ Hopefully these are rare exceptions that never happen again.
 
 **Alternate** is only required for badges that have alternate names or descriptions based on gender or alignment.
 
-**BadgePartialType** is only included for badges that have other badges as requirements (Accolades)  
+**BadgePartialType** is only included for badges that have other badges or prerequisites as requirements (Accolades, History)  
 
 List all flags in alphabetical order.
-&nbsp;<BR>
-&nbsp;<BR>
-> import {ReclusesVictory} from "../../map/recluses-victory";
 
+```
+import {ReclusesVictory} from "../../map/recluses-victory";
+```
 All zone-related badges include one or more map import lines. Accolades awarded for all exploration badges in a zone should import that zone map. History badges should import maps for every zone that has an associated history plaque. Exploration badges should import the map they’re found on. List all maps in alphabetical order. In theory, this allows users to click on links to open VidiotMaps of each zone. This isn’t actually implemented yet but we’re keeping up with it anyway.
-&nbsp;<BR>
-&nbsp;<BR>
-> import {AstoriasLastStand} from "../exploration/astorias-last-stand";
 
+```
+import {AstoriasLastStand} from "../exploration/astorias-last-stand";
+```
 Next, add lines to import each of the badges that are required in order to earn the badge you’re working on (if any). List all badges in alphabetical order.
-&nbsp;<BR>
-&nbsp;<BR>
-> ***Leave an empty line between the above imports section and the below export section.***
-&nbsp;<BR>
-&nbsp;<BR>
-> export const ProtectorOfInnocents: IBadgeData = {
 
+```
+***Leave an empty line between the above imports section and the below export section.***
+```
+```
+export const ProtectorOfInnocents: IBadgeData = {
+```
 Use the Export Name for the one for the new badge you’re adding. Reminder, Export Name is Hero Male variant in CamelCase (ProperCase), no spaces or special characters.
-&nbsp;<BR>
-&nbsp;<BR>
-> type: BadgeType.ACHIEVEMENT,
 
+```
+type: BadgeType.ACHIEVEMENT,
+```
 Use the appropriate badge category here. (ACCOLADE, ACCOMPLISHMENT, ACHIEVEMENT, AE, CONSIGNMENT, DAY\_JOB, DEFEAT, EVENT, EXPLORATION, GLADIATOR, HISTORY, INVENTION, OUROBOROS, PVP, VETERAN)
-&nbsp;<BR>
-&nbsp;<BR>
-> key: "protector-of-innocents",
 
-Enter the Key Name here. Hero Male variant, lower case, no special characters, replace space with dash (snake-case).
-&nbsp;<BR>
-&nbsp;<BR>
-> SetTitleId: 21,<BR>
-> SetTitleIdPraetorian: 1669,
+```
+key: "protector-of-innocents",
+```
+Enter the Key Name here. Hero Male variant, lower case, no special characters, replace space with dash (snake-case or kebab-case).
 
+```
+SetTitleId: 21,
+SetTitleIdPraetorian: 1669,
+```
 Run the SetTitle file and see where the new badge shows up in the list. Reference the badges before and after to get the Set Title ID for each. Reminder, get this from the release candidate on beta or from live. SetTitleID will almost certainly change between closed beta and release. Note that some badges have a second ID for the Praetorian version. (Hopefully rare for any new badges.)
-&nbsp;<BR>
-&nbsp;<BR>
-> names: \[<BR>
-> {type: Alternate.H, value: "Sensation"},<BR>
-> {type: Alternate.MV, value: "Mr. Big"},<BR>
-> {type: Alternate.FV, value: "Ms. Big"},<BR>
-> {type: Alternate.P, value: "Acclaimed"}<BR>
-> /],
 
+```
+names: [
+{type: Alternate.H, value: "Sensation"},
+{type: Alternate.MV, value: "Mr. Big"},
+{type: Alternate.FV, value: "Ms. Big"},
+{type: Alternate.P, value: "Acclaimed"}
+],
+```
 (or)
-
-> names: \[<BR>
-> {value: "A Light in Dark Astoria"}<BR>
-> \],
-
+```
+names: [
+{value: "A Light in Dark Astoria"}
+],
+```
 Add the name of the badge, including any alternate forms.
-&nbsp;<BR>
-&nbsp;<BR>
-> alignment: ALIGNMENT\_ANY,
 
+```
+alignment: ALIGNMENT_ANY,
+```
 Use the appropriate Alignment value. As mentioned previously, possible values include: ALIGNMENT\_HERO, ALIGNMENT\_VILLAIN, and ALIGNMENT\_ANY – use whichever is required to OBTAIN the badge. The two badges that use ALIGNMENT\_PRIMAL and ALIGNMENT\_PRAETORIAN are outliers and hopefully such cases won’t pop up again. Alignments in general are a little messy. We are empowered to make changes based on reasonable player feedback.
-&nbsp;<BR>
-&nbsp;<BR>
-> mapKey: NightWard.key,
 
+```
+mapKey: NightWard.key,
+```
 Include the related map for Exploration badges.
-&nbsp;<BR>
-&nbsp;<BR>
-> location: \[-411.0, 48.0, -2623.0\],
 
+```
+location: [-411.0, 48.0, -2623.0],
+```
 Include the location coordinates for Exploration badges.
-&nbsp;<BR>
-&nbsp;<BR>
-> badgeText: \[<BR>
-> {type: Alternate.H, value: "Positron has awarded you this badge for achieving Security Level 10."},<BR>
-> {type: Alternate.V, value: "Arachnos has awarded you the Soldier Badge for reaching Level 10."},<BR>
-> {<BR>
-> type: Alternate.P, value: "Working your way through the ins-and-outs of Praetoria's political landscape has become second " +<BR>
-> "nature to you."<BR>
-> }<BR>
-> \],
 
+```
+badgeText: [
+{type: Alternate.H, value: "Positron has awarded you this badge for achieving Security Level 10."},
+{type: Alternate.V, value: "Arachnos has awarded you the Soldier Badge for reaching Level 10."},
+{
+type: Alternate.P, value: "Working your way through the ins-and-outs of Praetoria's political landscape has become second " +
+"nature to you."
+}
+],
+```
 (or)
-
-> badgeText: \[<BR>
-> {type: Alternate.H, value: \`Positron has awarded you this badge for achieving Security Level 10.\`},<BR>
-> {type: Alternate.V, value: \`Arachnos has awarded you the Soldier Badge for reaching Level 10.\`},<BR>
-> {type: Alternate.P, value: \`Working your way through the ins-and-outs of Praetoria's political landscape has become second nature to you.\`}<BR>
-> \],
-
+```
+badgeText: [
+{type: Alternate.H, value: `Positron has awarded you this badge for achieving Security Level 10.`},
+{type: Alternate.V, value: `Arachnos has awarded you the Soldier Badge for reaching Level 10.`},
+{type: Alternate.P, value: `Working your way through the ins-and-outs of Praetoria's political landscape has become second nature to you.`}
+],
+```
 Note the above has two types of quotes. Quotation marks are used for shorter lines, but longer lines are required to be broken into multiple lines. OR you can use back-ticks instead of quotation marks and not have to break longer lines up. **So it’s always better to use back-ticks instead of quotation marks.** Feel free to fix any quotes that still use quotation marks to use back-ticks instead. (This is the key to the left of the number 1 on US keyboard layouts, shared with Tilde.)
-&nbsp;<BR>
-&nbsp;<BR>
-> acquisition: "Reach level 10",
 
+```
+acquisition: "Reach level 10",
+```
 Short text that explains how to get the badge. Be concise and avoid spoilers.
-&nbsp;<BR>
-&nbsp;<BR>
-> notes: \`This includes anything craftable on Invention Worktables, Base Worktables, and Empowerment Stations (including Empowerment Buffs), as well as special crafting such as the Vanguard Crafting Table and Candy Keeper.\`,
 
+```
+notes: `This includes anything craftable on Invention Worktables, Base Worktables, and Empowerment Stations (including Empowerment Buffs), as well as special crafting such as the Vanguard Crafting Table and Candy Keeper.`,
+```
 Include additional notes and spoilers here.
-&nbsp;<BR>
-&nbsp;<BR>
-> links: \[<BR>
-> {title: "Protector of Innocents Badge", href: "https&#65279;://homecoming.wiki/wiki/Protector\_of\_Innocents\_Badge"},<BR>
-> {title: "Soldier Badge", href: "https&#65279;://homecoming.wiki/wiki/Soldier\_Badge"},<BR>
-> {title: "Praetorian Professional Badge", href: "https&#65279;://homecoming.wiki/wiki/Praetorian\_Professional\_Badge"}<BR>
-> \],
 
+```
+links: [
+{title: "Protector of Innocents Badge", href: "https://homecoming.wiki/wiki/Protector_of_Innocents_Badge"},
+{title: "Soldier Badge", href: "https://homecoming.wiki/wiki/Soldier_Badge"},
+{title: "Praetorian Professional Badge", href: "https://homecoming.wiki/wiki/Praetorian_Professional_Badge"}
+],
+```
 Add links to the badge’s wiki page, including alternate titles. If there are alternates, list the hero male variant first. 
 
 Be careful of special character code in the URL itself. For instance, the badge Dead Man's Tree has a URL that reads https&#65279;:/homecoming.wiki/wiki/Dead_Man%27s_Tree_Badge.  Note that the apostrophe is replaced with %27. Another example is Land, Sea & Air which has a comma and an ampersand, and its URL looks like https&#65279;://homecoming.wiki/wiki/Land%2C_Sea_%26_Air_Badge  with %2C for the comma and %26 for the ampersand. Reference [online sources](https://www.freecodecamp.org/news/url-encoded-characters-reference/) for other special characters.
-&nbsp;<BR>
-&nbsp;<BR>
-> icons: \[<BR>
-> {type: Alternate.H, value: "https&#65279;://n15g.github.io/coh-content-db-homecoming/images/badges/achievement/protector-of-innocents-h.png" },<BR>
-> {type: Alternate.V, value: "https&#65279;://n15g.github.io/coh-content-db-homecoming/images/badges/achievement/protector-of-innocents-v.png" }<BR>
-> \],
 
+```
+icons: [
+{type: Alternate.H, value: "https://n15g.github.io/coh-content-db-homecoming/images/badges/achievement/protector-of-innocents-h.png"},
+{type: Alternate.V, value: "https://n15g.github.io/coh-content-db-homecoming/images/badges/achievement/protector-of-innocents-v.png"}
+],
+```
 Link to the badge image file(s) located in the docs folder. Yes, it’s the same file, even though the above URLs don’t contain “docs” in the link. GitHub Magic (TM)!
-&nbsp;<BR>
-&nbsp;<BR>
-> partials: \[<BR>
-> {key: AstoriasLastStand.key, type: BadgePartialType.BADGE, badgeKey: AstoriasLastStand.key},<BR>
-> {key: CairnWarder.key, type: BadgePartialType.BADGE, badgeKey: CairnWarder.key},<BR>
-> {key: DarkMystic.key, type: BadgePartialType.BADGE, badgeKey: DarkMystic.key},<BR>
-> {key: PhantomRadio.key, type: BadgePartialType.BADGE, badgeKey: PhantomRadio.key},<BR>
->
-> {<BR>
-> key: "bicn-0",<BR>
-> type: BadgePartialType.PLAQUE,<BR>
-> mapKey: AtlasPark.key,<BR>
-> plaqueType: PlaqueType.MONUMENT,<BR>
-> location: \[330.45, 3.93, 397.33\],<BR>
-> inscription: \`On February 3, 1931, Rudolph Augustus Seifert arrived at Central Station near City Park - now Atlas Park. A Swiss foreigner, the architect found himself in Paragon City by chance, and by some miracle our city had found one of its most gifted artists in turn. Rudolph loved Paragon dearly and dedicated his life's work to uplifting the city in its darkest days.<BR>
->
-> Rudolph collaborated with architectural firm Ashburn and Cross to build a new vision of Paragon under the Paragon City Architectural Commision. This partnership was most notably responsible for such incredible sights as Independence Port's Valor Bridge and, most famously, the iconic statue of Atlas dominating the Atlas Park skyline ever since its completion and inauguration in April 1946. This plaque lies outside Hotel Geneva, Seifert's very first project within the city and the beginning of a quiet but deeply impactful legacy. Rudolph Augustus Seifert passed away in 1981, aged 83, survived only by the city he loved so very dearly.\`,<BR>
-> notes: \`This plaque is in \[map:${AtlasPark.key}\], roughly 258 yards south-southwest of the Atlas Plaza neighborhood marker.\`,<BR>
-> vidiotMapKey: "8"<BR>
-> },<BR>
-> \]
 
+```
+partials: [
+{key: AstoriasLastStand.key, type: BadgePartialType.BADGE, badgeKey: AstoriasLastStand.key},
+{key: CairnWarder.key, type: BadgePartialType.BADGE, badgeKey: CairnWarder.key},
+{key: DarkMystic.key, type: BadgePartialType.BADGE, badgeKey: DarkMystic.key},
+{key: PhantomRadio.key, type: BadgePartialType.BADGE, badgeKey: PhantomRadio.key},
+
+{
+key: "bicn-0",
+type: BadgePartialType.PLAQUE,
+mapKey: AtlasPark.key,
+plaqueType: PlaqueType.MONUMENT,
+location: [330.45, 3.93, 397.33],
+inscription: `On February 3, 1931, Rudolph Augustus Seifert arrived at Central Station near City Park - now Atlas Park. A Swiss foreigner, the architect found himself in Paragon City by chance, and by some miracle our city had found one of its most gifted artists in turn. Rudolph loved Paragon dearly and dedicated his life's work to uplifting the city in its darkest days.
+
+Rudolph collaborated with architectural firm Ashburn and Cross to build a new vision of Paragon under the Paragon City Architectural Commision. This partnership was most notably responsible for such incredible sights as Independence Port's Valor Bridge and, most famously, the iconic statue of Atlas dominating the Atlas Park skyline ever since its completion and inauguration in April 1946. This plaque lies outside Hotel Geneva, Seifert's very first project within the city and the beginning of a quiet but deeply impactful legacy. Rudolph Augustus Seifert passed away in 1981, aged 83, survived only by the city he loved so very dearly.`,
+notes: `This plaque is in [map:${AtlasPark.key}], roughly 258 yards south-southwest of the Atlas Plaza neighborhood marker.`,
+vidiotMapKey: "8"
+},
+]
+```
 Accolades: list all badges required to earn this accolade in the Partials section in alphabetical order.
 
 History Badges: List all required plaques, including Map Key, Plaque Type (WALL\_PLAQUE or MONUMENT), location, inscription, notes, and VidiotMaps key if there is one.
-&nbsp;<BR>
-&nbsp;<BR>
-> };
 
+```
+};
+```
 Close bracket for the whole page.
-&nbsp;<BR>
-&nbsp;<BR>
+
 ### Merging Updates
 
 Once you’re certain you’ve correctly captured all updates, go to the main page of your edited branch. There will be a box at the top of the page that says “This branch is X commits ahead of the master.” This will include a link you can click that takes you to a summary page, comparing your changes to the master version. Take this opportunity to thoroughly review your changes for correctness and completeness. Near the top of that page is a green button titled “Create Pull Request.” Click that, then you’ll have an opportunity to add notes describing your changes. Then click the green Submit button, and a merge request will be sent to Nick/KeyboardKitsune.
 
-Below is an example .ts file for a badge called Fake Badge. <ins>Underlined</ins> text is variable; use only what’s required.
+Below is an example .ts file for a badge called Fake Badge, which includes code for several different badge types. Use only whichever portions and variables are required for the badge your're creating or updating. 
 
-> import {<ins>ALIGNMENT\_ANY</ins>, <ins>Alternate</ins>, <ins>BadgePartialType</ins>, BadgeType, IBadgeData} from "coh-content-db";<BR>
-> import {<ins>ZoneName</ins>} from "../../map/<ins>zone-name</ins>";<BR>
-> import {<ins>ZoneNameTwo</ins>} from "../../map/<ins>zone-name-two</ins>";<BR>
-> import {<ins>RequiredBadge</ins>} from "../exploration/<ins>required-badge</ins>";<BR>
-> import {<ins>SecondRequiredBadge</ins>} from "../exploration/<ins>second-required-badge</ins>";<BR>
->
-> export const <ins>FakeBadge</ins>: IBadgeData = {<BR>
-> type: BadgeType.<ins>ACHIEVEMENT</ins>,<BR>
-> key: "<ins>fake-badge</ins>",<BR>
-> setTitleId: <ins>9999</ins>,<BR>
-> names: \[<BR>
-> {value: "<ins>Fake Badge With No Alternate Names</ins>"},<BR>
-> {type: Alternate.H, value: "<ins>Fake Badge Good Boy</ins>"},<BR>
-> {type: Alternate.F, value: "<ins>Fake Badge Good Girl</ins>"},<BR>
-> {type: Alternate.V, value: "<ins>Fake Badge Bad Any</ins>"},<BR>
-> {type: Alternate.MV, value: "<ins>Fake Badge Bad Boy</ins>"},<BR>
-> {type: Alternate.FV, value: "<ins>Fake Badge Bad Girl</ins>"},<BR>
-> {type: Alternate.P, value: "<ins>Fake Badge Gold Any</ins>"},<BR>
-> {type: Alternate.MP, value: "<ins>Fake Badge Gold Boy</ins>"},<BR>
-> {type: Alternate.FP, value: "<ins>Fake Badge Gold Girl</ins>"}<BR>
-> \],<BR>
-> alignment: <ins>ALIGNMENT\_ANY</ins>, *(that's an underscore not a space)*<BR>
-> badgeText: \[<BR>
-> {value: \`<ins>This version is for when the Badge Fairy doesn’t care what your alignment is.</ins>\`},<BR>
-> {type: Alternate.H, value: \`<ins>The Badge Fairy awarded you this badge because you are wholesome.</ins>\`},<BR>
-> {type: Alternate.V, value: \`<ins>You stole this badge from the Badge Fairy because you are evil!</ins>\`},<BR>
-> {type: Alternate.P, value: \`<ins>You dragged the Badge Fairy through a portal and demanded this badge.</ins>\`}<BR>
-> \],<BR>
-> acquisition: \`<ins>Do the Hokey Pokey with a full team of people in \[map:${ZoneName.key}\] or \[map:zone-name\]</ins>\`,<BR>
-> notes: \`<ins>The Hokey Pokey can be performed in an alternate reality where this emote exists. Spoiler text goes here. Remember to use back-ticks instead of quotation marks.</ins>\`<BR>
-> links: \[<BR>
-> {title: "<ins>Fake Badge Badge</ins>", href: "<ins>https&#65279;://homecoming.wiki/wiki/There_Is_No_Real_URL_For_This</ins>"},<BR>
-> {title: "<ins>Alternate Name Badge</ins>", href: "<ins>https&#65279;://homecoming.wiki/wiki/Remember_Special_Characters</ins>"}<BR>
-> \],<BR>
-> icons: \[<BR>
-> {value: "https&#65279;://n15g.github.io/coh-content-db-homecoming/images/badges/<ins>achievement/fake-badge.png</ins>"}<BR>
-> \],<BR>
-> partials: \[<BR>
-> {key: <ins>RequiredBadge</ins>.key, type: BadgePartialType.BADGE, badgeKey: <ins>RequiredBadge</ins>.key},<BR>
-> {key: <ins>SecondRequiredBadge</ins>.key, type: BadgePartialType.BADGE, badgeKey: <ins>SecondRequiredBadge</ins>.key}<BR>
-> {<BR>
-> key: "<ins>fake\-0</ins>",<BR>
-> type: BadgePartialType.PLAQUE,<BR>
-> mapKey: <ins>ZoneName</ins>.key,<BR>
-> plaqueType: PlaqueType.<ins>MONUMENT</ins>,<BR>
-> location: \[<ins>330.45, 3.93, 397.33</ins>\],<BR>
-> inscription: \`<ins>The Badge Fairy first appears on this spot in 2005</ins>\`,<BR>
-> notes: \`This plaque is in \[map:${<ins>ZoneName</ins>.key}\] <ins>or</ins> \[map:<ins>zone-name</ins>\], <ins>50</ins> yards <ins>north</ins> of the <ins>Specified</ins> neighborhood marker.\`,<BR>
-> vidiotMapKey: "<ins>8</ins>"<BR>
-> },<BR>
-> \]<BR>
-> };
+```
+import {ALIGNMENT_ANY, Alternate, BadgePartialType, BadgeType, IBadgeData} from "coh-content-db";
+import {ZoneName} from "../../map/zone-name";
+import {ZoneNameTwo} from "../../map/zone-name-two";
+import {RequiredBadge} from "../exploration/required-badge";
+import {SecondRequiredBadge} from "../exploration/second-required-badge";
+
+export const FakeBadge: IBadgeData = {
+type: BadgeType.ACHIEVEMENT,
+key: "fake-badge",
+setTitleId: 9999,
+names: [
+{value: "Fake Badge With No Alternate Names"},
+{type: Alternate.H, value: "Fake Badge Good Boy"},
+{type: Alternate.F, value: "Fake Badge Good Girl"},
+{type: Alternate.V, value: "Fake Badge Bad Any"},
+{type: Alternate.MV, value: "Fake Badge Bad Boy"},
+{type: Alternate.FV, value: "Fake Badge Bad Girl"},
+{type: Alternate.P, value: "Fake Badge Gold Any"},
+{type: Alternate.MP, value: "Fake Badge Gold Boy"},
+{type: Alternate.FP, value: "Fake Badge Gold Girl"}
+],
+alignment: ALIGNMENT_ANY,
+badgeText: [
+{value: `This version is for when the Badge Fairy doesn’t care what your alignment is.`},
+{type: Alternate.H, value: `The Badge Fairy awarded you this badge because you are wholesome.`},
+{type: Alternate.V, value: `You stole this badge from the Badge Fairy because you are evil!`},
+{type: Alternate.P, value: `You dragged the Badge Fairy through a portal and demanded this badge.`}
+],
+acquisition: `Do the Hokey Pokey with a full team of people in [map:${ZoneName.key}] or [map:zone-name]`,
+notes: `The Hokey Pokey can be performed in an alternate reality where this emote exists. Spoiler text goes here. Remember to use back-ticks instead of quotation marks.`
+links: [
+{title: "Fake Badge Badge", href: "https://homecoming.wiki/wiki/There_Is_No_Real_URL_For_This"},
+{title: "Alternate Name Badge", href: "https://homecoming.wiki/wiki/Remember_Special_Characters"}
+],
+icons: [
+{value: "https://n15g.github.io/coh-content-db-homecoming/images/badges/achievement/fake-badge.png"}
+],
+partials: [
+{key: RequiredBadge.key, type: BadgePartialType.BADGE, badgeKey: RequiredBadge.key},
+{key: SecondRequiredBadge.key, type: BadgePartialType.BADGE, badgeKey: SecondRequiredBadge.key}
+{
+key: "fake-0",
+type: BadgePartialType.PLAQUE,
+mapKey: ZoneName.key,
+plaqueType: PlaqueType.MONUMENT,
+location: [330.45, 3.93, 397.33],
+inscription: `The Badge Fairy first appears on this spot in 2005`,
+notes: `This plaque is in [map:${ZoneName.key}] or [map:zone-name], 50 yards north of the Boopfield neighborhood marker.`,
+vidiotMapKey: "8"
+},
+]
+};
+```
 
 ### To Obtain & View Badges In-Game
 
 Create one Primal character with a Male costume in one slot and a Female costume in another slot. Create one Praetorian character who also has one Male and one Female costume. You’ll be able to swap costumes to see if the badge name or text changes by gender. Swap the Primal character’s alignment at Null the Gull to see if there are variants by alignment. **Take screen shots of everything.**
 
-
 Award all badges on the Beta server:
 
-1.  Save the badge_grant_all.txt file (in this directory) to your settings\beta folder in your Homecoming installation directory. You may have to create the beta folder. This file will need to be updated when new badges are added.    
-2.  While logged into a character on the beta server, type /bindloadfile badge_grant_all.txt and hit enter.    
+1.  Save the badge-grant-all.txt file (in the docs directory) to your settings\beta folder in your Homecoming installation directory. You may have to create the beta folder. This file will need to be updated when new badges are added.    
+2.  While logged into a character on the beta server, type /bindloadfile badge-grant-all.txt and hit enter.    
 3.  Wait a few minutes while all the badges finish granting themselves to you.
     
 Grant yourself new badges not yet included in the badge grant file:
