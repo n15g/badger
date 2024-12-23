@@ -183,7 +183,7 @@ You can easily obtain the image icons for new badges via the patch notes. Right 
         
     4.  Naming convention for badge image files (Key Name):
         
-        1.  All lower case, replace spaces with dash (snake-case)
+        1.  All lower case, replace spaces with dash (snake-case or kebab-case)
             
         2.  Use the Male version of the badge name, if there are gendered versions.  
             (the-once-and-future-king.png)
