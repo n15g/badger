@@ -250,7 +250,7 @@ Next, add lines to import each of the badges that are required in order to earn 
 ```
 export const ProtectorOfInnocents: IBadgeData = {
 ```
-Use the Export Name for the one for the new badge you’re adding. Reminder, Export Name is Hero Male variant in CamelCase (ProperCase), no spaces or special characters.
+Use the Export Name for the new badge you’re adding. Reminder, Export Name is Hero Male variant in CamelCase (ProperCase), no spaces or special characters.
 
 ```
 type: BadgeType.ACHIEVEMENT,
