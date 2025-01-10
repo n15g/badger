@@ -99,7 +99,7 @@ Databse is located here: [https://n15g.github.io/badger/](https://n15g.github.io
     
 *   Image editing software
     
-*   Download [badge-grant-all.txt](docs/badge_grant_all.txt) 
+*   Download [badge-grant-all.txt]([docs/badge_grant_all.txt](https://n15g.github.io/badger/docs/badge_grant_all.txt) 
     
 *   Download [SetTitle file](https://n15g.github.io/badger/assets/settitle.txt)
     
@@ -175,7 +175,7 @@ You can easily obtain the image icons for new badges via the patch notes. Right 
     
 6.  Crop images as needed
     
-    1.  Open each image in an image editing program and look closely for extra “tags” that need to be cropped. Typical round badges are 48x48 pixels and often need to be trimmed. See [example-needs-cropped.png](docs/example-needs-cropped.png) in the docs directory for examples.
+    1.  Open each image in an image editing program and look closely for extra “tags” that need to be cropped. Typical round badges are 48x48 pixels and often need to be trimmed. See [example-needs-cropped.png]([docs](https://n15g.github.io/badger/docs/example-needs-cropped.png) in the docs directory for examples.
         
     2.  Crop the top/left 48x48 pixels and save the file, ensuring to retain the transparent background and .png extension.
         
