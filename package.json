@@ -11,7 +11,8 @@
         "upgrade:db": "npm install --save coh-content-db@latest",
         "upgrade:hc": "npm install --save coh-content-db-homecoming@latest",
         "test": "ng test",
-        "lint": "ng lint"
+        "lint": "ng lint",
+        "push": "git push && git push --tags"
     },
     "repository": "https://github.com/n15g/badger",
     "private": true,
