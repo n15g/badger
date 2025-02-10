@@ -1,5 +1,8 @@
 # Badger
 
+[![GitHub Tag](https://img.shields.io/github/v/tag/n15g/badger)](https://github.com/n15g/badger/tags)
+[![GitHub License](https://img.shields.io/github/license/n15g/badger)](LICENSE)
+
 Badger is a badge database and tracker application for City of Heroes badge hunters.
 
 ### To run the app, just visit the following link, no need to download or run anything: https://n15g.github.io/badger/
@@ -28,6 +31,13 @@ Go hunt. Kill Skuls.
 ## Development
 
 If you'd like to run the app locally for development purposes, here's what you'll need:
+
+### Modifying the badges and other data
+
+This repository just contains the code for the Badger UI.
+
+The badge data for Homecoming is maintained in the [coh-content-db-homecoming](https://github.com/n15g/coh-content-db-homecoming) project.
+See the README file for that repository for details on how to modify badge content.
 
 ### Requirements
 
