@@ -19,8 +19,16 @@
     </div>
     <div class="row">
         <div class="col">
-            <input type="text" placeholder="Search..." class="form-control search" [(ngModel)]="queryStr"
-                   [ngModelOptions]="{standalone: true}"/>
+            <div class="input-group">
+                <input type="text" placeholder="Search..." class="form-control search br-0" [(ngModel)]="queryStr"
+                    [ngModelOptions]="{standalone: true}"/>
+                <div class="input-group-append">
+                    <select class="custom-select" [(ngModel)]="searchType" [ngModelOptions]="{standalone: true}">
+                        <option value="names">By title</option>
+                        <option value="badgeText">By badge text</option>
+                    </select>
+                </div>
+            </div>
         </div>
         <div class="col-12 col-md-3 col-lg-2 ml-auto mt-3 mt-md-0">
             <button type="button" class="btn btn-light btn-block" (click)="clearFilters()">Clear Filters</button>

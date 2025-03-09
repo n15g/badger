@@ -3,7 +3,7 @@ import {BadgeType, IBadge, IServerGroup} from 'coh-content-db';
 import {SessionStorage} from 'ngx-store';
 import {FilterBadgeTypePipe} from '../filter-badge-type.pipe';
 import {FilterBadgeMapPipe} from '../filter-badge-map.pipe';
-import {FilterBadgeSearchPipe} from '../filter-badge-search.pipe';
+import {FilterBadgeSearchPipe, FilterBadgeSearchType} from '../filter-badge-search.pipe';
 import {BadgeSortDirection, BadgeSortPipe, BadgeSortType} from '../badge-sort.pipe';
 import {AlignmentFilterType, FilterBadgeAlignmentPipe} from '../filter-badge-alignment.pipe';
 import {PagePipe} from '../../common/page.pipe';
@@ -73,6 +73,19 @@ export class BadgeListComponent implements OnInit {
         this.update();
     }
 
+    @SessionStorage("badge-list.searchType")
+    _searchType: FilterBadgeSearchType = "names";
+
+    get searchType(): FilterBadgeSearchType {
+        return this._searchType;
+    }
+
+    set searchType(value: FilterBadgeSearchType) {
+        console.log(value);
+        this._searchType = value;
+        this.update();
+    }
+
     @SessionStorage("badge-list.alignment")
     private _alignment: AlignmentFilterType = "" as AlignmentFilterType;
 
@@ -131,7 +144,7 @@ export class BadgeListComponent implements OnInit {
         let badges = this.serverGroup.badges;
         badges = this.filterBadgeType.transform(badges, this._type);
         badges = this.filterBadgeMap.transform(badges, this._mapKey);
-        badges = this.filterBadgeSearch.transform(badges, this._queryStr);
+        badges = this.filterBadgeSearch.transform(badges, this._searchType, this._queryStr);
         badges = this.filterBadgeAlignmentPipe.transform(badges, this._alignment);
         badges = this.badgeSort.transform(badges, this._sortType, this._sortDirection);
 
