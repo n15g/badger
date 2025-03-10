@@ -4,7 +4,7 @@ import {SessionStorage} from "ngx-store";
 import {BadgeSortDirection, BadgeSortPipe, BadgeSortType} from "../../badge/badge-sort.pipe";
 import {FilterBadgeTypePipe} from "../../badge/filter-badge-type.pipe";
 import {FilterBadgeMapPipe} from "../../badge/filter-badge-map.pipe";
-import {FilterBadgeSearchPipe} from "../../badge/filter-badge-search.pipe";
+import {FilterBadgeSearchPipe, FilterBadgeSearchType} from "../../badge/filter-badge-search.pipe";
 import {CharacterBadgesPipe, ICharacterBadge, ICharacterBadgePartial} from "../character-badges.pipe";
 import {ICharacter} from "../character";
 import {ServerGroupPipe} from "../../server-group/server-group.pipe";
@@ -100,6 +100,20 @@ export class CharacterBadgeChecklistComponent implements OnInit {
         this.update();
     }
 
+
+    @SessionStorage("badge-list.searchType")
+    _searchType: FilterBadgeSearchType = "names";
+
+    get searchType(): FilterBadgeSearchType {
+        return this._searchType;
+    }
+
+    set searchType(value: FilterBadgeSearchType) {
+        console.log(value);
+        this._searchType = value;
+        this.update();
+    }
+
     @SessionStorage("character-badge-list.showCollected")
     _showCollected: boolean = true;
 
@@ -163,7 +177,7 @@ export class CharacterBadgeChecklistComponent implements OnInit {
         badges = this.filterBadgeType.transform(badges, this._type);
         badges = this.filterBadgeMap.transform(badges, this._mapKey);
         badges = this.filterBadgeAlignmentPipe.transform(badges, this._alignment);
-        badges = this.filterBadgeSearch.transform(badges, this._queryStr);
+        badges = this.filterBadgeSearch.transform(badges, this._searchType, this._queryStr);
         badges = this.badgeSort.transform(badges, this._sortType, this._sortDirection);
 
         if (!this._showCollected) {
