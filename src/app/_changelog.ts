@@ -177,5 +177,6 @@ export const Changelog: { [id: string]: string } = {
         '* Update to `coh-content-db-homecoming@1.4.2`.\n',
     '1.3.47':
         '* Update to `coh-content-db-homecoming@1.4.3`.\n',
-
+    '1.3.48':
+        '* https://github.com/n15g/badger/pull/45 - Added ability to search badges by badge text.\n',
 };
