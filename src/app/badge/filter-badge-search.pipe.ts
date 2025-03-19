@@ -20,6 +20,7 @@ export class FilterBadgeSearchPipe implements PipeTransform {
             if (searchType === 'badgeText') {
                 return (badge.notes && badge.notes.toLowerCase().includes(query.toLowerCase()))
                     || _.some(badge.badgeText, (name) => oc(name).value().toLowerCase().includes(query.toLowerCase()))
+                    ||  (badge.acquisition && badge.acquisition.toLowerCase().includes(query.toLowerCase()))
                     || _.some(badge.partials || [], (partial) => (oc(partial).inscription() || '').toLowerCase().includes(query.toLowerCase()) || (oc(partial).notes() || '').toLowerCase().includes(query.toLowerCase()))
             }
 
