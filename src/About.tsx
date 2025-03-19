@@ -2,6 +2,7 @@ import { Box, Card, CardContent, CardOverflow, Stack, Typography } from '@mui/jo
 import BadgeIcon from './badge/BadgeIcon.tsx'
 import homecomingLogo from './assets/homecoming.png'
 import { NavLink } from 'react-router'
+import DropShadowImage from './util/DropShadowImage.tsx'
 
 function About() {
   return (
@@ -16,7 +17,7 @@ function About() {
             </Typography>
 
             <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-              <a href="https://homecomingservers.com/"><img src={homecomingLogo} alt="Homecoming"/></a>
+              <a href="https://homecomingservers.com/"><DropShadowImage src={homecomingLogo} alt="Homecoming"/></a>
             </Box>
 
             <Typography>

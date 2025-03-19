@@ -3,6 +3,7 @@ import { Alignment, Badge, Sex } from 'coh-content-db'
 import { Box, Stack, Tooltip } from '@mui/joy'
 import ContentService from '../assets/ContentService.ts'
 import { VscWorkspaceUnknown } from 'react-icons/vsc'
+import DropShadowImage from '../util/DropShadowImage.tsx'
 
 const BadgeIcon: FC<{ badge: string | Badge, alignment?: Alignment, sex?: Sex }> = ({ badge, alignment, sex }) => {
 
@@ -28,7 +29,7 @@ const BadgeIcon: FC<{ badge: string | Badge, alignment?: Alignment, sex?: Sex }>
 
     return (
       <Tooltip title={actualBadge.name.getValue(alignment, sex)}>
-        <img src={href} alt="Badge icon"/>
+        <DropShadowImage src={href} alt="Badge icon"/>
       </Tooltip>
     )
   }
@@ -37,7 +38,7 @@ const BadgeIcon: FC<{ badge: string | Badge, alignment?: Alignment, sex?: Sex }>
     <Stack direction="column" gap={1}>
       {actualBadge.icon.canonical.map((icon) => (
         <Tooltip key={`${icon.alignment ?? ''}:${icon.sex ?? ''}`} title={actualBadge.name.getValue(icon.alignment, icon.sex)}>
-          <img src={icon.value} alt={actualBadge.name.getValue(icon.alignment, icon.sex)}/>
+          <DropShadowImage src={icon.value} alt={actualBadge.name.getValue(icon.alignment, icon.sex)}/>
         </Tooltip>
       ))}
     </Stack>
