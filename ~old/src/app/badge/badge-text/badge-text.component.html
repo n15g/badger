@@ -1,8 +1,0 @@
-<blockquote class="card-text blockquote badge-texts">
-    <footer *ngFor="let entry of badge.badgeText | alternates"
-            class="blockquote-footer badge-text"
-            [ngClass]="entry.classes">
-        <fa-icon *ngIf="entry | sexIcon" [icon]="entry | sexIcon"></fa-icon>
-        {{entry.value}}
-    </footer>
-</blockquote>

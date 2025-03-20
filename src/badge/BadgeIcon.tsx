@@ -1,9 +1,9 @@
 import { FC } from 'react'
 import { Alignment, Badge, Sex } from 'coh-content-db'
 import { Box, Stack, Tooltip } from '@mui/joy'
-import ContentService from '../assets/ContentService.ts'
 import { VscWorkspaceUnknown } from 'react-icons/vsc'
 import DropShadowImage from '../util/DropShadowImage.tsx'
+import ContentService from '../ContentService.ts'
 
 const BadgeIcon: FC<{ badge: string | Badge, alignment?: Alignment, sex?: Sex }> = ({ badge, alignment, sex }) => {
 

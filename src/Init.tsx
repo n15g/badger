@@ -1,7 +1,7 @@
 import { FC, ReactNode, useEffect, useState } from 'react'
 import icon from './assets/logo.svg'
 import { Box, Typography } from '@mui/joy'
-import ContentService from './assets/ContentService.ts'
+import ContentService from './ContentService.ts'
 
 const Init: FC<{ children: ReactNode }> = (props) => {
   const [loaded, setLoaded] = useState(false)
