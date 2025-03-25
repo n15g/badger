@@ -8,6 +8,7 @@ import { Box, CssBaseline, CssVarsProvider } from '@mui/joy'
 import InitColorSchemeScript from '@mui/joy/InitColorSchemeScript'
 import Header from './Header.tsx'
 import Init from './Init.tsx'
+import BadgeList from './BadgeList.tsx'
 
 const root = document.getElementById('root')
 
@@ -38,6 +39,7 @@ createRoot(root).render(
             }}>
             <Routes>
               <Route path="/" element={<About/>}></Route>
+              <Route path="/badges" element={<BadgeList/>}></Route>
             </Routes>
           </Box>
         </Init>

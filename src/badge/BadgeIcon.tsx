@@ -35,11 +35,13 @@ const BadgeIcon: FC<{ badge: string | Badge, alignment?: Alignment, sex?: Sex }>
   }
 
   return (
-    <Stack direction="column" gap={1}>
+    <Stack direction="row" gap={2} sx={{ justifyContent: 'center' }}>
       {actualBadge.icon.canonical.map((icon) => (
-        <Tooltip key={`${icon.alignment ?? ''}:${icon.sex ?? ''}`} title={actualBadge.name.getValue(icon.alignment, icon.sex)}>
-          <DropShadowImage src={icon.value} alt={actualBadge.name.getValue(icon.alignment, icon.sex)}/>
-        </Tooltip>
+        <Box key={`${icon.alignment ?? ''}:${icon.sex ?? ''}`} sx={{ display: 'flex' }}>
+          <Tooltip title={actualBadge.name.getValue(icon.alignment, icon.sex)}>
+            <DropShadowImage src={icon.value} alt={actualBadge.name.getValue(icon.alignment, icon.sex)}/>
+          </Tooltip>
+        </Box>
       ))}
     </Stack>
   )

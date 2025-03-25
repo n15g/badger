@@ -1,7 +1,21 @@
-import { Box, GlobalStyles, Sheet, Tab, TabList, Tabs, Typography } from '@mui/joy'
+import { Box, GlobalStyles, List, ListDivider, ListItem, Sheet, Typography } from '@mui/joy'
 import PaletteButton from './util/PaletteButton.tsx'
 import { NavLink } from 'react-router'
 import logo from './assets/logo.svg'
+import { FC, ReactNode } from 'react'
+
+const MenuItem: FC<{ children: ReactNode, to: string, end?: boolean }> = ({ children, to, end }) => {
+  return (
+    <NavLink end={end} to={to} style={{ textDecoration: 'none' }}>
+      {({ isActive }) => (
+        <ListItem
+          variant={isActive ? 'soft' : 'plain'}>
+          <Typography sx={{ color: 'inherit' }}>{children}</Typography>
+        </ListItem>
+      )}
+    </NavLink>
+  )
+}
 
 function Header() {
   return (
@@ -33,14 +47,15 @@ function Header() {
         <img src={logo} alt="Badger" style={{ height: 40, marginRight: 8 }}/>
         Badger
       </Typography>
-      <Tabs sx={{ height: '100%' }}>
-        <TabList sx={{ height: '100%' }}>
-          <Tab component={NavLink} to="/">About</Tab>
-          <Tab component={NavLink} to="/character">Characters</Tab>
-          <Tab component={NavLink} to="/badges">Badges</Tab>
-          <Tab component={NavLink} to="/changelog">Changelog</Tab>
-        </TabList>
-      </Tabs>
+      <List role="menubar" orientation="horizontal">
+        <MenuItem to="/" end>About</MenuItem>
+        <ListDivider/>
+        <MenuItem to="/badges">Badges</MenuItem>
+        <ListDivider/>
+        <MenuItem to="/characters">Characters</MenuItem>
+        <ListDivider/>
+        <MenuItem to="/changelog">Changelog</MenuItem>
+      </List>
       <Box sx={{ ml: 'auto' }}>
         <PaletteButton/>
       </Box>
