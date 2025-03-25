@@ -5,8 +5,8 @@ import BadgeIcon from './badge/BadgeIcon.tsx'
 import Pagination from './util/Pagination.tsx'
 import { useSessionStorage } from './util/use-session-storage.ts'
 
-const Td = styled('td')(() => ({}))
-const Th = styled('th')(() => ({}))
+const TD = styled('td')(() => ({}))
+const TH = styled('th')(() => ({}))
 
 function BadgeList() {
   const [searchOptions, setSearchOptions] = useSessionStorage<BadgeSearchOptions>('badge-list-parameters', {
@@ -27,17 +27,25 @@ function BadgeList() {
           <Table noWrap={true}>
             <thead>
             <tr>
-              <Th sx={{ width: 200 }}>Icon</Th>
-              <Th>Name</Th>
-              <Th sx={{ display: { sm: 'none', xs: 'none', md: 'table-cell' } }}>Description</Th>
+              <TH sx={{ width: 200 }}>Icon</TH>
+              <TH>Name</TH>
+              <TH sx={{ display: { sm: 'none', xs: 'none', md: 'table-cell' } }}>Description</TH>
             </tr>
             </thead>
             <tbody>
             {badges.items.map(badge => (
               <tr key={badge.key}>
-                <Td><Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}><BadgeIcon badge={badge}/></Box></Td>
-                <Td>{badge.name.default}</Td>
-                <Td sx={{ display: { sm: 'none', xs: 'none', md: 'table-cell' } }}>{badge.badgeText.default}</Td>
+                <TD style={{ height: 80 }}>
+                  <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                    <BadgeIcon badge={badge}/>
+                  </Box>
+                </TD>
+                <TD>
+                  {badge.name.default}
+                </TD>
+                <TD sx={{ display: { sm: 'none', xs: 'none', md: 'table-cell' } }}>
+                  {badge.badgeText.default}
+                </TD>
               </tr>
             ))
             }
