@@ -26,7 +26,7 @@ const Pagination: FC<{ paged: Paged<unknown>, range?: number, onChange: (page: n
     showPages.push(i)
   }
 
-  return <Stack direction="row" justifyContent="space-between">
+  return <Stack direction={{ md: 'row' }} justifyContent="space-between" alignItems="center" gap={4}>
     <ButtonGroup>
       <Button onClick={() => {
         onChange(1, paged.pageSize)
@@ -38,6 +38,7 @@ const Pagination: FC<{ paged: Paged<unknown>, range?: number, onChange: (page: n
 
       {showPages.map(index => (
         <Button key={index}
+                sx={{ display: { xs: index === paged.page ? 'inline-block' : 'none', sm: 'inline-block' }, minWidth: '4em' }}
                 disabled={index === paged.page}
                 variant={index === paged.page ? 'solid' : 'plain'}
                 onClick={() => {
@@ -55,17 +56,19 @@ const Pagination: FC<{ paged: Paged<unknown>, range?: number, onChange: (page: n
         onChange(paged.totalPages, paged.pageSize)
       }} disabled={paged.page === paged.totalPages}><GoMoveToEnd/></Button>
     </ButtonGroup>
-    <Typography level="title-sm">{paged.totalPages} Page{paged.totalPages === 1 ? '' : 's'}</Typography>
+    <Stack direction="row" gap={4} alignItems="center">
+      <Typography level="title-sm">{paged.totalPages} Page{paged.totalPages === 1 ? '' : 's'}</Typography>
 
-    <Select value={paged.pageSize ?? 0} onChange={(_, value) => {
-      onChange(paged.page, value ?? undefined)
-    }}>
-      <Option value={0}>All items</Option>
-      <Option value={10}>10 items per page</Option>
-      <Option value={20}>20 items per page</Option>
-      <Option value={50}>50 items per page</Option>
-      <Option value={100}>100 items per page</Option>
-    </Select>
+      <Select value={paged.pageSize ?? 0} onChange={(_, value) => {
+        onChange(paged.page, value ?? undefined)
+      }}>
+        <Option value={0}>All items</Option>
+        <Option value={8}>8 items per page</Option>
+        <Option value={20}>20 items per page</Option>
+        <Option value={50}>50 items per page</Option>
+        <Option value={100}>100 items per page</Option>
+      </Select>
+    </Stack>
   </Stack>
 }
 

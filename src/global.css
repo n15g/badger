@@ -1,0 +1,24 @@
+:root {
+    --hero-color: rgb(74, 133, 211);
+
+    --villain-color: rgb(139, 42, 34);
+
+    --praetorian-color: rgb(207, 173, 35);
+}
+
+p.badge-name {
+    font-weight: bolder;
+
+    &.hero {
+        color: var(--hero-color);
+    }
+
+    &.villain {
+        color: var(--villain-color);
+    }
+
+    &.praetorian {
+        color: var(--praetorian-color);
+    }
+}
+

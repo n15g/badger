@@ -7,7 +7,12 @@ import ContentService from '../ContentService.ts'
 import { FaSpinner } from 'react-icons/fa'
 import { GrDocumentMissing } from 'react-icons/gr'
 
-const BadgeIcon: FC<{ badge: string | Badge, alignment?: Alignment, sex?: Sex }> = ({ badge, alignment, sex }) => {
+const BadgeIcon: FC<{
+  badge: string | Badge,
+  defaultIcon?: boolean
+  alignment?: Alignment,
+  sex?: Sex
+}> = ({ badge, defaultIcon = false, alignment, sex }) => {
   let actualBadge: Badge | undefined
   const [loaded, setLoaded] = useState(false)
   const [error, setError] = useState(false)
@@ -29,8 +34,10 @@ const BadgeIcon: FC<{ badge: string | Badge, alignment?: Alignment, sex?: Sex }>
     )
   }
 
-  if (sex || alignment) {
-    const href = actualBadge.icon.getValue(alignment, sex)
+  if (defaultIcon || sex || alignment) {
+    const href = defaultIcon
+      ? actualBadge.icon.default?.value
+      : actualBadge.icon.getValue(alignment, sex)
 
     return (
       <Tooltip title={actualBadge.name.getValue(alignment, sex)}>

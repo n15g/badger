@@ -1,5 +1,6 @@
 import '@fontsource/inter/index.css'
 import '@loadingio/loading.css/loading.css'
+import './global.css'
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import About from './About.tsx'
