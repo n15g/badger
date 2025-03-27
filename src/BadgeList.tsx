@@ -5,9 +5,12 @@ import BadgeIcon from './badge/BadgeIcon.tsx'
 import Pagination from './util/Pagination.tsx'
 import { useSessionStorage } from './util/use-session-storage.ts'
 import BadgeName from './badge/BadgeName.tsx'
+import BadgeAlignment from './badge/BadgeAlignment.tsx'
+import BadgeType from './badge/BadgeType.tsx'
 
 const TD = styled('td')(() => ({}))
 const TH = styled('th')(() => ({}))
+const hideOnSmall = { display: { xs: 'none', md: 'table-cell' } }
 
 function BadgeList() {
   const [searchOptions, setSearchOptions] = useSessionStorage<BadgeSearchOptions>('badge-list-parameters', {
@@ -32,7 +35,9 @@ function BadgeList() {
             <tr>
               <TH sx={{ width: { xs: 120, md: 200 } }}>Icon</TH>
               <TH sx={{ width: { xs: 120, md: 240 } }}>Name</TH>
-              <TH sx={{ display: { sm: 'none', xs: 'none', md: 'table-cell' } }}>Description</TH>
+              <TH sx={{ ...hideOnSmall, width: 200 }}>Type</TH>
+              <TH sx={{ ...hideOnSmall, width: 100 }}>Alignments</TH>
+              <TH sx={{ ...hideOnSmall }}>Description</TH>
             </tr>
             </thead>
             <tbody>
@@ -46,7 +51,13 @@ function BadgeList() {
                 <TD>
                   <BadgeName badge={badge}/>
                 </TD>
-                <TD sx={{ display: { sm: 'none', xs: 'none', md: 'table-cell' } }}>
+                <TD sx={{ ...hideOnSmall }}>
+                  <BadgeType badge={badge}/>
+                </TD>
+                <TD sx={{ ...hideOnSmall }}>
+                  <BadgeAlignment badge={badge}/>
+                </TD>
+                <TD sx={{ ...hideOnSmall }}>
                   {badge.badgeText.default?.value}
                 </TD>
               </tr>
