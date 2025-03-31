@@ -7,6 +7,7 @@ import { useSessionStorage } from './util/use-session-storage.ts'
 import BadgeName from './badge/BadgeName.tsx'
 import BadgeAlignment from './badge/BadgeAlignment.tsx'
 import BadgeType from './badge/BadgeType.tsx'
+import BadgeMarkdown from './util/BadgeMarkdown.tsx'
 
 const TD = styled('td')(() => ({}))
 const TH = styled('th')(() => ({}))
@@ -37,7 +38,7 @@ function BadgeList() {
               <TH sx={{ width: { xs: 120, md: 240 } }}>Name</TH>
               <TH sx={{ ...hideOnSmall, width: 200 }}>Type</TH>
               <TH sx={{ ...hideOnSmall, width: 100 }}>Alignments</TH>
-              <TH sx={{ ...hideOnSmall }}>Description</TH>
+              <TH sx={{ ...hideOnSmall }}>Acquisition</TH>
             </tr>
             </thead>
             <tbody>
@@ -58,7 +59,7 @@ function BadgeList() {
                   <BadgeAlignment badge={badge}/>
                 </TD>
                 <TD sx={{ ...hideOnSmall }}>
-                  {badge.badgeText.default?.value}
+                  <BadgeMarkdown content={badge.acquisition ?? badge.notes}/>
                 </TD>
               </tr>
             ))
