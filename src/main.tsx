@@ -9,7 +9,8 @@ import { Box, CssBaseline, CssVarsProvider } from '@mui/joy'
 import InitColorSchemeScript from '@mui/joy/InitColorSchemeScript'
 import Header from './Header.tsx'
 import Init from './Init.tsx'
-import BadgeList from './BadgeList.tsx'
+import BadgeList from './badge/BadgeList.tsx'
+import BadgeView from './badge/BadgeView.tsx'
 
 const root = document.getElementById('root')
 
@@ -41,6 +42,7 @@ createRoot(root).render(
             <Routes>
               <Route path="/" element={<About/>}></Route>
               <Route path="/badges" element={<BadgeList/>}></Route>
+              <Route path="/badges/:badgeKey" element={<BadgeView/>}></Route>
             </Routes>
           </Box>
         </Init>

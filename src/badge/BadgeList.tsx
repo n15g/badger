@@ -1,17 +1,20 @@
 import { Box, Card, Input, styled, Table } from '@mui/joy'
-import ContentService from './ContentService.ts'
-import { BadgeSearchOptions } from '../../coh-content-db'
-import BadgeIcon from './badge/BadgeIcon.tsx'
-import Pagination from './util/Pagination.tsx'
-import { useSessionStorage } from './util/use-session-storage.ts'
-import BadgeName from './badge/BadgeName.tsx'
-import BadgeAlignment from './badge/BadgeAlignment.tsx'
-import BadgeType from './badge/BadgeType.tsx'
-import BadgeMarkdown from './util/BadgeMarkdown.tsx'
+import { NavLink } from 'react-router'
+import { useSessionStorage } from '../util/use-session-storage.ts'
+import Pagination from '../util/Pagination.tsx'
+import ContentService from '../ContentService.ts'
+import BadgeName from './BadgeName.tsx'
+import BadgeType from './BadgeType.tsx'
+import BadgeAlignment from './BadgeAlignment.tsx'
+import BadgerMarkdown from '../util/BadgerMarkdown.tsx'
+import BadgeIcon from './BadgeIcon.tsx'
+import { BadgeSearchOptions } from '../../../coh-content-db'
+import { FC, ReactNode } from 'react'
 
 const TD = styled('td')(() => ({}))
 const TH = styled('th')(() => ({}))
 const hideOnSmall = { display: { xs: 'none', md: 'table-cell' } }
+
 
 function BadgeList() {
   const [searchOptions, setSearchOptions] = useSessionStorage<BadgeSearchOptions>('badge-list-parameters', {
@@ -45,21 +48,31 @@ function BadgeList() {
             {badges.items.map(badge => (
               <tr key={badge.key}>
                 <TD style={{ height: 100 }} sx={{ overflowX: 'hidden' }}>
-                  <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                    <BadgeIcon badge={badge} defaultIcon/>
-                  </Box>
+                  <RowLink to={badge.key}>
+                    <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                      <BadgeIcon badge={badge} defaultIcon/>
+                    </Box>
+                  </RowLink>
                 </TD>
                 <TD>
-                  <BadgeName badge={badge}/>
+                  <RowLink to={badge.key}>
+                    <BadgeName badge={badge} direction="column"/>
+                  </RowLink>
                 </TD>
                 <TD sx={{ ...hideOnSmall }}>
-                  <BadgeType badge={badge}/>
+                  <RowLink to={badge.key}>
+                    <BadgeType badge={badge}/>
+                  </RowLink>
                 </TD>
                 <TD sx={{ ...hideOnSmall }}>
-                  <BadgeAlignment badge={badge}/>
+                  <RowLink to={badge.key}>
+                    <BadgeAlignment badge={badge}/>
+                  </RowLink>
                 </TD>
                 <TD sx={{ ...hideOnSmall }}>
-                  <BadgeMarkdown content={badge.acquisition ?? badge.notes}/>
+                  <RowLink to={badge.key}>
+                    <BadgerMarkdown content={badge.acquisition ?? badge.notes}/>
+                  </RowLink>
                 </TD>
               </tr>
             ))
@@ -74,6 +87,12 @@ function BadgeList() {
       </Box>
     </>
   )
+}
+
+const RowLink: FC<{ children: ReactNode, to: string }> = ({ children, to }) => {
+  return <NavLink to={to} style={{ textDecoration: 'none', color: 'inherit' }}>
+    {children}
+  </NavLink>
 }
 
 export default BadgeList

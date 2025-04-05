@@ -5,7 +5,7 @@ import { SxProps } from '@mui/joy/styles/types'
 
 const disabled: SxProps = { userSelect: 'none', opacity: 0.2 }
 
-const BadgeName: FC<{ badge: Badge }> = ({ badge }) => {
+const BadgeAlignment: FC<{ badge: Badge }> = ({ badge }) => {
   return (
     <Stack direction="row" gap={1}>
       <Typography title="Hero" sx={badge.alignment.hero ? { color: 'var(--alignment-hero)' } : disabled}>H</Typography>
@@ -16,4 +16,4 @@ const BadgeName: FC<{ badge: Badge }> = ({ badge }) => {
     </Stack>
   )
 }
-export default BadgeName
+export default BadgeAlignment
