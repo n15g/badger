@@ -1,4 +1,3 @@
-import '@fontsource/inter/index.css'
 import '@loadingio/loading.css/loading.css'
 import './global.css'
 import { StrictMode } from 'react'
@@ -11,6 +10,7 @@ import Header from './Header.tsx'
 import Init from './Init.tsx'
 import BadgeList from './badge/BadgeList.tsx'
 import BadgeView from './badge/BadgeView.tsx'
+import { theme } from './theme.ts'
 
 const root = document.getElementById('root')
 
@@ -22,7 +22,7 @@ createRoot(root).render(
   <StrictMode>
     <InitColorSchemeScript/>
     <BrowserRouter>
-      <CssVarsProvider defaultMode="system">
+      <CssVarsProvider defaultMode="system" theme={theme}>
         <CssBaseline/>
         <Init>
           <Header/>

@@ -1,7 +1,10 @@
 import { styled } from '@mui/joy'
 
-const DropShadowImage = styled('img')(({ theme }) => ({
-  filter: `drop-shadow(0 0 0.5rem ${theme.vars.palette.text.tertiary})`
+
+const DropShadowImage = styled('img', {
+  shouldForwardProp: (prop) => prop !== 'shadowSize',
+})<{ shadowSize?: string }>(({ theme, shadowSize = '0.3rem' }) => ({
+  filter: `drop-shadow(0 0 ${shadowSize} ${theme.vars.palette.text.primary})`,
 }))
 
 export default DropShadowImage

@@ -1,16 +1,15 @@
 import { Box, GlobalStyles, List, ListDivider, ListItem, Sheet, Typography } from '@mui/joy'
 import PaletteButton from './util/PaletteButton.tsx'
 import { NavLink } from 'react-router'
-import logo from './assets/logo.svg'
+import logo from './assets/images/logo/badger.svg'
 import { FC, ReactNode } from 'react'
 
 const MenuItem: FC<{ children: ReactNode, to: string, end?: boolean }> = ({ children, to, end }) => {
   return (
     <NavLink end={end} to={to} style={{ textDecoration: 'none' }}>
       {({ isActive }) => (
-        <ListItem
-          variant={isActive ? 'soft' : 'plain'}>
-          <Typography sx={{ color: 'inherit' }}>{children}</Typography>
+        <ListItem variant={isActive ? 'soft' : 'plain'}>
+          <Typography className="game-title" sx={{ color: 'inherit' }}>{children}</Typography>
         </ListItem>
       )}
     </NavLink>
@@ -43,6 +42,7 @@ function Header() {
         })}
       />
       <Typography level="h2" component={NavLink} to="/"
+                  className="game-title"
                   sx={{ display: 'flex', alignItems: 'center', textDecoration: 'none', color: 'inherit', mr: 4 }}>
         <img src={logo} alt="Badger" style={{ height: 40, marginRight: 8 }}/>
         Badger

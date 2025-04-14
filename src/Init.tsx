@@ -1,5 +1,5 @@
 import { FC, ReactNode, useEffect, useState } from 'react'
-import icon from './assets/logo.svg'
+import icon from './assets/images/logo/badger.svg'
 import { Box, Typography } from '@mui/joy'
 import ContentService from './ContentService.ts'
 

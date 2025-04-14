@@ -5,21 +5,21 @@ import { Typography } from '@mui/joy'
 const BadgeType: FC<{ badge: Badge }> = ({ badge }) => {
   return <Typography>
     {{
-      'EXPLORATION': 'Exploration',
-      'HISTORY': 'History',
-      'ACCOMPLISHMENT': 'Accomplishment',
-      'ACHIEVEMENT': 'Achievement',
-      'ACCOLADE': 'Accolade',
-      'GLADIATOR': 'Gladiator',
-      'VETERAN': 'Veteran',
-      'PVP': 'PvP',
-      'INVENTION': 'Invention',
-      'DEFEAT': 'Defeat',
-      'EVENT': 'Event',
-      'OUROBOROS': 'Ouroboros',
-      'CONSIGNMENT': 'Consignment',
-      'DAY_JOB': 'Day Job',
-      'AE': 'Architect Entertainment',
+      'exploration': 'Exploration',
+      'history': 'History',
+      'accomplishment': 'Accomplishment',
+      'achievement': 'Achievement',
+      'accolade': 'Accolade',
+      'gladiator': 'Gladiator',
+      'veteran': 'Veteran',
+      'pvp': 'PvP',
+      'invention': 'Invention',
+      'defeat': 'Defeat',
+      'event': 'Event',
+      'ouroboros': 'Ouroboros',
+      'consignment': 'Consignment',
+      'day-job': 'Day Job',
+      'architect-entertainment': 'Architect Entertainment',
     }[badge.type] || badge.type}
   </Typography>
 }

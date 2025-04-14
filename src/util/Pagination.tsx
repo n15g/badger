@@ -1,6 +1,6 @@
 import { Button, ButtonGroup, Option, Select, Stack, Typography } from '@mui/joy'
 import { FC } from 'react'
-import { Paged } from '../../../coh-content-db'
+import { Paged } from 'coh-content-db'
 import { GoChevronLeft, GoChevronRight, GoMoveToEnd, GoMoveToStart } from 'react-icons/go'
 
 
@@ -10,18 +10,10 @@ const Pagination: FC<{ paged: Paged<unknown>, range?: number, onChange: (page: n
   const showPages = []
   const halfRange = Math.floor(range / 2)
 
-// Calculate the starting index
-  let start = Math.max(
-    paged.page - halfRange,        // Center the active page
-    1                              // Ensure it doesn't go below 1
-  )
-
-  // Adjust if we are near the end
+  let start = Math.max(paged.page - halfRange, 1)
   if (start + range - 1 > paged.totalPages) {
     start = Math.max(paged.totalPages - range + 1, 1)
   }
-
-  // Populate the showPages array
   for (let i = start; i < start + range && i <= paged.totalPages; i++) {
     showPages.push(i)
   }

@@ -1,5 +1,62 @@
+@font-face {
+    font-family: 'Montreal';
+    font-style: normal;
+    font-weight: 400;
+    src: local('Montreal Regular'), url('./assets/fonts/montreal-regular.woff') format('woff');
+}
+
+@font-face {
+    font-family: 'Montreal';
+    font-style: normal;
+    font-weight: 700;
+    src: local('Montreal Bold'), url('./assets/fonts/montreal-bold.woff') format('woff');
+}
+
+@font-face {
+    font-family: 'Red Circle Regular';
+    font-style: normal;
+    font-weight: normal;
+    src: local('Red Circle Regular'), url('./assets/fonts/red-circle.woff') format('woff');
+}
+
 :root {
-    --alignment-hero: rgb(74, 133, 211);
-    --alignment-villain: rgb(139, 42, 34);
-    --alignment-praetorian: rgb(207, 173, 35);
+    --hero-color: rgb(34, 100, 255);
+    --vigilante-color: rgb(34, 100, 255);
+    --villain-color: rgb(139, 42, 34);
+    --rogue-color: rgb(139, 42, 34);
+    --praetorian--color: rgb(207, 173, 35);
+    --resistance--color: rgb(207, 173, 35);
+    --loyalist--color: rgb(207, 173, 35);
+
+    p.morality, span.morality {
+        font-weight: bold;
+
+        &.hero {
+            color: var(--hero-color);
+        }
+
+        &.vigilante {
+            color: var(--vigilante-color);
+        }
+
+        &.villain {
+            color: var(--villain-color);
+        }
+
+        &.rogue {
+            color: var(--rogue-color);
+        }
+
+        &.praetorian {
+            color: var(--praetorian--color);
+        }
+
+        &.resistance {
+            color: var(--resistance--color);
+        }
+
+        &.loyalist {
+            color: var(--loyalist--color);
+        }
+    }
 }

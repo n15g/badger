@@ -8,9 +8,9 @@ import BadgerMarkdown from '../util/BadgerMarkdown.tsx'
 function BadgeList() {
   const params = useParams()
 
-  try {
-    const badge = ContentService.db.getBadge(params.badgeKey)
+  const badge = ContentService.db.getBadge(params.badgeKey)
 
+  if (badge) {
     return (
       <Box component="section" sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
         <Card>
@@ -27,7 +27,7 @@ function BadgeList() {
         </Card>
       </Box>
     )
-  } catch {
+  } else {
     return (
       <Box component="section" sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
         Unknown badge: {params.badgeKey}
