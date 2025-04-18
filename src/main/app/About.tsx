@@ -1,6 +1,6 @@
 import { Box, Card, CardContent, CardOverflow, Stack, Typography } from '@mui/joy'
 import BadgeIcon from './badge/BadgeIcon.tsx'
-import homecomingLogo from './assets/images/logo/homecoming.png'
+import homecomingLogo from '../resources/images/logo/homecoming.png'
 import DropShadowImage from './util/DropShadowImage.tsx'
 
 function About() {

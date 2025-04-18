@@ -6,7 +6,7 @@ import BadgerMarkdown from '../util/BadgerMarkdown.tsx'
 import ContentProvider from '../content/ContentProvider.tsx'
 
 function BadgeList() {
-  const { content } = ContentProvider.useContent()
+  const content = ContentProvider.useContent()
   const params = useParams()
 
   const badge = content.getBadge(params.badgeKey)

@@ -11,8 +11,8 @@ import BadgeList from './badge/BadgeList.tsx'
 import BadgeView from './badge/BadgeView.tsx'
 import { theme } from './theme.ts'
 import ErrorProvider from './util/ErrorProvider.tsx'
-import ContentProvider from './content/ContentProvider.tsx'
 import BadgerDbProvider from './db/BadgerDbProvider.tsx'
+import ContentLoader from './content/ContentLoader.tsx'
 
 const root = document.getElementById('root')
 
@@ -28,7 +28,7 @@ createRoot(root).render(
         <CssBaseline/>
         <ErrorProvider>
           <BadgerDbProvider>
-            <ContentProvider>
+            <ContentLoader>
               <Header/>
               <Box
                 component="main"
@@ -49,7 +49,7 @@ createRoot(root).render(
                   <Route path="/badges/:badgeKey" element={<BadgeView/>}></Route>
                 </Routes>
               </Box>
-            </ContentProvider>
+            </ContentLoader>
           </BadgerDbProvider>
         </ErrorProvider>
       </CssVarsProvider>

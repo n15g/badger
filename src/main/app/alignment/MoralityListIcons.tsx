@@ -2,12 +2,12 @@ import { FC } from 'react'
 import { MoralityList } from 'coh-content-db'
 import { Stack, Tooltip } from '@mui/joy'
 import { SxProps } from '@mui/joy/styles/types'
-import heroIcon from '../assets/images/icon/morality-hero.png'
-import vigilanteIcon from '../assets/images/icon/morality-vigilante.png'
-import villainIcon from '../assets/images/icon/morality-villain.png'
-import rogueIcon from '../assets/images/icon/morality-rogue.png'
-import resistanceIcon from '../assets/images/icon/morality-resistance.png'
-import loyalistIcon from '../assets/images/icon/morality-loyalist.png'
+import heroIcon from '../../resources/images/icon/morality-hero.png'
+import vigilanteIcon from '../../resources/images/icon/morality-vigilante.png'
+import villainIcon from '../../resources/images/icon/morality-villain.png'
+import rogueIcon from '../../resources/images/icon/morality-rogue.png'
+import resistanceIcon from '../../resources/images/icon/morality-resistance.png'
+import loyalistIcon from '../../resources/images/icon/morality-loyalist.png'
 import DropShadowImage from '../util/DropShadowImage.tsx'
 
 const values: { key: keyof MoralityList, title: string, icon: string }[] = [
@@ -19,7 +19,7 @@ const values: { key: keyof MoralityList, title: string, icon: string }[] = [
   { key: 'loyalist', title: 'Loyalist', icon: loyalistIcon },
 ]
 
-const disabled: SxProps = { userSelect: 'none', opacity: 0.1 }
+const disabled: SxProps = { userSelect: 'none', opacity: 0.2 }
 
 const MoralityListIcons: FC<{ moralityList: MoralityList, iconSize?: number }> = ({ moralityList, iconSize = 16 }) => {
   return (
@@ -27,7 +27,7 @@ const MoralityListIcons: FC<{ moralityList: MoralityList, iconSize?: number }> =
       {values.map(value => (
         <Tooltip key={value.key} title={value.title}>
           <DropShadowImage src={value.icon}
-                           shadowSize="0.1rem"
+                           shadowSize={moralityList[value.key] ? '2px' : '0'}
                            alt={value.title}
                            width={iconSize}
                            sx={moralityList[value.key] ? {} : disabled}/>

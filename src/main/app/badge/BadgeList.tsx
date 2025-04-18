@@ -17,7 +17,7 @@ const hideOnSmall = { display: { xs: 'none', md: 'table-cell' } }
 
 
 function BadgeList() {
-  const { content } = ContentProvider.useContent()
+  const content = ContentProvider.useContent()
   const [searchOptions, setSearchOptions] = useSessionStorage<BadgeSearchOptions>('badge-list-parameters', {
     query: { str: '', on: { name: true } },
     pageSize: 8

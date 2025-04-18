@@ -13,7 +13,7 @@ const BadgeIcon: FC<{
   alignment?: Alignment,
   sex?: Sex
 }> = ({ badge, default: isDefault = false, alignment, sex }) => {
-  const { content } = ContentProvider.useContent()
+  const content = ContentProvider.useContent()
   const [loaded, setLoaded] = useState(false)
   const [error, setError] = useState(false)
 

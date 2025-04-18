@@ -7,21 +7,21 @@ import LoadingScreen from '../util/LoadingScreen.tsx'
 import axios from 'axios'
 import ErrorProvider from '../util/ErrorProvider.tsx'
 import { DEFAULT_BUNDLE_SOURCE } from '../global.ts'
+import ContentProvider from './ContentProvider.tsx'
 
 const BUNDLE_SOURCE_KEY = 'bundle-source'
 const BUNDLE_CACHE_KEY = 'cached-bundle'
 
 type BundleSource = string | BundleData
 
-interface ContentState {
-  content: CohContentDatabase
+interface ContentLoaderState {
   bundleSource: string
   loadBundle: (source?: BundleSource) => Promise<void>
 }
 
-const ContentContext = createContext<ContentState | undefined>(undefined)
+const ContentContext = createContext<ContentLoaderState | undefined>(undefined)
 
-const ContentProvider: FC<{ children: ReactNode }> & { useContent: () => ContentState } =
+const ContentLoader: FC<{ children: ReactNode }> & { useContentLoader: () => ContentLoaderState } =
   ({ children }) => {
     const badgerDb = BadgerDbProvider.useBadgerDb()
     const error = ErrorProvider.useError()
@@ -93,7 +93,9 @@ const ContentProvider: FC<{ children: ReactNode }> & { useContent: () => Content
     if (content && bundleSource) {
       return (
         <ContentContext value={value as never}>
-          {children}
+          <ContentProvider content={content}>
+            {children}
+          </ContentProvider>
         </ContentContext>
       )
     } else if (fatalError) {
@@ -103,12 +105,12 @@ const ContentProvider: FC<{ children: ReactNode }> & { useContent: () => Content
     }
   }
 
-ContentProvider.useContent = (): ContentState => {
+ContentLoader.useContentLoader = (): ContentLoaderState => {
   const context = use(ContentContext)
   if (!context) {
-    throw new Error('useContent must be used within a ContentProvider')
+    throw new Error('useContentLoader must be used within a ContentLoaderProvider')
   }
   return context
 }
 
-export default ContentProvider
+export default ContentLoader

@@ -1,7 +1,7 @@
 import { Box, GlobalStyles, List, ListDivider, ListItem, Sheet, Typography } from '@mui/joy'
 import PaletteButton from './util/PaletteButton.tsx'
 import { NavLink } from 'react-router'
-import logo from './assets/images/logo/badger.svg'
+import logo from '../resources/images/logo/badger.svg'
 import { FC, ReactNode } from 'react'
 
 const MenuItem: FC<{ children: ReactNode, to: string, end?: boolean }> = ({ children, to, end }) => {

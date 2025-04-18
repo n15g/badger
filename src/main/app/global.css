@@ -2,21 +2,21 @@
     font-family: 'Montreal';
     font-style: normal;
     font-weight: 400;
-    src: local('Montreal Regular'), url('./assets/fonts/montreal-regular.woff') format('woff');
+    src: local('Montreal Regular'), url('../resources/fonts/montreal-regular.woff') format('woff');
 }
 
 @font-face {
     font-family: 'Montreal';
     font-style: normal;
     font-weight: 700;
-    src: local('Montreal Bold'), url('./assets/fonts/montreal-bold.woff') format('woff');
+    src: local('Montreal Bold'), url('../resources/fonts/montreal-bold.woff') format('woff');
 }
 
 @font-face {
     font-family: 'Red Circle Regular';
     font-style: normal;
     font-weight: normal;
-    src: local('Red Circle Regular'), url('./assets/fonts/red-circle.woff') format('woff');
+    src: local('Red Circle Regular'), url('../resources/fonts/red-circle.woff') format('woff');
 }
 
 :root {

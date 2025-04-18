@@ -1,5 +1,5 @@
 import { FC } from 'react'
-import icon from '../assets/images/logo/badger.svg'
+import icon from '../../resources/images/logo/badger.svg'
 import { Box, Stack, Typography } from '@mui/joy'
 
 const Init: FC<{ text: string, percent?: number }> = ({ text }) => {
