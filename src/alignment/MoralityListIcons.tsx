@@ -8,7 +8,7 @@ import villainIcon from '../assets/images/icon/morality-villain.png'
 import rogueIcon from '../assets/images/icon/morality-rogue.png'
 import resistanceIcon from '../assets/images/icon/morality-resistance.png'
 import loyalistIcon from '../assets/images/icon/morality-loyalist.png'
-import DropShadowImage from './DropShadowImage.tsx'
+import DropShadowImage from '../util/DropShadowImage.tsx'
 
 const values: { key: keyof MoralityList, title: string, icon: string }[] = [
   { key: 'hero', title: 'Hero', icon: heroIcon },

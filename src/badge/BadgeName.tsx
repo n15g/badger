@@ -2,7 +2,7 @@ import { FC, Fragment } from 'react'
 import { AlternateData, Badge } from 'coh-content-db'
 import { Stack, Typography } from '@mui/joy'
 import { PiGenderFemale, PiGenderMale } from 'react-icons/pi'
-import AlignmentColored from '../util/AlignmentColored.tsx'
+import AlignmentColored from '../alignment/AlignmentColored.tsx'
 
 
 const BadgeName: FC<{ badge: Badge, defaultName?: boolean, direction?: 'row' | 'column' }> =

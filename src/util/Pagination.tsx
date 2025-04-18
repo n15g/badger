@@ -22,11 +22,17 @@ const Pagination: FC<{ paged: Paged<unknown>, range?: number, onChange: (page: n
     <ButtonGroup>
       <Button onClick={() => {
         onChange(1, paged.pageSize)
-      }} disabled={paged.page === 1}><GoMoveToStart/></Button>
+      }} disabled={paged.page === 1}
+              title="First">
+        <GoMoveToStart/>
+      </Button>
 
       <Button onClick={() => {
         onChange(paged.page - 1, paged.pageSize)
-      }} disabled={paged.page === 1}><GoChevronLeft/></Button>
+      }} disabled={paged.page === 1}
+              title="Previous">
+        <GoChevronLeft/>
+      </Button>
 
       {showPages.map(index => (
         <Button key={index}
@@ -42,11 +48,17 @@ const Pagination: FC<{ paged: Paged<unknown>, range?: number, onChange: (page: n
 
       <Button onClick={() => {
         onChange(paged.page + 1, paged.pageSize)
-      }} disabled={paged.page === paged.totalPages}><GoChevronRight/></Button>
+      }} disabled={paged.page >= paged.totalPages}
+              title="Next">
+        <GoChevronRight/>
+      </Button>
 
       <Button onClick={() => {
         onChange(paged.totalPages, paged.pageSize)
-      }} disabled={paged.page === paged.totalPages}><GoMoveToEnd/></Button>
+      }} disabled={paged.page >= paged.totalPages}
+              title="Last">
+        <GoMoveToEnd/>
+      </Button>
     </ButtonGroup>
     <Stack direction="row" gap={4} alignItems="center">
       <Typography level="title-sm">{paged.totalPages} Page{paged.totalPages === 1 ? '' : 's'}</Typography>

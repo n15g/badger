@@ -1,14 +1,15 @@
 import { Alert, Box, Card, Typography } from '@mui/joy'
 import { useParams } from 'react-router'
-import ContentService from '../ContentService.ts'
 import BadgeName from './BadgeName.tsx'
 import BadgeIcon from './BadgeIcon.tsx'
 import BadgerMarkdown from '../util/BadgerMarkdown.tsx'
+import ContentProvider from '../content/ContentProvider.tsx'
 
 function BadgeList() {
+  const { content } = ContentProvider.useContent()
   const params = useParams()
 
-  const badge = ContentService.db.getBadge(params.badgeKey)
+  const badge = content.getBadge(params.badgeKey)
 
   if (badge) {
     return (

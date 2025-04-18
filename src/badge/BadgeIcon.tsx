@@ -2,10 +2,10 @@ import { FC, useState } from 'react'
 import { Alignment, Badge, Sex } from 'coh-content-db'
 import { Box, Stack, Tooltip } from '@mui/joy'
 import { VscWorkspaceUnknown } from 'react-icons/vsc'
-import ContentService from '../ContentService.ts'
 import { FaSpinner } from 'react-icons/fa'
 import { GrDocumentMissing } from 'react-icons/gr'
 import DropShadowImage from '../util/DropShadowImage.tsx'
+import ContentProvider from '../content/ContentProvider.tsx'
 
 const BadgeIcon: FC<{
   badge: string | Badge,
@@ -13,11 +13,12 @@ const BadgeIcon: FC<{
   alignment?: Alignment,
   sex?: Sex
 }> = ({ badge, default: isDefault = false, alignment, sex }) => {
+  const { content } = ContentProvider.useContent()
   const [loaded, setLoaded] = useState(false)
   const [error, setError] = useState(false)
 
   const badgeKey = typeof badge === 'string' ? badge : badge.key
-  const badgeEntity = typeof badge === 'string' ? ContentService.db.getBadge(badgeKey) : badge
+  const badgeEntity = typeof badge === 'string' ? content.getBadge(badgeKey) : badge
 
   if (badgeEntity) {
     if (isDefault || sex || alignment) {
