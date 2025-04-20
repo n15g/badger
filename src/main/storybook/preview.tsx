@@ -10,6 +10,7 @@ import { useDarkMode } from 'storybook-dark-mode'
 import { CohContentDatabase } from 'coh-content-db'
 import { HOMECOMING } from 'coh-content-db-homecoming'
 import ContentProvider from '../app/content/ContentProvider.tsx'
+import XLWidth from './XLWidth.tsx'
 
 const content = new CohContentDatabase(HOMECOMING)
 
@@ -30,7 +31,11 @@ const preview: Preview = {
       <ContentProvider content={content}>
         <Story/>
       </ContentProvider>
-    )
+    ),
+    (Story, { parameters }) => {
+      const { xl = false } = parameters
+      return xl ? <XLWidth><Story/></XLWidth> : <Story/>
+    }
   ]
 }
 

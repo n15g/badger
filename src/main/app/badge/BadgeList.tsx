@@ -1,4 +1,4 @@
-import { Box, Card, Input, Stack, styled, Table } from '@mui/joy'
+import { Box, Card, Stack, styled, Table } from '@mui/joy'
 import { NavLink } from 'react-router'
 import { useSessionStorage } from '../util/use-session-storage.ts'
 import Pagination from '../util/Pagination.tsx'
@@ -10,6 +10,7 @@ import { FC, ReactNode } from 'react'
 import BadgerMarkdown from '../util/BadgerMarkdown.tsx'
 import MoralityListIcons from '../alignment/MoralityListIcons.tsx'
 import ContentProvider from '../content/ContentProvider.tsx'
+import BadgeSearchBar from './search/BadgeSearchBar.tsx'
 
 const TD = styled('td')(() => ({}))
 const TH = styled('th')(() => ({}))
@@ -18,18 +19,13 @@ const hideOnSmall = { display: { xs: 'none', md: 'table-cell' } }
 
 function BadgeList() {
   const content = ContentProvider.useContent()
-  const [searchOptions, setSearchOptions] = useSessionStorage<BadgeSearchOptions>('badge-list-parameters', {
-    query: { str: '', on: { name: true } },
-    pageSize: 8
-  })
+  const [searchOptions, setSearchOptions] = useSessionStorage<BadgeSearchOptions>('badge-list-parameters', BadgeSearchBar.defaultSearch)
   const badges = content.searchBadges(searchOptions)
 
   return (
     <Box component="section" sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-      <Card sx={{ my: 8, mx: 2, maxWidth: 1800, }}>
-        <Input value={searchOptions.query?.str} onChange={(event) => {
-          setSearchOptions({ ...searchOptions, query: { str: event.target.value } })
-        }}></Input>
+      <Card sx={{ my: 8, mx: 2, maxWidth: 1800 }}>
+        <BadgeSearchBar searchOptions={searchOptions} onChange={setSearchOptions}></BadgeSearchBar>
         <Pagination paged={badges} onChange={(page, pageSize) => {
           setSearchOptions({ ...searchOptions, page: page, pageSize: pageSize })
         }}/>
