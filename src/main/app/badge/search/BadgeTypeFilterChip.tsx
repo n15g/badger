@@ -1,9 +1,9 @@
 import { FC, KeyboardEvent, RefObject, useState } from 'react'
 import { BadgeSearchOptions } from 'coh-content-db'
-import ContentProvider from '../../content/ContentProvider.tsx'
 import { Popover } from '@base-ui-components/react'
 import { Autocomplete, AutocompleteListbox, Chip, ChipDelete, Sheet, Stack } from '@mui/joy'
 import { Icons } from '../../util/Icons.tsx'
+import { BadgeTypes } from '../BadgeTypes.tsx'
 
 interface Props {
   searchOptions: BadgeSearchOptions,
@@ -11,24 +11,22 @@ interface Props {
 }
 
 const BadgeMapFilterChip: FC<Props> = ({ searchOptions, onChange }) => {
-  const content = ContentProvider.useContent()
-
-  const zones = content.zones
-  const zone = content.getZone(searchOptions.filter?.zoneKey) ?? null
+  const options = BadgeTypes.keys
+  const value = searchOptions.filter?.type ?? null
 
   const [open, setOpen] = useState(false)
 
   const Clear = (<ChipDelete onClick={() => {
-    onChange?.({ ...searchOptions, filter: { ...searchOptions.filter, zoneKey: undefined } })
+    onChange?.({ ...searchOptions, filter: { ...searchOptions.filter, type: undefined } })
   }}><Icons.Cross/></ChipDelete>)
 
   return (
     <Popover.Root open={open} onOpenChange={setOpen}>
       <Popover.Trigger render={
-        <Chip color={zone ? 'primary' : undefined} endDecorator={zone ? Clear : null}>
+        <Chip color={value ? 'primary' : undefined} endDecorator={value ? Clear : null}>
           <Stack direction="row" gap={0.5} alignItems="center">
-            <Icons.Zone/>
-            {zone?.name}
+            <Icons.Badge/>
+            {value ? BadgeTypes.get(value) : null}
           </Stack>
         </Chip>
       }/>
@@ -41,22 +39,21 @@ const BadgeMapFilterChip: FC<Props> = ({ searchOptions, onChange }) => {
               autoHighlight
               autoComplete
               forcePopupIcon={false}
-              value={zone}
+              value={value}
               onKeyDown={(event) => {
                 if (event.type === 'keydown' && ((event as KeyboardEvent).key === 'Escape')) {
                   setOpen(false)
                 }
               }}
-              onChange={(_, zone) => {
-                onChange?.({ ...searchOptions, ...searchOptions.filter, filter: { zoneKey: zone?.key } })
+              onChange={(_, value) => {
+                onChange?.({ ...searchOptions, filter: { ...searchOptions.filter, type: value ?? undefined } })
                 setOpen(false)
               }}
               slots={{
                 listbox: ListBox
               }}
-              options={zones}
-              getOptionLabel={(zone) => zone.name}
-              getOptionKey={(zone) => zone.key}
+              options={options}
+              getOptionLabel={(value) => BadgeTypes.get(value) ?? '?'}
             />
           </Popover.Popup>
         </Popover.Positioner>

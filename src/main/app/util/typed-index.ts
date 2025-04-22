@@ -5,7 +5,10 @@ export class TypedIndex<T extends string | symbol, V> {
     this.index = values
   }
 
-  get(key: T): V | undefined {
+  get(key: T | undefined): V | undefined {
+    if (!key) {
+      return undefined
+    }
     return this.index[key]
   }
 

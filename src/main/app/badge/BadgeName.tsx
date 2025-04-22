@@ -1,7 +1,7 @@
 import { FC, Fragment } from 'react'
 import { AlternateData, Badge } from 'coh-content-db'
 import { Stack, Typography } from '@mui/joy'
-import AlignmentColored from '../alignment/AlignmentColored.tsx'
+import MoralityColored from '../alignment/MoralityColored.tsx'
 import { Icons } from '../util/Icons.tsx'
 
 
@@ -23,8 +23,8 @@ const StyledName: FC<{ name?: AlternateData<string> }> = ({ name }) => {
   return <Stack direction="row" alignItems="center" gap={0.25}>
     {name?.sex === 'M' && <Icons.Male/>}
     {name?.sex === 'F' && <Icons.Female/>}
-    <Typography sx={{ overflow: 'hidden', textWrap: 'nowrap', textOverflow: 'ellipsis' }}>
-      <AlignmentColored alignment={name?.alignment}>{name?.value ?? 'Unknown'}</AlignmentColored>
+    <Typography sx={{ fontWeight: 'bold', overflow: 'hidden', textWrap: 'nowrap', textOverflow: 'ellipsis' }}>
+      <MoralityColored morality={name?.alignment}>{name?.value ?? 'Unknown'}</MoralityColored>
     </Typography>
   </Stack>
 }

@@ -1,4 +1,4 @@
-import { Box, Card, Stack, styled, Table } from '@mui/joy'
+import { Box, Card, Stack, styled, Table, Typography } from '@mui/joy'
 import { NavLink } from 'react-router'
 import { useSessionStorage } from '../util/use-session-storage.ts'
 import Pagination from '../util/Pagination.tsx'
@@ -59,7 +59,7 @@ function BadgeList() {
               <TD sx={{ ...hideOnSmall }}>
                 <RowLink to={badge.key}>
                   <Stack direction="column" spacing={2} alignItems="center">
-                    <BadgeType badge={badge}/>
+                    <Typography><BadgeType badge={badge}/></Typography>
                     <MoralityListIcons moralityList={badge.morality}/>
                   </Stack>
                 </RowLink>
