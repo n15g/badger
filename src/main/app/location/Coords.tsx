@@ -1,8 +1,7 @@
 import { FC, useState } from 'react'
 import { IconButton, Snackbar, styled, Typography } from '@mui/joy'
 import { Coords } from 'coh-content-db'
-import { BiCopy } from 'react-icons/bi'
-import { CgClose } from 'react-icons/cg'
+import { Icons } from '../util/Icons.tsx'
 
 const Code = styled('code')(() => ({ userSelect: 'all' }))
 const Sup = styled('sup')(() => ({ cursor: 'pointer' }))
@@ -23,7 +22,7 @@ const LocationInfo: FC<{ coords: Coords }> = ({ coords }) => {
           <Sup onClick={() => {
             void copyThumbtack()
           }}>
-            <BiCopy/>
+            <Icons.Copy/>
           </Sup>
         </Code>
       </Typography>
@@ -40,7 +39,7 @@ const LocationInfo: FC<{ coords: Coords }> = ({ coords }) => {
                       setCopyNotificationOpen(false)
                     }}
                   >
-                    <CgClose/>
+                    <Icons.Cross/>
                   </IconButton>
                 }>
         Copied to clipboard!

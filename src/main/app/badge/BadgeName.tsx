@@ -1,8 +1,8 @@
 import { FC, Fragment } from 'react'
 import { AlternateData, Badge } from 'coh-content-db'
 import { Stack, Typography } from '@mui/joy'
-import { PiGenderFemale, PiGenderMale } from 'react-icons/pi'
 import AlignmentColored from '../alignment/AlignmentColored.tsx'
+import { Icons } from '../util/Icons.tsx'
 
 
 const BadgeName: FC<{ badge: Badge, defaultName?: boolean, direction?: 'row' | 'column' }> =
@@ -21,8 +21,8 @@ const BadgeName: FC<{ badge: Badge, defaultName?: boolean, direction?: 'row' | '
 
 const StyledName: FC<{ name?: AlternateData<string> }> = ({ name }) => {
   return <Stack direction="row" alignItems="center" gap={0.25}>
-    {name?.sex === 'M' && <PiGenderMale/>}
-    {name?.sex === 'F' && <PiGenderFemale/>}
+    {name?.sex === 'M' && <Icons.Male/>}
+    {name?.sex === 'F' && <Icons.Female/>}
     <Typography sx={{ overflow: 'hidden', textWrap: 'nowrap', textOverflow: 'ellipsis' }}>
       <AlignmentColored alignment={name?.alignment}>{name?.value ?? 'Unknown'}</AlignmentColored>
     </Typography>

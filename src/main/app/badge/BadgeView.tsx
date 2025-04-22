@@ -14,6 +14,8 @@ function BadgeList() {
   if (badge) {
     return (
       <Box component="section" sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+        <title>{`${badge.name.toString(' / ')} Badge`}</title>
+
         <Card>
           <BadgeIcon badge={badge}/>
           <Typography level="h1"><BadgeName badge={badge}/></Typography>

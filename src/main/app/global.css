@@ -19,6 +19,10 @@
     src: local('Red Circle Regular'), url('../resources/fonts/red-circle.woff') format('woff');
 }
 
+#root {
+    isolation: isolate;
+}
+
 :root {
     --hero-color: rgb(34, 100, 255);
     --vigilante-color: rgb(34, 100, 255);

@@ -1,7 +1,7 @@
 import { createContext, FC, ReactNode, use, useCallback, useMemo, useState } from 'react'
 import { IconButton, Snackbar } from '@mui/joy'
-import { CgClose } from 'react-icons/cg'
 import { errorToMeatspace } from './error-to-meatspace.ts'
+import { Icons } from './Icons.tsx'
 
 type ErrorFunc = (err: unknown) => void
 
@@ -38,7 +38,7 @@ const ErrorProvider: FC<{ children: ReactNode }> & { useError: () => ErrorFunc }
                         setOpen(false)
                       }}
                     >
-                      <CgClose/>
+                      <Icons.Cross/>
                     </IconButton>
                   }>
           {errorStr}

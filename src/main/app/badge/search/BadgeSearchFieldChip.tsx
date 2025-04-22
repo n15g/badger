@@ -1,60 +1,88 @@
-import { FC } from 'react'
+import { FC, KeyboardEvent, RefObject, useState } from 'react'
 import { BadgeQueryableField, BadgeSearchOptions } from 'coh-content-db'
-import { Chip, ListItemDecorator, Option, Select, Stack } from '@mui/joy'
-import { BiCheck } from 'react-icons/bi'
-import { BADGE_QUERYABLE_FIELD_LABELS } from './badge-queryable-field-labels.ts'
-import { MdSearch } from 'react-icons/md'
+import { Autocomplete, AutocompleteListbox, AutocompleteOption, Chip, ChipDelete, ListItemDecorator, Sheet, Stack } from '@mui/joy'
+import { Icons } from '../../util/Icons.tsx'
+import { Popover } from '@base-ui-components/react'
+import { BadgeQueryableFields } from './BadgeQueryableFields.tsx'
 
-const selectOptions = BADGE_QUERYABLE_FIELD_LABELS
+const selectOptions = BadgeQueryableFields
 
-interface BadgeSearchBarProps {
+interface Props {
   searchOptions: BadgeSearchOptions,
   onChange?: (options: BadgeSearchOptions) => void,
 }
 
-const BadgeSearchFieldChip: FC<BadgeSearchBarProps> = ({ searchOptions, onChange }) => {
+const BadgeSearchFieldChip: FC<Props> = ({ searchOptions, onChange }) => {
   const values: BadgeQueryableField [] = searchOptions.query?.fields ?? ['name']
 
-  return (
-    <Chip
-      placeholder={<ChipLabel values={values}/>}
-      value={values}
-      multiple={true}
-      indicator={null}
-      component={Select}
-      color={values.length === 0 ? 'neutral' : 'primary'}
-      size="sm"
-      onChange={(_, newValue) => {
-        onChange?.({
-          ...searchOptions, query: {
-            ...searchOptions.query,
-            fields: newValue as BadgeQueryableField[]
-          }
-        })
-      }}
-      renderValue={() => (<ChipLabel values={values}/>)}
-    >
-      {selectOptions.entries.map(([val, label]) => (
-        <Option key={val} value={val}>
-          <ListItemDecorator>
-            {values.includes(val) && <BiCheck/>}
-          </ListItemDecorator>
-          {label}
-        </Option>
-      ))}
-    </Chip>
-  )
-}
+  const isActive = !!values.length
+  const isDefault = values.length === 1 && values[0] === 'name'
 
-const ChipLabel: FC<{ values: BadgeQueryableField[] }> = ({ values }) => {
+  const [open, setOpen] = useState(false)
+
+  const Clear = (<ChipDelete onClick={() => {
+    onChange?.({ ...searchOptions, ...{ query: { fields: ['name'] } } })
+  }}><Icons.Reset/></ChipDelete>)
+
   return (
-    <Stack direction="row" alignItems="center" gap={0.5}>
-      <MdSearch/>
-      {values.length === 0 && 'Nothing'}
-      {values.length === 1 && selectOptions.get(values[0])}
-      {values.length > 1 && `${values.length.toString()} Fields`}
-    </Stack>
+    <Popover.Root open={open} onOpenChange={setOpen}>
+      <Popover.Trigger render={
+        <Chip color={isActive ? 'primary' : undefined}
+              endDecorator={isDefault ? null : Clear}>
+          <Stack direction="row" gap={0.5} alignItems="center">
+            <Icons.Search/>
+            {values.length === 0 && 'Nothing'}
+            {values.length === 1 && selectOptions.get(values[0])}
+            {values.length > 1 && `${values.length.toString()} Fields`}
+          </Stack>
+        </Chip>
+      }/>
+      <Popover.Portal>
+        <Popover.Positioner sideOffset={2}>
+          <Popover.Popup render={<Sheet variant="outlined" sx={{ p: 1 }}/>}>
+            <Autocomplete
+              open
+              autoFocus
+              autoHighlight
+              multiple
+              autoComplete
+              disableClearable
+              forcePopupIcon={false}
+              renderTags={() => null}
+              value={values}
+              onKeyDown={(event) => {
+                if (event.type === 'keydown' && ((event as KeyboardEvent).key === 'Escape')) {
+                  setOpen(false)
+                }
+              }}
+              onChange={(_, newValue) => {
+                onChange?.({ ...searchOptions, ...{ query: { fields: newValue as BadgeQueryableField[] } } })
+              }}
+              slots={{
+                listbox: ListBox
+              }}
+              options={selectOptions.keys}
+              renderOption={(props, option, { selected }) => (
+                <AutocompleteOption {...props} key={option}>
+                  <ListItemDecorator>{selected && <Icons.Check/>}</ListItemDecorator>
+                  {selectOptions.get(option)}
+                </AutocompleteOption>
+              )}
+            />
+          </Popover.Popup>
+        </Popover.Positioner>
+      </Popover.Portal>
+    </Popover.Root>
   )
 }
 
 export default BadgeSearchFieldChip
+
+const ListBox = ({ ref, ...props }: object & { ref?: RefObject<HTMLUListElement | null> }) => (
+  <AutocompleteListbox
+    ref={ref}
+    {...props}
+    variant="plain"
+    size="sm"
+  />
+)

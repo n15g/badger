@@ -9,6 +9,10 @@ export class TypedIndex<T extends string | symbol, V> {
     return this.index[key]
   }
 
+  get keys(): T[] {
+    return Object.keys(this.index) as T[]
+  }
+
   get entries(): [T, V][] {
     return Object.entries(this.index) as [T, V][]
   }

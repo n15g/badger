@@ -1,7 +1,7 @@
 import { Button, ButtonGroup, Option, Select, Stack, Typography } from '@mui/joy'
 import { FC } from 'react'
 import { Paged } from 'coh-content-db'
-import { GoChevronLeft, GoChevronRight, GoMoveToEnd, GoMoveToStart } from 'react-icons/go'
+import { Icons } from './Icons.tsx'
 
 
 const Pagination: FC<{ paged: Paged<unknown>, range?: number, onChange: (page: number, pageSize: number | undefined) => void }>
@@ -24,14 +24,14 @@ const Pagination: FC<{ paged: Paged<unknown>, range?: number, onChange: (page: n
         onChange(1, paged.pageSize)
       }} disabled={paged.page === 1}
               title="First">
-        <GoMoveToStart/>
+        <Icons.First/>
       </Button>
 
       <Button onClick={() => {
         onChange(paged.page - 1, paged.pageSize)
       }} disabled={paged.page === 1}
               title="Previous">
-        <GoChevronLeft/>
+        <Icons.Prev/>
       </Button>
 
       {showPages.map(index => (
@@ -50,14 +50,14 @@ const Pagination: FC<{ paged: Paged<unknown>, range?: number, onChange: (page: n
         onChange(paged.page + 1, paged.pageSize)
       }} disabled={paged.page >= paged.totalPages}
               title="Next">
-        <GoChevronRight/>
+        <Icons.Next/>
       </Button>
 
       <Button onClick={() => {
         onChange(paged.totalPages, paged.pageSize)
       }} disabled={paged.page >= paged.totalPages}
               title="Last">
-        <GoMoveToEnd/>
+        <Icons.Last/>
       </Button>
     </ButtonGroup>
     <Stack direction="row" gap={4} alignItems="center">

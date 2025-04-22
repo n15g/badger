@@ -1,11 +1,9 @@
 import { FC, useState } from 'react'
 import { Alignment, Badge, Sex } from 'coh-content-db'
 import { Box, Stack, Tooltip } from '@mui/joy'
-import { VscWorkspaceUnknown } from 'react-icons/vsc'
-import { FaSpinner } from 'react-icons/fa'
-import { GrDocumentMissing } from 'react-icons/gr'
 import DropShadowImage from '../util/DropShadowImage.tsx'
 import ContentProvider from '../content/ContentProvider.tsx'
+import { Icons } from '../util/Icons.tsx'
 
 const BadgeIcon: FC<{
   badge: string | Badge,
@@ -38,8 +36,8 @@ const BadgeIcon: FC<{
                                         onError={() => {
                                           setError(true)
                                         }}/>}
-            {!error && !loaded && <FaSpinner className="ld ld-spin" size={32}/>}
-            {error && <GrDocumentMissing size={32}/>}
+            {!error && !loaded && <Icons.Spinner className="ld ld-spin" size={32}/>}
+            {error && <Icons.Missing size={32}/>}
           </Box>
         </Tooltip>
       )
@@ -60,8 +58,8 @@ const BadgeIcon: FC<{
                                             onError={() => {
                                               setError(true)
                                             }}/>}
-                {!error && !loaded && <FaSpinner className="ld ld-spin" size={32}/>}
-                {error && <GrDocumentMissing size={32}/>}
+                {!error && !loaded && <Icons.Spinner className="ld ld-spin" size={32}/>}
+                {error && <Icons.Missing size={32}/>}
               </Box>
             </Tooltip>
           </Box>
@@ -75,7 +73,7 @@ const BadgeIcon: FC<{
     return (
       <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
         <Tooltip title={`Unknown badge: ${key}`}>
-          <VscWorkspaceUnknown size={48}/>
+          <Icons.Badge size={48}/>
         </Tooltip>
       </Box>
     )

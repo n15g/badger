@@ -24,6 +24,8 @@ function BadgeList() {
 
   return (
     <Box component="section" sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+      <title>Badge List</title>
+
       <Card sx={{ my: 8, mx: 2, maxWidth: 1800 }}>
         <BadgeSearchBar searchOptions={searchOptions} onChange={setSearchOptions}></BadgeSearchBar>
         <Pagination paged={badges} onChange={(page, pageSize) => {
