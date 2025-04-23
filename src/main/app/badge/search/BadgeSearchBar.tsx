@@ -5,6 +5,7 @@ import BadgeSearchFieldChip from './BadgeSearchFieldChip.tsx'
 import BadgeMapFilterChip from './BadgeMapFilterChip.tsx'
 import BadgeTypeFilterChip from './BadgeTypeFilterChip.tsx'
 import BadgeMoralityFilterChip from './BadgeMoralityFilterChip.tsx'
+import BadgeSortFilterChip from './BadgeSortFilterChip.tsx'
 
 interface BadgeSearchBarProps {
   searchOptions: BadgeSearchOptions,
@@ -26,11 +27,12 @@ const BadgeSearchBar: FC<BadgeSearchBarProps> & { defaultSearch: BadgeSearchOpti
                onChange?.({ ...searchOptions, ...{ query: { str: event.target.value } } })
              }}
       />
-      <Stack direction="row" gap={1}>
+      <Stack direction="row" gap={1} sx={{ flexWrap: 'wrap' }}>
         <BadgeSearchFieldChip {...{ searchOptions, onChange }}/>
         <BadgeTypeFilterChip {...{ searchOptions, onChange }}/>
         <BadgeMoralityFilterChip {...{ searchOptions, onChange }}/>
         <BadgeMapFilterChip {...{ searchOptions, onChange }}/>
+        <BadgeSortFilterChip {...{ searchOptions, onChange }}/>
       </Stack>
     </Stack>
   )

@@ -11,10 +11,11 @@ import {
   MdWarning
 } from 'react-icons/md'
 import { PiCompassRoseFill, PiGenderFemale, PiGenderMale } from 'react-icons/pi'
-import { FaMedal, FaSpinner } from 'react-icons/fa'
+import { FaMedal, FaSortAlphaDownAlt, FaSortAlphaUp, FaSpinner } from 'react-icons/fa'
 import { GrDocumentMissing } from 'react-icons/gr'
 import { GoChevronLeft, GoChevronRight, GoMoveToEnd, GoMoveToStart } from 'react-icons/go'
 import { RxReset } from 'react-icons/rx'
+import { BiSortAlt2 } from 'react-icons/bi'
 
 /**
  * Use icons from here for consistency across the app
@@ -41,6 +42,10 @@ export const Icons = {
   Search: MdSearch,
   Spinner: FaSpinner,
   Missing: GrDocumentMissing,
+
+  Sort: BiSortAlt2,
+  Asc: FaSortAlphaUp,
+  Desc: FaSortAlphaDownAlt,
 
   Prev: GoChevronLeft,
   Next: GoChevronRight,

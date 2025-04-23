@@ -26,6 +26,20 @@ export const NameSearch = {
   },
 }
 
+export const AllFilters = {
+  args: {
+    searchOptions: {
+      query: { str: 'Test', fields: ['set-title-id'] },
+      filter: {
+        zoneKey: 'echo-rikti-crash-site',
+        type: 'exploration',
+        morality: 'resistance',
+      },
+      sort: 'release-date.desc',
+    }
+  },
+}
+
 export const Long_man = {
   parameters: {
     xl: true,
