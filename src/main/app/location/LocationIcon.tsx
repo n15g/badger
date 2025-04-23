@@ -1,5 +1,5 @@
 import { FC } from 'react'
-import { Box, Tooltip, Typography, useTheme } from '@mui/joy'
+import { Stack, Tooltip, Typography, useTheme } from '@mui/joy'
 import { LocationIcon } from 'coh-content-db'
 
 import badgeIcon from '../../resources/images/icon/location-badge.svg'
@@ -20,7 +20,7 @@ const LocationInfo: FC<{ icon?: LocationIcon, text?: string, size?: number }>
 
   return (
     <Tooltip title={type[0]}>
-      <Box position="relative" minWidth={size} width={size}>
+      <Stack position="relative" minWidth={size} width={size}>
         <DropShadowImage src={type[1]} shadowSize="3px" alt={type[0]} width="100%" height="100%"/>
 
         <Typography
@@ -37,7 +37,7 @@ const LocationInfo: FC<{ icon?: LocationIcon, text?: string, size?: number }>
           }}>
           {text}
         </Typography>
-      </Box>
+      </Stack>
     </Tooltip>
   )
 }
