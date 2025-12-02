@@ -29,7 +29,7 @@ const BadgeMapFilterChip: FC<Props> = ({ searchOptions, onChange }) => {
             {value ? BadgeTypes.get(value) : null}
           </Stack>
         </Chip>
-      }/>
+      } nativeButton={false}/>
       <Popover.Portal>
         <Popover.Positioner sideOffset={2}>
           <Popover.Popup render={<Sheet variant="outlined" sx={{ p: 1 }}/>}>

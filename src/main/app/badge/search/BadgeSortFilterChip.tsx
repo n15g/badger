@@ -30,7 +30,7 @@ const BadgeMapFilterChip: FC<Props> = ({ searchOptions, onChange }) => {
             {sortFields.get(value)?.label}
           </Stack>
         </Chip>
-      }/>
+      } nativeButton={false}/>
       <Popover.Portal>
         <Popover.Positioner sideOffset={2}>
           <Popover.Popup render={<Sheet variant="outlined" sx={{ p: 1 }}/>}>
@@ -56,8 +56,8 @@ const BadgeMapFilterChip: FC<Props> = ({ searchOptions, onChange }) => {
               options={sortFields.keys}
               groupBy={(x) => sortFields.get(x)?.label ?? ''}
               renderTags={() => null}
-              getOptionLabel={(zone) => sortFields.get(zone)?.label ?? ''}
               renderOption={(props, option) => (
+                // eslint-disable-next-line react-x/jsx-key-before-spread
                 <AutocompleteOption {...props} key={option}>
                   <ListItemDecorator>
                     {sortFields.get(option)?.asc ? <Icons.Asc/> : <Icons.Desc/>}

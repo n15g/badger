@@ -1,22 +1,32 @@
 import { FC } from 'react'
 import { Zone } from 'coh-content-db'
-import { Link, Tooltip, Typography } from '@mui/joy'
-import ZoneTooltip from './ZoneTooltip.tsx'
+import { Tooltip } from '@mui/joy'
 import ContentProvider from '../content/ContentProvider.tsx'
+import ErrorText from '../util/ErrorText.tsx'
+import ZoneTooltip from '../zone/ZoneTooltip.tsx'
+import { NavLink } from 'react-router'
+import { Icons } from '../util/Icons.tsx'
 
-const ZoneLink: FC<{ zone: Zone | string }> = ({ zone }) => {
+const ZoneLink: FC<{ value: Zone | string }> = ({ value }) => {
   const content = ContentProvider.useContent()
-  const zoneKey = typeof zone === 'string' ? zone : zone.key
-  const zoneEntity = typeof zone === 'string' ? content.getZone(zoneKey) : zone
 
-  if (zoneEntity) {
-    return <Tooltip placement="top" title={<ZoneTooltip zone={zoneEntity}/>}>
-      <Link>
-        {zoneEntity.name}
-      </Link>
-    </Tooltip>
+  const key = typeof value === 'string' ? value : value.key
+  const zone = typeof value === 'string' ? content.getZone(key) : value
+
+  if (zone) {
+    return (
+      <Tooltip placement="top" title={<ZoneTooltip zone={zone}/>}>
+        <NavLink to={`/zone/${key}`} className="entityLink">
+          <span className="entity">{zone.name}</span> <Icons.Zone/>
+        </NavLink>
+      </Tooltip>
+    )
   } else {
-    return <Typography color="danger" title={'Unknown Zone'}>{zoneKey}</Typography>
+    return (
+      <span className="entityLink">
+      <ErrorText title="Unknown zone">{key}</ErrorText> <Icons.Zone/>
+      </span>
+    )
   }
 }
 

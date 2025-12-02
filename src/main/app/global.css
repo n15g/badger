@@ -1,3 +1,5 @@
+@import '@loadingio/loading.css/loading.css';
+
 @font-face {
     font-family: 'Montreal';
     font-style: normal;
@@ -59,6 +61,30 @@
 
         &.loyalist {
             color: var(--loyalist--color);
+        }
+    }
+
+    .hover-zoom {
+        transition: transform .2s ease-in-out;
+
+        &:hover {
+            transform: scale(1.2);
+        }
+    }
+
+    .entity {
+        font-weight: bold;
+    }
+
+    .entityLink {
+        border: rgba(128, 128, 128, 0.5) solid 1px;
+        border-radius: 8px;
+        padding: 3px 4px 1px;
+        text-decoration: none;
+        color: inherit;
+
+        &:hover {
+            background-color: rgba(128, 128, 128, 0.25);
         }
     }
 }

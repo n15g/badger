@@ -36,7 +36,7 @@ const BadgeSearchFieldChip: FC<Props> = ({ searchOptions, onChange }) => {
             {values.length > 1 && `${values.length.toString()} Fields`}
           </Stack>
         </Chip>
-      }/>
+      } nativeButton={false}/>
       <Popover.Portal>
         <Popover.Positioner sideOffset={2}>
           <Popover.Popup render={<Sheet variant="outlined" sx={{ p: 1 }}/>}>
@@ -63,6 +63,7 @@ const BadgeSearchFieldChip: FC<Props> = ({ searchOptions, onChange }) => {
               }}
               options={selectOptions.keys}
               renderOption={(props, option, { selected }) => (
+                // eslint-disable-next-line react-x/jsx-key-before-spread
                 <AutocompleteOption {...props} key={option}>
                   <ListItemDecorator>{selected && <Icons.Check/>}</ListItemDecorator>
                   {selectOptions.get(option)}

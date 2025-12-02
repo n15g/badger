@@ -25,7 +25,7 @@ const MoralityListIcons: FC<{ moralityList: MoralityList, iconSize?: number }> =
   return (
     <Stack direction="row" gap={0.5}>
       {values.map(value => (
-        <Tooltip key={value.key} title={value.title}>
+        <Tooltip key={value.key} title={`${moralityList[value.key] ? '✅' : '❌'} ${value.title}`}>
           <DropShadowImage src={value.icon}
                            shadowSize={moralityList[value.key] ? '2px' : '0'}
                            alt={value.title}

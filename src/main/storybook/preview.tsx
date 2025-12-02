@@ -1,18 +1,16 @@
 // noinspection JSUnusedGlobalSymbols
 
 import type { Preview } from '@storybook/react'
-import { theme } from '../app/theme.ts'
+import { Theme } from '../app/theme.ts'
 import { CssBaseline, CssVarsProvider } from '@mui/joy'
 
 import '../../main/app/global.css'
-import SetTheme from './SetTheme.tsx'
-import { useDarkMode } from 'storybook-dark-mode'
-import { CohContentDatabase } from 'coh-content-db'
-import { HOMECOMING } from 'coh-content-db-homecoming'
 import ContentProvider from '../app/content/ContentProvider.tsx'
 import XLWidth from './XLWidth.tsx'
-
-const content = new CohContentDatabase(HOMECOMING)
+import { STORYBOOK_CONTENT } from './storybook-content.ts'
+import SetTheme from './SetTheme.tsx'
+import { useDarkMode } from '@vueless/storybook-dark-mode'
+import { BrowserRouter } from 'react-router'
 
 const preview: Preview = {
   parameters: {
@@ -20,22 +18,24 @@ const preview: Preview = {
   },
   decorators: [
     Story => (
-      <CssVarsProvider theme={theme} defaultMode="light">
-        <CssBaseline/>
-        <SetTheme mode={useDarkMode() ? 'dark' : 'light'}>
-          <Story/>
-        </SetTheme>
-      </CssVarsProvider>
+      <BrowserRouter>
+        <CssVarsProvider theme={Theme} defaultMode="system">
+          <CssBaseline/>
+          <SetTheme mode={useDarkMode() ? 'dark' : 'light'}>
+            <Story/>
+          </SetTheme>
+        </CssVarsProvider>
+      </BrowserRouter>
     ),
     Story => (
-      <ContentProvider content={content}>
+      <ContentProvider content={STORYBOOK_CONTENT}>
         <Story/>
       </ContentProvider>
     ),
     (Story, { parameters }) => {
       const { xl = false } = parameters
       return xl ? <XLWidth><Story/></XLWidth> : <Story/>
-    }
+    },
   ]
 }
 

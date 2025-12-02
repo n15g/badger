@@ -1,32 +1,34 @@
 // noinspection JSUnusedGlobalSymbols
 
 import BadgeSearchBar from './BadgeSearchBar.tsx'
+import { Meta, StoryObj } from '@storybook/react-vite'
 
-
-export default {
+const meta: Meta<typeof BadgeSearchBar> = {
   title: 'badge/BadgeSearchBar',
   component: BadgeSearchBar,
 }
+export default meta
+type StoryType = StoryObj<typeof meta.component>
 
-export const Defaults = {
+export const Defaults: StoryType = {
   args: {
     searchOptions: BadgeSearchBar.defaultSearch
   },
 }
 
-export const NoFields = {
+export const NoFields: StoryType = {
   args: {
     searchOptions: { query: { fields: [] } }
   },
 }
 
-export const NameSearch = {
+export const NameSearch: StoryType = {
   args: {
     searchOptions: { query: { str: 'Test', fields: ['name'] } }
   },
 }
 
-export const AllFilters = {
+export const AllFilters: StoryType = {
   args: {
     searchOptions: {
       query: { str: 'Test', fields: ['set-title-id'] },
@@ -40,7 +42,7 @@ export const AllFilters = {
   },
 }
 
-export const Long_man = {
+export const Long_man: StoryType = {
   parameters: {
     xl: true,
   },

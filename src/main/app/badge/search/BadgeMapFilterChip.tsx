@@ -31,7 +31,7 @@ const BadgeMapFilterChip: FC<Props> = ({ searchOptions, onChange }) => {
             {zone?.name}
           </Stack>
         </Chip>
-      }/>
+      } nativeButton={false}/>
       <Popover.Portal>
         <Popover.Positioner sideOffset={2}>
           <Popover.Popup render={<Sheet variant="outlined" sx={{ p: 1 }}/>}>

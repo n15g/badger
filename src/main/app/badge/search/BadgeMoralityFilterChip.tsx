@@ -45,7 +45,7 @@ const BadgeMapFilterChip: FC<Props> = ({ searchOptions, onChange }) => {
             {value?.label}
           </Stack>
         </Chip>
-      }/>
+      } nativeButton={false}/>
       <Popover.Portal>
         <Popover.Positioner sideOffset={2}>
           <Popover.Popup render={<Sheet variant="outlined" sx={{ p: 1 }}/>}>
@@ -71,6 +71,7 @@ const BadgeMapFilterChip: FC<Props> = ({ searchOptions, onChange }) => {
               options={options.values}
               getOptionKey={(x) => x.key}
               renderOption={(props, option) => (
+                // eslint-disable-next-line react-x/jsx-key-before-spread
                 <AutocompleteOption {...props} key={option.key}>
                   <ListItemDecorator>
                     <DropShadowImage src={option.icon}

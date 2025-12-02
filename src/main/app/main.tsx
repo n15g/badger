@@ -1,4 +1,3 @@
-import '@loadingio/loading.css/loading.css'
 import './global.css'
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
@@ -9,7 +8,7 @@ import InitColorSchemeScript from '@mui/joy/InitColorSchemeScript'
 import Header from './Header.tsx'
 import BadgeList from './badge/BadgeList.tsx'
 import BadgeView from './badge/BadgeView.tsx'
-import { theme } from './theme.ts'
+import { Theme } from './theme.ts'
 import ErrorProvider from './util/ErrorProvider.tsx'
 import BadgerDbProvider from './db/BadgerDbProvider.tsx'
 import ContentLoader from './content/ContentLoader.tsx'
@@ -24,7 +23,7 @@ createRoot(root).render(
   <StrictMode>
     <InitColorSchemeScript/>
     <BrowserRouter>
-      <CssVarsProvider defaultMode="system" theme={theme}>
+      <CssVarsProvider defaultMode="system" theme={Theme}>
         <CssBaseline/>
         <ErrorProvider>
           <BadgerDbProvider>

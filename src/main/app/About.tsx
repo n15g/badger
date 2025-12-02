@@ -2,8 +2,11 @@ import { Box, Card, CardContent, CardOverflow, Stack, Typography } from '@mui/jo
 import BadgeIcon from './badge/BadgeIcon.tsx'
 import homecomingLogo from '../resources/images/logo/homecoming.png'
 import DropShadowImage from './util/DropShadowImage.tsx'
+import ContentProvider from './content/ContentProvider.tsx'
 
 function About() {
+  const content = ContentProvider.useContent()
+
   return (
     <>
       <Box component="section" sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
@@ -25,10 +28,10 @@ function About() {
           </CardContent>
           <CardOverflow variant="soft" sx={{ display: { xs: 'none', sm: 'flex' }, padding: 4 }}>
             <Stack direction="column" gap={2} sx={{ alignItems: 'center', justifyContent: 'center' }}>
-              <BadgeIcon badge="lobbyist" alignment="hero"/>
-              <BadgeIcon badge="received-the-stalwart-medallion" alignment="hero"/>
-              <BadgeIcon badge="vip" alignment="hero"/>
-              <BadgeIcon badge="reunited" alignment="hero"/>
+              <BadgeIcon badge={content.getBadge('lobbyist')} alignment="hero"/>
+              <BadgeIcon badge={content.getBadge('received-the-stalwart-medallion')} alignment="hero"/>
+              <BadgeIcon badge={content.getBadge('vip')} alignment="hero"/>
+              <BadgeIcon badge={content.getBadge('reunited')} alignment="hero"/>
             </Stack>
           </CardOverflow>
         </Card>

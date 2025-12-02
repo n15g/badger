@@ -1,7 +1,7 @@
 import { Card } from '@mui/joy'
 import { FC, ReactNode } from 'react'
 
-const SetTheme: FC<{ children: ReactNode }> = ({ children }) => {
+const XLWidth: FC<{ children: ReactNode }> = ({ children }) => {
   return (
     <Card sx={{ minWidth: 1024 }}>
       {children}
@@ -9,4 +9,4 @@ const SetTheme: FC<{ children: ReactNode }> = ({ children }) => {
   )
 }
 
-export default SetTheme
+export default XLWidth

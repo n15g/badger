@@ -1,12 +1,12 @@
 import { FC, useState } from 'react'
 import { IconButton, Snackbar, styled, Typography } from '@mui/joy'
-import { Coords } from 'coh-content-db'
+import { Coords as DbCoords } from 'coh-content-db'
 import { Icons } from '../util/Icons.tsx'
 
 const Code = styled('code')(() => ({ userSelect: 'all' }))
 const Sup = styled('sup')(() => ({ cursor: 'pointer' }))
 
-const LocationInfo: FC<{ coords: Coords }> = ({ coords }) => {
+const Coords: FC<{ coords: DbCoords }> = ({ coords }) => {
   const [copyNotificationOpen, setCopyNotificationOpen] = useState(false)
 
   async function copyThumbtack() {
@@ -48,4 +48,4 @@ const LocationInfo: FC<{ coords: Coords }> = ({ coords }) => {
   )
 }
 
-export default LocationInfo
+export default Coords

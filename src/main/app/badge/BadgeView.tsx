@@ -1,9 +1,9 @@
 import { Alert, Box, Card, Typography } from '@mui/joy'
 import { useParams } from 'react-router'
-import BadgeName from './BadgeName.tsx'
 import BadgeIcon from './BadgeIcon.tsx'
 import BadgerMarkdown from '../util/BadgerMarkdown.tsx'
 import ContentProvider from '../content/ContentProvider.tsx'
+import BadgeNameInline from './BadgeNameInline.tsx'
 
 function BadgeList() {
   const content = ContentProvider.useContent()
@@ -18,7 +18,9 @@ function BadgeList() {
 
         <Card>
           <BadgeIcon badge={badge}/>
-          <Typography level="h1"><BadgeName badge={badge}/></Typography>
+          <Typography level="h1">
+            <BadgeNameInline badge={badge}/>
+          </Typography>
           {badge.badgeText.canonical.map((alternate) => (
             <Alert key={`${alternate.sex ?? ''}:${alternate.alignment ?? ''}:${alternate.value}`}>
               <BadgerMarkdown content={alternate.value}/>

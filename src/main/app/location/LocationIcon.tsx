@@ -1,6 +1,6 @@
 import { FC } from 'react'
 import { Stack, Tooltip, Typography, useTheme } from '@mui/joy'
-import { LocationIcon } from 'coh-content-db'
+import { LocationIcon as DbLocationIcon } from 'coh-content-db'
 
 import badgeIcon from '../../resources/images/icon/location-badge.svg'
 import plaqueIcon from '../../resources/images/icon/location-plaque.svg'
@@ -8,7 +8,7 @@ import pedestalIcon from '../../resources/images/icon/location-pedestal.svg'
 import objectIcon from '../../resources/images/icon/location-object.svg'
 import DropShadowImage from '../util/DropShadowImage.tsx'
 
-const LocationInfo: FC<{ icon?: LocationIcon, text?: string, size?: number }>
+const LocationIcon: FC<{ icon?: DbLocationIcon, text?: string, size?: number }>
   = ({ icon, text, size = 32 }) => {
   const theme = useTheme()
   const type = {
@@ -42,4 +42,4 @@ const LocationInfo: FC<{ icon?: LocationIcon, text?: string, size?: number }>
   )
 }
 
-export default LocationInfo
+export default LocationIcon
