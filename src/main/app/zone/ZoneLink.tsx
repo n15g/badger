@@ -16,7 +16,7 @@ const ZoneLink: FC<{ value: Zone | string }> = ({ value }) => {
   if (zone) {
     return (
       <Tooltip placement="top" title={<ZoneTooltip zone={zone}/>}>
-        <NavLink to={`/zone/${key}`} className="entityLink">
+        <NavLink to={`/zones/${key}`} className="entityLink">
           <span className="entity">{zone.name}</span> <Icons.Zone/>
         </NavLink>
       </Tooltip>

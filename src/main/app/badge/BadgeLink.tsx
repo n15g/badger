@@ -17,7 +17,7 @@ const BadgeLink: FC<{ value: Badge | string }> = ({ value }) => {
   if (entity) {
     return (
       <Tooltip placement="top" title={<BadgeTooltip badge={entity}/>}>
-        <NavLink to={`/badge/${key}`} className="entityLink">
+        <NavLink to={`/badges/${key}`} className="entityLink">
           <BadgeNameInline badge={entity}/> <Icons.Badge/>
         </NavLink>
       </Tooltip>
