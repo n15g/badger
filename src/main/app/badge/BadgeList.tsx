@@ -2,7 +2,6 @@ import { Box, Card, Stack, styled, Table, Typography } from '@mui/joy'
 import { NavLink } from 'react-router'
 import { useSessionStorage } from '../util/use-session-storage.ts'
 import Pagination from '../util/Pagination.tsx'
-import BadgeType from './BadgeType.tsx'
 import BadgeIcon from './BadgeIcon.tsx'
 import { BadgeSearchOptions } from 'coh-content-db'
 import { FC, ReactNode } from 'react'
@@ -11,6 +10,10 @@ import ContentProvider from '../content/ContentProvider.tsx'
 import BadgeSearchBar from './search/BadgeSearchBar.tsx'
 import BadgeAcquisitionPreview from './BadgeAcquisitionPreview.tsx'
 import BadgeNameInline from './BadgeNameInline.tsx'
+import MainSection from '../util/MainSection.tsx'
+import { BadgeTypes } from './BadgeTypes.tsx'
+import SectionTitle from '../util/SectionTitle.tsx'
+import { Icons } from '../util/Icons.tsx'
 
 const TD = styled('td')(() => ({}))
 const TH = styled('th')(() => ({}))
@@ -23,10 +26,10 @@ function BadgeList() {
   const badges = content.searchBadges(searchOptions)
 
   return (
-    <Box component="section" sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-      <title>Badge List</title>
+    <MainSection label="Badges">
+      <SectionTitle><Icons.Badge/> Badges</SectionTitle>
 
-      <Card sx={{ my: 8, mx: 2, maxWidth: 1800 }}>
+      <Card>
         <BadgeSearchBar searchOptions={searchOptions} onChange={setSearchOptions}></BadgeSearchBar>
         <Pagination paged={badges} onChange={(page, pageSize) => {
           setSearchOptions({ ...searchOptions, page: page, pageSize: pageSize })
@@ -51,7 +54,7 @@ function BadgeList() {
                   </Box>
                 </RowLink>
               </TD>
-              <TD className="game-text">
+              <TD>
                 <RowLink to={badge.key}>
                   <BadgeNameInline badge={badge}/>
                 </RowLink>
@@ -59,7 +62,7 @@ function BadgeList() {
               <TD sx={{ ...hideOnSmall }}>
                 <RowLink to={badge.key}>
                   <Stack direction="column" spacing={2} alignItems="center">
-                    <Typography><BadgeType badge={badge}/></Typography>
+                    <Typography>{BadgeTypes.get(badge.type)}</Typography>
                     <MoralityListIcons moralityList={badge.morality}/>
                   </Stack>
                 </RowLink>
@@ -77,7 +80,7 @@ function BadgeList() {
         }}/>
       </Card>
 
-    </Box>
+    </MainSection>
   )
 }
 

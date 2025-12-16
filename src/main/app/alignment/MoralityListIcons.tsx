@@ -19,7 +19,7 @@ const values: { key: keyof MoralityList, title: string, icon: string }[] = [
   { key: 'loyalist', title: 'Loyalist', icon: loyalistIcon },
 ]
 
-const disabled: SxProps = { userSelect: 'none', opacity: 0.2 }
+const disabled: SxProps = { userSelect: 'none', opacity: 0.1 }
 
 const MoralityListIcons: FC<{ moralityList: MoralityList, iconSize?: number }> = ({ moralityList, iconSize = 16 }) => {
   return (
@@ -30,6 +30,7 @@ const MoralityListIcons: FC<{ moralityList: MoralityList, iconSize?: number }> =
                            shadowSize={moralityList[value.key] ? '2px' : '0'}
                            alt={value.title}
                            width={iconSize}
+                           height={iconSize}
                            sx={moralityList[value.key] ? {} : disabled}/>
         </Tooltip>
       ))}

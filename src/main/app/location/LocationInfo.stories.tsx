@@ -4,6 +4,7 @@ import LocationInfo from './LocationInfo.tsx'
 import { Location } from 'coh-content-db'
 import { STORYBOOK_CONTENT } from '../../storybook/storybook-content.ts'
 import { Meta, StoryObj } from '@storybook/react-vite'
+import { Box } from '@mui/joy'
 
 const meta: Meta<typeof LocationInfo> = {
   title: 'location/LocationInfo',
@@ -72,3 +73,16 @@ export const Empty: StoryType = {
     location: undefined
   },
 }
+
+export const In_Wide_Container: StoryType = {
+  args: {
+    location: STORYBOOK_CONTENT.getContact('anti-matter')?.location
+  },
+}
+In_Wide_Container.decorators = [
+  (Story) => (
+    <Box sx={{ minWidth: 600 }}>
+      <Story/>
+    </Box>
+  )
+]

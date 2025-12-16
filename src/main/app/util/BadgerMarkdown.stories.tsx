@@ -16,6 +16,18 @@ export const Badge_Link: StoryType = {
   },
 }
 
+export const Contact_Link: StoryType = {
+  args: {
+    content: 'This is some markdown content with a [anti-matter](contact://anti-matter) contact link'
+  },
+}
+
+export const Mission_Link: StoryType = {
+  args: {
+    content: 'This is some markdown content with a [abandoned-sewers-trial](mission://abandoned-sewers-trial) mission link'
+  },
+}
+
 export const Zone_Link: StoryType = {
   args: {
     content: 'This is some markdown content with a [rikti-war-zone](zone://rikti-war-zone) badge link'

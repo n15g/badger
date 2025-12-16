@@ -1,17 +1,15 @@
 import './global.css'
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
-import About from './About.tsx'
-import { BrowserRouter, Route, Routes } from 'react-router'
+import { BrowserRouter } from 'react-router'
 import { Box, CssBaseline, CssVarsProvider } from '@mui/joy'
 import InitColorSchemeScript from '@mui/joy/InitColorSchemeScript'
 import Header from './Header.tsx'
-import BadgeList from './badge/BadgeList.tsx'
-import BadgeView from './badge/BadgeView.tsx'
 import { Theme } from './theme.ts'
 import ErrorProvider from './util/ErrorProvider.tsx'
 import BadgerDbProvider from './db/BadgerDbProvider.tsx'
 import ContentLoader from './content/ContentLoader.tsx'
+import BadgerRoutes from './BadgerRoutes.tsx'
 
 const root = document.getElementById('root')
 
@@ -42,11 +40,7 @@ createRoot(root).render(
                   gap: 1,
                   overflow: 'auto',
                 }}>
-                <Routes>
-                  <Route path="/" element={<About/>}></Route>
-                  <Route path="/badges" element={<BadgeList/>}></Route>
-                  <Route path="/badges/:badgeKey" element={<BadgeView/>}></Route>
-                </Routes>
+                <BadgerRoutes/>
               </Box>
             </ContentLoader>
           </BadgerDbProvider>

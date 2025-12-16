@@ -87,4 +87,23 @@
             background-color: rgba(128, 128, 128, 0.25);
         }
     }
+
+    blockquote {
+        margin: 0;
+        border-left: 4px solid; /* A nice green color */
+        padding: 0 0 0 15px;
+        font-style: italic;
+
+        &.hero {
+            border-color: var(--hero-color);
+        }
+
+        &.villain {
+            border-color: var(--villain-color);
+        }
+
+        &.praetorian {
+            border-color: var(--praetorian--color);
+        }
+    }
 }

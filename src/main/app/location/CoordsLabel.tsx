@@ -1,12 +1,13 @@
 import { FC, useState } from 'react'
-import { IconButton, Snackbar, styled, Typography } from '@mui/joy'
-import { Coords as DbCoords } from 'coh-content-db'
+import { styled, Typography } from '@mui/joy'
 import { Icons } from '../util/Icons.tsx'
+import CopyNotification from '../util/CopyNotification.tsx'
+import { Coords } from 'coh-content-db'
 
 const Code = styled('code')(() => ({ userSelect: 'all' }))
 const Sup = styled('sup')(() => ({ cursor: 'pointer' }))
 
-const Coords: FC<{ coords: DbCoords }> = ({ coords }) => {
+const CoordsLabel: FC<{ coords: Coords }> = ({ coords }) => {
   const [copyNotificationOpen, setCopyNotificationOpen] = useState(false)
 
   async function copyThumbtack() {
@@ -26,26 +27,11 @@ const Coords: FC<{ coords: DbCoords }> = ({ coords }) => {
           </Sup>
         </Code>
       </Typography>
-      <Snackbar open={copyNotificationOpen}
-                color="success"
-                variant="soft"
-                autoHideDuration={2000}
-                onClose={() => {
-                  setCopyNotificationOpen(false)
-                }}
-                endDecorator={
-                  <IconButton
-                    onClick={() => {
-                      setCopyNotificationOpen(false)
-                    }}
-                  >
-                    <Icons.Cross/>
-                  </IconButton>
-                }>
-        Copied to clipboard!
-      </Snackbar>
+      <CopyNotification open={copyNotificationOpen} onClose={() => {
+        setCopyNotificationOpen(false)
+      }}/>
     </>
   )
 }
 
-export default Coords
+export default CoordsLabel

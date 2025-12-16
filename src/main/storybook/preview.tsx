@@ -15,6 +15,11 @@ import { BrowserRouter } from 'react-router'
 const preview: Preview = {
   parameters: {
     layout: 'centered',
+    options: {
+      storySort: {
+        method: 'alphabetical'
+      }
+    }
   },
   decorators: [
     Story => (

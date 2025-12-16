@@ -1,35 +1,25 @@
-import {
-  MdCheck,
-  MdClose,
-  MdContentCopy,
-  MdGroups,
-  MdLocalPolice,
-  MdMenuBook,
-  MdOutlineHistory,
-  MdPersonPin,
-  MdSearch,
-  MdWarning
-} from 'react-icons/md'
+import { MdCheck, MdClose, MdContentCopy, MdLocalPolice, MdSearch, MdWarning } from 'react-icons/md'
 import { PiCompassRoseFill, PiGenderFemale, PiGenderMale } from 'react-icons/pi'
-import { FaExternalLinkAlt, FaMedal, FaSortAlphaDownAlt, FaSortAlphaUp, FaSpinner } from 'react-icons/fa'
+import { FaAward, FaExternalLinkAlt, FaSortAlphaDownAlt, FaSortAlphaUp, FaSpinner } from 'react-icons/fa'
 import { GrDocumentMissing } from 'react-icons/gr'
 import { GoChevronLeft, GoChevronRight, GoMoveToEnd, GoMoveToStart } from 'react-icons/go'
-import { RxReset } from 'react-icons/rx'
+import { RxChevronRight, RxReset } from 'react-icons/rx'
 import { BiSortAlt2 } from 'react-icons/bi'
 import { Sex } from 'coh-content-db'
 import { ReactNode } from 'react'
+import { IoMdCheckboxOutline } from 'react-icons/io'
+import { TbCalendarStar, TbLabel, TbNotes } from 'react-icons/tb'
+import { BsPersonCircle } from 'react-icons/bs'
+import { ImTarget } from 'react-icons/im'
 
 /**
  * Use icons from here for consistency across the app
  */
 export const Icons = {
   Zone: PiCompassRoseFill,
-  Badge: FaMedal,
-  Contact: MdPersonPin,
-
-  Mission: MdOutlineHistory,
-  Arc: MdMenuBook,
-  Group: MdGroups,
+  Badge: FaAward,
+  Contact: BsPersonCircle,
+  Mission: ImTarget,
 
   Morality: MdLocalPolice,
 
@@ -46,14 +36,19 @@ export const Icons = {
   },
 
   Cross: MdClose,
+  ReleaseDate: TbCalendarStar,
+  SetTitle: TbLabel,
   Alert: MdWarning,
   Reset: RxReset,
+  Breadcrumb: RxChevronRight,
   Check: MdCheck,
   Copy: MdContentCopy,
   Search: MdSearch,
   Spinner: FaSpinner,
   Missing: GrDocumentMissing,
   Link: FaExternalLinkAlt,
+  Acquisition: IoMdCheckboxOutline,
+  Notes: TbNotes,
 
   Sort: BiSortAlt2,
   Asc: FaSortAlphaUp,

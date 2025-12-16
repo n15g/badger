@@ -34,7 +34,10 @@ export default tseslint.config({ ignores: ['dist'] }, {
       'warn',
       { allowConstantExport: true },
     ],
-    'semi': ['error', 'never']
+    'semi': ['error', 'never'],
+    '@typescript-eslint/restrict-template-expressions': ['error', {
+      allowNumber: true
+    }],
   },
 }, {
   plugins: {
