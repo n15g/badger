@@ -5,7 +5,7 @@ import { Typography } from '@mui/joy'
 import BadgeLink from './BadgeLink.tsx'
 
 
-const BadgeAcquisitionPreview: FC<{ badge: Badge }> = ({ badge }) => {
+const BadgeAcquisitionSummary: FC<{ badge: Badge }> = ({ badge }) => {
   const { acquisition, requirements, notes } = badge
 
   if (acquisition) {
@@ -43,4 +43,4 @@ const BadgeAcquisitionPreview: FC<{ badge: Badge }> = ({ badge }) => {
   return <Typography color="neutral" fontStyle="italic">Unknown</Typography>
 }
 
-export default BadgeAcquisitionPreview
+export default BadgeAcquisitionSummary

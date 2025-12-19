@@ -27,6 +27,6 @@ export const SmartImage: FC<Props> = ({ src, alt, sx, ...props }) => {
       sx={sx}
       {...props}
     />
-    {!loaded && <Icons.Spinner className="ld ld-spin" size={32}/>}
+    {!loaded && <Icons.Spinner className="ld ld-spin"/>}
   </Box>
 }

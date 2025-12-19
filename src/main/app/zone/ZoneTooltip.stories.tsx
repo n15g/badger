@@ -17,3 +17,8 @@ export const Default: StoryType = {
   },
 }
 
+export const Bloody_bay: StoryType = {
+  args: {
+    zone: STORYBOOK_CONTENT.getZone('bloody-bay')
+  },
+}

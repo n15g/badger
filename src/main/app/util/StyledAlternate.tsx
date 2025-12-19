@@ -4,10 +4,19 @@ import { Icons } from './Icons.tsx'
 import { Typography } from '@mui/joy'
 import MoralityColored from '../alignment/MoralityColored.tsx'
 
-const StyledAlternate: FC<{ value?: AlternateData<string> }> = ({ value }) => {
+const StyledAlternate: FC<{ value: AlternateData<string> }> = ({ value }) => {
+  const { sex, value: text, alignment } = value
+  let decorator = undefined
+
+  if (sex === 'M') {
+    decorator = <Icons.Male/>
+  } else if (sex === 'F') {
+    decorator = <Icons.Female/>
+  }
+
   return <>
-    <Typography startDecorator={Icons.forSex(value?.sex)}>
-      <MoralityColored morality={value?.alignment}>{value?.value ?? 'Unknown'}</MoralityColored>
+    <Typography>
+      <MoralityColored morality={alignment}>{text}</MoralityColored><sup style={{ fontSize: '0.7em' }}>{decorator}</sup>
     </Typography>
   </>
 }

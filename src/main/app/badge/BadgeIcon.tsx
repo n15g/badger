@@ -5,8 +5,10 @@ import { SmartImage } from '../util/SmartImage.tsx'
 const BadgeIcon: FC<{
   badge: Badge | undefined,
   alignment?: Alignment,
-  sex?: Sex
-}> = ({ badge, alignment, sex }) => {
+  sex?: Sex,
+  width?: number | string,
+  height?: number | string,
+}> = ({ badge, alignment, sex, width, height }) => {
   if (badge) {
     return <SmartImage
       src={badge.icon.getValue(alignment, sex)}
@@ -16,6 +18,7 @@ const BadgeIcon: FC<{
           filter: `drop-shadow(0 0 4px ${theme.palette.text.icon})`,
         }
       }}
+      style={{ width: width, height: height }}
     />
   }
 }

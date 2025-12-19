@@ -1,8 +1,22 @@
-import { Alert, Box, Breadcrumbs, Card, CardOverflow, Divider, Stack, Typography } from '@mui/joy'
+import {
+  Box,
+  Breadcrumbs,
+  Card,
+  CardOverflow,
+  Checkbox,
+  Divider,
+  List,
+  ListDivider,
+  ListItem,
+  ListItemContent,
+  ListItemDecorator,
+  Stack,
+  Typography
+} from '@mui/joy'
 import BadgeIcon from './BadgeIcon.tsx'
 import BadgerMarkdown from '../util/BadgerMarkdown.tsx'
 import { Badge } from 'coh-content-db'
-import { FC } from 'react'
+import { FC, Fragment } from 'react'
 import { Icons } from '../util/Icons.tsx'
 import MoralityListIcons from '../alignment/MoralityListIcons.tsx'
 import SmartLink from '../util/SmartLink.tsx'
@@ -10,12 +24,13 @@ import { NavLink } from 'react-router'
 import MainSection from '../util/MainSection.tsx'
 import { BadgeTypes } from './BadgeTypes.tsx'
 import SectionTitle from '../util/SectionTitle.tsx'
-import BadgeNameInline from './BadgeNameInline.tsx'
 import ReleaseDate from '../util/ReleaseDate.tsx'
 import SetTitleLabel from './SetTitleLabel.tsx'
+import RequirementListItem from './RequirementListItem.tsx'
+import BadgeNameList from './BadgeNameList.tsx'
 
 const BadgeView: FC<{ badge: Badge }> = ({ badge }) => {
-  const { name, type, badgeText, morality, links, acquisition, notes, effect, releaseDate, setTitleId } = badge
+  const { name, type, badgeText, morality, links, acquisition, requirements, notes, effect, releaseDate, setTitleId } = badge
 
   return (
     <MainSection label={name.toString(' / ')}>
@@ -31,47 +46,20 @@ const BadgeView: FC<{ badge: Badge }> = ({ badge }) => {
         </CardOverflow>
 
         <Box>
-          <SectionTitle><BadgeNameInline badge={badge}/></SectionTitle>
+          <SectionTitle>
+            <BadgeNameList badge={badge}/>
+          </SectionTitle>
         </Box>
 
         <Stack
           sx={{
-            flexDirection: { xs: 'column-reverse', sm: 'row' },
+            flexDirection: { xs: 'column', sm: 'row-reverse' },
+            justifyContent: 'space-between',
             gap: 2
           }}>
 
-          {/* Detail Panel*/}
-          <Stack gap={2}>
-            <Box>
-              {badgeText.canonical.map((alternate) => (
-                <blockquote key={alternate.value} className={alternate.alignment}>
-                  <Typography component="span" level="body-xs">
-                    <BadgerMarkdown content={alternate.value}/>
-                  </Typography>
-                </blockquote>
-              ))}
-            </Box>
-
-            <Alert startDecorator={<Icons.Acquisition size={32}/>} color="success">
-              <div>
-                <Typography level="body-md">Acquisition</Typography>
-
-                TODO: Detailed acquisition
-
-                {acquisition && <BadgerMarkdown content={acquisition}/>}
-              </div>
-            </Alert>
-
-            <Alert startDecorator={<Icons.Notes size={32}/>}>
-              <Stack>
-                <Typography level="body-md">Notes</Typography>
-                {notes ? <BadgerMarkdown content={notes}/> : <em>No notes</em>}
-              </Stack>
-            </Alert>
-          </Stack>
-
           {/* Info Panel*/}
-          <Card>
+          <Card sx={{ minWidth: 240 }}>
             <Stack gap={2} alignItems="center">
 
               <Typography startDecorator={<Icons.Badge/>}>{BadgeTypes.get(type)}</Typography>
@@ -91,9 +79,13 @@ const BadgeView: FC<{ badge: Badge }> = ({ badge }) => {
 
               {links.length > 0 && (<>
                 <Divider/>
-                {links.map(link => (
-                  <SmartLink key={link.href} href={link.href}>{link.title}</SmartLink>
-                ))}
+                <List>
+                  {links.map(link => (
+                    <ListItem key={link.href}>
+                      <Typography startDecorator={<Icons.Link/>}><SmartLink href={link.href}>{link.title}</SmartLink></Typography>
+                    </ListItem>
+                  ))}
+                </List>
               </>)}
 
               <Divider/>
@@ -101,6 +93,55 @@ const BadgeView: FC<{ badge: Badge }> = ({ badge }) => {
 
             </Stack>
           </Card>
+
+          {/* Detail Panel*/}
+          <Stack gap={2} flexGrow={1}>
+            <Box>
+              {badgeText.canonical.map((alternate) => (
+                <blockquote key={alternate.value} className={alternate.alignment}>
+                  <Typography component="span" level="body-xs">
+                    <BadgerMarkdown content={alternate.value}/>
+                  </Typography>
+                </blockquote>
+              ))}
+            </Box>
+
+            <Card variant="soft">
+              <Typography level="title-md" startDecorator={<Icons.Acquisition/>}>Requirements</Typography>
+              <Box sx={{ pl: 1 }}>
+
+                {acquisition && (
+                  <Typography component="span" level="body-md"><BadgerMarkdown content={acquisition}/></Typography>
+                )}
+
+                {requirements.length > 0 && (
+                  <List size="sm">
+                    {requirements.length > 1 && <ListDivider inset="startContent"/>}
+                    {requirements.map((requirement) => (
+                      <Fragment key={requirement.key}>
+                        <ListItem>
+                          <ListItemDecorator><Checkbox/></ListItemDecorator>
+                          <ListItemContent>
+                            <RequirementListItem requirement={requirement}/>
+                          </ListItemContent>
+                        </ListItem>
+                        {requirements.length > 1 && <ListDivider inset="startContent"/>}
+                      </Fragment>
+                    ))}
+                  </List>
+                )}
+
+              </Box>
+            </Card>
+
+            <Card>
+              <Typography level="title-md" startDecorator={<Icons.Notes/>}>Notes</Typography>
+              <Box sx={{ pl: 1 }}>
+                <Typography component="span" level={'body-sm'}>{notes ? <BadgerMarkdown content={notes}/> : <em>No notes</em>}</Typography>
+              </Box>
+            </Card>
+          </Stack>
+
         </Stack>
       </Card>
     </MainSection>

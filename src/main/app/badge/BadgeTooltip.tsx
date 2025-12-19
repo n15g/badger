@@ -29,7 +29,7 @@ export const BadgeCardTooltip: FC<Props> = ({ badge }) => {
 
       <Stack direction="column" spacing={1} alignItems="center">
         <NavLink to={`/badge/${badgeKey}`} style={{ textDecoration: 'none', color: 'inherit' }}>
-          <Typography textAlign="center" level="title-lg"><BadgeNameList badge={badge}/></Typography>
+          <Typography component="span" textAlign="center" level="title-lg"><BadgeNameList badge={badge}/></Typography>
         </NavLink>
 
         <Stack

@@ -8,8 +8,8 @@ import pedestalIcon from '../../resources/images/icon/location-pedestal.svg'
 import objectIcon from '../../resources/images/icon/location-object.svg'
 import DropShadowImage from '../util/DropShadowImage.tsx'
 
-const LocationIcon: FC<{ icon?: DbLocationIcon, text?: string, size?: number }>
-  = ({ icon, text, size = 32 }) => {
+const LocationIcon: FC<{ icon?: DbLocationIcon, text?: string, height?: number | string }>
+  = ({ icon, text }) => {
   const theme = useTheme()
   const type = {
     'badge': ['Badge', badgeIcon],
@@ -20,18 +20,19 @@ const LocationIcon: FC<{ icon?: DbLocationIcon, text?: string, size?: number }>
 
   return (
     <Tooltip title={type[0]}>
-      <Stack position="relative" minWidth={size} width={size}>
+      <Stack position="relative" sx={{ height: '1.2em', top: '0.2em' }}>
         <DropShadowImage src={type[1]} shadowSize="3px" alt={type[0]} width="100%" height="100%"/>
 
         <Typography
           level="body-sm"
           position="absolute"
-          top="45%"
+          top="50%"
           left="50%"
           sx={{
             transform: 'translate(-50%, -50%)',
             pointerEvents: 'none',
             fontWeight: 'bold',
+            fontSize: '0.6em',
             color: theme.palette.common.black,
             textShadow: `0 0 4px ${theme.palette.common.white}`,
           }}>

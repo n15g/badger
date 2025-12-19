@@ -1,11 +1,11 @@
 import { FC, ReactNode } from 'react'
-import { Link } from '@mui/joy'
+import { Link, Typography } from '@mui/joy'
 import BadgeLink from '../badge/BadgeLink.tsx'
-import { Icons } from './Icons.tsx'
 import { getDomainConfig } from './ExternalDomains.ts'
 import ZoneLink from '../zone/ZoneLink.tsx'
 import ContactLink from '../contact/ContactLink.tsx'
 import MissionLink from '../mission/MissionLink.tsx'
+import { Icons } from './Icons.tsx'
 
 const SmartLink: FC<{ href: string, children: ReactNode }> = ({ href, children }) => {
 
@@ -27,18 +27,16 @@ const SmartLink: FC<{ href: string, children: ReactNode }> = ({ href, children }
   }
 
   const domainConfig = getDomainConfig(url.host)
-  const icon = domainConfig ?
-    <img src={domainConfig.logo} alt={domainConfig.alt} title={domainConfig.alt} height={12} style={{ paddingRight: 4 }}/> : undefined
+  const icon = domainConfig
+    ? <img src={domainConfig.logo} alt={domainConfig.alt} title={domainConfig.alt} height={16} style={{ paddingLeft: 4 }}/>
+    : <Icons.ExternalLink height={16} style={{ paddingLeft: 4 }}/>
 
   return (
-    <span>
-      <Link href={href}
-            startDecorator={icon}
-            endDecorator={<Icons.Link style={{ paddingLeft: '4px' }}/>
-            }>
+    <Typography component="span">
+      <Link href={href} endDecorator={icon}>
         {children}
       </Link>
-    </span>
+    </Typography>
   )
 }
 

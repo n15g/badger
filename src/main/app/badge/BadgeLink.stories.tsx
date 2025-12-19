@@ -57,3 +57,9 @@ export const Unknown_Key: StoryType = {
     value: 'invalid-key'
   },
 }
+
+export const Undefined: StoryType = {
+  args: {
+    value: undefined
+  },
+}

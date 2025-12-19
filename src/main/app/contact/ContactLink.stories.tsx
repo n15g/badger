@@ -29,3 +29,8 @@ export const Unknown_Key: StoryType = {
   },
 }
 
+export const Undefined: StoryType = {
+  args: {
+    value: undefined
+  },
+}

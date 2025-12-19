@@ -33,3 +33,15 @@ export const ZoneLink: StoryType = {
     href: 'zone://atlas-park'
   },
 }
+
+export const Homecoming_Wiki_Link: StoryType = {
+  render: () => (<SmartLink href={'https://homecoming.wiki/Test'}>Homecoming Wiki Link</SmartLink>)
+}
+
+export const Paragon_Wiki_Link: StoryType = {
+  render: () => (<SmartLink href={'https://archive.paragonwiki.com/Test'}>Paragon Wiki Link</SmartLink>)
+}
+
+export const Other_External_Link: StoryType = {
+  render: () => (<SmartLink href={'https://google.com'}>Google Link</SmartLink>)
+}

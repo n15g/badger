@@ -1,5 +1,5 @@
 import { FC, useState } from 'react'
-import { styled, Typography } from '@mui/joy'
+import { styled } from '@mui/joy'
 import { Icons } from '../util/Icons.tsx'
 import CopyNotification from '../util/CopyNotification.tsx'
 import { Coords } from 'coh-content-db'
@@ -16,9 +16,8 @@ const CoordsLabel: FC<{ coords: Coords }> = ({ coords }) => {
   }
 
   return (
-    <>
-      <Typography level="body-xs">
-        <Code>
+    <span>
+        <Code sx={{fontSize: '0.7em'}}>
           [{coords[0].toFixed(1)}, {coords[1].toFixed(1)}, {coords[2].toFixed(1)}]
           <Sup onClick={() => {
             void copyThumbtack()
@@ -26,11 +25,10 @@ const CoordsLabel: FC<{ coords: Coords }> = ({ coords }) => {
             <Icons.Copy/>
           </Sup>
         </Code>
-      </Typography>
       <CopyNotification open={copyNotificationOpen} onClose={() => {
         setCopyNotificationOpen(false)
       }}/>
-    </>
+    </span>
   )
 }
 

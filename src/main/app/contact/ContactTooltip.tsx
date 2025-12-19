@@ -4,7 +4,7 @@ import { Breadcrumbs, Card, CardOverflow, Divider, Stack, Typography } from '@mu
 import { Icons } from '../util/Icons.tsx'
 import { NavLink } from 'react-router'
 import MoralityListIcons from '../alignment/MoralityListIcons.tsx'
-import LocationInfo from '../location/LocationInfo.tsx'
+import LocationLink from '../location/LocationLink.tsx'
 import LevelRangeLabel from '../util/LevelRangeLabel.tsx'
 
 const ContactTooltip: FC<{ contact: Contact }> = ({ contact }) => {
@@ -32,7 +32,7 @@ const ContactTooltip: FC<{ contact: Contact }> = ({ contact }) => {
 
         {contact.location && (<>
           <Divider/>
-          <LocationInfo location={contact.location}/>
+          <LocationLink location={contact.location}/>
         </>)}
       </Stack>
 

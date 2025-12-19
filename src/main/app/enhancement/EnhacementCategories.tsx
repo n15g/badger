@@ -1,0 +1,31 @@
+import { EnhancementCategory } from 'coh-content-db'
+import { TypedIndex } from '../util/typed-index.ts'
+
+export const EnhancementCategories = new TypedIndex<EnhancementCategory, string>({
+  'defense-debuff': 'Defense Debuff',
+  'to-hit-debuff': 'To-hit Debuff',
+  'taunt': 'Taunt',
+  'confuse': 'Confuse',
+  'healing': 'Healing',
+  'defense-buff': 'Defense Buff',
+  'resist-damage': 'Resist Damage',
+  'intangibility': 'Intangibility',
+  'sleep': 'Sleep',
+  'slow': 'Slow',
+  'hold': 'Hold',
+  'stun': 'Stun',
+  'immobilize': 'Immobilize',
+  'fear': 'Fear',
+  'endurance-modification': 'Endurance Modification',
+  'endurance-reduction': 'Endurance Reduction',
+  'recharge-reduction': 'Recharge Reduction',
+  'interrupt-duration': 'Interrupt Duration',
+  'accuracy': 'Accuracy',
+  'to-hit-buff': 'To-hit-Buff',
+  'damage': 'Damage',
+  'knockback': 'Knockback',
+  'run-speed': 'Run Speed',
+  'jump': 'Jump',
+  'fly-speed': 'Fly Speed',
+  'range': 'Range',
+})

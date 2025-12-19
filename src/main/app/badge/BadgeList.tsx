@@ -8,7 +8,7 @@ import { FC, ReactNode } from 'react'
 import MoralityListIcons from '../alignment/MoralityListIcons.tsx'
 import ContentProvider from '../content/ContentProvider.tsx'
 import BadgeSearchBar from './search/BadgeSearchBar.tsx'
-import BadgeAcquisitionPreview from './BadgeAcquisitionPreview.tsx'
+import BadgeAcquisitionSummary from './BadgeAcquisitionSummary.tsx'
 import BadgeNameInline from './BadgeNameInline.tsx'
 import MainSection from '../util/MainSection.tsx'
 import { BadgeTypes } from './BadgeTypes.tsx'
@@ -68,7 +68,7 @@ function BadgeList() {
                 </RowLink>
               </TD>
               <TD sx={{ ...hideOnSmall }}>
-                <BadgeAcquisitionPreview badge={badge}/>
+                <BadgeAcquisitionSummary badge={badge}/>
               </TD>
             </tr>
           ))

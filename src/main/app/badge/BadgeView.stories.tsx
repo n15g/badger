@@ -17,6 +17,24 @@ export const Exploration: StoryType = {
   },
 }
 
+export const Multi_Location: StoryType = {
+  args: {
+    badge: STORYBOOK_CONTENT.getBadge('urban-spelunker')
+  },
+}
+
+export const Accolade: StoryType = {
+  args: {
+    badge: STORYBOOK_CONTENT.getBadge('received-the-atlas-medallion')
+  },
+}
+
+export const History: StoryType = {
+  args: {
+    badge: STORYBOOK_CONTENT.getBadge('patron-of-the-arts')
+  },
+}
+
 export const With_Acquisition: StoryType = {
   args: {
     badge: STORYBOOK_CONTENT.getBadge('generational-trauma'),
@@ -31,6 +49,12 @@ export const Multiple_BadgeText: StoryType = {
 
 export const With_Effect: StoryType = {
   args: {
-    badge: STORYBOOK_CONTENT.badges.find((badge) => badge.effect),
+    badge: STORYBOOK_CONTENT.getBadge('gold-standard'),
+  },
+}
+
+export const Invention: StoryType = {
+  args: {
+    badge: STORYBOOK_CONTENT.getBadge('decaying'),
   },
 }

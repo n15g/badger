@@ -7,8 +7,7 @@ const config: StorybookConfig = {
     '../app/**/*.stories.@(ts|tsx|js|jsx)'
   ],
   addons: [
-    '@vueless/storybook-dark-mode',
-    'storybook-addon-remix-react-router'
+    '@vueless/storybook-dark-mode'
   ],
   framework: {
     'name': '@storybook/react-vite',
