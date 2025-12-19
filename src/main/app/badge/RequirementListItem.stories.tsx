@@ -2,7 +2,6 @@
 
 import RequirementListItem from './RequirementListItem.tsx'
 import { Meta, StoryObj } from '@storybook/react-vite'
-import { KallistiWharf } from '../../../../../coh-content-db-homecoming/src/main/ts/zone/kallisti-wharf.ts'
 
 const meta: Meta<typeof RequirementListItem> = {
   title: 'badge/RequirementListItem',
@@ -103,7 +102,7 @@ export const Monument: StoryType = {
     requirement: {
       key: 'patr-0',
       type: 'monument',
-      location: [{ zoneKey: KallistiWharf.key, coords: [1997.9, 47.5, 423], icon: 'plaque', iconText: '20' }],
+      location: [{ zoneKey: 'kallisti-wharf', coords: [1997.9, 47.5, 423], icon: 'plaque', iconText: '20' }],
       monumentText: `Theatre Row was a place of fashion and culture for decades. It truly rose to fame in the 1910s and 1920s when Kallisti Wharf was booming with trade, shipping, and immigration.
 It was renowned for its unique street food, art festivals, and numerous theaters, quickly developing into a major tourist trap.
 By the late 1930s the Paragon Showcase sprang up, a rival film festival to the nascent Cannes and Venice Film Festivals.`,
@@ -117,7 +116,7 @@ export const Monument_With_All: StoryType = {
     requirement: {
       key: 'patr-0',
       type: 'monument',
-      location: [{ zoneKey: KallistiWharf.key, coords: [1997.9, 47.5, 423], icon: 'plaque', iconText: '20' }],
+      location: [{ zoneKey: 'kallisti-wharf', coords: [1997.9, 47.5, 423], icon: 'plaque', iconText: '20' }],
       monumentText: `Theatre Row was a place of fashion and culture for decades. It truly rose to fame in the 1910s and 1920s when Kallisti Wharf was booming with trade, shipping, and immigration.
 It was renowned for its unique street food, art festivals, and numerous theaters, quickly developing into a major tourist trap.
 By the late 1930s the Paragon Showcase sprang up, a rival film festival to the nascent Cannes and Venice Film Festivals.`,
