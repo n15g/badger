@@ -218,12 +218,16 @@
         border: rgba(128, 128, 128, 0.5) solid 1px;
         border-radius: 8px;
         padding: 3px 4px 1px;
-        text-decoration: none;
         color: inherit;
 
         &:hover {
             background-color: rgba(128, 128, 128, 0.25);
         }
+    }
+
+    a {
+        text-decoration: none;
+        color: inherit;
     }
 
     blockquote {

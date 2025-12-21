@@ -2,6 +2,7 @@ import {
   Box,
   Divider,
   Drawer,
+  Dropdown,
   GlobalStyles,
   IconButton,
   List,
@@ -9,14 +10,16 @@ import {
   ListItem,
   ListItemButton,
   ListSubheader,
+  Menu,
+  MenuButton,
+  MenuItem,
   Sheet,
-  Tooltip,
   Typography
 } from '@mui/joy'
 import PaletteButton from './util/PaletteButton.tsx'
 import { NavLink } from 'react-router'
 import logo from '../resources/images/logo/badger.svg'
-import { FC, ReactNode, useState } from 'react'
+import { useState } from 'react'
 import { MdOutlineMenu } from 'react-icons/md'
 import { BiChevronDown } from 'react-icons/bi'
 
@@ -54,86 +57,86 @@ function Header() {
       </Typography>
       <Box sx={{ display: { xs: 'none', lg: 'flex' }, flexGrow: 1, justifyContent: 'space-between' }}>
         <List role="menubar" orientation="horizontal">
-          <MenuItem to="/" end>About</MenuItem>
+          <NavLink to="/" end>
+            {({ isActive }) => (<ListItem variant={isActive ? 'soft' : 'plain'}>About</ListItem>)}
+          </NavLink>
           <ListDivider/>
-          <MenuItem to="/characters">My Characters</MenuItem>
+          <NavLink to="/characters">
+            {({ isActive }) => (<ListItem variant={isActive ? 'soft' : 'plain'}>Characters</ListItem>)}
+          </NavLink>
           <ListDivider/>
-          <MenuItem to="/badges">Badges</MenuItem>
+          <NavLink to="/badges">
+            {({ isActive }) => (<ListItem variant={isActive ? 'soft' : 'plain'}>Badges</ListItem>)}
+          </NavLink>
           <ListDivider/>
-          <Tooltip color="neutral" variant="outlined" placement="bottom-start" title={<>
-            <List>
-              <MenuItem to="/contacts">Contacts</MenuItem>
-              <MenuItem to="/missions">Missions</MenuItem>
-              <MenuItem to="/zones">Zones</MenuItem>
-            </List>
-          </>
-          }>
-            <ListItem>Other Data <BiChevronDown/></ListItem>
-          </Tooltip>
+          <Dropdown>
+            <MenuButton slots={{ root: ListItem }} sx={{ cursor: 'pointer' }}>
+              Other Data <BiChevronDown/>
+            </MenuButton>
+            <Menu>
+              <MenuItem><NavLink to="/contacts">Contacts</NavLink></MenuItem>
+              <MenuItem><NavLink to="/missions">Missions</NavLink></MenuItem>
+              <MenuItem><NavLink to="/zones">Zones</NavLink></MenuItem>
+            </Menu>
+          </Dropdown>
           <ListDivider/>
-          <MenuItem to="https://github.com/n15g/badger/blob/master/CHANGELOG.md">Changelog</MenuItem>
+          <NavLink to="https://github.com/n15g/badger/blob/master/CHANGELOG.md/">
+            <ListItem>Changelog</ListItem>
+          </NavLink>
         </List>
         <PaletteButton/>
       </Box>
 
+      {/* MOBILE */}
+      <Box sx={{ display: { xs: 'flex', lg: 'none' }, ml: 'auto' }}>
+        <IconButton variant="outlined" color="neutral" onClick={() => {
+          setDrawerOpen(true)
+        }}>
+          <MdOutlineMenu/>
+        </IconButton>
+        <Drawer open={drawerOpen} onClose={() => {
+          setDrawerOpen(false)
+        }}>
+          <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mt: 1, mx: 2 }}>
+            <Typography level="h2" component={NavLink} to="/"
+                        sx={{ display: 'flex', alignItems: 'center', textDecoration: 'none', color: 'inherit' }}>
+              <img src={logo} alt="Badger" style={{ height: 40, marginRight: 16 }}/>
+              Badger
+            </Typography>
+            <PaletteButton/>
+          </Box>
 
-      {/* MOBILE */
-      }
-      <IconButton sx={{ display: { xs: 'flex', lg: 'none' }, ml: 'auto' }} variant="outlined" color="neutral" onClick={() => {
-        setDrawerOpen(true)
-      }}>
-        <MdOutlineMenu/>
-      </IconButton>
-      <Drawer open={drawerOpen} onClose={() => {
-        setDrawerOpen(false)
-      }}>
-        <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mt: 1, mx: 2 }}>
-          <Typography level="h2" component={NavLink} to="/"
-                      sx={{ display: 'flex', alignItems: 'center', textDecoration: 'none', color: 'inherit' }}>
-            <img src={logo} alt="Badger" style={{ height: 40, marginRight: 16 }}/>
-            Badger
-          </Typography>
-          <PaletteButton/>
-        </Box>
+          <List size="lg" component="nav">
+            <ListItemButton component={NavLink} to="/" onClick={() => {
+              setDrawerOpen(false)
+            }}>About</ListItemButton>
+            <ListItemButton component={NavLink} to="/characters" onClick={() => {
+              setDrawerOpen(false)
+            }}>Characters</ListItemButton>
+            <Divider/>
+            <ListItem nested>
+              <ListSubheader>Data</ListSubheader>
+              <ListItemButton component={NavLink} to="/badges" onClick={() => {
+                setDrawerOpen(false)
+              }}>Badges</ListItemButton>
+              <ListItemButton component={NavLink} to="/contacts" onClick={() => {
+                setDrawerOpen(false)
+              }}>Contacts</ListItemButton>
+              <ListItemButton component={NavLink} to="/missions" onClick={() => {
+                setDrawerOpen(false)
+              }}>Missions</ListItemButton>
+              <ListItemButton component={NavLink} to="/zones" onClick={() => {
+                setDrawerOpen(false)
+              }}>Zones</ListItemButton>
+            </ListItem>
+            <Divider/>
+            <ListItemButton component={NavLink} to="https://github.com/n15g/badger/blob/master/CHANGELOG.md">Changelog</ListItemButton>
+          </List>
+        </Drawer>
+      </Box>
 
-        <List size="lg" component="nav">
-          <ListItemButton component={NavLink} to="/" onClick={() => {
-            setDrawerOpen(false)
-          }}>About</ListItemButton>
-          <ListItemButton component={NavLink} to="/characters" onClick={() => {
-            setDrawerOpen(false)
-          }}>Characters</ListItemButton>
-          <Divider/>
-          <ListItem nested>
-            <ListSubheader>Data</ListSubheader>
-            <ListItemButton component={NavLink} to="/badges" onClick={() => {
-              setDrawerOpen(false)
-            }}>Badges</ListItemButton>
-            <ListItemButton component={NavLink} to="/contacts" onClick={() => {
-              setDrawerOpen(false)
-            }}>Contacts</ListItemButton>
-            <ListItemButton component={NavLink} to="/missions" onClick={() => {
-              setDrawerOpen(false)
-            }}>Missions</ListItemButton>
-            <ListItemButton component={NavLink} to="/zones" onClick={() => {
-              setDrawerOpen(false)
-            }}>Zones</ListItemButton>
-          </ListItem>
-          <Divider/>
-          <ListItemButton component={NavLink} to="https://github.com/n15g/badger/blob/master/CHANGELOG.md">Changelog</ListItemButton>
-        </List>
-      </Drawer>
     </Sheet>
   </>)
 }
 
-const MenuItem: FC<{ children: ReactNode, to: string, end?: boolean }> = ({ children, to, end }) => {
-  return (
-    <NavLink end={end} to={to} style={{ textDecoration: 'none', color: 'inherit' }}>
-      {({ isActive }) => (
-        <ListItem variant={isActive ? 'soft' : 'plain'}>{children}</ListItem>
-      )}
-    </NavLink>
-  )
-}
 export default Header
