@@ -20,7 +20,7 @@ const LocationLink: FC<{ location: Location }> = ({ location }) => {
                 endDecorator={<Icons.Zone/>}
     >
       {zone && (
-        <Tooltip title={<ZoneTooltip zone={zone}/>}>
+        <Tooltip title={<ZoneTooltip zone={zone}/>} variant="plain">
           <NavLink to={`/zones/${zoneKey}`} style={{ textDecoration: 'none', color: 'inherit' }} className="entity">
             {zone.name}
           </NavLink>
