@@ -1,16 +1,17 @@
-import { Box, Breadcrumbs, Card, CardOverflow, Divider, List, ListItem, Stack, Typography } from '@mui/joy'
+import { Box, Breadcrumbs, Card, CardOverflow, Divider, Stack, Typography } from '@mui/joy'
 import { Contact } from 'coh-content-db'
 import { FC } from 'react'
 import { Icons } from '../util/Icons.tsx'
 import MoralityListIcons from '../alignment/MoralityListIcons.tsx'
-import SmartLink from '../util/SmartLink.tsx'
 import { NavLink } from 'react-router'
 import MainSection from '../util/MainSection.tsx'
 import SectionTitle from '../util/SectionTitle.tsx'
-import BadgerMarkdown from '../util/BadgerMarkdown.tsx'
 import LocationLink from '../location/LocationLink.tsx'
 import LevelRangeLabel from '../util/LevelRangeLabel.tsx'
 import ContactMissions from './ContactMissions.tsx'
+import InfoPanel from '../util/InfoPanel.tsx'
+import NotesBlock from '../util/NotesBlock.tsx'
+import LinksBlock from '../util/LinksBlock.tsx'
 
 const ContactView: FC<{ contact: Contact }> = ({ contact }) => {
   const { name, title, location, levelRange, morality, links, notes } = contact
@@ -28,51 +29,39 @@ const ContactView: FC<{ contact: Contact }> = ({ contact }) => {
           <Divider inset="context"/>
         </CardOverflow>
 
-        <Box>
-          <SectionTitle>
-            {name}
-          </SectionTitle>
-        </Box>
+        <SectionTitle>
+          {name}
+        </SectionTitle>
+
+        <Divider/>
 
         <Stack sx={{
-          flexDirection: { xs: 'column', sm: 'row-reverse' },
+          flexDirection: { xs: 'column', md: 'row-reverse' },
           justifyContent: 'space-between',
+          alignItems: 'flex-start',
           gap: 2
         }}>
 
           {/* Info Panel*/}
-          <Card sx={{ minWidth: 240 }}>
-            <Stack gap={2} alignItems="center">
-              <Icons.Contact size={64}/>
+          <InfoPanel>
+            <Icons.Contact size={64}/>
 
-              <Typography textAlign="center" level="title-lg">{name}</Typography>
+            <Typography textAlign="center" level="title-lg">{name}</Typography>
 
-              {title && (<>
-                <Typography level="title-sm" sx={{ fontStyle: 'italic' }}>{title}</Typography>
-              </>)}
+            {title && (<>
+              <Typography level="title-sm" sx={{ fontStyle: 'italic' }}>{title}</Typography>
+            </>)}
 
-              <Divider/>
-
-              {levelRange && <LevelRangeLabel value={levelRange}/>}
-
-              {location && (<>
-                <LocationLink location={location}/>
-              </>)}
-
+            <Stack direction="row" gap={4}>
               <MoralityListIcons moralityList={morality}/>
-
-              {links.length > 0 && (<>
-                <Divider/>
-                <List>
-                  {links.map(link => (
-                    <ListItem key={link.href}>
-                      <Typography startDecorator={<Icons.Link/>}><SmartLink href={link.href}>{link.title}</SmartLink></Typography>
-                    </ListItem>
-                  ))}
-                </List>
-              </>)}
+              {levelRange && <LevelRangeLabel value={levelRange}/>}
             </Stack>
-          </Card>
+
+            {location && (<>
+              <LocationLink location={location}/>
+            </>)}
+
+          </InfoPanel>
 
           {/* Detail Panel*/}
           <Stack gap={2} flexGrow={1}>
@@ -82,13 +71,9 @@ const ContactView: FC<{ contact: Contact }> = ({ contact }) => {
               <ContactMissions contact={contact}/>
             </Box>
 
-            <Card>
-              <Typography level="title-md" startDecorator={<Icons.Notes/>}>Notes</Typography>
-              <Box sx={{ pl: 1 }}>
-                <Typography component="span" level={'body-sm'}>{notes ? <BadgerMarkdown content={notes}/> :
-                  <em>No notes</em>}</Typography>
-              </Box>
-            </Card>
+            <NotesBlock notes={notes}/>
+
+            <LinksBlock links={links}/>
 
           </Stack>
 

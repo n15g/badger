@@ -28,6 +28,9 @@ import ReleaseDate from '../util/ReleaseDate.tsx'
 import SetTitleLabel from './SetTitleLabel.tsx'
 import RequirementListItem from './RequirementListItem.tsx'
 import BadgeNameList from './BadgeNameList.tsx'
+import InfoPanel from '../util/InfoPanel.tsx'
+import NotesBlock from '../util/NotesBlock.tsx'
+import LinksBlock from '../util/LinksBlock.tsx'
 
 const BadgeView: FC<{ badge: Badge }> = ({ badge }) => {
   const { name, type, badgeText, morality, links, acquisition, requirements, notes, effect, releaseDate, setTitleId } = badge
@@ -45,54 +48,52 @@ const BadgeView: FC<{ badge: Badge }> = ({ badge }) => {
           <Divider inset="context"/>
         </CardOverflow>
 
-        <Box>
-          <SectionTitle>
-            <BadgeNameList badge={badge}/>
-          </SectionTitle>
-        </Box>
+        <SectionTitle>
+          <BadgeNameList badge={badge}/>
+        </SectionTitle>
 
-        <Stack
-          sx={{
-            flexDirection: { xs: 'column', sm: 'row-reverse' },
-            justifyContent: 'space-between',
-            gap: 2
-          }}>
+        <Divider inset="none"/>
+
+        <Stack sx={{
+          flexDirection: { xs: 'column', md: 'row-reverse' },
+          justifyContent: 'space-between',
+          alignItems: 'flex-start',
+          gap: 2
+        }}>
 
           {/* Info Panel*/}
-          <Card sx={{ minWidth: 240 }}>
-            <Stack gap={2} alignItems="center">
+          <InfoPanel>
 
-              <Typography startDecorator={<Icons.Badge/>}>{BadgeTypes.get(type)}</Typography>
-              <BadgeIcon badge={badge}/>
+            <Typography startDecorator={<Icons.Badge/>}>{BadgeTypes.get(type)}</Typography>
+            <BadgeIcon badge={badge}/>
 
-              {effect && (
-                <Typography level="body-xs" textAlign="center" variant="soft" sx={{ borderRadius: 8, px: 1, py: 1.5 }}>
-                  {effect}
-                </Typography>
-              )}
+            {effect && (
+              <Typography level="body-xs" textAlign="center" variant="soft" sx={{ borderRadius: 8, px: 1, py: 1.5 }}>
+                {effect}
+              </Typography>
+            )}
 
-              <MoralityListIcons moralityList={morality}/>
+            <MoralityListIcons moralityList={morality}/>
 
-              {setTitleId && (
-                <SetTitleLabel value={setTitleId}/>
-              )}
+            {setTitleId && (
+              <SetTitleLabel value={setTitleId}/>
+            )}
 
-              {links.length > 0 && (<>
-                <Divider/>
-                <List>
-                  {links.map(link => (
-                    <ListItem key={link.href}>
-                      <Typography startDecorator={<Icons.Link/>}><SmartLink href={link.href}>{link.title}</SmartLink></Typography>
-                    </ListItem>
-                  ))}
-                </List>
-              </>)}
-
+            {links.length > 0 && (<>
               <Divider/>
-              <ReleaseDate value={releaseDate} format="long"/>
+              <List>
+                {links.map(link => (
+                  <ListItem key={link.href}>
+                    <Typography startDecorator={<Icons.Link/>}><SmartLink href={link.href}>{link.title}</SmartLink></Typography>
+                  </ListItem>
+                ))}
+              </List>
+            </>)}
 
-            </Stack>
-          </Card>
+            <Divider/>
+            <ReleaseDate value={releaseDate} format="long"/>
+
+          </InfoPanel>
 
           {/* Detail Panel*/}
           <Stack gap={2} flexGrow={1}>
@@ -134,12 +135,9 @@ const BadgeView: FC<{ badge: Badge }> = ({ badge }) => {
               </Box>
             </Card>
 
-            <Card>
-              <Typography level="title-md" startDecorator={<Icons.Notes/>}>Notes</Typography>
-              <Box sx={{ pl: 1 }}>
-                <Typography component="span" level={'body-sm'}>{notes ? <BadgerMarkdown content={notes}/> : <em>No notes</em>}</Typography>
-              </Box>
-            </Card>
+            <NotesBlock notes={notes}/>
+
+            <LinksBlock links={links}/>
           </Stack>
 
         </Stack>

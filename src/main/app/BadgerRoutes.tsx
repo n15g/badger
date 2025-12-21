@@ -7,6 +7,7 @@ import ZoneList from './zone/ZoneList.tsx'
 import ContactList from './contact/ContactList.tsx'
 import MissionList from './mission/MissionList.tsx'
 import ContactViewLoader from './contact/ContactViewLoader.tsx'
+import MissionViewLoader from './mission/MissionViewLoader.tsx'
 
 function BadgerRoutes() {
   return (
@@ -19,6 +20,7 @@ function BadgerRoutes() {
       <Route path="/contacts/:contactKey" element={<ContactViewLoader/>}></Route>
 
       <Route path="/missions" element={<MissionList/>}></Route>
+      <Route path="/missions/:missionKey" element={<MissionViewLoader/>}></Route>
 
       <Route path="/zones" element={<ZoneList/>}></Route>
       <Route path="/zones/:zoneKey" element={<ZoneViewLoader/>}></Route>
