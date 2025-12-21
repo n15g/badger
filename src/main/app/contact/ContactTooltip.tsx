@@ -8,6 +8,8 @@ import LocationLink from '../location/LocationLink.tsx'
 import LevelRangeLabel from '../util/LevelRangeLabel.tsx'
 
 const ContactTooltip: FC<{ contact: Contact }> = ({ contact }) => {
+  const { name, title, location, levelRange, morality } = contact
+
   return (
     <Card sx={{ minWidth: 260, maxWidth: 320, p: 2, borderRadius: '1em', boxShadow: '10' }}>
       <CardOverflow>
@@ -23,24 +25,24 @@ const ContactTooltip: FC<{ contact: Contact }> = ({ contact }) => {
 
       <Stack direction="column" spacing={1} alignItems="center">
         <NavLink to={`/contacts/${contact.key}`} style={{ textDecoration: 'none', color: 'inherit' }}>
-          <Typography textAlign="center" level="title-lg">{contact.name}</Typography>
+          <Typography textAlign="center" level="title-lg">{name}</Typography>
         </NavLink>
 
-        {contact.title && (<>
-          <Typography level="title-sm" sx={{ fontStyle: 'italic' }}>{contact.title}</Typography>
+        {title && (<>
+          <Typography level="title-sm" sx={{ fontStyle: 'italic' }}>{title}</Typography>
         </>)}
 
-        {contact.location && (<>
+        {location && (<>
           <Divider/>
-          <LocationLink location={contact.location}/>
+          <LocationLink location={location}/>
         </>)}
       </Stack>
 
       <CardOverflow sx={{ py: 1 }}>
         <Divider inset="context"/>
         <Stack direction="row" justifyContent="space-between" alignItems="center" sx={{ pt: 1 }}>
-          <MoralityListIcons moralityList={contact.morality}/>
-          {contact.levelRange && <div style={{ marginLeft: 'auto' }}><LevelRangeLabel value={contact.levelRange}/></div>}
+          <MoralityListIcons moralityList={morality}/>
+          {levelRange && <div style={{ marginLeft: 'auto' }}><LevelRangeLabel value={levelRange}/></div>}
         </Stack>
       </CardOverflow>
     </Card>
