@@ -38,7 +38,7 @@ function BadgeList() {
         <Table noWrap={true} className="badgeList">
           <thead>
           <tr>
-            <TH sx={{ width: { xs: 120, md: 240 } }} style={{ textAlign: 'center' }}>Badge</TH>
+            <TH sx={{ width: { xs: 120, md: 240 } }}>Badge</TH>
             <TH sx={{ ...hideOnSmall, width: 140 }}>Type</TH>
             <TH sx={{ ...hideOnSmall, width: 140 }}>Release Date</TH>
             <TH sx={{ ...hideOnSmall }}>Requirement</TH>
