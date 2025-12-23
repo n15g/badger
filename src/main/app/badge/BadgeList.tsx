@@ -1,11 +1,10 @@
-import { Box, Card, Stack, styled, Table, Typography } from '@mui/joy'
+import { Card, styled, Table, Typography } from '@mui/joy'
 import { NavLink } from 'react-router'
 import { useSessionStorage } from '../util/use-session-storage.ts'
 import Pagination from '../util/Pagination.tsx'
 import BadgeIcon from './BadgeIcon.tsx'
 import { BadgeSearchOptions } from 'coh-content-db'
 import { FC, ReactNode } from 'react'
-import MoralityListIcons from '../alignment/MoralityListIcons.tsx'
 import ContentProvider from '../content/ContentProvider.tsx'
 import BadgeSearchBar from './search/BadgeSearchBar.tsx'
 import BadgeAcquisitionSummary from './BadgeAcquisitionSummary.tsx'
@@ -14,6 +13,7 @@ import MainSection from '../util/MainSection.tsx'
 import { BadgeTypes } from './BadgeTypes.tsx'
 import SectionTitle from '../util/SectionTitle.tsx'
 import { Icons } from '../util/Icons.tsx'
+import ReleaseDate from '../util/ReleaseDate.tsx'
 
 const TD = styled('td')(() => ({}))
 const TH = styled('th')(() => ({}))
@@ -35,40 +35,47 @@ function BadgeList() {
           setSearchOptions({ ...searchOptions, page: page, pageSize: pageSize })
         }}/>
 
-        <Table noWrap={true}>
+        <Table noWrap={true} className="badgeList">
           <thead>
           <tr>
-            <TH sx={{ width: { xs: 120, md: 200 } }} style={{ textAlign: 'center' }}>Icon</TH>
-            <TH sx={{ width: { xs: 120, md: 240 } }} style={{ textAlign: 'center' }}>Name</TH>
-            <TH sx={{ ...hideOnSmall, width: 200 }} style={{ textAlign: 'center' }}>Type</TH>
-            <TH sx={{ ...hideOnSmall }}>Acquisition</TH>
+            <TH sx={{ width: { xs: 120, md: 240 } }} style={{ textAlign: 'center' }}>Badge</TH>
+            <TH sx={{ ...hideOnSmall, width: 140 }}>Type</TH>
+            <TH sx={{ ...hideOnSmall, width: 140 }}>Release Date</TH>
+            <TH sx={{ ...hideOnSmall }}>Requirement</TH>
           </tr>
           </thead>
           <tbody>
           {badges.items.map(badge => (
             <tr key={badge.key}>
-              <TD style={{ height: 100 }} sx={{ overflowX: 'hidden' }}>
-                <RowLink to={badge.key}>
-                  <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                    <BadgeIcon badge={badge}/>
-                  </Box>
-                </RowLink>
-              </TD>
               <TD>
                 <RowLink to={badge.key}>
-                  <BadgeNameInline badge={badge}/>
+                  <Typography component="span" level="body-sm"
+                              startDecorator={<BadgeIcon badge={badge} height="1em"/>}
+                              title={badge.name.toString(' / ')}
+                  >
+                    <BadgeNameInline badge={badge}/>
+                  </Typography>
                 </RowLink>
               </TD>
               <TD sx={{ ...hideOnSmall }}>
                 <RowLink to={badge.key}>
-                  <Stack direction="column" spacing={2} alignItems="center">
-                    <Typography>{BadgeTypes.get(badge.type)}</Typography>
-                    <MoralityListIcons moralityList={badge.morality}/>
-                  </Stack>
+                  <Typography component="span" level="body-xs" sx={{ overflowX: 'hidden', textOverflow: 'ellipsis' }}
+                              title={BadgeTypes.get(badge.type)}>
+                    {BadgeTypes.get(badge.type)}
+                  </Typography>
                 </RowLink>
               </TD>
               <TD sx={{ ...hideOnSmall }}>
-                <BadgeAcquisitionSummary badge={badge}/>
+                <RowLink to={badge.key}>
+                  <Typography component="span" level="body-xs" sx={{ overflowX: 'hidden', textOverflow: 'ellipsis' }}>
+                    <ReleaseDate value={badge.releaseDate}/>
+                  </Typography>
+                </RowLink>
+              </TD>
+              <TD sx={{ ...hideOnSmall }}>
+                <Typography component="span" level="body-xs">
+                  <BadgeAcquisitionSummary badge={badge}/>
+                </Typography>
               </TD>
             </tr>
           ))

@@ -66,7 +66,6 @@ const Pagination: FC<{ paged: Paged<unknown>, range?: number, onChange: (page: n
       <Select value={paged.pageSize ?? 0} onChange={(_, value) => {
         onChange(paged.page, value ?? undefined)
       }}>
-        <Option value={8}>8 items per page</Option>
         <Option value={20}>20 items per page</Option>
         <Option value={50}>50 items per page</Option>
         <Option value={100}>100 items per page</Option>

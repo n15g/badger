@@ -7,7 +7,7 @@ const MainSection: FC<{ label?: string, children: ReactNode }> = ({ label, child
   return (
     <Section sx={{
       mx: { xs: 2, md: 8, lg: 'auto' },
-      my: { xs: 2, md: 'auto' },
+      my: { xs: 2, md: 4 },
       minWidth: { md: 800, lg: 1200 },
       maxWidth: 1600
     }}>

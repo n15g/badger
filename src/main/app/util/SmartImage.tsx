@@ -1,5 +1,5 @@
 import { FC, ImgHTMLAttributes, useState } from 'react'
-import { Box, styled } from '@mui/joy'
+import { styled } from '@mui/joy'
 import { Icons } from './Icons.tsx'
 import { SxProps } from '@mui/joy/styles/types'
 
@@ -12,7 +12,7 @@ const Img = styled('img')({})
 export const SmartImage: FC<Props> = ({ src, alt, sx, ...props }) => {
   const [loaded, setLoaded] = useState(false)
 
-  return <Box>
+  return <>
     <Img
       src={src}
       alt={alt}
@@ -28,5 +28,5 @@ export const SmartImage: FC<Props> = ({ src, alt, sx, ...props }) => {
       {...props}
     />
     {!loaded && <Icons.Spinner className="ld ld-spin"/>}
-  </Box>
+  </>
 }

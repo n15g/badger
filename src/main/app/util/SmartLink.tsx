@@ -32,8 +32,8 @@ const SmartLink: FC<{ href: string, children: ReactNode }> = ({ href, children }
     : <Icons.ExternalLink height={16} style={{ paddingLeft: 4 }}/>
 
   return (
-    <Typography component="span">
-      <Link href={href} endDecorator={icon}>
+    <Typography component="span" display="inline">
+      <Link href={href} startDecorator={<Icons.Link/>} endDecorator={icon} style={{ textDecoration: 'underline' }}>
         {children}
       </Link>
     </Typography>

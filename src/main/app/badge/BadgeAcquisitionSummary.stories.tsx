@@ -13,15 +13,38 @@ type StoryType = StoryObj<typeof meta.component>
 
 const content = STORYBOOK_CONTENT
 
-export const Single_Location: StoryType = {
+export const Exploration_Simple: StoryType = {
   args: {
     badge: content.getBadge('lobbyist')
   },
 }
 
-export const Single_Badge: StoryType = {
+export const Exploration_Multiple_One_Zone: StoryType = {
   args: {
-    badge: content.getBadge('abomination')
+    badge: content.getBadge('secret-prisoner')
   },
 }
 
+export const Exploration_Multiple_Zones: StoryType = {
+  args: {
+    badge: content.getBadge('river-rat')
+  },
+}
+
+export const History: StoryType = {
+  args: {
+    badge: content.getBadge('lorekeeper')
+  },
+}
+
+export const Accomplishment: StoryType = {
+  args: {
+    badge: content.getBadge('former-servant-of-recluse')
+  },
+}
+
+export const Invention: StoryType = {
+  args: {
+    badge: content.getBadge('decaying')
+  },
+}

@@ -16,7 +16,7 @@ const LinksBlock: FC<{ links: Link[] }> = ({ links }) => {
           <List component="ol" marker="lower-roman">
             {links.map(link => (
               <ListItem key={link.href}>
-                <Typography startDecorator={<Icons.Link/>}><SmartLink href={link.href}>{link.title}</SmartLink></Typography>
+                <SmartLink href={link.href}>{link.title}</SmartLink>
               </ListItem>
             ))}
           </List>

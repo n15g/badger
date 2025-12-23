@@ -14,7 +14,7 @@ interface BadgeSearchBarProps {
 
 const defaultSearch: BadgeSearchOptions = {
   query: { str: '', fields: ['name'] },
-  pageSize: 8
+  pageSize: 20
 }
 
 const BadgeSearchBar: FC<BadgeSearchBarProps> & { defaultSearch: BadgeSearchOptions } = ({ searchOptions, onChange }) => {

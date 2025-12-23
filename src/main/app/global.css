@@ -248,4 +248,9 @@
             border-color: var(--praetorian--color);
         }
     }
+
+    table.badgeList p {
+        margin-top: 0;
+        margin-bottom: 0;
+    }
 }

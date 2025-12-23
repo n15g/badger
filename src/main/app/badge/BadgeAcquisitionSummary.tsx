@@ -1,46 +1,91 @@
 import { FC } from 'react'
-import { Badge } from 'coh-content-db'
-import BadgerMarkdown from '../util/BadgerMarkdown.tsx'
+import { Badge, EnhancementCategory } from 'coh-content-db'
 import { Typography } from '@mui/joy'
+import BadgerMarkdown from '../util/BadgerMarkdown.tsx'
+import LocationLink from '../location/LocationLink.tsx'
+import ZoneLink from '../zone/ZoneLink.tsx'
+import MissionLink from '../mission/MissionLink.tsx'
 import BadgeLink from './BadgeLink.tsx'
+import NaturalList from '../util/NaturalList.tsx'
+import BadgeIconLink from './BadgeIconLink.tsx'
+import EnhancementCategoryLabel from '../enhancement/EnhancementCategoryLabel.tsx'
 
 
 const BadgeAcquisitionSummary: FC<{ badge: Badge }> = ({ badge }) => {
-  const { acquisition, requirements, notes } = badge
+  const { type, acquisition, requirements, zoneKeys } = badge
 
   if (acquisition) {
     return <BadgerMarkdown content={acquisition}/>
   }
 
-  if (requirements.length) {
-    if (requirements.length === 1) {
-      const requirement = requirements[0]
-      switch (requirement.type) {
-        case 'badge':
-          return <>Acquire the <BadgeLink value={badge}/> badge.</>
-        case 'invention':
-          break
-        case 'invention-plus-one':
-          break
-        case 'location':
-          break
-        case 'monument':
-          break
-        case 'mission':
-          break
-        case 'task':
-          break
-        default:
-          return
-      }
+  if (requirements.length === 1) {
+    const requirement = requirements[0]
+
+    if (requirement.type === 'badge') {
+      return <>Collect <BadgeLink value={requirement.badgeKey}/>.</>
+    } else if (requirement.type === 'mission') {
+      return <>Complete <MissionLink value={requirement.missionKey}/>.</>
+    } else if (requirement.type === 'location' && requirement.location?.length === 1) {
+      return <>Visit <LocationLink location={requirement.location[0]}/>.</>
     }
   }
 
-  if (notes) {
-    return <Typography color="neutral" fontStyle="italic">See notes</Typography>
+  if (requirements.length > 1) {
+    if (requirements[0].type === 'badge') {
+      const keys = [...requirements.reduce((set, requirement) => {
+        if (requirement.badgeKey) {
+          set.add(requirement.badgeKey)
+        }
+        return set
+      }, new Set<string>())]
+
+      return (<>
+        Collect <NaturalList keys={keys} renderFn={(key) => <BadgeIconLink value={key}/>} cap={8}/>.
+      </>)
+    }
+
+    if (requirements[0].type === 'mission') {
+      const keys = [...requirements.reduce((set, requirement) => {
+        if (requirement.missionKey) {
+          set.add(requirement.missionKey)
+        }
+        return set
+      }, new Set<string>())]
+
+      return (<>
+        Complete <NaturalList keys={keys} renderFn={(key) => <MissionLink value={key}/>} cap={3}/>.
+      </>)
+    }
   }
 
-  return <Typography color="neutral" fontStyle="italic">Unknown</Typography>
+  if (type === 'exploration') {
+    return <>Visit locations in <NaturalList keys={zoneKeys} renderFn={(key) => <ZoneLink value={key}/>} cap={5}/>.</>
+  }
+
+  if (type === 'history') {
+    return <>Visit monuments in <NaturalList keys={zoneKeys} renderFn={(key) => <ZoneLink value={key}/>} cap={5}/>.</>
+  }
+
+  if (type === 'invention') {
+    const { levels, types } = requirements.reduce((accumulator, requirement) => {
+      if (requirement.inventionLevel) {
+        accumulator.levels.add(requirement.inventionLevel)
+      }
+      requirement.inventionTypes?.forEach((type) => accumulator.types.add(type))
+      return accumulator
+    }, { levels: new Set<number>(), types: new Set<EnhancementCategory>() })
+
+    return (<>
+      Craft level {' '}
+      <NaturalList keys={[...levels].map((x) => x.toString())}/>
+      {' '}
+      <NaturalList keys={[...types]} renderFn={(key) => <EnhancementCategoryLabel value={key}/>}/>
+      {' '}
+      enhancements.
+    </>)
+  }
+
+  return <Typography color="neutral" fontStyle="italic">See details.</Typography>
 }
 
 export default BadgeAcquisitionSummary

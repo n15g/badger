@@ -19,7 +19,6 @@ import { Badge } from 'coh-content-db'
 import { FC, Fragment } from 'react'
 import { Icons } from '../util/Icons.tsx'
 import MoralityListIcons from '../alignment/MoralityListIcons.tsx'
-import SmartLink from '../util/SmartLink.tsx'
 import { NavLink } from 'react-router'
 import MainSection from '../util/MainSection.tsx'
 import { BadgeTypes } from './BadgeTypes.tsx'
@@ -78,17 +77,6 @@ const BadgeView: FC<{ badge: Badge }> = ({ badge }) => {
             {setTitleId && (
               <SetTitleLabel value={setTitleId}/>
             )}
-
-            {links.length > 0 && (<>
-              <Divider/>
-              <List>
-                {links.map(link => (
-                  <ListItem key={link.href}>
-                    <Typography startDecorator={<Icons.Link/>}><SmartLink href={link.href}>{link.title}</SmartLink></Typography>
-                  </ListItem>
-                ))}
-              </List>
-            </>)}
 
             <Divider/>
             <ReleaseDate value={releaseDate} format="long"/>
