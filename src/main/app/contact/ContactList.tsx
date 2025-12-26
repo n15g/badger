@@ -10,14 +10,16 @@ function ContactList() {
   const contacts = content.contacts.sort((a, b) => a.name.localeCompare(b.name))
 
   return (
-    <MainSection label="Contacts">
+    <MainSection title="Contacts">
       <SectionTitle><Icons.Contact/> Contacts</SectionTitle>
 
-      <Card>
-        <List component="ul" marker="disc" sx={{ display: 'block', columnCount: { md: 2, lg: 3 }, columnGap: 4 }}>
-          {contacts.map((contact) => (<ListItem key={contact.key}>
-            <ContactLink value={contact}/>
-          </ListItem>))}
+      <Card sx={{ display: { xs: 'contents', md: 'flex' } }}>
+        <List sx={{ display: 'block', columnCount: { md: 2, lg: 3 }, columnGap: 4 }}>
+          {contacts.map((mission) => (
+            <ListItem key={mission.key} sx={{ display: 'flex', justifyContent: 'center', p: 1 }}>
+              <ContactLink value={mission}/>
+            </ListItem>
+          ))}
         </List>
       </Card>
 

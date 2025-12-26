@@ -17,7 +17,7 @@ const ZoneView: FC<{ zone: Zone }> = ({ zone }) => {
   const { name, type, levelRange, morality, links, notes, } = zone
 
   return (
-    <MainSection label={name}>
+    <MainSection title={name}>
       <Card>
         <CardOverflow>
           <Breadcrumbs separator={<Icons.Breadcrumb/>}>
@@ -38,7 +38,7 @@ const ZoneView: FC<{ zone: Zone }> = ({ zone }) => {
         <Stack sx={{
           flexDirection: { xs: 'column', md: 'row-reverse' },
           justifyContent: 'space-between',
-          alignItems: 'flex-start',
+          alignItems: { xs: 'center', md: 'flex-start' },
           gap: 2
         }}>
 

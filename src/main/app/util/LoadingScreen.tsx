@@ -1,8 +1,8 @@
 import { FC } from 'react'
-import icon from '../../resources/images/logo/badger.svg'
 import { Box, Stack, Typography } from '@mui/joy'
+import BadgerSpinner from './BadgerSpinner.tsx'
 
-const Init: FC<{ text: string, percent?: number }> = ({ text }) => {
+const LoadingScreen: FC<{ text: string, percent?: number }> = ({ text }) => {
   return (
     <Box
       className="running"
@@ -15,10 +15,7 @@ const Init: FC<{ text: string, percent?: number }> = ({ text }) => {
         overflow: 'auto',
       }}>
       <Stack direction={{ xs: 'column', sm: 'row' }} alignItems="center" gap={4} padding={2}>
-        <img style={{ width: '64px', height: '64px' }}
-             src={icon}
-             className="ld ld-heartbeat"
-             alt="Loading"/>
+        <BadgerSpinner width={64}/>
         <Stack direction="column" gap={1}>
           <Typography level="h3" textAlign={{ xs: 'center', sm: 'start' }}>Loading</Typography>
           <Typography>{text}</Typography>
@@ -28,4 +25,4 @@ const Init: FC<{ text: string, percent?: number }> = ({ text }) => {
   )
 }
 
-export default Init
+export default LoadingScreen

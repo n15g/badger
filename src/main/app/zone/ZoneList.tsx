@@ -10,14 +10,16 @@ function ZoneList() {
   const zones = content.zones.sort((a, b) => a.name.localeCompare(b.name))
 
   return (
-    <MainSection label="Zones">
+    <MainSection title="Zones">
       <SectionTitle><Icons.Zone/> Zones</SectionTitle>
 
-      <Card>
-        <List component="ul" marker="disc" sx={{ display: 'block', columnCount: { md: 2, lg: 3 }, columnGap: 4 }}>
-          {zones.map((zone) => (<ListItem key={zone.key}>
-            <ZoneLink value={zone}/>
-          </ListItem>))}
+      <Card sx={{ display: { xs: 'contents', md: 'flex' } }}>
+        <List sx={{ display: 'block', columnCount: { md: 2, lg: 3 }, columnGap: 4 }}>
+          {zones.map((mission) => (
+            <ListItem key={mission.key} sx={{ display: 'flex', justifyContent: 'center', p: 1 }}>
+              <ZoneLink value={mission}/>
+            </ListItem>
+          ))}
         </List>
       </Card>
 

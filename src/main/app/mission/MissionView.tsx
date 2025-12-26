@@ -17,7 +17,7 @@ const MissionView: FC<{ mission: Mission }> = ({ mission }) => {
   const { name, contactKeys, levelRange, morality, links, notes, flashback } = mission
 
   return (
-    <MainSection label={name}>
+    <MainSection title={name}>
       <Card>
         <CardOverflow>
           <Breadcrumbs separator={<Icons.Breadcrumb/>}>
@@ -38,7 +38,7 @@ const MissionView: FC<{ mission: Mission }> = ({ mission }) => {
         <Stack sx={{
           flexDirection: { xs: 'column', md: 'row-reverse' },
           justifyContent: 'space-between',
-          alignItems: 'flex-start',
+          alignItems: { xs: 'center', md: 'flex-start' },
           gap: 2
         }}>
 

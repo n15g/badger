@@ -20,8 +20,7 @@ const BadgeLink: FC<{ value?: Badge | string }> = ({ value }) => {
       <Tooltip title={<BadgeTooltip badge={badge}/>} variant="plain">
         <NavLink to={`/badges/${key}`} className="entityLink">
           <Typography component="span" display="inline" className="entity"
-                      startDecorator={<BadgeIcon badge={badge} height="0.9em"/>}
-                      endDecorator={<Icons.Badge/>}>
+                      startDecorator={<BadgeIcon badge={badge} height="0.9em"/>}>
             <BadgeNameInline badge={badge}/>
           </Typography>
         </NavLink>

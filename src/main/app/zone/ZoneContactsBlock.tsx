@@ -9,7 +9,9 @@ const ZoneContacts: FC<{ zone: Zone }> = ({ zone }) => {
   const content = ContentProvider.useContent()
 
   const contacts: Contact[] = useMemo(() => {
-    return content.contacts.filter((contact) => contact.location?.zoneKey === zone.key)
+    return content.contacts
+      .filter((contact) => contact.location?.zoneKey === zone.key)
+      .sort((a, b) => a.name.localeCompare(b.name))
   }, [zone.key, content])
 
   return (
@@ -20,7 +22,7 @@ const ZoneContacts: FC<{ zone: Zone }> = ({ zone }) => {
           <p><em>None</em></p>
         </>)}
         {contacts.length >= 1 && (<>
-          <List component="ul" marker="disc" sx={{ display: 'block', columnCount: { xs: 1, md: 2 }, columnGap: 4 }}>
+          <List component="ul" marker="disc" sx={{ display: 'block', columnCount: { lg: 2 }, columnGap: 4 }}>
             {contacts.map((contact) => (
               <ListItem key={contact.key}>
                 <ContactLink value={contact}/>

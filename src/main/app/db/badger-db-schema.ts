@@ -1,4 +1,5 @@
 import { DBSchema } from 'idb'
+import { Character } from '../character/character.ts'
 
 export interface BadgerDbSchema extends DBSchema {
   'kv-store': {
@@ -7,5 +8,9 @@ export interface BadgerDbSchema extends DBSchema {
       key: string,
       value: unknown
     }
+  },
+  'characters': {
+    key: string
+    value: Character
   }
 }

@@ -17,7 +17,7 @@ const ContactLink: FC<{ value?: Contact | string }> = ({ value }) => {
     return (
       <Tooltip title={<ContactTooltip contact={contact}/>} variant="plain">
         <NavLink to={`/contacts/${key}`} className="entityLink">
-          <Typography component="span" display="inline" className="entity" endDecorator={<Icons.Contact/>}>
+          <Typography component="span" display="inline" className="entity" startDecorator={<Icons.Contact/>}>
             {contact.name}
           </Typography>
         </NavLink>

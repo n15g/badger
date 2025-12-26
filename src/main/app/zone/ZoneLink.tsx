@@ -17,7 +17,7 @@ const ZoneLink: FC<{ value?: Zone | string }> = ({ value }) => {
     return (
       <Tooltip title={<ZoneTooltip zone={zone}/>} variant="plain">
         <NavLink to={`/zones/${key}`} className="entityLink">
-          <Typography component="span" display="inline" className="entity" endDecorator={<Icons.Zone/>}>
+          <Typography component="span" display="inline" className="entity" startDecorator={<Icons.Zone/>}>
             {zone.name}
           </Typography>
         </NavLink>

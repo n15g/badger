@@ -3,14 +3,10 @@ import { styled } from '@mui/joy'
 import { Icons } from './Icons.tsx'
 import { SxProps } from '@mui/joy/styles/types'
 
-interface Props extends ImgHTMLAttributes<HTMLImageElement> {
-  sx?: SxProps
-}
-
 const Img = styled('img')({})
 
-export const SmartImage: FC<Props> = ({ src, alt, sx, ...props }) => {
-  const [loaded, setLoaded] = useState(false)
+export const SmartImage: FC<{ sx?: SxProps } & ImgHTMLAttributes<HTMLImageElement>> = ({ src, alt, sx, ...props }) => {
+  const [loaded, setLoaded] = useState(!src)
 
   return <>
     <Img

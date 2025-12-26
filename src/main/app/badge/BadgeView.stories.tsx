@@ -58,3 +58,9 @@ export const Invention: StoryType = {
     badge: STORYBOOK_CONTENT.getBadge('decaying'),
   },
 }
+
+export const Not_Counted_In_Totals: StoryType = {
+  args: {
+    badge: STORYBOOK_CONTENT.getBadge('bug-hunter'),
+  },
+}

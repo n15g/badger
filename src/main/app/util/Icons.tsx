@@ -1,4 +1,4 @@
-import { MdCheck, MdClose, MdContentCopy, MdLocalPolice, MdLocationOn, MdSearch, MdWarning } from 'react-icons/md'
+import { MdAdd, MdCheck, MdClose, MdContentCopy, MdDelete, MdEdit, MdLocalPolice, MdLocationOn, MdSearch, MdWarning } from 'react-icons/md'
 import { PiGenderFemale, PiGenderMale } from 'react-icons/pi'
 import { FaAward, FaExternalLinkAlt, FaSortAlphaDownAlt, FaSortAlphaUp, FaSpinner } from 'react-icons/fa'
 import { GrDocumentMissing } from 'react-icons/gr'
@@ -7,7 +7,7 @@ import { RxChevronRight, RxReset } from 'react-icons/rx'
 import { BiChevronDown, BiSortAlt2 } from 'react-icons/bi'
 import { IoMdCheckboxOutline } from 'react-icons/io'
 import { TbCalendarStar, TbLabel, TbLink, TbNotes } from 'react-icons/tb'
-import { BsPersonCircle } from 'react-icons/bs'
+import { BsPersonCircle, BsPersonVcard } from 'react-icons/bs'
 import { ImTarget } from 'react-icons/im'
 
 /**
@@ -18,6 +18,7 @@ export const Icons = {
   Badge: FaAward,
   Contact: BsPersonCircle,
   Mission: ImTarget,
+  Character: BsPersonVcard,
 
   Morality: MdLocalPolice,
 
@@ -25,6 +26,9 @@ export const Icons = {
   Female: PiGenderFemale,
 
   Cross: MdClose,
+  Plus: MdAdd,
+  Delete: MdDelete,
+  Edit: MdEdit,
   ReleaseDate: TbCalendarStar,
   SetTitle: TbLabel,
   Alert: MdWarning,

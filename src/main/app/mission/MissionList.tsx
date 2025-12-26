@@ -10,14 +10,16 @@ function MissionList() {
   const missions = content.missions.sort((a, b) => a.name.localeCompare(b.name))
 
   return (
-    <MainSection label="Missions">
+    <MainSection title="Missions">
       <SectionTitle><Icons.Mission/> Missions</SectionTitle>
 
-      <Card>
-        <List component="ul" marker="disc" sx={{ display: 'block', columnCount: { md: 2, lg: 3 }, columnGap: 4 }}>
-          {missions.map((mission) => (<ListItem key={mission.key}>
-            <MissionLink value={mission}/>
-          </ListItem>))}
+      <Card sx={{ display: { xs: 'contents', md: 'flex' } }}>
+        <List sx={{ display: 'block', columnCount: { md: 2, lg: 3 }, columnGap: 4 }}>
+          {missions.map((mission) => (
+            <ListItem key={mission.key} sx={{ display: 'flex', justifyContent: 'center', p: 1 }}>
+              <MissionLink value={mission}/>
+            </ListItem>
+          ))}
         </List>
       </Card>
 

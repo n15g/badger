@@ -17,7 +17,7 @@ const MissionLink: FC<{ value?: Mission | string }> = ({ value }) => {
     return (
       <Tooltip title={<MissionTooltip mission={mission}/>} variant="plain">
         <NavLink to={`/missions/${key}`} className="entityLink">
-          <Typography component="span" display="inline" className="entity" endDecorator={<Icons.Mission/>}>
+          <Typography component="span" display="inline" className="entity" startDecorator={<Icons.Mission/>}>
             {mission.name}
           </Typography>
         </NavLink>

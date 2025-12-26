@@ -16,7 +16,8 @@ const StyledAlternate: FC<{ value: AlternateData<string> }> = ({ value }) => {
 
   return <>
     <Typography>
-      <MoralityColored morality={alignment}>{text}</MoralityColored><sup style={{ fontSize: '0.7em' }}>{decorator}</sup>
+      <MoralityColored morality={alignment}>{text}</MoralityColored>
+      {decorator && <sup style={{ fontSize: '0.7em' }}>{decorator}</sup>}
     </Typography>
   </>
 }

@@ -3,7 +3,7 @@ import { Alert, Box } from '@mui/joy'
 import { errorToMeatspace } from './error-to-meatspace.ts'
 import { Icons } from './Icons.tsx'
 
-const Init: FC<{ error: unknown }> = ({ error }) => {
+const ErrorScreen: FC<{ error: unknown }> = ({ error }) => {
   return (
     <Box
       component="main"
@@ -22,4 +22,4 @@ const Init: FC<{ error: unknown }> = ({ error }) => {
   )
 }
 
-export default Init
+export default ErrorScreen

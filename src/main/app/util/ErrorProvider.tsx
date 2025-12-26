@@ -1,4 +1,4 @@
-import { createContext, FC, ReactNode, use, useCallback, useMemo, useState } from 'react'
+import { createContext, FC, ReactNode, use, useCallback, useState } from 'react'
 import { IconButton, Snackbar } from '@mui/joy'
 import { errorToMeatspace } from './error-to-meatspace.ts'
 import { Icons } from './Icons.tsx'
@@ -19,10 +19,8 @@ const ErrorProvider: FC<{ children: ReactNode }> & { useError: () => ErrorFunc }
       setOpen(true)
     }, [])
 
-    const value = useMemo(() => error, [error])
-
     return (
-      <ErrorContext value={value}>
+      <ErrorContext value={error}>
         {children}
         <Snackbar open={open}
                   color="danger"

@@ -17,7 +17,7 @@ const ContactView: FC<{ contact: Contact }> = ({ contact }) => {
   const { name, title, location, levelRange, morality, links, notes } = contact
 
   return (
-    <MainSection label={name}>
+    <MainSection title={name}>
       <Card>
         <CardOverflow>
           <Breadcrumbs separator={<Icons.Breadcrumb/>}>
@@ -38,7 +38,7 @@ const ContactView: FC<{ contact: Contact }> = ({ contact }) => {
         <Stack sx={{
           flexDirection: { xs: 'column', md: 'row-reverse' },
           justifyContent: 'space-between',
-          alignItems: 'flex-start',
+          alignItems: { xs: 'center', md: 'flex-start' },
           gap: 2
         }}>
 

@@ -1,4 +1,5 @@
 import {
+  Alert,
   Box,
   Breadcrumbs,
   Card,
@@ -32,10 +33,23 @@ import NotesBlock from '../util/NotesBlock.tsx'
 import LinksBlock from '../util/LinksBlock.tsx'
 
 const BadgeView: FC<{ badge: Badge }> = ({ badge }) => {
-  const { name, type, badgeText, morality, links, acquisition, requirements, notes, effect, releaseDate, setTitleId } = badge
+  const {
+    name,
+    type,
+    badgeText,
+    morality,
+    links,
+    acquisition,
+    requirements,
+    notes,
+    effect,
+    releaseDate,
+    setTitleId,
+    ignoreInTotals
+  } = badge
 
   return (
-    <MainSection label={name.toString(' / ')}>
+    <MainSection title={name.toString(' / ')}>
       <Card>
         <CardOverflow>
           <Breadcrumbs separator={<Icons.Breadcrumb/>}>
@@ -56,7 +70,7 @@ const BadgeView: FC<{ badge: Badge }> = ({ badge }) => {
         <Stack sx={{
           flexDirection: { xs: 'column', md: 'row-reverse' },
           justifyContent: 'space-between',
-          alignItems: 'flex-start',
+          alignItems: { xs: 'center', md: 'flex-start' },
           gap: 2
         }}>
 
@@ -76,6 +90,12 @@ const BadgeView: FC<{ badge: Badge }> = ({ badge }) => {
 
             {setTitleId && (
               <SetTitleLabel value={setTitleId}/>
+            )}
+
+            {ignoreInTotals && (
+              <Alert color="danger" sx={{ textAlign: 'center' }}>
+                Not counted toward badge totals
+              </Alert>
             )}
 
             <Divider/>

@@ -8,6 +8,7 @@ import ContactList from './contact/ContactList.tsx'
 import MissionList from './mission/MissionList.tsx'
 import ContactViewLoader from './contact/ContactViewLoader.tsx'
 import MissionViewLoader from './mission/MissionViewLoader.tsx'
+import CharacterListLoader from './character/CharacterListLoader.tsx'
 
 function BadgerRoutes() {
   return (
@@ -15,6 +16,8 @@ function BadgerRoutes() {
       <Route path="/" element={<About/>}></Route>
       <Route path="/badges" element={<BadgeList/>}></Route>
       <Route path="/badges/:badgeKey" element={<BadgeViewLoader/>}></Route>
+
+      <Route path="/characters" element={<CharacterListLoader/>}></Route>
 
       <Route path="/contacts" element={<ContactList/>}></Route>
       <Route path="/contacts/:contactKey" element={<ContactViewLoader/>}></Route>

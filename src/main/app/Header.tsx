@@ -21,7 +21,7 @@ import { NavLink } from 'react-router'
 import logo from '../resources/images/logo/badger.svg'
 import { useState } from 'react'
 import { MdOutlineMenu } from 'react-icons/md'
-import { BiChevronDown } from 'react-icons/bi'
+import { Icons } from './util/Icons.tsx'
 
 function Header() {
   const [drawerOpen, setDrawerOpen] = useState(false)
@@ -62,27 +62,41 @@ function Header() {
           </NavLink>
           <ListDivider/>
           <NavLink to="/characters">
-            {({ isActive }) => (<ListItem variant={isActive ? 'soft' : 'plain'}>Characters</ListItem>)}
+            {({ isActive }) => (<ListItem variant={isActive ? 'soft' : 'plain'}><Icons.Character/> Characters</ListItem>)}
           </NavLink>
           <ListDivider/>
           <NavLink to="/badges">
-            {({ isActive }) => (<ListItem variant={isActive ? 'soft' : 'plain'}>Badges</ListItem>)}
+            {({ isActive }) => (<ListItem variant={isActive ? 'soft' : 'plain'}><Icons.Badge/> Badges</ListItem>)}
           </NavLink>
           <ListDivider/>
           <Dropdown>
             <MenuButton slots={{ root: ListItem }} sx={{ cursor: 'pointer' }}>
-              Other Data <BiChevronDown/>
+              Other Data <Icons.ChevronDown/>
             </MenuButton>
             <Menu>
-              <MenuItem><NavLink to="/contacts">Contacts</NavLink></MenuItem>
-              <MenuItem><NavLink to="/missions">Missions</NavLink></MenuItem>
-              <MenuItem><NavLink to="/zones">Zones</NavLink></MenuItem>
+              <MenuItem><NavLink to="/contacts"><Icons.Contact/> Contacts</NavLink></MenuItem>
+              <MenuItem><NavLink to="/missions"><Icons.Mission/> Missions</NavLink></MenuItem>
+              <MenuItem><NavLink to="/zones"><Icons.Zone/> Zones</NavLink></MenuItem>
             </Menu>
           </Dropdown>
           <ListDivider/>
-          <NavLink to="https://github.com/n15g/badger/blob/master/CHANGELOG.md/">
-            <ListItem>Changelog</ListItem>
-          </NavLink>
+          <Dropdown>
+            <MenuButton slots={{ root: ListItem }} sx={{ cursor: 'pointer' }}>
+              Changelogs <Icons.ChevronDown/>
+            </MenuButton>
+            <Menu>
+              <MenuItem>
+                <NavLink to="https://github.com/n15g/badger/blob/master/CHANGELOG.md/">
+                  Badger <Icons.ExternalLink/>
+                </NavLink>
+              </MenuItem>
+              <MenuItem>
+                <NavLink to="https://github.com/n15g/coh-content-db-homecoming/blob/master/CHANGELOG.md/">
+                  Homecoming <Icons.ExternalLink/>
+                </NavLink>
+              </MenuItem>
+            </Menu>
+          </Dropdown>
         </List>
         <PaletteButton/>
       </Box>
@@ -110,27 +124,36 @@ function Header() {
             <ListItemButton component={NavLink} to="/" onClick={() => {
               setDrawerOpen(false)
             }}>About</ListItemButton>
+            <Divider/>
             <ListItemButton component={NavLink} to="/characters" onClick={() => {
               setDrawerOpen(false)
-            }}>Characters</ListItemButton>
+            }}><Icons.Character/> Characters</ListItemButton>
             <Divider/>
             <ListItem nested>
               <ListSubheader>Data</ListSubheader>
               <ListItemButton component={NavLink} to="/badges" onClick={() => {
                 setDrawerOpen(false)
-              }}>Badges</ListItemButton>
+              }}><Icons.Badge/> Badges</ListItemButton>
               <ListItemButton component={NavLink} to="/contacts" onClick={() => {
                 setDrawerOpen(false)
-              }}>Contacts</ListItemButton>
+              }}><Icons.Contact/> Contacts</ListItemButton>
               <ListItemButton component={NavLink} to="/missions" onClick={() => {
                 setDrawerOpen(false)
-              }}>Missions</ListItemButton>
+              }}><Icons.Mission/> Missions</ListItemButton>
               <ListItemButton component={NavLink} to="/zones" onClick={() => {
                 setDrawerOpen(false)
-              }}>Zones</ListItemButton>
+              }}><Icons.Zone/> Zones</ListItemButton>
             </ListItem>
             <Divider/>
-            <ListItemButton component={NavLink} to="https://github.com/n15g/badger/blob/master/CHANGELOG.md">Changelog</ListItemButton>
+            <ListItem nested>
+              <ListSubheader>Changelogs</ListSubheader>
+              <ListItemButton component={NavLink} to="https://github.com/n15g/badger/blob/master/CHANGELOG.md">
+                Badger <Icons.ExternalLink/>
+              </ListItemButton>
+              <ListItemButton component={NavLink} to="https://github.com/n15g/coh-content-db-homecoming/blob/master/CHANGELOG.md">
+                Homecoming <Icons.ExternalLink/>
+              </ListItemButton>
+            </ListItem>
           </List>
         </Drawer>
       </Box>

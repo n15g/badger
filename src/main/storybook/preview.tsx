@@ -11,6 +11,9 @@ import { STORYBOOK_CONTENT } from './storybook-content.ts'
 import SetTheme from './SetTheme.tsx'
 import { useDarkMode } from '@vueless/storybook-dark-mode'
 import { BrowserRouter } from 'react-router'
+import ErrorProvider from '../app/util/ErrorProvider.tsx'
+import BadgerDbProvider from '../app/db/BadgerDbProvider.tsx'
+import CharacterDbProvider from '../app/character/CharacterDbProvider.tsx'
 
 const preview: Preview = {
   parameters: {
@@ -34,8 +37,17 @@ const preview: Preview = {
     ),
     Story => (
       <ContentProvider content={STORYBOOK_CONTENT}>
-        <Story/>
+        <BadgerDbProvider>
+          <CharacterDbProvider>
+            <Story/>
+          </CharacterDbProvider>
+        </BadgerDbProvider>
       </ContentProvider>
+    ),
+    Story => (
+      <ErrorProvider>
+        <Story/>
+      </ErrorProvider>
     ),
     (Story, { parameters }) => {
       const { xl = false } = parameters

@@ -10,6 +10,7 @@ import ErrorProvider from './util/ErrorProvider.tsx'
 import BadgerDbProvider from './db/BadgerDbProvider.tsx'
 import ContentLoader from './content/ContentLoader.tsx'
 import BadgerRoutes from './BadgerRoutes.tsx'
+import CharacterDbProvider from './character/CharacterDbProvider.tsx'
 
 const root = document.getElementById('root')
 
@@ -25,24 +26,26 @@ createRoot(root).render(
         <CssBaseline/>
         <ErrorProvider>
           <BadgerDbProvider>
-            <ContentLoader>
-              <Header/>
-              <Box
-                component="main"
-                sx={{
-                  pt: 'calc(12px + var(--Header-height))',
-                  pb: { xs: 2, sm: 2, md: 3 },
-                  flex: 1,
-                  display: 'flex',
-                  flexDirection: 'column',
-                  minWidth: 0,
-                  height: '100dvh',
-                  gap: 1,
-                  overflow: 'auto',
-                }}>
-                <BadgerRoutes/>
-              </Box>
-            </ContentLoader>
+            <CharacterDbProvider>
+              <ContentLoader>
+                <Header/>
+                <Box
+                  component="main"
+                  sx={{
+                    pt: 'calc(12px + var(--Header-height))',
+                    pb: { xs: 2, sm: 2, md: 3 },
+                    flex: 1,
+                    display: 'flex',
+                    flexDirection: 'column',
+                    minWidth: 0,
+                    height: '100dvh',
+                    gap: 1,
+                    overflow: 'auto',
+                  }}>
+                  <BadgerRoutes/>
+                </Box>
+              </ContentLoader>
+            </CharacterDbProvider>
           </BadgerDbProvider>
         </ErrorProvider>
       </CssVarsProvider>

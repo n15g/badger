@@ -3,16 +3,17 @@ import { styled } from '@mui/joy'
 
 const Section = styled('section')({})
 
-const MainSection: FC<{ label?: string, children: ReactNode }> = ({ label, children }) => {
+const MainSection: FC<{ title?: string, children: ReactNode }> = ({ title, children }) => {
   return (
     <Section sx={{
-      mx: { xs: 2, md: 8, lg: 'auto' },
-      my: { xs: 2, md: 4 },
-      minWidth: { md: 800, lg: 1200 },
-      maxWidth: 1600
+      px: { xs: 1, md: 8, lg: '10%' },
+      py: { xs: 2, md: 4 },
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center'
     }}>
-      {label && (<>
-        <title>{label}</title>
+      {title && (<>
+        <title>{title}</title>
       </>)}
 
       {children}
