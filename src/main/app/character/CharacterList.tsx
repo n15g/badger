@@ -1,4 +1,4 @@
-import { Box, Button, Card, List, ListItem } from '@mui/joy'
+import { Box, Button, Card, ListItem } from '@mui/joy'
 import MainSection from '../util/MainSection.tsx'
 import SectionTitle from '../util/SectionTitle.tsx'
 import { Icons } from '../util/Icons.tsx'
@@ -48,39 +48,41 @@ const CharacterList: FC<{ characters: Character[] }> = ({ characters }) => {
             </Button>
           )}
         </Box>
-        <List sx={{ display: 'block', columnCount: { sm: 2, lg: 3 }, columnGap: 4 }}>
-          {characters.map((character) => (
-            <ListItem key={character.key}>
-              <Box sx={{ position: 'relative' }}>
-                <CharacterCard character={character}/>
-                {editing && (
-                  <Box sx={{
-                    position: 'absolute',
-                    display: 'flex',
-                    justifyContent: 'flex-end',
-                    p: 2,
-                    gap: 2,
-                    alignItems: 'center',
-                    top: 2,
-                    left: 2,
-                    right: 2,
-                    bottom: 2,
-                    borderRadius: 8,
-                    backgroundColor: 'rgba(0,0,0,0.5)',
-                    backdropFilter: 'blur(1.5px)',
-                  }}>
-                    <Button color="primary" variant="outlined" onClick={() => {
-                      setCharacterPendingEdit(character)
-                    }}><Icons.Edit/></Button>
-                    <Button color="danger" variant="outlined" onClick={() => {
-                      setCharacterPendingDelete(character)
-                    }}><Icons.Delete/></Button>
-                  </Box>
-                )}
-              </Box>
-            </ListItem>
-          ))}
-        </List>
+        <Box display="flex" flexDirection="row" flexWrap="wrap" gap={2} justifyContent="center" p={4}>
+          {characters
+            .sort((a, b) => a.name.localeCompare(b.name))
+            .map((character) => (
+              <ListItem key={character.key} sx={{ display: 'flex', justifyContent: 'center' }}>
+                <Box sx={{ position: 'relative' }}>
+                  <CharacterCard character={character}/>
+                  {editing && (
+                    <Box sx={{
+                      position: 'absolute',
+                      display: 'flex',
+                      justifyContent: 'flex-end',
+                      p: 2,
+                      gap: 2,
+                      alignItems: 'center',
+                      top: 2,
+                      left: 2,
+                      right: 2,
+                      bottom: 2,
+                      borderRadius: 8,
+                      backgroundColor: 'rgba(0,0,0,0.5)',
+                      backdropFilter: 'blur(1.5px)',
+                    }}>
+                      <Button color="primary" variant="outlined" onClick={() => {
+                        setCharacterPendingEdit(character)
+                      }}><Icons.Edit/></Button>
+                      <Button color="danger" variant="outlined" onClick={() => {
+                        setCharacterPendingDelete(character)
+                      }}><Icons.Delete/></Button>
+                    </Box>
+                  )}
+                </Box>
+              </ListItem>
+            ))}
+        </Box>
       </Card>
 
       <DeleteCharacterModal character={characterPendingDelete} onClose={() => {
