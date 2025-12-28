@@ -11,7 +11,7 @@ const CharacterCard: FC<{ character: Character }> = ({ character }) => {
   return (
     <NavLink to={`/characters/${character.key}`}>
       <Card sx={{ width: 280, flexDirection: 'row', alignItems: 'center', gap: 2, py: 1 }}>
-        {archetypeKey && <ArchetypeIcon archetypeKey={archetypeKey} width={32}/>}
+        {archetypeKey && <ArchetypeIcon archetypeKey={archetypeKey} height={32}/>}
 
         <Stack sx={{ overflowX: 'hidden', flexGrow: 1 }}>
           <Typography level="title-lg"
