@@ -2,20 +2,16 @@ import { FC } from 'react'
 import { Card, Divider, Stack, Typography } from '@mui/joy'
 import { NavLink } from 'react-router'
 import { Character } from './character.ts'
-import ContentProvider from '../content/ContentProvider.tsx'
-import ArchetypeIcon from './ArchetypeIcon.tsx'
 import BadgeCount from './BadgeCount.tsx'
+import ArchetypeIcon from '../archetype/ArchetypeIcon.tsx'
 
 const CharacterCard: FC<{ character: Character }> = ({ character }) => {
-  const content = ContentProvider.useContent()
-
   const { name, archetypeKey, server } = character
-  const archetype = content.getArchetype(archetypeKey)
 
   return (
     <NavLink to={`/characters/${character.key}`}>
       <Card sx={{ width: 280, flexDirection: 'row', alignItems: 'center', gap: 2, py: 1 }}>
-        {archetype && <ArchetypeIcon archetype={archetype} width={32}/>}
+        {archetypeKey && <ArchetypeIcon archetypeKey={archetypeKey} width={32}/>}
 
         <Stack sx={{ overflowX: 'hidden', flexGrow: 1 }}>
           <Typography level="title-lg"

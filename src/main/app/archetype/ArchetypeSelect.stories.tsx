@@ -4,7 +4,7 @@ import ArchetypeSelect from './ArchetypeSelect.tsx'
 import { Meta, StoryObj } from '@storybook/react-vite'
 
 const meta: Meta<typeof ArchetypeSelect> = {
-  title: 'character/ArchetypeSelect',
+  title: 'archetype/ArchetypeSelect',
   component: ArchetypeSelect,
 }
 export default meta

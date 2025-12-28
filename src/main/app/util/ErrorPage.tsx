@@ -3,7 +3,8 @@ import { Alert, Box } from '@mui/joy'
 import { errorToMeatspace } from './error-to-meatspace.ts'
 import { Icons } from './Icons.tsx'
 
-const ErrorScreen: FC<{ error: unknown }> = ({ error }) => {
+const ErrorPage: FC<{ error: unknown }> = ({ error }) => {
+  console.error("An error occurred", error)
   return (
     <Box
       component="main"
@@ -22,4 +23,4 @@ const ErrorScreen: FC<{ error: unknown }> = ({ error }) => {
   )
 }
 
-export default ErrorScreen
+export default ErrorPage

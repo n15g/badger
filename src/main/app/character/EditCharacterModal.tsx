@@ -2,25 +2,11 @@ import { FC } from 'react'
 import { Modal, ModalClose, ModalDialog, Typography } from '@mui/joy'
 import CharacterDbProvider from './CharacterDbProvider.tsx'
 import { Character } from './character.ts'
-import ErrorProvider from '../util/ErrorProvider.tsx'
-import CharacterEdit from './CharacterEdit.tsx'
+import EditCharacterForm from './EditCharacterForm.tsx'
 
-const AddCharacterButton: FC<{ character?: Character, onClose: () => void }>
+const EditCharacterModal: FC<{ character?: Character, onClose: () => void }>
   = ({ character, onClose }) => {
-  const { saveCharacter } = CharacterDbProvider.useCharacterDb()
-  const error = ErrorProvider.useError()
-
-  const saveFn = async (next: Character) => {
-    try {
-      if (character?.key) {
-        await saveCharacter(next)
-      }
-    } catch (err: unknown) {
-      error(err)
-    } finally {
-      onClose()
-    }
-  }
+  const { mutateCharacter } = CharacterDbProvider.useCharacterDb()
 
   return character && (
     <Modal
@@ -29,12 +15,17 @@ const AddCharacterButton: FC<{ character?: Character, onClose: () => void }>
       <ModalDialog>
         <ModalClose/>
         <Typography level="title-lg">Edit Character</Typography>
-        <CharacterEdit character={character} onSave={async (next) => {
-          await saveFn({ ...character, ...next })
+        <EditCharacterForm character={character} onSave={async (next) => {
+          await mutateCharacter(character.key, (draft) => {
+            draft.name = next.name
+            draft.server = next.server
+            draft.archetypeKey = next.archetypeKey
+          })
+          onClose()
         }}/>
       </ModalDialog>
     </Modal>
   )
 }
 
-export default AddCharacterButton
+export default EditCharacterModal

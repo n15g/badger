@@ -27,12 +27,12 @@ const ArchetypeSelect: FC<{ value?: string, onNewValue?: (value: string) => void
                 value={archetype.key}
                 label={(
                   <Typography
-                    startDecorator={<ArchetypeIcon archetype={archetype} style={{ height: '1.4em' }}/>}>
+                    startDecorator={<ArchetypeIcon archetypeKey={archetype.key} height="1.4em"/>}>
                     {archetype.name}
                   </Typography>
                 )}>
           <ListItemDecorator>
-            <ArchetypeIcon archetype={archetype} style={{ height: '1.4em' }}/>
+            <ArchetypeIcon archetypeKey={archetype.key} height="1.4em"/>
           </ListItemDecorator>
           {archetype.name}
         </Option>

@@ -2,7 +2,6 @@ import { createContext, FC, ReactNode, use, useCallback, useEffect, useMemo, use
 import { BundleData, CohContentDatabase } from 'coh-content-db'
 import BadgerDbProvider from '../db/BadgerDbProvider.tsx'
 import { reticulateSplines } from '../util/reticulate-splines.ts'
-import ErrorScreen from '../util/ErrorScreen.tsx'
 import LoadingScreen from '../util/LoadingScreen.tsx'
 import axios from 'axios'
 import ErrorProvider from '../util/ErrorProvider.tsx'
@@ -26,21 +25,16 @@ const ContentLoader: FC<{ children: ReactNode }> & { useContentLoader: () => Con
     const badgerDb = BadgerDbProvider.useBadgerDb()
     const error = ErrorProvider.useError()
 
-    const [fatalError, setFatalError] = useState<unknown>()
     const [loadingStr, setLoadingStr] = useState<string>(reticulateSplines)
     const [bundleSource, setBundleSource] = useState<string | undefined>()
     const [content, setContent] = useState<CohContentDatabase | undefined>()
 
     const loadBundle = useCallback(async (newSource?: BundleSource) => {
       const loadHrefBundle = async (href: string) => {
-        try {
-          const response = await axios.get(href)
-          const bundle = await response.data as BundleData
-          setContent(new CohContentDatabase(bundle))
-          setBundleSource(href)
-        } catch (err) {
-          setFatalError(err)
-        }
+        const response = await axios.get(href)
+        const bundle = await response.data as BundleData
+        setContent(new CohContentDatabase(bundle))
+        setBundleSource(href)
       }
 
       const loadIdbBundle = async () => {
@@ -77,12 +71,8 @@ const ContentLoader: FC<{ children: ReactNode }> & { useContentLoader: () => Con
     }, [])
 
     useEffect(() => {
-      try {
-        setLoadingStr('Loading content bundle...')
-        void loadBundle()
-      } catch (err) {
-        setFatalError(err)
-      }
+      setLoadingStr('Loading content bundle...')
+      void loadBundle()
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
@@ -98,8 +88,6 @@ const ContentLoader: FC<{ children: ReactNode }> & { useContentLoader: () => Con
           </ContentProvider>
         </ContentContext>
       )
-    } else if (fatalError) {
-      return <ErrorScreen error={fatalError}/>
     } else {
       return <LoadingScreen text={loadingStr}/>
     }

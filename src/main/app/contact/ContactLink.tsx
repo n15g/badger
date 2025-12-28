@@ -25,9 +25,9 @@ const ContactLink: FC<{ value?: Contact | string }> = ({ value }) => {
     )
   } else {
     return (
-      <span className="entityLink">
-      <ErrorText title="Unknown contact">{key ?? 'Unknown Contact'}</ErrorText> <Icons.Contact/>
-      </span>
+      <Typography component="span" display="inline" className="entityLink" startDecorator={<Icons.Contact/>}>
+        <ErrorText title="Unknown contact">{key ?? 'Unknown Contact'}</ErrorText>
+      </Typography>
     )
   }
 }

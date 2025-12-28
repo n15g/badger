@@ -1,7 +1,6 @@
-import { FC, ImgHTMLAttributes } from 'react'
-import { Tooltip } from '@mui/joy'
-import { Archetype } from 'coh-content-db'
-import { SxProps } from '@mui/joy/styles/types'
+import { FC } from 'react'
+import { SmartImage } from '../util/SmartImage.tsx'
+import { TbCircleDashedLetterA } from 'react-icons/tb'
 import arachnosSoldierIcon from '../../resources/images/archetype/arachnos-soldier.png'
 import arachnosWidowIcon from '../../resources/images/archetype/arachnos-widow.png'
 import blasterIcon from '../../resources/images/archetype/blaster.png'
@@ -17,11 +16,8 @@ import sentinelIcon from '../../resources/images/archetype/sentinel.png'
 import stalkerIcon from '../../resources/images/archetype/stalker.png'
 import tankerIcon from '../../resources/images/archetype/tanker.png'
 import warshadeIcon from '../../resources/images/archetype/warshade.png'
-import { SmartImage } from '../util/SmartImage.tsx'
 
-const ArchetypeIcon: FC<{ archetype: Archetype, sx?: SxProps } & ImgHTMLAttributes<HTMLImageElement>>
-  = ({ archetype, sx, ...props }) => {
-
+const ArchetypeIcon: FC<{ archetypeKey: string, height?: string | number }> = ({ archetypeKey, height = 32 }) => {
   const icon = {
     'arachnos-soldier': arachnosSoldierIcon,
     'arachnos-widow': arachnosWidowIcon,
@@ -38,13 +34,9 @@ const ArchetypeIcon: FC<{ archetype: Archetype, sx?: SxProps } & ImgHTMLAttribut
     'stalker': stalkerIcon,
     'tanker': tankerIcon,
     'warshade': warshadeIcon,
-  }[archetype.key]
+  }[archetypeKey]
 
-  return (
-    <Tooltip title={archetype.name}>
-      <SmartImage src={icon} alt="Icon" sx={sx} {...props}/>
-    </Tooltip>
-  )
+  return icon ? <SmartImage src={icon} style={{ height: height }}/> : <TbCircleDashedLetterA size={height}/>
 }
 
 export default ArchetypeIcon

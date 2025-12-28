@@ -1,9 +1,8 @@
-import { FC, useState } from 'react'
+import { FC, useCallback, useState } from 'react'
 import { Box, Button, FormControl, FormLabel, Input, Stack, Typography } from '@mui/joy'
-import ArchetypeSelect from './ArchetypeSelect.tsx'
-import ErrorProvider from '../util/ErrorProvider.tsx'
 import BadgerSpinner from '../util/BadgerSpinner.tsx'
 import ServerSelect from './ServerSelect.tsx'
+import ArchetypeSelect from '../archetype/ArchetypeSelect.tsx'
 
 interface CharacterData {
   name: string,
@@ -11,7 +10,7 @@ interface CharacterData {
   archetypeKey?: string
 }
 
-const CharacterCard: FC<{ character?: CharacterData, onSave: (character: CharacterData) => Promise<void> }>
+const EditCharacterForm: FC<{ character?: CharacterData, onSave: (character: CharacterData) => Promise<void> }>
   = ({ character, onSave }) => {
 
   const defaultState: CharacterData = {
@@ -19,14 +18,18 @@ const CharacterCard: FC<{ character?: CharacterData, onSave: (character: Charact
     server: character?.server ?? '',
     archetypeKey: character?.archetypeKey ?? 'blaster'
   }
-  const error = ErrorProvider.useError()
-
   const [characterState, setCharacterState] = useState(defaultState)
   const [saving, setSaving] = useState(false)
 
   const valid = characterState.name && characterState.name !== ''
     && characterState.server && characterState.server !== ''
     && characterState.archetypeKey && characterState.archetypeKey != ''
+
+  const saveFn = useCallback(async () => {
+    setSaving(true)
+    await onSave(characterState)
+    setSaving(false)
+  }, [characterState, onSave])
 
   return (
     <Box sx={{ width: 300 }}>
@@ -71,15 +74,7 @@ const CharacterCard: FC<{ character?: CharacterData, onSave: (character: Charact
 
         <Button
           disabled={!valid || saving}
-          onClick={() => {
-            setSaving(true)
-            onSave(characterState).then(() => {
-              setSaving(false)
-            }, (err: unknown) => {
-              error(err)
-              setSaving(false)
-            })
-          }}>
+          onClick={() => void saveFn()}>
           {saving ? <BadgerSpinner style={{ height: '1.2em' }}/> : <>Save</>}
         </Button>
       </Stack>
@@ -87,4 +82,4 @@ const CharacterCard: FC<{ character?: CharacterData, onSave: (character: Charact
   )
 }
 
-export default CharacterCard
+export default EditCharacterForm

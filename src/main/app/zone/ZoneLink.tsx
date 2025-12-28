@@ -25,9 +25,9 @@ const ZoneLink: FC<{ value?: Zone | string }> = ({ value }) => {
     )
   } else {
     return (
-      <span className="entityLink">
-      <ErrorText title="Unknown zone">{key ?? 'Unknown Zone'}</ErrorText> <Icons.Zone/>
-      </span>
+      <Typography component="span" display="inline" className="entityLink" startDecorator={<Icons.Zone/>}>
+        <ErrorText title="Unknown zone">{key ?? 'Unknown Zone'}</ErrorText> <Icons.Zone/>
+      </Typography>
     )
   }
 }

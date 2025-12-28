@@ -28,9 +28,9 @@ const BadgeLink: FC<{ value?: Badge | string }> = ({ value }) => {
     )
   } else {
     return (
-      <span className="entityLink">
-      <ErrorText title="Unknown badge">{key ?? 'Unknown Badge'}</ErrorText> <Icons.Badge/>
-      </span>
+      <Typography component="span" display="inline" className="entityLink" startDecorator={<Icons.Badge/>}>
+        <ErrorText title="Unknown badge">{key ?? 'Unknown Badge'}</ErrorText>
+      </Typography>
     )
   }
 }

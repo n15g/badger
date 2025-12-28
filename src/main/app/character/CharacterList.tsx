@@ -5,12 +5,13 @@ import { Icons } from '../util/Icons.tsx'
 import { FC, useEffect, useState } from 'react'
 import { Character } from './character.ts'
 import CharacterCard from './CharacterCard.tsx'
-import AddCharacterButton from './AddCharacterButton.tsx'
 import DeleteCharacterModal from './DeleteCharacterModal.tsx'
 import EditCharacterModal from './EditCharacterModal.tsx'
+import AddCharacterModal from './AddCharacterModal.tsx'
 
 const CharacterList: FC<{ characters: Character[] }> = ({ characters }) => {
   const [editing, setEditing] = useState(false)
+  const [addCharacterOpen, setAddCharacterOpen] = useState(false)
   const [characterPendingDelete, setCharacterPendingDelete] = useState<Character | undefined>()
   const [characterPendingEdit, setCharacterPendingEdit] = useState<Character | undefined>()
 
@@ -37,7 +38,11 @@ const CharacterList: FC<{ characters: Character[] }> = ({ characters }) => {
 
       <Card sx={{ display: { xs: 'contents', md: 'flex' }, minWidth: { md: 800 }, minHeight: { md: 300 } }}>
         <Box sx={{ display: 'flex', justifyContent: 'flex-end', gap: 2 }}>
-          <AddCharacterButton/>
+          <Button onClick={() => {
+            setAddCharacterOpen(true)
+          }}>
+            <Icons.Plus/> Add Character
+          </Button>
           {characters.length > 0 && (
             <Button
               color={editing ? 'success' : 'neutral'}
@@ -84,6 +89,10 @@ const CharacterList: FC<{ characters: Character[] }> = ({ characters }) => {
             ))}
         </Box>
       </Card>
+
+      <AddCharacterModal open={addCharacterOpen} onClose={() => {
+        setAddCharacterOpen(false)
+      }}/>
 
       <DeleteCharacterModal character={characterPendingDelete} onClose={() => {
         setCharacterPendingDelete(undefined)

@@ -1,9 +1,9 @@
 import { FC, ReactNode } from 'react'
-import { Typography } from '@mui/joy'
+import { Typography, TypographyProps } from '@mui/joy'
 
-const ErrorText: FC<{ title?: string, children: ReactNode }> = ({ title, children }) => {
+const ErrorText: FC<{ title?: string, children: ReactNode } & TypographyProps> = ({ title, children, ...props }) => {
   return (
-    <Typography component="span" display="inline" color="danger" title={title}>
+    <Typography component="span" display="inline" color="danger" title={title} {...props}>
       {children}
     </Typography>
   )

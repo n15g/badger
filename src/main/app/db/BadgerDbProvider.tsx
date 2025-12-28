@@ -1,8 +1,6 @@
 import { createContext, FC, ReactNode, use, useEffect, useState } from 'react'
 import { BadgerDb, getBadgerDb } from './badger-db.ts'
-import { reticulateSplines } from '../util/reticulate-splines.ts'
 import LoadingScreen from '../util/LoadingScreen.tsx'
-import ErrorScreen from '../util/ErrorScreen.tsx'
 
 
 const IndexedDbContext = createContext<BadgerDb | undefined>(undefined)
@@ -10,21 +8,11 @@ const IndexedDbContext = createContext<BadgerDb | undefined>(undefined)
 const BadgerDbProvider: FC<{ children: ReactNode }> & { useBadgerDb: () => BadgerDb } =
   ({ children }) => {
     const [badgerDb, setBadgerDb] = useState<BadgerDb | undefined>()
-    const [error, setError] = useState<unknown>()
-    const [loadingStr, setLoadingStr] = useState<string>(reticulateSplines)
 
     useEffect(() => {
       const loadDb = async () => {
         if (!badgerDb) {
-          try {
-            setLoadingStr('Initializing Badger IndexedDB...')
-            const db = await getBadgerDb()
-            setBadgerDb(db)
-            return db
-          } catch (err) {
-            console.error(err)
-            setError(err)
-          }
+          setBadgerDb(await getBadgerDb())
         }
       }
 
@@ -42,10 +30,8 @@ const BadgerDbProvider: FC<{ children: ReactNode }> & { useBadgerDb: () => Badge
           {children}
         </IndexedDbContext>
       )
-    } else if (error) {
-      return <ErrorScreen error={error}/>
     } else {
-      return <LoadingScreen text={loadingStr}/>
+      return <LoadingScreen text={'Initializing IndexedDB...'}/>
     }
   }
 

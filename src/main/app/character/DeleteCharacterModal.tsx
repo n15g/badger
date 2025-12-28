@@ -1,31 +1,24 @@
-import { FC, useState } from 'react'
+import { FC, useCallback, useState } from 'react'
 import { Button, Modal, ModalClose, ModalDialog, Stack, Typography } from '@mui/joy'
 import CharacterDbProvider from './CharacterDbProvider.tsx'
 import { Character } from './character.ts'
 import { Icons } from '../util/Icons.tsx'
-import ErrorProvider from '../util/ErrorProvider.tsx'
 import BadgerSpinner from '../util/BadgerSpinner.tsx'
 
-const AddCharacterButton: FC<{ character?: Character, onClose: () => void }>
+const DeleteCharacterModal: FC<{ character?: Character, onClose: () => void }>
   = ({ character, onClose }) => {
   const { deleteCharacter } = CharacterDbProvider.useCharacterDb()
-  const error = ErrorProvider.useError()
 
   const [deleting, setDeleting] = useState(false)
 
-  const deleteFn = async () => {
-    try {
-      setDeleting(true)
-      if (character?.key) {
-        await deleteCharacter(character.key)
-      }
-    } catch (err: unknown) {
-      error(err)
-    } finally {
-      setDeleting(false)
-      onClose()
+  const deleteFn = useCallback(async () => {
+    setDeleting(true)
+    if (character?.key) {
+      await deleteCharacter(character.key)
     }
-  }
+    setDeleting(false)
+    onClose()
+  }, [character, deleteCharacter, onClose])
 
   return character && (
     <Modal
@@ -56,4 +49,4 @@ const AddCharacterButton: FC<{ character?: Character, onClose: () => void }>
   )
 }
 
-export default AddCharacterButton
+export default DeleteCharacterModal

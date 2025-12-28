@@ -25,9 +25,9 @@ const MissionLink: FC<{ value?: Mission | string }> = ({ value }) => {
     )
   } else {
     return (
-      <span className="entityLink">
-      <ErrorText title="Unknown mission">{key ?? 'Unknown Mission'}</ErrorText> <Icons.Mission/>
-      </span>
+      <Typography component="span" display="inline" className="entityLink" startDecorator={<Icons.Mission/>}>
+        <ErrorText title="Unknown mission">{key ?? 'Unknown Mission'}</ErrorText>
+      </Typography>
     )
   }
 }

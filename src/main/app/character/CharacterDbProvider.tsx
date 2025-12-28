@@ -1,12 +1,15 @@
 import { createContext, FC, ReactNode, use, useCallback, useEffect, useMemo, useState } from 'react'
 import { Character } from './character.ts'
 import BadgerDbProvider from '../db/BadgerDbProvider.tsx'
-import ErrorProvider from '../util/ErrorProvider.tsx'
+import { Draft, produce } from 'immer'
+import LoadingScreen from '../util/LoadingScreen.tsx'
 
 interface CharacterDbContextValue {
+  loading: boolean,
   characters: Character[],
-  getCharacter: (key: string) => Promise<Character | undefined>,
-  saveCharacter: (character: Character) => Promise<void>,
+  refreshCharacters: () => Promise<void>,
+  createCharacter: (character: Character) => Promise<void>,
+  mutateCharacter: (key: string, recipe: (draft: Draft<Character>) => void) => Promise<void>,
   deleteCharacter: (key: string) => Promise<void>,
 }
 
@@ -15,17 +18,32 @@ const CharacterDbContext = createContext<CharacterDbContextValue | undefined>(un
 const CharacterDbProvider: FC<{ children: ReactNode }> & { useCharacterDb: () => CharacterDbContextValue } =
   ({ children }) => {
     const db = BadgerDbProvider.useBadgerDb()
-    const error = ErrorProvider.useError()
 
     const [characters, setCharacters] = useState<Character[] | undefined>()
 
     const refreshCharacters = useCallback(async () => {
-      try {
-        setCharacters(await db.getCharacters())
-      } catch (err: unknown) {
-        error(err)
+      setCharacters(await db.getCharacters())
+    }, [db])
+
+    const createCharacter = useCallback(async (character: Character): Promise<void> => {
+      await db.saveCharacter(character)
+      await refreshCharacters()
+    }, [db, refreshCharacters])
+
+    const mutateCharacter = useCallback(async (key: string, recipe: (draft: Draft<Character>) => void): Promise<void> => {
+      const current = await db.getCharacter(key)
+      if (!current) {
+        throw new Error(`Attempted to mutate character with unknown key [${key}]. Has it been deleted recently?`)
       }
-    }, [db, error])
+      const next = produce(current, recipe)
+      await db.saveCharacter(next)
+      await refreshCharacters()
+    }, [db, refreshCharacters])
+
+    const deleteCharacter = useCallback(async (key: string): Promise<void> => {
+      await db.deleteCharacter(key)
+      await refreshCharacters()
+    }, [db, refreshCharacters])
 
     useEffect(() => {
       void refreshCharacters()
@@ -35,31 +53,29 @@ const CharacterDbProvider: FC<{ children: ReactNode }> & { useCharacterDb: () =>
     const value = useMemo(() => {
       return {
         characters,
-        getCharacter: (key: string) => db.getCharacter(key),
-        saveCharacter: async (character: Character) => {
-          await db.saveCharacter(character)
-          await refreshCharacters()
-        },
-        deleteCharacter: async (key: string) => {
-          await db.deleteCharacter(key)
-          await refreshCharacters()
-        }
+        refreshCharacters,
+        createCharacter,
+        mutateCharacter,
+        deleteCharacter
       } as CharacterDbContextValue
-    }, [db, characters, refreshCharacters])
+    }, [characters, refreshCharacters, createCharacter, mutateCharacter, deleteCharacter])
 
     return (<>
-      {characters && (
-        <CharacterDbContext value={value}>
-          {children}
-        </CharacterDbContext>
-      )}
+      {!characters
+        ? <LoadingScreen text={'Initializing IndexedDB...'}/>
+        : (
+          <CharacterDbContext value={value}>
+            {children}
+          </CharacterDbContext>
+        )
+      }
     </>)
   }
 
 CharacterDbProvider.useCharacterDb = (): CharacterDbContextValue => {
   const context = use(CharacterDbContext)
   if (!context) {
-    throw new Error('useCharacter must be used within a CharacterDbProvider')
+    throw new Error('useCharacterDb must be used within a CharacterDbProvider')
   }
   return context
 }

@@ -21,3 +21,9 @@ export const Long_Name: StoryType = {
     character: { key: 'test', name: 'This is a really long character name', archetypeKey: 'blaster', server: 'Torchbearer' }
   },
 }
+
+export const Unknown_Archetype: StoryType = {
+  args: {
+    character: { key: 'test', name: 'This is a really long character name', archetypeKey: undefined, server: 'Torchbearer' }
+  },
+}
