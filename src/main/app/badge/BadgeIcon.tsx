@@ -1,13 +1,9 @@
-import { FC } from 'react'
+import { FC, ImgHTMLAttributes } from 'react'
 import { Badge, VariantContext } from 'coh-content-db'
 import { SmartImage } from '../util/SmartImage.tsx'
 
-const BadgeIcon: FC<{
-  badge: Badge | undefined,
-  context?: VariantContext,
-  width?: number | string,
-  height?: number | string,
-}> = ({ badge, context, width, height }) => {
+const BadgeIcon: FC<{ badge: Badge | undefined, context?: VariantContext } & ImgHTMLAttributes<HTMLImageElement>>
+  = ({ badge, context, ...props }) => {
   if (badge) {
     return <SmartImage
       src={badge.icon.getValue(context)}
@@ -17,7 +13,7 @@ const BadgeIcon: FC<{
           filter: `drop-shadow(0 0 4px ${theme.palette.text.icon})`,
         }
       }}
-      style={{ width: width, height: height }}
+      {...props}
     />
   }
 }

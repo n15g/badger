@@ -1,8 +1,7 @@
-import { styled, Table, Typography } from '@mui/joy'
+import { Stack, styled, Table, Typography } from '@mui/joy'
 import { NavLink } from 'react-router'
 import { useSessionStorage } from '../util/use-session-storage.ts'
 import Pagination from '../util/Pagination.tsx'
-import BadgeIcon from './BadgeIcon.tsx'
 import { Badge, BadgeSearchOptions } from 'coh-content-db'
 import ContentProvider from '../content/ContentProvider.tsx'
 import BadgeSearchBar from './search/BadgeSearchBar.tsx'
@@ -12,6 +11,7 @@ import { BadgeTypes } from './BadgeTypes.tsx'
 import ReleaseDate from '../util/ReleaseDate.tsx'
 import CharacterContextProvider from '../character/CharacterContextProvider.tsx'
 import { FC } from 'react'
+import BadgeIcon from './BadgeIcon.tsx'
 
 const TD = styled('td')(() => ({}))
 const TH = styled('th')(() => ({}))
@@ -59,12 +59,16 @@ const BadgeRow: FC<{ badge: Badge }> = ({ badge }) => {
     <tr>
       <TD>
         <NavLink to={linkTarget}>
-          <Typography component="span" level="body-sm"
-                      startDecorator={<BadgeIcon badge={badge} height="1em"/>}
-                      title={badge.name.toString(' / ')}
-          >
-            <BadgeNameInline badge={badge} context={character}/>
-          </Typography>
+          <Stack direction="row" alignItems="center" gap={1}>
+            <BadgeIcon badge={badge} style={{ height: '1.5em' }}/>
+            <Typography
+              component="span"
+              level="body-sm"
+              title={badge.name.toString(' / ')}
+            >
+              <BadgeNameInline badge={badge} context={character}/>
+            </Typography>
+          </Stack>
         </NavLink>
       </TD>
       <TD sx={{ ...hideOnSmall }}>

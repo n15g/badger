@@ -40,7 +40,7 @@ const BadgeAcquisitionSummary: FC<{ badge: Badge }> = ({ badge }) => {
       }, new Set<string>())]
 
       return (<>
-        Collect <NaturalList keys={keys} renderFn={(key) => <BadgeIconLink value={key}/>} cap={8}/>.
+        Collect <NaturalList keys={keys} renderFn={(key) => <BadgeIconLink value={key} style={{ height: '1em' }}/>} cap={8}/>.
       </>)
     }
 

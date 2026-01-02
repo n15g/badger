@@ -18,7 +18,7 @@ export const SmartImage: FC<{ sx?: SxProps } & ImgHTMLAttributes<HTMLImageElemen
       onError={() => {
         setLoaded(true)
       }}
-      style={{ display: loaded ? undefined : 'none' }}
+      style={{...props.style, display: loaded ? undefined : 'none' }}
       className="hover-zoom"
       sx={sx}
       {...props}
