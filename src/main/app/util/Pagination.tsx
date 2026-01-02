@@ -36,7 +36,7 @@ const Pagination: FC<{ paged: Paged<unknown>, range?: number, onChange: (page: n
 
       {showPages.map(index => (
         <Button key={index}
-                sx={{ display: { xs: index === paged.page ? 'inline-block' : 'none', md: 'inline-block' }, minWidth: '2em' }}
+                sx={{ display: { xs: index === paged.page ? 'inline-block' : 'none', md: 'inline-block' }, minWidth: '4em' }}
                 disabled={index === paged.page}
                 variant={index === paged.page ? 'solid' : 'plain'}
                 onClick={() => {
