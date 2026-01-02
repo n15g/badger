@@ -1,88 +1,59 @@
 # Badger
 
+[![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/n15g/badger/build.yml?branch=master)](https://github.com/n15g/badger/actions)
 [![GitHub Tag](https://img.shields.io/github/v/tag/n15g/badger)](https://github.com/n15g/badger/tags)
 [![GitHub License](https://img.shields.io/github/license/n15g/badger)](LICENSE)
 
-Badger is a badge database and tracker application for City of Heroes badge hunters.
+Badger is a badge tracking application for the City of Heroes [Homecoming](https://homecomingservers.com/) servers.
 
-### To run the app, just visit the following link, no need to download or run anything: https://n15g.github.io/badger/
-
-I designed badger to solve a couple of issues that have cropped up in the post-sunset era:
-
-* The original badge hunting sites and tools are out of date.
-* Much of the old tools are closed source and abandoned.
-* There are now multiple server groups running, each with different badges available on their servers.
-
-To that end, Badger is open source.
-It is also designed to handle different servers with different badges available.
-The badge and server data are also stored in open-source git repositories under the GPL 3.0 and also published to npm, making it easy to use in other applications if you wish.
-I actively encourage anyone who wants to use the badge data for other projects to do so.
-
-The currently supported server groups are:
-
-* Homecoming - https://github.com/n15g/coh-content-db-homecoming
-
-If anyone is interested in creating or maintaining the data for other server groups, let me know.
-
-...and of course, happy badging!
+Badger runs directly in your browser, no need to download anything: https://n15g.github.io/badger/
 
 Go hunt. Kill Skuls.
 
-## Development
+----
+
+# Changelog
+
+[CHANGELOG.md](CHANGELOG.md)
+
+----
+
+# Development
 
 If you'd like to run the app locally for development purposes, here's what you'll need:
 
 ### Modifying the badges and other data
 
-This repository just contains the code for the Badger UI.
+This repository just contains the code for the Badger App.
 
 The badge data for Homecoming is maintained in the [coh-content-db-homecoming](https://github.com/n15g/coh-content-db-homecoming) project.
-See the README file for that repository for details on how to modify badge content.
+See the README file in that repository for details on how to modify badge content.
 
 ### Requirements
 
-* [Node JS](https://nodejs.org/)
-* [git](https://git-scm.com/) for source control
-* For badge development an understanding of [TypeScript](https://www.typescriptlang.org/)
-* For UI development, an understanding of [Angular](https://angular.dev/)
+* [Node JS 22+](https://nodejs.org/)
+* [git SCM](https://git-scm.com/)
 
 ### Running locally
 
 1. Clone the project `git clone git@github.com:n15g/badger.git`
 2. Install project dependencies `npm install`
-3. Launch the development server `npm run start`
+3. Launch the development server `npm run dev`
+4. Launch storybook `npm run storybook`
 
-The app will now be accessible at http://localhost:4200.
+The app will now be accessible at http://localhost:5173 and storybook at http://localhost:6006.
 Most changes will be reflected automatically without needing to restart the server.
 
-### Linking changes from a content database
+----
 
-To test changes to a content database, like the [Homecoming Content DB](https://github.com/n15g/coh-content-db-homecoming), you'll need to
-build and link that project locally.
+# Release
 
-For Homecoming specifically, you can follow the following process:
+1. Determine the next [Semantic Release](https://semver.org) version, i.e. `2.0.0-rc.16`
+2. Update the version and release notes in the [CHANGELOG.md](CHANGELOG.md).
+    * Commit with the comment `Changelog <semver>`
+3. `npm version <semver>` - Updates the package.json and commits + tags new version. Use semver syntax for version number.
+4. `npm run push` - Push the commit and tags to remote.
+5. GitHub will release automatically.
 
-1. Clone the coh-content-db-homecoming repo: `git clone git@github.com:n15g/coh-content-db-homecoming.git`
-2. From the coh-content-db-homecoming folder:
-    1. Run `npm link`
-    2. Make your changes to the content.
-    3. Run `npm build` or `npm watch` to build automatically on changes.
-3. From the badger folder:
-    1. Run `npm run link:hc` to link to your local changes in the coh-content-db-homecoming folder.
-    2. Run `npm run start` to start the development server and see your changes reflected in the UI.
-
-### Updating the package version
-
-Use [Semantic Versioning](https://semver.org/).
-
-1. `npm version <new version>`
-2. Update the [changelog](src/app/_changelog.ts).
-
-### Building and publish
-
-Build the application bundle and publish to github pages.
-
-1. `npm run build`
-2. `npm run pages`
-
-```
+Tags matching the pattern `v<X>.<Y>.<Z>` will attempt to publish to npm (this can only be achieved by the package manager (n15g).
+The `npm version` command automatically prepends the `v` prefix to the version number.
