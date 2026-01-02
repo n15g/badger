@@ -1,19 +1,25 @@
 import { FC } from 'react'
-import { Badge } from 'coh-content-db'
+import { Badge, VariantContext } from 'coh-content-db'
 import { Typography } from '@mui/joy'
-import StyledAlternate from '../util/StyledAlternate.tsx'
+import StyledVariant from '../util/StyledVariant.tsx'
 
 
-const BadgeNameInline: FC<{ badge: Badge }> =
-  ({ badge }) => {
+const BadgeNameInline: FC<{ badge: Badge, context?: VariantContext }> =
+  ({ badge, context }) => {
     return (
-      <Typography component="span" className="entity"
-                  sx={{ overflowX: 'hidden', textOverflow: 'ellipsis' }}
-      >
-        {badge.name.canonical.map((name, index) =>
+      <Typography
+        component="span"
+        className="entity"
+        sx={{ overflowX: 'hidden', textOverflow: 'ellipsis' }}>
+        {!context && badge.name.canonical.map((name, index) =>
           <span key={`${name.value}:${name.alignment ?? ''}:${name.sex ?? ''}`}>
             {index > 0 && <span style={{ padding: '0.25em' }}>/</span>}
-            <StyledAlternate value={name}/>
+            <StyledVariant value={name}/>
+          </span>
+        )}
+        {context && (
+          <span>
+            {badge.name.getVariant(context)?.value}
           </span>
         )}
       </Typography>

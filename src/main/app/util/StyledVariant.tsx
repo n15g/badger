@@ -1,10 +1,13 @@
 import { FC } from 'react'
-import { AlternateData } from 'coh-content-db'
 import { Icons } from './Icons.tsx'
-import { Typography } from '@mui/joy'
 import MoralityColored from '../alignment/MoralityColored.tsx'
+import { VariantData } from 'coh-content-db'
 
-const StyledAlternate: FC<{ value: AlternateData<string> }> = ({ value }) => {
+const StyledVariant: FC<{ value?: VariantData<string> }> = ({ value }) => {
+  if (!value) {
+    return
+  }
+
   const { sex, value: text, alignment } = value
   let decorator = undefined
 
@@ -14,12 +17,12 @@ const StyledAlternate: FC<{ value: AlternateData<string> }> = ({ value }) => {
     decorator = <Icons.Female/>
   }
 
-  return <>
-    <Typography>
+  return (
+    <span>
       <MoralityColored morality={alignment}>{text}</MoralityColored>
       {decorator && <sup style={{ fontSize: '0.7em' }}>{decorator}</sup>}
-    </Typography>
-  </>
+    </span>
+  )
 }
 
-export default StyledAlternate
+export default StyledVariant

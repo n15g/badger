@@ -1,5 +1,5 @@
 import { FC } from 'react'
-import { Badge } from 'coh-content-db'
+import { Badge, VariantContext } from 'coh-content-db'
 import { Tooltip } from '@mui/joy'
 import BadgeTooltip from './BadgeTooltip.tsx'
 import ContentProvider from '../content/ContentProvider.tsx'
@@ -9,7 +9,7 @@ import ErrorText from '../util/ErrorText.tsx'
 import BadgeIcon from './BadgeIcon.tsx'
 import CharacterContextProvider from '../character/CharacterContextProvider.tsx'
 
-const BadgeIconLink: FC<{ value?: Badge | string }> = ({ value }) => {
+const BadgeIconLink: FC<{ value?: Badge | string, context?: VariantContext }> = ({ value, context }) => {
   const content = ContentProvider.useContent()
   const { character } = CharacterContextProvider.useCharacterContext()
 
@@ -22,7 +22,7 @@ const BadgeIconLink: FC<{ value?: Badge | string }> = ({ value }) => {
     return (
       <Tooltip title={<BadgeTooltip badge={badge}/>} variant="plain">
         <NavLink to={linkTarget}>
-          <BadgeIcon badge={badge} height="1.2em"/>
+          <BadgeIcon badge={badge} context={context} height="1.2em"/>
         </NavLink>
       </Tooltip>
     )

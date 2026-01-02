@@ -1,7 +1,7 @@
 import { FC } from 'react'
 import { Badge } from 'coh-content-db'
 import { Stack, Typography } from '@mui/joy'
-import StyledAlternate from '../util/StyledAlternate.tsx'
+import StyledVariant from '../util/StyledVariant.tsx'
 
 
 const BadgeNameList: FC<{ badge: Badge }> =
@@ -16,7 +16,7 @@ const BadgeNameList: FC<{ badge: Badge }> =
             className="entity"
             textAlign="center"
           >
-            <StyledAlternate value={name}/>
+            <StyledVariant value={name}/>
           </Typography>
         )}
       </Stack>

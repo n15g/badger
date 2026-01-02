@@ -26,7 +26,7 @@ const BadgeGallery: FC<BoxProps> = ({ ...props }) => {
   return (
     <Box {...props}>
 
-      <Box display="flex" justifyContent="flex-start" gap={2} sx={{ m: 2 }}>
+      <Box display="flex" justifyContent="flex-start" gap={2} sx={{ mb: 2 }}>
         <FormControl orientation={'horizontal'}>
           <Select
             value={selectedType}
@@ -86,7 +86,7 @@ const GallerySection: FC<{ badges: Badge[], title: string, showUncollected: bool
       <Stack direction="row" flexWrap="wrap" justifyContent="center" sx={{ p: 1, gap: 2 }}>
         {displayed.map((badge) => (
           <Box key={badge.key} sx={ !character || hasBadge(character, badge.key) ? {} : {opacity: '0.4', filter: 'grayscale(1)'} }>
-            <BadgeIconLink value={badge}/>
+            <BadgeIconLink value={badge} context={character}/>
           </Box>
         ))}
         {displayed.length < 1 && <em>None</em>}

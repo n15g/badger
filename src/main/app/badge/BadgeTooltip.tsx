@@ -36,7 +36,7 @@ export const BadgeCardTooltip: FC<Props> = ({ badge }) => {
         <Stack direction="row" flexWrap="wrap" gap={2} sx={{ pt: 2 }}>
           {icon.canonical.map((icon) => (
             <NavLink key={icon.value} to={`/badge/${badgeKey}`}>
-              <BadgeIcon badge={badge} alignment={icon.alignment} sex={icon.sex}/>
+              <BadgeIcon badge={badge} context={{ morality: icon.alignment, sex: icon.sex }}/>
             </NavLink>
           ))}
         </Stack>

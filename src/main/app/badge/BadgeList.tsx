@@ -63,7 +63,7 @@ const BadgeRow: FC<{ badge: Badge }> = ({ badge }) => {
                       startDecorator={<BadgeIcon badge={badge} height="1em"/>}
                       title={badge.name.toString(' / ')}
           >
-            <BadgeNameInline badge={badge}/>
+            <BadgeNameInline badge={badge} context={character}/>
           </Typography>
         </NavLink>
       </TD>

@@ -5,13 +5,7 @@ import ContentProvider from '../content/ContentProvider.tsx'
 import ArchetypeIcon from './ArchetypeIcon.tsx'
 
 const ArchetypeSelect: FC<{ value?: string, onNewValue?: (value: string) => void, sx?: SxProps } & SelectProps<string, false>>
-  = ({
-       value,
-       onNewValue = () => {
-         /* empty */
-       },
-       sx, ...props
-     }) => {
+  = ({ value, onNewValue, sx, ...props }) => {
   const content = ContentProvider.useContent()
 
   return (
@@ -20,7 +14,7 @@ const ArchetypeSelect: FC<{ value?: string, onNewValue?: (value: string) => void
             {...props}
             value={value ?? ''}
             onChange={(_, value) => {
-              onNewValue(value ?? '')
+              onNewValue?.(value ?? '')
             }}>
       {content.archetypes.map((archetype) => (
         <Option key={archetype.key}

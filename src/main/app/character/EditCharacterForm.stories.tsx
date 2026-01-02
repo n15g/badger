@@ -24,6 +24,12 @@ export const New: StoryType = {
 
 export const Existing: StoryType = {
   args: {
-    character: { name: 'Test', archetypeKey: 'blaster', server: 'Torchbearer' }
+    character: { name: 'Test', archetypeKey: 'blaster', server: 'Torchbearer', morality: 'rogue', sex: 'F' }
+  },
+}
+
+export const Existing_Minimum: StoryType = {
+  args: {
+    character: { name: 'Test' }
   },
 }

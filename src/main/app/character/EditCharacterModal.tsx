@@ -20,6 +20,8 @@ const EditCharacterModal: FC<{ character?: Character, onClose: () => void }>
             draft.name = next.name
             draft.server = next.server
             draft.archetypeKey = next.archetypeKey
+            draft.morality = next.morality
+            draft.sex = next.sex
           })
           onClose()
         }}/>

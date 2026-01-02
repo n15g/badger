@@ -19,7 +19,7 @@ const defaultSearch: BadgeSearchOptions = {
 
 const BadgeSearchBar: FC<BadgeSearchBarProps> & { defaultSearch: BadgeSearchOptions } = ({ searchOptions, onChange }) => {
   return (
-    <Stack direction="column" gap={1}>
+    <Stack direction="column" gap={1} sx={{ mb: 2 }}>
       <Input placeholder="Search"
              sx={{ maxWidth: 480 }}
              value={searchOptions.query?.str}

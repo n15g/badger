@@ -36,10 +36,10 @@ function AboutPage() {
           </CardContent>
           <CardOverflow variant="soft" sx={{ display: { xs: 'none', sm: 'flex' }, padding: 4 }}>
             <Stack direction="column" gap={2} sx={{ alignItems: 'center', justifyContent: 'center' }}>
-              <BadgeIcon badge={content.getBadge('lobbyist')} alignment="hero"/>
-              <BadgeIcon badge={content.getBadge('received-the-stalwart-medallion')} alignment="hero"/>
-              <BadgeIcon badge={content.getBadge('vip')} alignment="hero"/>
-              <BadgeIcon badge={content.getBadge('reunited')} alignment="hero"/>
+              <BadgeIcon badge={content.getBadge('lobbyist')}/>
+              <BadgeIcon badge={content.getBadge('received-the-stalwart-medallion')}/>
+              <BadgeIcon badge={content.getBadge('vip')}/>
+              <BadgeIcon badge={content.getBadge('reunited')}/>
             </Stack>
           </CardOverflow>
         </Card>

@@ -1,18 +1,17 @@
 import { FC } from 'react'
-import { Alignment, Badge, Sex } from 'coh-content-db'
+import { Badge, VariantContext } from 'coh-content-db'
 import { SmartImage } from '../util/SmartImage.tsx'
 
 const BadgeIcon: FC<{
   badge: Badge | undefined,
-  alignment?: Alignment,
-  sex?: Sex,
+  context?: VariantContext,
   width?: number | string,
   height?: number | string,
-}> = ({ badge, alignment, sex, width, height }) => {
+}> = ({ badge, context, width, height }) => {
   if (badge) {
     return <SmartImage
-      src={badge.icon.getValue(alignment, sex)}
-      alt={badge.name.getValue(alignment, sex)}
+      src={badge.icon.getValue(context)}
+      alt={badge.name.getValue(context)}
       sx={(theme) => {
         return {
           filter: `drop-shadow(0 0 4px ${theme.palette.text.icon})`,

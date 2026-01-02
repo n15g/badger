@@ -1,21 +1,24 @@
-import { Box, Breadcrumbs, Button, Card, CardOverflow, Divider, ListItemDecorator, Tab, TabList, Tabs, Typography } from '@mui/joy'
+import { Box, Breadcrumbs, Button, Card, CardOverflow, Divider, ListItemDecorator, Stack, Tab, TabList, Tabs, Typography } from '@mui/joy'
 import { FC, useState } from 'react'
 import { Icons } from '../util/Icons.tsx'
 import { NavLink, Outlet, useLocation, useParams } from 'react-router'
 import MainSection from '../util/MainSection.tsx'
-import SectionTitle from '../util/SectionTitle.tsx'
 import CharacterContextProvider from './CharacterContextProvider.tsx'
 import { Character } from './character.ts'
 import ArchetypeIcon from '../archetype/ArchetypeIcon.tsx'
 import EditCharacterModal from './EditCharacterModal.tsx'
 import ContentProvider from '../content/ContentProvider.tsx'
+import MoralityIcon from '../alignment/MoralityIcon.tsx'
+import MoralitySelect from '../alignment/MoralitySelect.tsx'
+import CharacterDbProvider from './CharacterDbProvider.tsx'
 
 const CharacterViewPage: FC<{ character: Character }> = ({ character }) => {
   const content = ContentProvider.useContent()
+  const { mutateCharacter } = CharacterDbProvider.useCharacterDb()
   const { pathname } = useLocation()
   const params = useParams()
 
-  const { name, server, archetypeKey } = character
+  const { name, morality, archetypeKey, server } = character
   const badge = content.getBadge(params.badgeKey)
 
   const [editing, setEditing] = useState(false)
@@ -34,25 +37,29 @@ const CharacterViewPage: FC<{ character: Character }> = ({ character }) => {
             <Divider inset="context"/>
           </CardOverflow>
 
-          <SectionTitle>
-            {archetypeKey && <ArchetypeIcon archetypeKey={archetypeKey}/>} {name}
-          </SectionTitle>
+          <Card>
+            <Stack gap={1} sx={{ flexDirection: { xs: 'column', sm: 'row' } }} justifyContent="space-between" alignItems="center">
+              <Stack gap={1} direction="row">
+                {morality && <MoralityIcon morality={morality} height={32}/>}
+                {archetypeKey && <ArchetypeIcon archetypeKey={archetypeKey} height={32}/>}
+              </Stack>
 
-          <Box sx={{
-            display: 'flex',
-            justifyContent: 'center',
-            position: { lg: 'absolute' },
-            top: 48,
-            right: 8,
-            p: { md: 2 }
-          }}>
-            <Button color="primary" variant="soft" onClick={() => {
-              setEditing(true)
-            }}><Icons.Edit/></Button>
-            <EditCharacterModal character={editing ? character : undefined} onClose={() => {
-              setEditing(false)
-            }}/>
-          </Box>
+              <Typography level="title-xl" startDecorator={<Icons.Character/>}>{name} ({server})</Typography>
+
+              <MoralitySelect value={morality} onNewValue={(next) => {
+                void mutateCharacter(character.key, (draft) => {
+                  draft.morality = next
+                })
+              }}/>
+
+              <Button color="primary" variant="soft" onClick={() => {
+                setEditing(true)
+              }}><Icons.Edit/></Button>
+              <EditCharacterModal character={editing ? character : undefined} onClose={() => {
+                setEditing(false)
+              }}/>
+            </Stack>
+          </Card>
 
           <Tabs value={pathname}>
             <TabList>
@@ -80,7 +87,9 @@ const CharacterViewPage: FC<{ character: Character }> = ({ character }) => {
             </TabList>
           </Tabs>
 
-          <Outlet/>
+          <Box sx={{ pt: 2 }}>
+            <Outlet/>
+          </Box>
 
         </Card>
       </CharacterContextProvider>

@@ -70,7 +70,7 @@ const BadgeCard: FC<{ badge: Badge }> = ({ badge }) => {
 
           <Stack direction="row" flexWrap="wrap" gap={2}>
             {icon.canonical.map((icon) => (
-              <BadgeIcon key={icon.value} badge={badge} alignment={icon.alignment} sex={icon.sex}/>
+              <BadgeIcon key={icon.value} badge={badge} context={{ morality: icon.alignment, sex: icon.sex }}/>
             ))}
           </Stack>
 
@@ -101,10 +101,10 @@ const BadgeCard: FC<{ badge: Badge }> = ({ badge }) => {
         {/* Detail Panel*/}
         <Stack gap={2} flexGrow={1}>
           <Box>
-            {badgeText.canonical.map((alternate) => (
-              <blockquote key={alternate.value} className={alternate.alignment}>
+            {badgeText.canonical.map((variant) => (
+              <blockquote key={variant.value} className={variant.alignment}>
                 <Typography component="span" level="body-xs">
-                  <BadgerMarkdown content={alternate.value}/>
+                  <BadgerMarkdown content={variant.value}/>
                 </Typography>
               </blockquote>
             ))}
