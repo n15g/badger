@@ -57,6 +57,7 @@ function Header() {
       </Typography>
       <Box sx={{ display: { xs: 'none', lg: 'flex' }, flexGrow: 1, justifyContent: 'space-between' }}>
         <List role="menubar" orientation="horizontal">
+          <ListDivider/>
           <NavLink to="/" end><ListItem>About</ListItem></NavLink>
           <ListDivider/>
           <NavLink to="/characters"><ListItem><Icons.Character/> Characters</ListItem></NavLink>
@@ -93,6 +94,7 @@ function Header() {
               </MenuItem>
             </Menu>
           </Dropdown>
+          <ListDivider/>
         </List>
         <PaletteButton/>
       </Box>
