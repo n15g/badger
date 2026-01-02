@@ -11,6 +11,7 @@ interface CharacterDbContextValue {
   createCharacter: (character: Character) => Promise<void>,
   mutateCharacter: (key: string, recipe: (draft: Draft<Character>) => void) => Promise<void>,
   deleteCharacter: (key: string) => Promise<void>,
+  hasBadge: (character: Character, badgeKey: string) => boolean,
 }
 
 const CharacterDbContext = createContext<CharacterDbContextValue | undefined>(undefined)
@@ -45,6 +46,10 @@ const CharacterDbProvider: FC<{ children: ReactNode }> & { useCharacterDb: () =>
       await refreshCharacters()
     }, [db, refreshCharacters])
 
+    const hasBadge = useCallback((character: Character, badgeKey: string): boolean => {
+      return character.badges?.[badgeKey]?.owned ?? false
+    }, [])
+
     useEffect(() => {
       void refreshCharacters()
       // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -56,9 +61,10 @@ const CharacterDbProvider: FC<{ children: ReactNode }> & { useCharacterDb: () =>
         refreshCharacters,
         createCharacter,
         mutateCharacter,
-        deleteCharacter
+        deleteCharacter,
+        hasBadge
       } as CharacterDbContextValue
-    }, [characters, refreshCharacters, createCharacter, mutateCharacter, deleteCharacter])
+    }, [characters, refreshCharacters, createCharacter, mutateCharacter, deleteCharacter, hasBadge])
 
     return (<>
       {!characters

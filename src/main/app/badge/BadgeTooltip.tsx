@@ -2,19 +2,20 @@ import { FC } from 'react'
 import { Breadcrumbs, Card, CardOverflow, Divider, Stack, Typography } from '@mui/joy'
 import { Badge } from 'coh-content-db'
 import MoralityListIcons from '../alignment/MoralityListIcons.tsx'
-import { SmartImage } from '../util/SmartImage.tsx'
 import { NavLink } from 'react-router'
 import BadgeNameList from './BadgeNameList.tsx'
 import { Icons } from '../util/Icons.tsx'
 import { BadgeTypes } from './BadgeTypes.tsx'
 import ReleaseDate from '../util/ReleaseDate.tsx'
+import BadgeAcquisitionSummary from './BadgeAcquisitionSummary.tsx'
+import BadgeIcon from './BadgeIcon.tsx'
 
 interface Props {
   badge: Badge
 }
 
 export const BadgeCardTooltip: FC<Props> = ({ badge }) => {
-  const { key: badgeKey, acquisition, morality, type, icon, releaseDate } = badge
+  const { key: badgeKey, morality, type, icon, releaseDate } = badge
   return (
     <Card sx={{ minWidth: 260, maxWidth: 320, p: 2, borderRadius: '1em', boxShadow: '10' }}>
       <CardOverflow>
@@ -32,38 +33,15 @@ export const BadgeCardTooltip: FC<Props> = ({ badge }) => {
           <Typography component="span" textAlign="center" level="title-lg"><BadgeNameList badge={badge}/></Typography>
         </NavLink>
 
-        <Stack
-          direction="row"
-          gap={1}
-          sx={{
-            width: 200,
-            height: 100,
-            alignItems: 'center',
-            justifyContent: 'center',
-          }}
-        >
+        <Stack direction="row" flexWrap="wrap" gap={2} sx={{ pt: 2 }}>
           {icon.canonical.map((icon) => (
             <NavLink key={icon.value} to={`/badge/${badgeKey}`}>
-              <SmartImage
-                src={icon.value}
-                sx={(theme) => {
-                  return {
-                    maxWidth: '100%',
-                    maxHeight: '100%',
-                    objectFit: 'contain',
-                    flexShrink: 1,
-                    filter: `drop-shadow(0 0 4px ${theme.palette.text.primary})`,
-                  }
-                }}/>
+              <BadgeIcon badge={badge} alignment={icon.alignment} sex={icon.sex}/>
             </NavLink>
           ))}
         </Stack>
 
-        {acquisition && (
-          <Typography level="body-sm">
-            {acquisition}
-          </Typography>
-        )}
+        <Typography component="span" level="body-sm" textAlign="center"><BadgeAcquisitionSummary badge={badge}/></Typography>
       </Stack>
 
       <CardOverflow sx={{ py: 1 }}>

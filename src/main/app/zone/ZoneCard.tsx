@@ -13,7 +13,7 @@ import LinksBlock from '../util/LinksBlock.tsx'
 import { ZoneTypes } from './ZoneTypes.tsx'
 import ZoneContactsBlock from './ZoneContactsBlock.tsx'
 
-const ZoneView: FC<{ zone: Zone }> = ({ zone }) => {
+const ZoneCard: FC<{ zone: Zone }> = ({ zone }) => {
   const { name, type, levelRange, morality, links, notes, } = zone
 
   return (
@@ -24,7 +24,7 @@ const ZoneView: FC<{ zone: Zone }> = ({ zone }) => {
             <NavLink to="/zones" style={{ textDecoration: 'none' }}>
               <Typography level="title-sm" startDecorator={<Icons.Zone/>}>Zones</Typography>
             </NavLink>
-            <Typography level="title-sm">Zone</Typography>
+            <Typography level="title-sm">{zone.name}</Typography>
           </Breadcrumbs>
           <Divider inset="context"/>
         </CardOverflow>
@@ -42,12 +42,10 @@ const ZoneView: FC<{ zone: Zone }> = ({ zone }) => {
           gap: 2
         }}>
 
-          {/* Info Panel*/}
           <InfoPanel>
-
             <Icons.Zone size={64}/>
 
-            <Typography textAlign="center" level="title-lg">{name}</Typography>
+            <Typography textAlign="center" level="title-xl">{name}</Typography>
             <Typography level="title-sm" sx={{ fontStyle: 'italic' }}>{ZoneTypes.get(type)}</Typography>
 
             <Stack direction="row" gap={4}>
@@ -74,4 +72,4 @@ const ZoneView: FC<{ zone: Zone }> = ({ zone }) => {
   )
 }
 
-export default ZoneView
+export default ZoneCard

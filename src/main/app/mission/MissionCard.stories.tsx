@@ -1,12 +1,12 @@
 // noinspection JSUnusedGlobalSymbols
 
-import MissionView from './MissionView.tsx'
+import MissionCard from './MissionCard.tsx'
 import { STORYBOOK_CONTENT } from '../../storybook/storybook-content.ts'
 import { Meta, StoryObj } from '@storybook/react-vite'
 
-const meta: Meta<typeof MissionView> = {
-  title: 'mission/MissionView',
-  component: MissionView,
+const meta: Meta<typeof MissionCard> = {
+  title: 'mission/MissionCard',
+  component: MissionCard,
 }
 export default meta
 type StoryType = StoryObj<typeof meta.component>

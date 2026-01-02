@@ -14,6 +14,7 @@ import { BrowserRouter } from 'react-router'
 import ErrorProvider from '../app/util/ErrorProvider.tsx'
 import BadgerDbProvider from '../app/db/BadgerDbProvider.tsx'
 import CharacterDbProvider from '../app/character/CharacterDbProvider.tsx'
+import CharacterContextProvider from '../app/character/CharacterContextProvider.tsx'
 
 const preview: Preview = {
   parameters: {
@@ -39,7 +40,9 @@ const preview: Preview = {
       <ContentProvider content={STORYBOOK_CONTENT}>
         <BadgerDbProvider>
           <CharacterDbProvider>
-            <Story/>
+            <CharacterContextProvider>
+              <Story/>
+            </CharacterContextProvider>
           </CharacterDbProvider>
         </BadgerDbProvider>
       </ContentProvider>

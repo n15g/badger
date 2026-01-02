@@ -9,7 +9,7 @@ import DeleteCharacterModal from './DeleteCharacterModal.tsx'
 import EditCharacterModal from './EditCharacterModal.tsx'
 import AddCharacterModal from './AddCharacterModal.tsx'
 
-const CharacterList: FC<{ characters: Character[] }> = ({ characters }) => {
+const CharacterListPage: FC<{ characters: Character[] }> = ({ characters }) => {
   const [editing, setEditing] = useState(false)
   const [addCharacterOpen, setAddCharacterOpen] = useState(false)
   const [characterPendingDelete, setCharacterPendingDelete] = useState<Character | undefined>()
@@ -106,4 +106,4 @@ const CharacterList: FC<{ characters: Character[] }> = ({ characters }) => {
   )
 }
 
-export default CharacterList
+export default CharacterListPage

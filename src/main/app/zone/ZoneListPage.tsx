@@ -1,23 +1,23 @@
 import { Card, List, ListItem } from '@mui/joy'
 import ContentProvider from '../content/ContentProvider.tsx'
-import MissionLink from './MissionLink.tsx'
+import ZoneLink from './ZoneLink.tsx'
 import MainSection from '../util/MainSection.tsx'
 import SectionTitle from '../util/SectionTitle.tsx'
 import { Icons } from '../util/Icons.tsx'
 
-function MissionList() {
+function ZoneListPage() {
   const content = ContentProvider.useContent()
-  const missions = content.missions.sort((a, b) => a.name.localeCompare(b.name))
+  const zones = content.zones.sort((a, b) => a.name.localeCompare(b.name))
 
   return (
-    <MainSection title="Missions">
-      <SectionTitle><Icons.Mission/> Missions</SectionTitle>
+    <MainSection title="Zones">
+      <SectionTitle><Icons.Zone/> Zones</SectionTitle>
 
       <Card sx={{ display: { xs: 'contents', md: 'flex' } }}>
         <List sx={{ display: 'block', columnCount: { md: 2, lg: 3 }, columnGap: 4 }}>
-          {missions.map((mission) => (
+          {zones.map((mission) => (
             <ListItem key={mission.key} sx={{ display: 'flex', justifyContent: 'center', p: 1 }}>
-              <MissionLink value={mission}/>
+              <ZoneLink value={mission}/>
             </ListItem>
           ))}
         </List>
@@ -27,4 +27,4 @@ function MissionList() {
   )
 }
 
-export default MissionList
+export default ZoneListPage

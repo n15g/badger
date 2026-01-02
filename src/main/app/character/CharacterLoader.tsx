@@ -1,15 +1,16 @@
 import { useParams } from 'react-router'
-import CharacterView from './CharacterView.tsx'
 import Page404 from '../Page404.tsx'
+import { FC, ReactNode } from 'react'
 import CharacterDbProvider from './CharacterDbProvider.tsx'
+import { Character } from './character.ts'
 
-function CharacterViewLoader() {
+const CharacterLoader: FC<{ children: (Character: Character) => ReactNode }> = ({ children }) => {
   const { characters } = CharacterDbProvider.useCharacterDb()
   const params = useParams()
 
   const character = characters.find((character) => character.key === params.characterKey)
 
-  return character ? <CharacterView character={character}/> : <Page404/>
+  return !character ? <Page404/> : <>{children(character)}</>
 }
 
-export default CharacterViewLoader
+export default CharacterLoader

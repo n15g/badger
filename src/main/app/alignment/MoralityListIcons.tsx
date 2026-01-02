@@ -19,7 +19,7 @@ const values: { key: keyof MoralityList, title: string, icon: string }[] = [
   { key: 'loyalist', title: 'Loyalist', icon: loyalistIcon },
 ]
 
-const disabled: SxProps = { userSelect: 'none', opacity: 0.1 }
+const disabled: SxProps = { userSelect: 'none', opacity: 0.2, filter: 'grayscale(1)' }
 
 const MoralityListIcons: FC<{ moralityList: MoralityList, iconSize?: number }> = ({ moralityList, iconSize = 16 }) => {
   return (

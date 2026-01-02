@@ -8,17 +8,21 @@ import { Icons } from '../util/Icons.tsx'
 import BadgeNameInline from './BadgeNameInline.tsx'
 import ErrorText from '../util/ErrorText.tsx'
 import BadgeIcon from './BadgeIcon.tsx'
+import CharacterContextProvider from '../character/CharacterContextProvider.tsx'
 
 const BadgeLink: FC<{ value?: Badge | string }> = ({ value }) => {
   const content = ContentProvider.useContent()
+  const { character } = CharacterContextProvider.useCharacterContext()
 
   const key = typeof value === 'string' ? value : value?.key
   const badge = typeof value === 'string' ? content.getBadge(key) : value
 
+  const linkTarget = !character ? `/badges/${key}` : `/characters/${character.key}/badges/${key}`
+
   if (badge) {
     return (
       <Tooltip title={<BadgeTooltip badge={badge}/>} variant="plain">
-        <NavLink to={`/badges/${key}`} className="entityLink">
+        <NavLink to={linkTarget} className="entityLink">
           <Typography component="span" display="inline" className="entity"
                       startDecorator={<BadgeIcon badge={badge} height="0.9em"/>}>
             <BadgeNameInline badge={badge}/>

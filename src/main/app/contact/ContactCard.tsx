@@ -5,7 +5,6 @@ import { Icons } from '../util/Icons.tsx'
 import MoralityListIcons from '../alignment/MoralityListIcons.tsx'
 import { NavLink } from 'react-router'
 import MainSection from '../util/MainSection.tsx'
-import SectionTitle from '../util/SectionTitle.tsx'
 import LocationLink from '../location/LocationLink.tsx'
 import LevelRangeLabel from '../util/LevelRangeLabel.tsx'
 import ContactMissions from './ContactMissions.tsx'
@@ -13,7 +12,7 @@ import InfoPanel from '../util/InfoPanel.tsx'
 import NotesBlock from '../util/NotesBlock.tsx'
 import LinksBlock from '../util/LinksBlock.tsx'
 
-const ContactView: FC<{ contact: Contact }> = ({ contact }) => {
+const ContactCard: FC<{ contact: Contact }> = ({ contact }) => {
   const { name, title, location, levelRange, morality, links, notes } = contact
 
   return (
@@ -24,14 +23,10 @@ const ContactView: FC<{ contact: Contact }> = ({ contact }) => {
             <NavLink to="/contacts" style={{ textDecoration: 'none' }}>
               <Typography level="title-sm" startDecorator={<Icons.Contact/>}>Contacts</Typography>
             </NavLink>
-            <Typography level="title-sm">Contact</Typography>
+            <Typography level="title-sm">{name}</Typography>
           </Breadcrumbs>
           <Divider inset="context"/>
         </CardOverflow>
-
-        <SectionTitle>
-          {name}
-        </SectionTitle>
 
         <Divider/>
 
@@ -42,11 +37,10 @@ const ContactView: FC<{ contact: Contact }> = ({ contact }) => {
           gap: 2
         }}>
 
-          {/* Info Panel*/}
           <InfoPanel>
             <Icons.Contact size={64}/>
 
-            <Typography textAlign="center" level="title-lg">{name}</Typography>
+            <Typography textAlign="center" level="title-xl">{name}</Typography>
 
             {title && (<>
               <Typography level="title-sm" sx={{ fontStyle: 'italic' }}>{title}</Typography>
@@ -60,7 +54,6 @@ const ContactView: FC<{ contact: Contact }> = ({ contact }) => {
             {location && (<>
               <LocationLink location={location}/>
             </>)}
-
           </InfoPanel>
 
           {/* Detail Panel*/}
@@ -83,4 +76,4 @@ const ContactView: FC<{ contact: Contact }> = ({ contact }) => {
   )
 }
 
-export default ContactView
+export default ContactCard

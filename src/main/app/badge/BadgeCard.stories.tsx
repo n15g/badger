@@ -1,12 +1,12 @@
 // noinspection JSUnusedGlobalSymbols
 
-import BadgeView from './BadgeView.tsx'
+import BadgeCard from './BadgeCard.tsx'
 import { Meta, StoryObj } from '@storybook/react-vite'
 import { STORYBOOK_CONTENT } from '../../storybook/storybook-content.ts'
 
-const meta: Meta<typeof BadgeView> = {
-  title: 'badge/BadgeView',
-  component: BadgeView,
+const meta: Meta<typeof BadgeCard> = {
+  title: 'badge/BadgeCard',
+  component: BadgeCard,
 }
 export default meta
 type StoryType = StoryObj<typeof meta.component>

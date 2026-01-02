@@ -13,7 +13,7 @@ import BadgerRoutes from './BadgerRoutes.tsx'
 import CharacterDbProvider from './character/CharacterDbProvider.tsx'
 import { ErrorBoundary } from 'react-error-boundary'
 import ErrorPage from './util/ErrorPage.tsx'
-import CharacterScopeProvider from './character/CharacterScopeProvider.tsx'
+import CharacterContextProvider from './character/CharacterContextProvider.tsx'
 
 const root = document.getElementById('root')
 
@@ -31,7 +31,7 @@ createRoot(root).render(
           <ErrorBoundary FallbackComponent={({ error }) => (<ErrorPage error={error as unknown}/>)}>
             <BadgerDbProvider>
               <CharacterDbProvider>
-                <CharacterScopeProvider>
+                <CharacterContextProvider>
                   <ContentLoader>
                     <Header/>
                     <Box
@@ -50,7 +50,7 @@ createRoot(root).render(
                       <BadgerRoutes/>
                     </Box>
                   </ContentLoader>
-                </CharacterScopeProvider>
+                </CharacterContextProvider>
               </CharacterDbProvider>
             </BadgerDbProvider>
           </ErrorBoundary>

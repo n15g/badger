@@ -57,21 +57,17 @@ function Header() {
       </Typography>
       <Box sx={{ display: { xs: 'none', lg: 'flex' }, flexGrow: 1, justifyContent: 'space-between' }}>
         <List role="menubar" orientation="horizontal">
-          <NavLink to="/" end>
-            {({ isActive }) => (<ListItem variant={isActive ? 'soft' : 'plain'}>About</ListItem>)}
-          </NavLink>
+          <NavLink to="/" end><ListItem>About</ListItem></NavLink>
           <ListDivider/>
-          <NavLink to="/characters">
-            {({ isActive }) => (<ListItem variant={isActive ? 'soft' : 'plain'}><Icons.Character/> Characters</ListItem>)}
-          </NavLink>
+          <NavLink to="/characters"><ListItem><Icons.Character/> Characters</ListItem></NavLink>
           <ListDivider/>
-          <NavLink to="/badges">
-            {({ isActive }) => (<ListItem variant={isActive ? 'soft' : 'plain'}><Icons.Badge/> Badges</ListItem>)}
-          </NavLink>
+          <NavLink to="/badges"><ListItem><Icons.Badge/> Badge List</ListItem></NavLink>
+          <ListDivider/>
+          <NavLink to="/badge-gallery"><ListItem><Icons.Gallery/> Badge Gallery</ListItem></NavLink>
           <ListDivider/>
           <Dropdown>
             <MenuButton slots={{ root: ListItem }} sx={{ cursor: 'pointer' }}>
-              Other Data <Icons.ChevronDown/>
+              <Icons.Database/> Database <Icons.ChevronDown/>
             </MenuButton>
             <Menu>
               <MenuItem><NavLink to="/contacts"><Icons.Contact/> Contacts</NavLink></MenuItem>
@@ -130,10 +126,15 @@ function Header() {
             }}><Icons.Character/> Characters</ListItemButton>
             <Divider/>
             <ListItem nested>
-              <ListSubheader>Data</ListSubheader>
+              <ListSubheader>Badges</ListSubheader>
               <ListItemButton component={NavLink} to="/badges" onClick={() => {
                 setDrawerOpen(false)
-              }}><Icons.Badge/> Badges</ListItemButton>
+              }}><Icons.Badge/> Badge List</ListItemButton>
+              <ListItemButton component={NavLink} to="/badge-gallery" onClick={() => {
+                setDrawerOpen(false)
+              }}><Icons.Gallery/> Badge Gallery</ListItemButton>
+
+              <ListSubheader>Database</ListSubheader>
               <ListItemButton component={NavLink} to="/contacts" onClick={() => {
                 setDrawerOpen(false)
               }}><Icons.Contact/> Contacts</ListItemButton>

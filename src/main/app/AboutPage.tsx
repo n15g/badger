@@ -6,7 +6,7 @@ import ContentProvider from './content/ContentProvider.tsx'
 import MainSection from './util/MainSection.tsx'
 import { NavLink } from 'react-router'
 
-function About() {
+function AboutPage() {
   const content = ContentProvider.useContent()
 
   return (
@@ -49,4 +49,4 @@ function About() {
   )
 }
 
-export default About
+export default AboutPage

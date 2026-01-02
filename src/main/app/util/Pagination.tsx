@@ -18,7 +18,7 @@ const Pagination: FC<{ paged: Paged<unknown>, range?: number, onChange: (page: n
     showPages.push(i)
   }
 
-  return <Stack direction={{ md: 'row' }} justifyContent="space-between" alignItems="center" gap={4}>
+  return <Stack direction={{ md: 'row' }} justifyContent="space-between" alignItems="center" gap={2}>
     <ButtonGroup>
       <Button onClick={() => {
         onChange(1, paged.pageSize)
@@ -36,7 +36,7 @@ const Pagination: FC<{ paged: Paged<unknown>, range?: number, onChange: (page: n
 
       {showPages.map(index => (
         <Button key={index}
-                sx={{ display: { xs: index === paged.page ? 'inline-block' : 'none', sm: 'inline-block' }, minWidth: '4em' }}
+                sx={{ display: { xs: index === paged.page ? 'inline-block' : 'none', md: 'inline-block' }, minWidth: '2em' }}
                 disabled={index === paged.page}
                 variant={index === paged.page ? 'solid' : 'plain'}
                 onClick={() => {
@@ -60,7 +60,8 @@ const Pagination: FC<{ paged: Paged<unknown>, range?: number, onChange: (page: n
         <Icons.Last/>
       </Button>
     </ButtonGroup>
-    <Stack direction="row" gap={4} alignItems="center">
+
+    <Stack direction="row" columnGap={2} alignItems="center">
       <Typography level="title-sm">{paged.totalPages} Page{paged.totalPages === 1 ? '' : 's'}</Typography>
 
       <Select value={paged.pageSize ?? 0} onChange={(_, value) => {

@@ -1,7 +1,7 @@
 import { MdAdd, MdCheck, MdClose, MdContentCopy, MdDelete, MdEdit, MdLocalPolice, MdLocationOn, MdSearch, MdWarning } from 'react-icons/md'
 import { PiGenderFemale, PiGenderMale } from 'react-icons/pi'
 import { FaAward, FaExternalLinkAlt, FaSortAlphaDownAlt, FaSortAlphaUp, FaSpinner } from 'react-icons/fa'
-import { GrDocumentMissing } from 'react-icons/gr'
+import { GrDocumentMissing, GrGallery } from 'react-icons/gr'
 import { GoChevronLeft, GoChevronRight, GoMoveToEnd, GoMoveToStart } from 'react-icons/go'
 import { RxChevronRight, RxReset } from 'react-icons/rx'
 import { BiChevronDown, BiSortAlt2 } from 'react-icons/bi'
@@ -9,6 +9,7 @@ import { IoMdCheckboxOutline } from 'react-icons/io'
 import { TbCalendarStar, TbLabel, TbLink, TbNotes } from 'react-icons/tb'
 import { BsPersonCircle, BsPersonVcard } from 'react-icons/bs'
 import { ImTarget } from 'react-icons/im'
+import { FaDatabase } from 'react-icons/fa6'
 
 /**
  * Use icons from here for consistency across the app
@@ -29,6 +30,8 @@ export const Icons = {
   Plus: MdAdd,
   Delete: MdDelete,
   Edit: MdEdit,
+  Database: FaDatabase,
+  Gallery: GrGallery,
   ReleaseDate: TbCalendarStar,
   SetTitle: TbLabel,
   Alert: MdWarning,

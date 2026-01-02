@@ -1,11 +1,11 @@
 // noinspection JSUnusedGlobalSymbols
 
-import CharacterView from './CharacterView.tsx'
+import CharacterViewPage from './CharacterViewPage.tsx'
 import { Meta, StoryObj } from '@storybook/react-vite'
 
-const meta: Meta<typeof CharacterView> = {
-  title: 'character/CharacterView',
-  component: CharacterView
+const meta: Meta<typeof CharacterViewPage> = {
+  title: 'character/CharacterViewPage',
+  component: CharacterViewPage
 }
 export default meta
 type StoryType = StoryObj<typeof meta.component>
