@@ -8,9 +8,10 @@ import { Character } from './character.ts'
 import ArchetypeIcon from '../archetype/ArchetypeIcon.tsx'
 import EditCharacterModal from './EditCharacterModal.tsx'
 import ContentProvider from '../content/ContentProvider.tsx'
-import MoralityIcon from '../alignment/MoralityIcon.tsx'
-import MoralitySelect from '../alignment/MoralitySelect.tsx'
+import MoralityIcon from '../morality/MoralityIcon.tsx'
+import MoralitySelect from '../morality/MoralitySelect.tsx'
 import CharacterDbProvider from './CharacterDbProvider.tsx'
+import BadgeCount from './BadgeCount.tsx'
 
 const CharacterViewPage: FC<{ character: Character }> = ({ character }) => {
   const content = ContentProvider.useContent()
@@ -45,6 +46,8 @@ const CharacterViewPage: FC<{ character: Character }> = ({ character }) => {
               </Stack>
 
               <Typography level="title-xl" startDecorator={<Icons.Character/>}>{name} ({server})</Typography>
+
+              <BadgeCount character={character}/>
 
               <MoralitySelect value={morality} onNewValue={(next) => {
                 void mutateCharacter(character.key, (draft) => {

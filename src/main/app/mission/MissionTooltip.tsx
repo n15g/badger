@@ -3,8 +3,8 @@ import { Mission } from 'coh-content-db'
 import { Breadcrumbs, Card, CardOverflow, Divider, Stack, Typography } from '@mui/joy'
 import { Icons } from '../util/Icons.tsx'
 import { NavLink } from 'react-router'
-import { MissionTypes } from './MissionTypes.tsx'
-import MoralityListIcons from '../alignment/MoralityListIcons.tsx'
+import { MissionTypeLabels } from './MissionTypeLabels.tsx'
+import MoralityListIcons from '../morality/MoralityListIcons.tsx'
 import LevelRangeLabel from '../util/LevelRangeLabel.tsx'
 import ContactLink from '../contact/ContactLink.tsx'
 
@@ -18,7 +18,7 @@ const MissionTooltip: FC<{ mission: Mission }> = ({ mission }) => {
           <NavLink to="/missions" style={{ textDecoration: 'none' }}>
             <Typography level="title-sm" startDecorator={<Icons.Mission/>}>Missions</Typography>
           </NavLink>
-          <Typography level="title-sm">{MissionTypes.get(mission.type) ?? 'Mission'}</Typography>
+          <Typography level="title-sm">{MissionTypeLabels.get(mission.type) ?? 'Mission'}</Typography>
         </Breadcrumbs>
         <Divider inset="context"/>
       </CardOverflow>

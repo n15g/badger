@@ -3,7 +3,7 @@ import { ListItemDecorator, Option, Select, SelectProps, Typography } from '@mui
 import { SxProps } from '@mui/joy/styles/types'
 import { Morality, MORALITY } from 'coh-content-db'
 import MoralityIcon from './MoralityIcon.tsx'
-import { Moralities } from './Moralities.tsx'
+import { MoralityLabels } from './MoralityLabels.tsx'
 
 const MoralitySelect: FC<{ value?: string, onNewValue?: (value: Morality) => void, sx?: SxProps } & SelectProps<string, false>>
   = ({ value, onNewValue, sx, ...props }) => {
@@ -22,13 +22,13 @@ const MoralitySelect: FC<{ value?: string, onNewValue?: (value: Morality) => voi
                 label={(
                   <Typography
                     startDecorator={<MoralityIcon morality={morality} style={{ height: '1.4em' }}/>}>
-                    {Moralities.get(morality)}
+                    {MoralityLabels.get(morality)}
                   </Typography>
                 )}>
           <ListItemDecorator>
             <MoralityIcon morality={morality} style={{ height: '1.4em' }}/>
           </ListItemDecorator>
-          {Moralities.get(morality)}
+          {MoralityLabels.get(morality)}
         </Option>
       ))}
     </Select>

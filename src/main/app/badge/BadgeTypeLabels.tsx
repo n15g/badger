@@ -1,7 +1,7 @@
 import { BadgeType } from 'coh-content-db'
 import { TypedIndex } from '../util/typed-index.ts'
 
-export const BadgeTypes = new TypedIndex<BadgeType, string>({
+export const BadgeTypeLabels = new TypedIndex<BadgeType, string>({
   'exploration': 'Exploration',
   'history': 'History',
   'accomplishment': 'Accomplishment',

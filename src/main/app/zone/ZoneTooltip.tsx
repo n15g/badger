@@ -3,9 +3,9 @@ import { Zone } from 'coh-content-db'
 import { Breadcrumbs, Card, CardOverflow, Divider, Stack, Typography } from '@mui/joy'
 import { Icons } from '../util/Icons.tsx'
 import { NavLink } from 'react-router'
-import MoralityListIcons from '../alignment/MoralityListIcons.tsx'
+import MoralityListIcons from '../morality/MoralityListIcons.tsx'
 import LevelRangeLabel from '../util/LevelRangeLabel.tsx'
-import { ZoneTypes } from './ZoneTypes.tsx'
+import { ZoneTypeLabels } from './ZoneTypeLabels.tsx'
 
 const ZoneTooltip: FC<{ zone: Zone }> = ({ zone }) => {
   return (
@@ -15,7 +15,7 @@ const ZoneTooltip: FC<{ zone: Zone }> = ({ zone }) => {
           <NavLink to="/zones" style={{ textDecoration: 'none' }}>
             <Typography level="title-sm" startDecorator={<Icons.Zone/>}>Zones</Typography>
           </NavLink>
-          <Typography level="title-sm">{ZoneTypes.get(zone.type)}</Typography>
+          <Typography level="title-sm">{ZoneTypeLabels.get(zone.type)}</Typography>
         </Breadcrumbs>
         <Divider inset="context"/>
       </CardOverflow>

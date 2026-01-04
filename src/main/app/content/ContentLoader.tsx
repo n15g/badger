@@ -25,7 +25,6 @@ const ContentLoader: FC<{ children: ReactNode }> & { useContentLoader: () => Con
     const badgerDb = BadgerDbProvider.useBadgerDb()
     const error = ErrorProvider.useError()
 
-    const [loadingStr, setLoadingStr] = useState<string>(reticulateSplines)
     const [bundleSource, setBundleSource] = useState<string | undefined>()
     const [content, setContent] = useState<CohContentDatabase | undefined>()
 
@@ -71,7 +70,6 @@ const ContentLoader: FC<{ children: ReactNode }> & { useContentLoader: () => Con
     }, [])
 
     useEffect(() => {
-      setLoadingStr('Loading content bundle...')
       void loadBundle()
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
@@ -89,7 +87,7 @@ const ContentLoader: FC<{ children: ReactNode }> & { useContentLoader: () => Con
         </ContentContext>
       )
     } else {
-      return <LoadingScreen text={loadingStr}/>
+      return <LoadingScreen text={reticulateSplines()}/>
     }
   }
 

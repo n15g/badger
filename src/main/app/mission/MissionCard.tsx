@@ -2,7 +2,7 @@ import { Breadcrumbs, Card, CardOverflow, Divider, List, ListItem, Stack, Typogr
 import { Mission } from 'coh-content-db'
 import { FC } from 'react'
 import { Icons } from '../util/Icons.tsx'
-import MoralityListIcons from '../alignment/MoralityListIcons.tsx'
+import MoralityListIcons from '../morality/MoralityListIcons.tsx'
 import { NavLink } from 'react-router'
 import LevelRangeLabel from '../util/LevelRangeLabel.tsx'
 import ContactLink from '../contact/ContactLink.tsx'

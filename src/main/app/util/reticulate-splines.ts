@@ -19,7 +19,7 @@ export function reticulateSplines(): string {
     'Syncing your day job with server time...',
     'Repainting the sewer map (again)...',
     'Installing Omega Particle Containment units...',
-    'Scrubbing Ouroboros time loops of paradox gunk...',
+    'Scrubbing Ouroboros time loops of paradox residue...',
     'Tuning Sonic Resonance to 11...',
     'Relabeling mission doors as “abandoned”...',
     'Rehydrating Shivans...',

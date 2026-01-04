@@ -4,7 +4,7 @@ import MoralitySelect from './MoralitySelect.tsx'
 import { Meta, StoryObj } from '@storybook/react-vite'
 
 const meta: Meta<typeof MoralitySelect> = {
-  title: 'alignment/MoralitySelect',
+  title: 'morality/MoralitySelect',
   component: MoralitySelect,
 }
 export default meta

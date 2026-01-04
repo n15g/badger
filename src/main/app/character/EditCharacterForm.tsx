@@ -4,7 +4,7 @@ import BadgerSpinner from '../util/BadgerSpinner.tsx'
 import ServerSelect from './ServerSelect.tsx'
 import ArchetypeSelect from '../archetype/ArchetypeSelect.tsx'
 import { Morality, Sex } from 'coh-content-db'
-import MoralitySelect from '../alignment/MoralitySelect.tsx'
+import MoralitySelect from '../morality/MoralitySelect.tsx'
 
 interface CharacterData {
   name: string,

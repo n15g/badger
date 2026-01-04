@@ -9,7 +9,7 @@ import ErrorText from '../util/ErrorText.tsx'
 import BadgeIcon from './BadgeIcon.tsx'
 import CharacterContextProvider from '../character/CharacterContextProvider.tsx'
 
-const BadgeIconLink: FC<{ value?: Badge | string, context?: VariantContext } & ImgHTMLAttributes<HTMLImageElement>>
+const BadgeIconLink: FC<{ value?: Badge | string, context?: VariantContext, muted?: boolean } & ImgHTMLAttributes<HTMLImageElement>>
   = ({ value, context, ...props }) => {
   const content = ContentProvider.useContent()
   const { character } = CharacterContextProvider.useCharacterContext()

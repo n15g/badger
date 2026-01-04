@@ -1,7 +1,7 @@
 import { FC, ImgHTMLAttributes, useState } from 'react'
 import { styled } from '@mui/joy'
-import { Icons } from './Icons.tsx'
 import { SxProps } from '@mui/joy/styles/types'
+import Spinner from './Spinner.tsx'
 
 const Img = styled('img')({})
 
@@ -18,11 +18,11 @@ export const SmartImage: FC<{ sx?: SxProps } & ImgHTMLAttributes<HTMLImageElemen
       onError={() => {
         setLoaded(true)
       }}
-      style={{...props.style, display: loaded ? undefined : 'none' }}
+      style={{ ...props.style, display: loaded ? undefined : 'none' }}
       className="hover-zoom"
       sx={sx}
       {...props}
     />
-    {!loaded && <Icons.Spinner className="ld ld-spin"/>}
+    {!loaded && <Spinner/>}
   </>
 }

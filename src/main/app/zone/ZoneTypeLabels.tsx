@@ -1,7 +1,7 @@
 import { ZoneType } from 'coh-content-db'
 import { TypedIndex } from '../util/typed-index.ts'
 
-export const ZoneTypes = new TypedIndex<ZoneType, string>({
+export const ZoneTypeLabels = new TypedIndex<ZoneType, string>({
   'city': 'City Zone',
   'echo': 'Echo Zone',
   'tutorial': 'Tutorial Zone',

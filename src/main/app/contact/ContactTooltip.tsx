@@ -3,7 +3,7 @@ import { Contact } from 'coh-content-db'
 import { Breadcrumbs, Card, CardOverflow, Divider, Stack, Typography } from '@mui/joy'
 import { Icons } from '../util/Icons.tsx'
 import { NavLink } from 'react-router'
-import MoralityListIcons from '../alignment/MoralityListIcons.tsx'
+import MoralityListIcons from '../morality/MoralityListIcons.tsx'
 import LocationLink from '../location/LocationLink.tsx'
 import LevelRangeLabel from '../util/LevelRangeLabel.tsx'
 

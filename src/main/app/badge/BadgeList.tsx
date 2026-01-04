@@ -7,65 +7,72 @@ import ContentProvider from '../content/ContentProvider.tsx'
 import BadgeSearchBar from './search/BadgeSearchBar.tsx'
 import BadgeAcquisitionSummary from './BadgeAcquisitionSummary.tsx'
 import BadgeNameInline from './BadgeNameInline.tsx'
-import { BadgeTypes } from './BadgeTypes.tsx'
+import { BadgeTypeLabels } from './BadgeTypeLabels.tsx'
 import ReleaseDate from '../util/ReleaseDate.tsx'
 import CharacterContextProvider from '../character/CharacterContextProvider.tsx'
 import { FC } from 'react'
 import BadgeIcon from './BadgeIcon.tsx'
+import AsyncCheckbox from '../util/AsyncCheckbox.tsx'
 
 const TD = styled('td')(() => ({}))
 const TH = styled('th')(() => ({}))
+const TR = styled('tr')(() => ({}))
 const hideOnSmall = { display: { xs: 'none', md: 'table-cell' } }
 
 const BadgeList: FC = () => {
   const content = ContentProvider.useContent()
+  const { character } = CharacterContextProvider.useCharacterContext()
   const [searchOptions, setSearchOptions] = useSessionStorage<BadgeSearchOptions>('badge-list-parameters', BadgeSearchBar.defaultSearch)
-  const badges = content.searchBadges(searchOptions)
+  const results = content.searchBadges(searchOptions)
 
-  return (
-    <>
-      <BadgeSearchBar searchOptions={searchOptions} onChange={setSearchOptions}/>
-      <Pagination paged={badges} onChange={(page, pageSize) => {
-        setSearchOptions({ ...searchOptions, page: page, pageSize: pageSize })
-      }}/>
+  return (<>
+    <BadgeSearchBar searchOptions={searchOptions} onChange={setSearchOptions}/>
+    <Pagination paged={results} onChange={(page, pageSize) => {
+      setSearchOptions({ ...searchOptions, page: page, pageSize: pageSize })
+    }}/>
 
-      <Table noWrap={true} className="badgeList">
-        <thead>
-        <tr>
-          <TH sx={{ width: 320 }}>Badge</TH>
-          <TH sx={{ ...hideOnSmall, width: 140 }}>Type</TH>
-          <TH sx={{ ...hideOnSmall, width: 140 }}>Release Date</TH>
-          <TH sx={{ ...hideOnSmall }}>Requirement</TH>
-        </tr>
-        </thead>
-        <tbody>
-        {badges.items.map(badge => (
-          <BadgeRow key={badge.key} badge={badge}/>
-        ))}
-        </tbody>
-      </Table>
-      <Pagination paged={badges} onChange={(page, pageSize) => {
-        setSearchOptions({ ...searchOptions, page: page, pageSize: pageSize })
-      }}/>
-    </>
-  )
+    <Table noWrap={true} className="badgeList">
+      <thead>
+      <TR>
+        {character && <TH sx={{ width: 40 }}></TH>}
+        <TH sx={{ width: 280 }}>Badge</TH>
+        <TH sx={{ ...hideOnSmall, width: 140 }}>Type</TH>
+        <TH sx={{ ...hideOnSmall, width: 140 }}>Release Date</TH>
+        <TH sx={{ ...hideOnSmall }}>Requirement</TH>
+      </TR>
+      </thead>
+      <tbody>
+      {results.items.map(badge => (
+        <BadgeRow key={badge.key} badge={badge}/>
+      ))}
+      </tbody>
+    </Table>
+    <Pagination paged={results} onChange={(page, pageSize) => {
+      setSearchOptions({ ...searchOptions, page: page, pageSize: pageSize })
+    }}/>
+  </>)
 }
 
 const BadgeRow: FC<{ badge: Badge }> = ({ badge }) => {
-  const { character } = CharacterContextProvider.useCharacterContext()
+  const { character, hasBadge, collectBadge } = CharacterContextProvider.useCharacterContext()
   const linkTarget = !character ? `/badges/${badge.key}` : `/characters/${character.key}/badges/${badge.key}`
 
+  const owned = character && hasBadge(badge)
+
   return (
-    <tr>
+    <TR sx={{ filter: owned ? 'brightness(0.4)' : '' }}>
+      {character && (
+        <TD sx={{ textAlign: 'center' }}>
+          <AsyncCheckbox checked={hasBadge(badge)} onFrobnicate={async (owned) => {
+            await collectBadge(badge, owned)
+          }}/>
+        </TD>
+      )}
       <TD>
         <NavLink to={linkTarget}>
           <Stack direction="row" alignItems="center" gap={1}>
             <BadgeIcon badge={badge} style={{ height: '1.5em' }}/>
-            <Typography
-              component="span"
-              level="body-sm"
-              title={badge.name.toString(' / ')}
-            >
+            <Typography component="span" level="body-xs">
               <BadgeNameInline badge={badge} context={character}/>
             </Typography>
           </Stack>
@@ -74,8 +81,8 @@ const BadgeRow: FC<{ badge: Badge }> = ({ badge }) => {
       <TD sx={{ ...hideOnSmall }}>
         <NavLink to={linkTarget}>
           <Typography component="span" level="body-xs" sx={{ overflowX: 'hidden', textOverflow: 'ellipsis' }}
-                      title={BadgeTypes.get(badge.type)}>
-            {BadgeTypes.get(badge.type)}
+                      title={BadgeTypeLabels.get(badge.type)}>
+            {BadgeTypeLabels.get(badge.type)}
           </Typography>
         </NavLink>
       </TD>
@@ -91,7 +98,7 @@ const BadgeRow: FC<{ badge: Badge }> = ({ badge }) => {
           <BadgeAcquisitionSummary badge={badge}/>
         </Typography>
       </TD>
-    </tr>
+    </TR>
   )
 }
 

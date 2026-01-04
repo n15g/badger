@@ -4,7 +4,7 @@ import { NavLink } from 'react-router'
 import { Character } from './character.ts'
 import BadgeCount from './BadgeCount.tsx'
 import ArchetypeIcon from '../archetype/ArchetypeIcon.tsx'
-import MoralityIcon from '../alignment/MoralityIcon.tsx'
+import MoralityIcon from '../morality/MoralityIcon.tsx'
 
 const CharacterCard: FC<{ character: Character }> = ({ character }) => {
   const { name, server, morality, archetypeKey } = character

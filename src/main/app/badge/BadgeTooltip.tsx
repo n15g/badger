@@ -1,11 +1,11 @@
 import { FC } from 'react'
 import { Breadcrumbs, Card, CardOverflow, Divider, Stack, Typography } from '@mui/joy'
 import { Badge } from 'coh-content-db'
-import MoralityListIcons from '../alignment/MoralityListIcons.tsx'
+import MoralityListIcons from '../morality/MoralityListIcons.tsx'
 import { NavLink } from 'react-router'
 import BadgeNameList from './BadgeNameList.tsx'
 import { Icons } from '../util/Icons.tsx'
-import { BadgeTypes } from './BadgeTypes.tsx'
+import { BadgeTypeLabels } from './BadgeTypeLabels.tsx'
 import ReleaseDate from '../util/ReleaseDate.tsx'
 import BadgeAcquisitionSummary from './BadgeAcquisitionSummary.tsx'
 import BadgeIcon from './BadgeIcon.tsx'
@@ -14,7 +14,7 @@ interface Props {
   badge: Badge
 }
 
-export const BadgeCardTooltip: FC<Props> = ({ badge }) => {
+export const BadgeTooltip: FC<Props> = ({ badge }) => {
   const { key: badgeKey, morality, type, icon, releaseDate } = badge
   return (
     <Card sx={{ minWidth: 260, maxWidth: 320, p: 2, borderRadius: '1em', boxShadow: '10' }}>
@@ -23,7 +23,7 @@ export const BadgeCardTooltip: FC<Props> = ({ badge }) => {
           <NavLink to="/badges" style={{ textDecoration: 'none' }}>
             <Typography level="title-sm" startDecorator={<Icons.Badge/>}>Badges</Typography>
           </NavLink>
-          <Typography level="title-sm">{BadgeTypes.get(type)} Badge</Typography>
+          <Typography level="title-sm">{BadgeTypeLabels.get(type)} Badge</Typography>
         </Breadcrumbs>
         <Divider inset="context"/>
       </CardOverflow>
@@ -57,4 +57,4 @@ export const BadgeCardTooltip: FC<Props> = ({ badge }) => {
   )
 }
 
-export default BadgeCardTooltip
+export default BadgeTooltip

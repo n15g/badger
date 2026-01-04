@@ -1,6 +1,6 @@
 import { FC } from 'react'
 import { Icons } from './Icons.tsx'
-import MoralityColored from '../alignment/MoralityColored.tsx'
+import MoralityColored from '../morality/MoralityColored.tsx'
 import { VariantData } from 'coh-content-db'
 
 const StyledVariant: FC<{ value?: VariantData<string> }> = ({ value }) => {

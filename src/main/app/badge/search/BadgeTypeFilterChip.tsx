@@ -3,7 +3,7 @@ import { BadgeSearchOptions } from 'coh-content-db'
 import { Popover } from '@base-ui-components/react'
 import { Autocomplete, AutocompleteListbox, Chip, ChipDelete, Sheet, Stack } from '@mui/joy'
 import { Icons } from '../../util/Icons.tsx'
-import { BadgeTypes } from '../BadgeTypes.tsx'
+import { BadgeTypeLabels } from '../BadgeTypeLabels.tsx'
 
 interface Props {
   searchOptions: BadgeSearchOptions,
@@ -11,7 +11,7 @@ interface Props {
 }
 
 const BadgeMapFilterChip: FC<Props> = ({ searchOptions, onChange }) => {
-  const options = BadgeTypes.keys
+  const options = BadgeTypeLabels.keys
   const value = searchOptions.filter?.type ?? null
 
   const [open, setOpen] = useState(false)
@@ -26,7 +26,7 @@ const BadgeMapFilterChip: FC<Props> = ({ searchOptions, onChange }) => {
         <Chip color={value ? 'primary' : undefined} endDecorator={value ? Clear : null}>
           <Stack direction="row" gap={0.5} alignItems="center">
             <Icons.Badge/>
-            {value ? BadgeTypes.get(value) : null}
+            {value ? BadgeTypeLabels.get(value) : null}
           </Stack>
         </Chip>
       } nativeButton={false}/>
@@ -53,7 +53,7 @@ const BadgeMapFilterChip: FC<Props> = ({ searchOptions, onChange }) => {
                 listbox: ListBox
               }}
               options={options}
-              getOptionLabel={(value) => BadgeTypes.get(value) ?? '?'}
+              getOptionLabel={(value) => BadgeTypeLabels.get(value) ?? '?'}
             />
           </Popover.Popup>
         </Popover.Positioner>

@@ -2,7 +2,7 @@ import { Breadcrumbs, Card, CardOverflow, Divider, Stack, Typography } from '@mu
 import { Zone } from 'coh-content-db'
 import { FC } from 'react'
 import { Icons } from '../util/Icons.tsx'
-import MoralityListIcons from '../alignment/MoralityListIcons.tsx'
+import MoralityListIcons from '../morality/MoralityListIcons.tsx'
 import { NavLink } from 'react-router'
 import MainSection from '../util/MainSection.tsx'
 import SectionTitle from '../util/SectionTitle.tsx'
@@ -10,7 +10,7 @@ import LevelRangeLabel from '../util/LevelRangeLabel.tsx'
 import InfoPanel from '../util/InfoPanel.tsx'
 import NotesBlock from '../util/NotesBlock.tsx'
 import LinksBlock from '../util/LinksBlock.tsx'
-import { ZoneTypes } from './ZoneTypes.tsx'
+import { ZoneTypeLabels } from './ZoneTypeLabels.tsx'
 import ZoneContactsBlock from './ZoneContactsBlock.tsx'
 
 const ZoneCard: FC<{ zone: Zone }> = ({ zone }) => {
@@ -46,7 +46,7 @@ const ZoneCard: FC<{ zone: Zone }> = ({ zone }) => {
             <Icons.Zone size={64}/>
 
             <Typography textAlign="center" level="title-xl">{name}</Typography>
-            <Typography level="title-sm" sx={{ fontStyle: 'italic' }}>{ZoneTypes.get(type)}</Typography>
+            <Typography level="title-sm" sx={{ fontStyle: 'italic' }}>{ZoneTypeLabels.get(type)}</Typography>
 
             <Stack direction="row" gap={4}>
               <MoralityListIcons moralityList={morality}/>

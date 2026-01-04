@@ -19,9 +19,9 @@ import BadgerMarkdown from '../util/BadgerMarkdown.tsx'
 import { Badge } from 'coh-content-db'
 import { FC, Fragment } from 'react'
 import { Icons } from '../util/Icons.tsx'
-import MoralityListIcons from '../alignment/MoralityListIcons.tsx'
+import MoralityListIcons from '../morality/MoralityListIcons.tsx'
 import { NavLink } from 'react-router'
-import { BadgeTypes } from './BadgeTypes.tsx'
+import { BadgeTypeLabels } from './BadgeTypeLabels.tsx'
 import ReleaseDate from '../util/ReleaseDate.tsx'
 import SetTitleLabel from './SetTitleLabel.tsx'
 import RequirementListItem from './RequirementListItem.tsx'
@@ -74,7 +74,7 @@ const BadgeCard: FC<{ badge: Badge }> = ({ badge }) => {
             ))}
           </Stack>
 
-          <Typography level="title-sm"><em>{BadgeTypes.get(type)}</em></Typography>
+          <Typography level="title-sm"><em>{BadgeTypeLabels.get(type)}</em></Typography>
 
           {effect && (
             <Typography level="body-xs" textAlign="center" variant="soft" sx={{ borderRadius: 8, px: 1, py: 1.5 }}>

@@ -9,8 +9,7 @@ const BadgeNameInline: FC<{ badge: Badge, context?: VariantContext }> =
     return (
       <Typography
         component="span"
-        className="entity"
-        sx={{ overflowX: 'hidden', textOverflow: 'ellipsis' }}>
+        className="entity">
         {!context && badge.name.canonical.map((name, index) =>
           <span key={`${name.value}:${name.alignment ?? ''}:${name.sex ?? ''}`}>
             {index > 0 && <span style={{ padding: '0.25em' }}>/</span>}

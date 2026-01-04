@@ -2,7 +2,7 @@ import { Box, Breadcrumbs, Card, CardOverflow, Divider, Stack, Typography } from
 import { Contact } from 'coh-content-db'
 import { FC } from 'react'
 import { Icons } from '../util/Icons.tsx'
-import MoralityListIcons from '../alignment/MoralityListIcons.tsx'
+import MoralityListIcons from '../morality/MoralityListIcons.tsx'
 import { NavLink } from 'react-router'
 import MainSection from '../util/MainSection.tsx'
 import LocationLink from '../location/LocationLink.tsx'
