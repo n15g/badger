@@ -1,6 +1,6 @@
 import { FC } from 'react'
 import { Mission } from 'coh-content-db'
-import { Tooltip, Typography } from '@mui/joy'
+import { Typography } from '@mui/joy'
 import ContentProvider from '../content/ContentProvider.tsx'
 import ErrorText from '../util/ErrorText.tsx'
 import MissionTooltip from '../mission/MissionTooltip.tsx'
@@ -15,13 +15,13 @@ const MissionLink: FC<{ value?: Mission | string }> = ({ value }) => {
 
   if (mission) {
     return (
-      <Tooltip title={<MissionTooltip mission={mission}/>} variant="plain">
+      <MissionTooltip mission={mission}>
         <NavLink to={`/missions/${key}`} className="entityLink">
           <Typography component="span" display="inline" className="entity" startDecorator={<Icons.Mission/>}>
             {mission.name}
           </Typography>
         </NavLink>
-      </Tooltip>
+      </MissionTooltip>
     )
   } else {
     return (

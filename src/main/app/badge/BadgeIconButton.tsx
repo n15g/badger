@@ -1,6 +1,6 @@
 import { FC, ImgHTMLAttributes, useCallback, useState } from 'react'
 import { Badge, VariantContext } from 'coh-content-db'
-import { Box, Tooltip } from '@mui/joy'
+import { Box } from '@mui/joy'
 import BadgeTooltip from './BadgeTooltip.tsx'
 import BadgeIcon from './BadgeIcon.tsx'
 import Spinner from '../util/Spinner.tsx'
@@ -33,7 +33,7 @@ const BadgeIconButton: FC<{
   }, [innerValue, loading, onFrobnicate])
 
   return (
-    <Tooltip title={<BadgeTooltip badge={badge}/>} variant="plain" enterDelay={500} enterNextDelay={500}>
+    <BadgeTooltip badge={badge}>
       <Box sx={{ position: 'relative', cursor: 'pointer' }} onClick={() => void frobnicate()}>
         <BadgeIcon
           {...props}
@@ -56,7 +56,7 @@ const BadgeIconButton: FC<{
           </Box>
         )}
       </Box>
-    </Tooltip>
+    </BadgeTooltip>
   )
 }
 

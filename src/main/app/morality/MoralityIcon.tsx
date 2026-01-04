@@ -7,7 +7,6 @@ import villainIcon from '../../resources/images/icon/morality-villain.png'
 import rogueIcon from '../../resources/images/icon/morality-rogue.png'
 import resistanceIcon from '../../resources/images/icon/morality-resistance.png'
 import loyalistIcon from '../../resources/images/icon/morality-loyalist.png'
-import { Icons } from '../util/Icons.tsx'
 
 const MoralityIcon: FC<{ morality: Morality, muted?: boolean } & ImgHTMLAttributes<HTMLImageElement>>
   = ({ morality, muted = false, ...props }) => {
@@ -20,13 +19,15 @@ const MoralityIcon: FC<{ morality: Morality, muted?: boolean } & ImgHTMLAttribut
     loyalist: loyalistIcon
   }[morality]
 
-  return icon ? <SmartImage
-    {...props}
-    src={icon}
-    sx={{
-      filter: muted ? 'grayscale(1) brightness(0.4)' : undefined,
-    }}
-  /> : <Icons.Morality/>
+  return icon
+    ? <SmartImage
+      {...props}
+      src={icon}
+      sx={{
+        filter: muted ? 'grayscale(1) brightness(0.4)' : undefined,
+      }}
+    />
+    : undefined
 }
 
 export default MoralityIcon

@@ -1,6 +1,6 @@
 import { FC } from 'react'
 import { Zone } from 'coh-content-db'
-import { Tooltip, Typography } from '@mui/joy'
+import { Typography } from '@mui/joy'
 import ContentProvider from '../content/ContentProvider.tsx'
 import ErrorText from '../util/ErrorText.tsx'
 import ZoneTooltip from '../zone/ZoneTooltip.tsx'
@@ -15,13 +15,13 @@ const ZoneLink: FC<{ value?: Zone | string }> = ({ value }) => {
 
   if (zone) {
     return (
-      <Tooltip title={<ZoneTooltip zone={zone}/>} variant="plain">
+      <ZoneTooltip zone={zone}>
         <NavLink to={`/zones/${key}`} className="entityLink">
           <Typography component="span" display="inline" className="entity" startDecorator={<Icons.Zone/>}>
             {zone.name}
           </Typography>
         </NavLink>
-      </Tooltip>
+      </ZoneTooltip>
     )
   } else {
     return (

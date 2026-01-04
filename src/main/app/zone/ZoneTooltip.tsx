@@ -1,31 +1,28 @@
-import { FC } from 'react'
+import { FC, ReactElement } from 'react'
 import { Zone } from 'coh-content-db'
-import { Breadcrumbs, Card, CardOverflow, Divider, Stack, Typography } from '@mui/joy'
+import { Card, CardOverflow, Divider, Stack, Tooltip, TooltipProps, Typography } from '@mui/joy'
 import { Icons } from '../util/Icons.tsx'
 import { NavLink } from 'react-router'
 import MoralityListIcons from '../morality/MoralityListIcons.tsx'
 import LevelRangeLabel from '../util/LevelRangeLabel.tsx'
 import { ZoneTypeLabels } from './ZoneTypeLabels.tsx'
 
-const ZoneTooltip: FC<{ zone: Zone }> = ({ zone }) => {
-  return (
-    <Card sx={{ minWidth: 260, maxWidth: 320, p: 2, borderRadius: '1em', boxShadow: '10' }}>
-      <CardOverflow>
-        <Breadcrumbs separator={<Icons.Breadcrumb/>}>
-          <NavLink to="/zones" style={{ textDecoration: 'none' }}>
-            <Typography level="title-sm" startDecorator={<Icons.Zone/>}>Zones</Typography>
-          </NavLink>
-          <Typography level="title-sm">{ZoneTypeLabels.get(zone.type)}</Typography>
-        </Breadcrumbs>
+const ZoneTooltip: FC<{ zone: Zone, children: ReactElement } & Omit<TooltipProps, 'title'>>
+  = ({ zone, children, ...props }) => {
+
+  const content = (
+    <Card variant="plain" sx={{ minWidth: 280, maxWidth: 320, alignItems: 'center' }}>
+      <CardOverflow sx={{ alignItems: 'center' }}>
+        <Typography level="title-sm" startDecorator={<Icons.Zone/>} sx={{ p: 1 }}>
+          {ZoneTypeLabels.get(zone.type)}
+        </Typography>
         <Divider inset="context"/>
       </CardOverflow>
 
-      <Stack spacing={1}>
-        <Stack direction="column" spacing={1} alignItems="center">
-          <NavLink to={`/zones/${zone.key}`} style={{ textDecoration: 'none', color: 'inherit' }}>
-            <Typography textAlign="center" level="title-lg">{zone.name}</Typography>
-          </NavLink>
-        </Stack>
+      <Stack direction="column" spacing={1} alignItems="center">
+        <NavLink to={`/zones/${zone.key}`} style={{ textDecoration: 'none', color: 'inherit' }}>
+          <Typography textAlign="center" level="title-lg">{zone.name}</Typography>
+        </NavLink>
       </Stack>
 
       <CardOverflow sx={{ py: 1 }}>
@@ -36,6 +33,12 @@ const ZoneTooltip: FC<{ zone: Zone }> = ({ zone }) => {
         </Stack>
       </CardOverflow>
     </Card>
+  )
+
+  return (
+    <Tooltip {...props} title={content} variant="outlined" enterDelay={500} enterNextDelay={500} sx={{ p: 0 }}>
+      {children}
+    </Tooltip>
   )
 }
 

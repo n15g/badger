@@ -1,7 +1,6 @@
 import { Box, Card, CardContent, CardOverflow, Stack, Typography } from '@mui/joy'
 import BadgeIcon from './badge/BadgeIcon.tsx'
 import homecomingLogo from '../resources/images/logo/homecoming.png'
-import DropShadowImage from './util/DropShadowImage.tsx'
 import ContentProvider from './content/ContentProvider.tsx'
 import MainSection from './util/MainSection.tsx'
 import { NavLink } from 'react-router'
@@ -26,7 +25,7 @@ function AboutPage() {
 
             <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
               <a href="https://homecomingservers.com/">
-                <DropShadowImage src={homecomingLogo} alt="Homecoming" width={200}/>
+                <img src={homecomingLogo} alt="Homecoming" width={200} style={{ filter: 'drop-shadow(0 0 4px)' }}/>
               </a>
             </Box>
             <p>

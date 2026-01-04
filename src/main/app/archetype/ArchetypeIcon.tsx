@@ -1,6 +1,5 @@
-import { FC } from 'react'
+import { FC, ImgHTMLAttributes } from 'react'
 import { SmartImage } from '../util/SmartImage.tsx'
-import { TbCircleDashedLetterA } from 'react-icons/tb'
 import arachnosSoldierIcon from '../../resources/images/archetype/arachnos-soldier.png'
 import arachnosWidowIcon from '../../resources/images/archetype/arachnos-widow.png'
 import blasterIcon from '../../resources/images/archetype/blaster.png'
@@ -17,7 +16,7 @@ import stalkerIcon from '../../resources/images/archetype/stalker.png'
 import tankerIcon from '../../resources/images/archetype/tanker.png'
 import warshadeIcon from '../../resources/images/archetype/warshade.png'
 
-const ArchetypeIcon: FC<{ archetypeKey: string, height?: string | number }> = ({ archetypeKey, height = 32 }) => {
+const ArchetypeIcon: FC<{ archetypeKey: string } & ImgHTMLAttributes<HTMLImageElement>> = ({ archetypeKey, ...props }) => {
   const icon = {
     'arachnos-soldier': arachnosSoldierIcon,
     'arachnos-widow': arachnosWidowIcon,
@@ -36,7 +35,7 @@ const ArchetypeIcon: FC<{ archetypeKey: string, height?: string | number }> = ({
     'warshade': warshadeIcon,
   }[archetypeKey]
 
-  return icon ? <SmartImage src={icon} style={{ height: height }}/> : <TbCircleDashedLetterA size={height}/>
+  return icon ? <SmartImage {...props} src={icon}/> : undefined
 }
 
 export default ArchetypeIcon

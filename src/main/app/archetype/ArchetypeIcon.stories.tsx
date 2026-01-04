@@ -24,12 +24,6 @@ export const Unknown: StoryType = {
   },
 }
 
-export const None: StoryType = {
-  args: {
-    archetypeKey: undefined
-  },
-}
-
 export const All: StoryType = {
   render: () => (
     <List>

@@ -1,6 +1,6 @@
 import { FC } from 'react'
 import { Badge } from 'coh-content-db'
-import { Tooltip, Typography } from '@mui/joy'
+import { Typography } from '@mui/joy'
 import BadgeTooltip from './BadgeTooltip.tsx'
 import ContentProvider from '../content/ContentProvider.tsx'
 import { NavLink } from 'react-router'
@@ -21,14 +21,14 @@ const BadgeLink: FC<{ value?: Badge | string }> = ({ value }) => {
 
   if (badge) {
     return (
-      <Tooltip title={<BadgeTooltip badge={badge}/>} variant="plain">
+      <BadgeTooltip badge={badge}>
         <NavLink to={linkTarget} className="entityLink">
           <Typography component="span" display="inline" className="entity"
-                      startDecorator={<BadgeIcon badge={badge} height="0.9em"/>}>
+                      startDecorator={<BadgeIcon badge={badge} style={{ height: '0.9em' }}/>}>
             <BadgeNameInline badge={badge}/>
           </Typography>
         </NavLink>
-      </Tooltip>
+      </BadgeTooltip>
     )
   } else {
     return (

@@ -1,5 +1,5 @@
 import { FC } from 'react'
-import { Tooltip, Typography } from '@mui/joy'
+import { Typography } from '@mui/joy'
 import { Location } from 'coh-content-db'
 import CoordsLabel from './CoordsLabel.tsx'
 import LocationIcon from './LocationIcon.tsx'
@@ -15,16 +15,16 @@ const LocationLink: FC<{ location: Location }> = ({ location }) => {
   const zone = content.getZone(location.zoneKey)
 
   return (
-    <Typography component="span" display="inline" className="entityLink"
+    <Typography component="span" display="inline-block" className="entityLink"
                 startDecorator={icon && <LocationIcon icon={icon} text={iconText}/>}
                 endDecorator={<Icons.Zone/>}
     >
       {zone && (
-        <Tooltip title={<ZoneTooltip zone={zone}/>} variant="plain">
+        <ZoneTooltip zone={zone}>
           <NavLink to={`/zones/${zoneKey}`} style={{ textDecoration: 'none', color: 'inherit' }} className="entity">
             {zone.name}
           </NavLink>
-        </Tooltip>
+        </ZoneTooltip>
       )}
       {coords && (
         <Typography component="span" level="body-xs" style={zone && { paddingLeft: '0.5em' }}>

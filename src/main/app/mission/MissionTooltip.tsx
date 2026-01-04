@@ -1,49 +1,45 @@
-import { FC } from 'react'
+import { FC, ReactElement } from 'react'
 import { Mission } from 'coh-content-db'
-import { Breadcrumbs, Card, CardOverflow, Divider, Stack, Typography } from '@mui/joy'
-import { Icons } from '../util/Icons.tsx'
+import { Card, CardOverflow, Divider, Stack, Tooltip, TooltipProps, Typography } from '@mui/joy'
 import { NavLink } from 'react-router'
-import { MissionTypeLabels } from './MissionTypeLabels.tsx'
 import MoralityListIcons from '../morality/MoralityListIcons.tsx'
 import LevelRangeLabel from '../util/LevelRangeLabel.tsx'
 import ContactLink from '../contact/ContactLink.tsx'
+import { Icons } from '../util/Icons.tsx'
+import { MissionTypeLabels } from './MissionTypeLabels.tsx'
 
-const MissionTooltip: FC<{ mission: Mission }> = ({ mission }) => {
+const MissionTooltip: FC<{ mission: Mission, children: ReactElement } & Omit<TooltipProps, 'title'>>
+  = ({ mission, children, ...props }) => {
   const { contactKeys } = mission
 
-  return (
-    <Card sx={{ minWidth: 260, maxWidth: 320, p: 2, borderRadius: '1em', boxShadow: '10' }}>
-      <CardOverflow>
-        <Breadcrumbs separator={<Icons.Breadcrumb/>}>
-          <NavLink to="/missions" style={{ textDecoration: 'none' }}>
-            <Typography level="title-sm" startDecorator={<Icons.Mission/>}>Missions</Typography>
-          </NavLink>
-          <Typography level="title-sm">{MissionTypeLabels.get(mission.type) ?? 'Mission'}</Typography>
-        </Breadcrumbs>
+  const content = (
+    <Card variant="plain" sx={{ minWidth: 280, maxWidth: 320, alignItems: 'center' }}>
+      <CardOverflow sx={{ alignItems: 'center' }}>
+        <Typography level="title-sm" startDecorator={<Icons.Mission/>} sx={{ p: 1 }}>
+          {MissionTypeLabels.get(mission.type)}
+        </Typography>
         <Divider inset="context"/>
       </CardOverflow>
 
-      <Stack spacing={1} alignItems="center">
-        <Stack direction="column" spacing={1} alignItems="center">
-          <NavLink to={`/missions/${mission.key}`} style={{ textDecoration: 'none', color: 'inherit' }}>
-            <Typography level="title-lg" textAlign="center">{mission.name}</Typography>
-          </NavLink>
-        </Stack>
-
-        {contactKeys && contactKeys.length > 0 && (<>
-          <Divider/>
-          {contactKeys.length <= 2 && (
-            <Stack gap={1}>
-              {contactKeys.map((contactKey) => (<ContactLink key={contactKey} value={contactKey}/>))}
-            </Stack>
-          )}
-          {contactKeys.length > 2 && (
-            <Typography sx={{ fontStyle: 'italic' }} startDecorator={<Icons.Contact/>}>
-              Multiple Contacts
-            </Typography>
-          )}
-        </>)}
+      <Stack direction="column" spacing={1} alignItems="center">
+        <NavLink to={`/missions/${mission.key}`} style={{ textDecoration: 'none', color: 'inherit' }}>
+          <Typography level="title-lg" textAlign="center">{mission.name}</Typography>
+        </NavLink>
       </Stack>
+
+      {contactKeys && contactKeys.length > 0 && (<>
+        <Divider/>
+        {contactKeys.length <= 2 && (
+          <Stack gap={1}>
+            {contactKeys.map((contactKey) => (<ContactLink key={contactKey} value={contactKey}/>))}
+          </Stack>
+        )}
+        {contactKeys.length > 2 && (
+          <Typography sx={{ fontStyle: 'italic' }} textAlign="center">
+            Multiple Contacts
+          </Typography>
+        )}
+      </>)}
 
       <CardOverflow sx={{ py: 1 }}>
         <Divider inset="context"/>
@@ -53,6 +49,12 @@ const MissionTooltip: FC<{ mission: Mission }> = ({ mission }) => {
         </Stack>
       </CardOverflow>
     </Card>
+  )
+
+  return (
+    <Tooltip {...props} title={content} variant="outlined" enterDelay={500} enterNextDelay={500} sx={{ p: 0 }}>
+      {children}
+    </Tooltip>
   )
 }
 

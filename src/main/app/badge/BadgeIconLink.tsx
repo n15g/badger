@@ -1,6 +1,5 @@
 import { FC, ImgHTMLAttributes } from 'react'
 import { Badge, VariantContext } from 'coh-content-db'
-import { Tooltip } from '@mui/joy'
 import BadgeTooltip from './BadgeTooltip.tsx'
 import ContentProvider from '../content/ContentProvider.tsx'
 import { NavLink } from 'react-router'
@@ -21,11 +20,11 @@ const BadgeIconLink: FC<{ value?: Badge | string, context?: VariantContext, mute
 
   if (badge) {
     return (
-      <Tooltip title={<BadgeTooltip badge={badge}/>} variant="plain">
+      <BadgeTooltip badge={badge}>
         <NavLink to={linkTarget}>
           <BadgeIcon badge={badge} context={context} {...props}/>
         </NavLink>
-      </Tooltip>
+      </BadgeTooltip>
     )
   } else {
     return (

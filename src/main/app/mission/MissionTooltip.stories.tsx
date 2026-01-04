@@ -4,6 +4,7 @@ import MissionTooltip from './MissionTooltip.tsx'
 import { STORYBOOK_CONTENT } from '../../storybook/storybook-content.ts'
 import { Meta, StoryObj } from '@storybook/react-vite'
 import { MoralityList } from 'coh-content-db'
+import { Box, Typography } from '@mui/joy'
 
 const meta: Meta<typeof MissionTooltip> = {
   title: 'mission/MissionTooltip',
@@ -14,19 +15,25 @@ type StoryType = StoryObj<typeof meta.component>
 
 export const Default: StoryType = {
   args: {
-    mission: STORYBOOK_CONTENT.getMission('abandoned-sewers-trial')
+    mission: STORYBOOK_CONTENT.getMission('abandoned-sewers-trial'),
+    children: <Box/>,
+    open: true,
   },
 }
 
 export const Couple_Of_Contacts: StoryType = {
   args: {
-    mission: STORYBOOK_CONTENT.getMission('stop-the-lost-attack')
+    mission: STORYBOOK_CONTENT.getMission('stop-the-lost-attack'),
+    children: <Box/>,
+    open: true,
   },
 }
 
 export const Multiple_Contacts: StoryType = {
   args: {
-    mission: STORYBOOK_CONTENT.getMission('retrieve-the-stolen-weapons-from-the-freakshow')
+    mission: STORYBOOK_CONTENT.getMission('retrieve-the-stolen-weapons-from-the-freakshow'),
+    children: <Box/>,
+    open: true
   },
 }
 
@@ -37,7 +44,16 @@ export const Minimal: StoryType = {
       type: 'story-arc',
       morality: new MoralityList(['heroic']),
       name: 'No Level Range Test',
-      links: []
-    }
+      links: [],
+    },
+    children: <Box/>,
+    open: true
+  },
+}
+
+export const Popup: StoryType = {
+  args: {
+    mission: STORYBOOK_CONTENT.getMission('abandoned-sewers-trial'),
+    children: <Typography>Hover me</Typography>,
   },
 }

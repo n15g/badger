@@ -15,7 +15,7 @@ const BadgeAcquisitionSummary: FC<{ badge: Badge }> = ({ badge }) => {
   const { type, acquisition, requirements, zoneKeys } = badge
 
   if (acquisition) {
-    return <BadgerMarkdown content={acquisition}/>
+    return <span className="no-p-padding"><BadgerMarkdown content={acquisition}/></span>
   }
 
   if (requirements.length === 1) {

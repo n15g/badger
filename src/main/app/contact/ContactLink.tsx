@@ -1,6 +1,6 @@
 import { FC } from 'react'
 import { Contact } from 'coh-content-db'
-import { Tooltip, Typography } from '@mui/joy'
+import { Typography } from '@mui/joy'
 import ContentProvider from '../content/ContentProvider.tsx'
 import ErrorText from '../util/ErrorText.tsx'
 import ContactTooltip from '../contact/ContactTooltip.tsx'
@@ -15,13 +15,13 @@ const ContactLink: FC<{ value?: Contact | string }> = ({ value }) => {
 
   if (contact) {
     return (
-      <Tooltip title={<ContactTooltip contact={contact}/>} variant="plain">
+      <ContactTooltip contact={contact}>
         <NavLink to={`/contacts/${key}`} className="entityLink">
           <Typography component="span" display="inline" className="entity" startDecorator={<Icons.Contact/>}>
             {contact.name}
           </Typography>
         </NavLink>
-      </Tooltip>
+      </ContactTooltip>
     )
   } else {
     return (
