@@ -10,11 +10,11 @@ const Pagination: FC<{ paged: Paged<unknown>, range?: number, onChange: (page: n
   const showPages = []
   const halfRange = Math.floor(range / 2)
 
-  let start = Math.max(paged.page - halfRange, 1)
-  if (start + range - 1 > paged.totalPages) {
-    start = Math.max(paged.totalPages - range + 1, 1)
+  let start = Math.max(paged.pageNumber - halfRange, 1)
+  if (start + range - 1 > paged.totalPageCount) {
+    start = Math.max(paged.totalPageCount - range + 1, 1)
   }
-  for (let i = start; i < start + range && i <= paged.totalPages; i++) {
+  for (let i = start; i < start + range && i <= paged.totalPageCount; i++) {
     showPages.push(i)
   }
 
@@ -22,23 +22,23 @@ const Pagination: FC<{ paged: Paged<unknown>, range?: number, onChange: (page: n
     <ButtonGroup>
       <Button onClick={() => {
         onChange(1, paged.pageSize)
-      }} disabled={paged.page === 1}
+      }} disabled={paged.pageNumber === 1}
               title="First">
         <Icons.First/>
       </Button>
 
       <Button onClick={() => {
-        onChange(paged.page - 1, paged.pageSize)
-      }} disabled={paged.page === 1}
+        onChange(paged.pageNumber - 1, paged.pageSize)
+      }} disabled={paged.pageNumber === 1}
               title="Previous">
         <Icons.Prev/>
       </Button>
 
       {showPages.map(index => (
         <Button key={index}
-                sx={{ display: { xs: index === paged.page ? 'inline-block' : 'none', md: 'inline-block' }, minWidth: '4em' }}
-                disabled={index === paged.page}
-                variant={index === paged.page ? 'solid' : 'plain'}
+                sx={{ display: { xs: index === paged.pageNumber ? 'inline-block' : 'none', md: 'inline-block' }, minWidth: '4em' }}
+                disabled={index === paged.pageNumber}
+                variant={index === paged.pageNumber ? 'solid' : 'plain'}
                 onClick={() => {
                   onChange(index, paged.pageSize)
                 }}>
@@ -47,25 +47,30 @@ const Pagination: FC<{ paged: Paged<unknown>, range?: number, onChange: (page: n
       ))}
 
       <Button onClick={() => {
-        onChange(paged.page + 1, paged.pageSize)
-      }} disabled={paged.page >= paged.totalPages}
+        onChange(paged.pageNumber + 1, paged.pageSize)
+      }} disabled={paged.pageNumber >= paged.totalPageCount}
               title="Next">
         <Icons.Next/>
       </Button>
 
       <Button onClick={() => {
-        onChange(paged.totalPages, paged.pageSize)
-      }} disabled={paged.page >= paged.totalPages}
+        onChange(paged.totalPageCount, paged.pageSize)
+      }} disabled={paged.pageNumber >= paged.totalPageCount}
               title="Last">
         <Icons.Last/>
       </Button>
     </ButtonGroup>
 
-    <Stack direction="row" columnGap={2} alignItems="center">
-      <Typography level="title-sm">{paged.totalPages} Page{paged.totalPages === 1 ? '' : 's'}</Typography>
+    <Typography>
+      {paged.matchedItemCount} Item{paged.matchedItemCount === 1 ? '' : 's'}
+      {paged.matchedItemCount !== paged.totalItemCount && <> ({paged.totalItemCount - paged.matchedItemCount} filtered)</>}
+    </Typography>
+
+    <Stack direction="row" columnGap={2} alignItems="center" sx={{ ml: { md: 'auto' } }}>
+      <Typography level="title-sm">{paged.totalPageCount} Page{paged.totalPageCount === 1 ? '' : 's'}</Typography>
 
       <Select value={paged.pageSize ?? 0} onChange={(_, value) => {
-        onChange(paged.page, value ?? undefined)
+        onChange(paged.pageNumber, value ?? undefined)
       }}>
         <Option value={20}>20 items per page</Option>
         <Option value={50}>50 items per page</Option>
