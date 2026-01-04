@@ -17,7 +17,7 @@ import {
 import BadgeIcon from './BadgeIcon.tsx'
 import BadgerMarkdown from '../util/BadgerMarkdown.tsx'
 import { Badge } from 'coh-content-db'
-import { FC, Fragment } from 'react'
+import { FC } from 'react'
 import { Icons } from '../util/Icons.tsx'
 import MoralityListIcons from '../morality/MoralityListIcons.tsx'
 import { NavLink } from 'react-router'
@@ -29,8 +29,15 @@ import InfoPanel from '../util/InfoPanel.tsx'
 import NotesBlock from '../util/NotesBlock.tsx'
 import LinksBlock from '../util/LinksBlock.tsx'
 import BadgeNameList from './BadgeNameList.tsx'
+import CharacterContextProvider from '../character/CharacterContextProvider.tsx'
+import AsyncSwitch from '../util/AsyncSwitch.tsx'
 
 const BadgeCard: FC<{ badge: Badge }> = ({ badge }) => {
+  const { character, hasBadge, collectBadge } = CharacterContextProvider.useCharacterContext()
+
+  const owned = !character || hasBadge(badge)
+  const badgesLink = character ? `/characters/${character.key}/badges` : `/badges`
+
   const {
     type,
     icon,
@@ -50,7 +57,7 @@ const BadgeCard: FC<{ badge: Badge }> = ({ badge }) => {
     <Card>
       <CardOverflow>
         <Breadcrumbs separator={<Icons.Breadcrumb/>}>
-          <NavLink to="/badges" style={{ textDecoration: 'none' }}>
+          <NavLink to={badgesLink} style={{ textDecoration: 'none' }}>
             <Typography level="title-sm" startDecorator={<Icons.Badge/>}>Badges</Typography>
           </NavLink>
           <Typography level="title-sm">{badge.name.toString(' / ')}</Typography>
@@ -70,7 +77,7 @@ const BadgeCard: FC<{ badge: Badge }> = ({ badge }) => {
 
           <Stack direction="row" flexWrap="wrap" gap={2}>
             {icon.canonical.map((icon) => (
-              <BadgeIcon key={icon.value} badge={badge} context={{ morality: icon.alignment, sex: icon.sex }}/>
+              <BadgeIcon key={icon.value} badge={badge} context={{ morality: icon.alignment, sex: icon.sex }} muted={!owned}/>
             ))}
           </Stack>
 
@@ -110,33 +117,43 @@ const BadgeCard: FC<{ badge: Badge }> = ({ badge }) => {
             ))}
           </Box>
 
-          <Card variant="soft">
-            <Typography level="title-md" startDecorator={<Icons.Acquisition/>}>Requirements</Typography>
-            <Box sx={{ pl: 1 }}>
+          <Box>
+            <Typography level="title-lg" startDecorator={<Icons.Acquisition/>}>Requirements</Typography>
 
-              {acquisition && (
-                <Typography component="span" level="body-md"><BadgerMarkdown content={acquisition}/></Typography>
-              )}
+            {character && (
+              <AsyncSwitch
+                size="lg"
+                color={owned ? 'success' : 'neutral'}
+                endDecorator="Complete"
+                sx={{ p: 2 }}
+                checked={owned}
+                onFrobnicate={async (owned) => {
+                  await collectBadge(badge, owned)
+                }}
+              />
+            )}
 
-              {requirements.length > 0 && (
-                <List size="sm">
-                  {requirements.length > 1 && <ListDivider inset="startContent"/>}
-                  {requirements.map((requirement) => (
-                    <Fragment key={requirement.key}>
-                      <ListItem>
-                        <ListItemDecorator><Checkbox/></ListItemDecorator>
-                        <ListItemContent>
-                          <RequirementListItem requirement={requirement}/>
-                        </ListItemContent>
-                      </ListItem>
-                      {requirements.length > 1 && <ListDivider inset="startContent"/>}
-                    </Fragment>
-                  ))}
-                </List>
-              )}
+            {acquisition && (
+              <Typography component="span" level="body-md"><BadgerMarkdown content={acquisition}/></Typography>
+            )}
 
-            </Box>
-          </Card>
+            {requirements.length > 0 && (
+              <List size="sm">
+                {requirements.length > 1 && <ListDivider inset="startContent"/>}
+                {requirements.map((requirement) => (
+                  <div key={requirement.key}>
+                    <ListItem>
+                      <ListItemDecorator><Checkbox/></ListItemDecorator>
+                      <ListItemContent>
+                        <RequirementListItem requirement={requirement}/>
+                      </ListItemContent>
+                    </ListItem>
+                    {requirements.length > 1 && <ListDivider inset="startContent"/>}
+                  </div>
+                ))}
+              </List>
+            )}
+          </Box>
 
           <NotesBlock notes={notes}/>
 

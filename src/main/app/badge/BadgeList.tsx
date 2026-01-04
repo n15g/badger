@@ -31,7 +31,7 @@ const BadgeList: FC = () => {
       setSearchOptions({ ...searchOptions, page: page, pageSize: pageSize })
     }}/>
 
-    <Table noWrap={true}>
+    <Table noWrap={true} hoverRow={true} borderAxis="none">
       <thead>
       <TR>
         {character && <TH sx={{ width: 40 }}></TH>}
