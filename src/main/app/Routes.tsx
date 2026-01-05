@@ -52,5 +52,5 @@ export const Routes = createBrowserRouter([
     ]
   },
 ], {
-  basename: import.meta.env.BASE_URL.slice(0, -1) || '/'
+  basename: '/badger'
 })
