@@ -1,26 +1,32 @@
-import { FC, KeyboardEvent, RefObject, useState } from 'react'
+import { FC, KeyboardEvent, RefObject, useMemo, useState } from 'react'
 import { BadgeSearchOptions } from 'coh-content-db'
 import { Popover } from '@base-ui-components/react'
 import { Autocomplete, AutocompleteListbox, AutocompleteOption, Chip, ChipDelete, ListItemDecorator, Sheet, Stack } from '@mui/joy'
 import { Icons } from '../../util/Icons.tsx'
 import { BadgeSortOptions } from './BadgeSortOptions.tsx'
-
-interface Props {
-  searchOptions: BadgeSearchOptions,
-  onChange?: (options: BadgeSearchOptions) => void,
-}
+import { produce } from 'immer'
 
 const sortFields = BadgeSortOptions
 
-const BadgeMapFilterChip: FC<Props> = ({ searchOptions, onChange }) => {
+const BadgeSortChip: FC<{
+  searchOptions: BadgeSearchOptions,
+  onChange?: (options: BadgeSearchOptions) => void,
+}> = ({ searchOptions, onChange }) => {
   const [open, setOpen] = useState(false)
 
   const value = searchOptions.sort
 
-  const Clear = (<ChipDelete onClick={() => {
-    onChange?.({ ...searchOptions, sort: undefined })
-  }}><Icons.Cross/></ChipDelete>)
-
+  const Clear = useMemo(() => (
+    <ChipDelete
+      onClick={() => {
+        onChange?.(produce(searchOptions, (draft) => {
+          draft.sort = undefined
+        }))
+      }}
+    >
+      <Icons.Cross/>
+    </ChipDelete>
+  ), [onChange, searchOptions])
   return (
     <Popover.Root open={open} onOpenChange={setOpen}>
       <Popover.Trigger render={
@@ -47,7 +53,9 @@ const BadgeMapFilterChip: FC<Props> = ({ searchOptions, onChange }) => {
                 }
               }}
               onChange={(_, value) => {
-                onChange?.({ ...searchOptions, sort: value ?? undefined })
+                onChange?.(produce(searchOptions, (draft) => {
+                  draft.sort = value ?? undefined
+                }))
                 setOpen(false)
               }}
               slots={{
@@ -82,4 +90,4 @@ const ListBox = ({ ref, ...props }: object & { ref?: RefObject<HTMLUListElement 
   />
 )
 
-export default BadgeMapFilterChip
+export default BadgeSortChip

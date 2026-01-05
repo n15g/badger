@@ -11,7 +11,7 @@ const BadgeGallery: FC<BoxProps> = ({ ...props }) => {
   const content = ContentProvider.useContent()
   const { character } = CharacterContextProvider.useCharacterContext()
 
-  const [showUncollected, setShowUncollected] = useState(true)
+  const [hideCollected, setHideCollected] = useState(false)
   const [selectedType, setSelectedType] = useState<BadgeType | null>('exploration')
 
   const groups = content
@@ -42,9 +42,9 @@ const BadgeGallery: FC<BoxProps> = ({ ...props }) => {
 
         {character && (
           <FormControl orientation="horizontal">
-            <FormLabel>Show Uncollected</FormLabel>
-            <Switch checked={showUncollected} onChange={(e) => {
-              setShowUncollected(e.target.checked)
+            <FormLabel>Hide Collected</FormLabel>
+            <Switch checked={hideCollected} onChange={(e) => {
+              setHideCollected(e.target.checked)
             }}/>
           </FormControl>
         )}
@@ -60,7 +60,7 @@ const BadgeGallery: FC<BoxProps> = ({ ...props }) => {
             <GallerySection
               badges={groups[key as BadgeType] ?? []}
               title={BadgeTypeLabels.get(key as BadgeType) ?? ''}
-              showUncollected={showUncollected}
+              hideCollected={hideCollected}
             />
           </Fragment>
         ))}
@@ -68,11 +68,11 @@ const BadgeGallery: FC<BoxProps> = ({ ...props }) => {
   )
 }
 
-const GallerySection: FC<{ badges: Badge[], title: string, showUncollected: boolean }> = ({ badges, title, showUncollected }) => {
+const GallerySection: FC<{ badges: Badge[], title: string, hideCollected: boolean }> = ({ badges, title, hideCollected }) => {
   const { character, hasBadge, collectBadge } = CharacterContextProvider.useCharacterContext()
 
   const owned = badges.filter((badge) => !character || hasBadge(badge))
-  const displayed = showUncollected ? badges : owned
+  const displayed = hideCollected ? owned : badges
 
   return (
     <Card sx={{ minHeight: 80, mb: 2 }}>

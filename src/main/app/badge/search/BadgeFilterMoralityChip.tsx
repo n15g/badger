@@ -1,4 +1,4 @@
-import { FC, KeyboardEvent, RefObject, useState } from 'react'
+import { FC, KeyboardEvent, RefObject, useMemo, useState } from 'react'
 import { BadgeSearchOptions, MORALITY } from 'coh-content-db'
 import { Popover } from '@base-ui-components/react'
 import { Autocomplete, AutocompleteListbox, AutocompleteOption, Chip, ChipDelete, ListItemDecorator, Sheet, Stack } from '@mui/joy'
@@ -6,20 +6,28 @@ import { Icons } from '../../util/Icons.tsx'
 import MoralityColored from '../../morality/MoralityColored.tsx'
 import { MoralityLabels } from '../../morality/MoralityLabels.tsx'
 import MoralityIcon from '../../morality/MoralityIcon.tsx'
+import { produce } from 'immer'
 
-interface Props {
+const BadgeFilterMoralityChip: FC<{
   searchOptions: BadgeSearchOptions,
   onChange?: (options: BadgeSearchOptions) => void,
-}
-
-const BadgeMapFilterChip: FC<Props> = ({ searchOptions, onChange }) => {
+}> = ({ searchOptions, onChange }) => {
   const morality = searchOptions.filter?.morality ?? undefined
 
   const [open, setOpen] = useState(false)
 
-  const Clear = (<ChipDelete onClick={() => {
-    onChange?.({ ...searchOptions, filter: { ...searchOptions.filter, morality: undefined } })
-  }}><Icons.Cross/></ChipDelete>)
+  const Clear = useMemo(() => (
+    <ChipDelete
+      onClick={() => {
+        onChange?.(produce(searchOptions, (draft) => {
+          draft.filter ??= {}
+          draft.filter.morality = undefined
+        }))
+      }}
+    >
+      <Icons.Cross/>
+    </ChipDelete>
+  ), [onChange, searchOptions])
 
   return (
     <Popover.Root open={open} onOpenChange={setOpen}>
@@ -47,7 +55,10 @@ const BadgeMapFilterChip: FC<Props> = ({ searchOptions, onChange }) => {
                 }
               }}
               onChange={(_, value) => {
-                onChange?.({ ...searchOptions, filter: { ...searchOptions.filter, morality: value ?? undefined } })
+                onChange?.(produce(searchOptions, (draft) => {
+                  draft.filter ??= {}
+                  draft.filter.morality = value ?? undefined
+                }))
                 setOpen(false)
               }}
               slots={{
@@ -80,4 +91,4 @@ const ListBox = ({ ref, ...props }: object & { ref?: RefObject<HTMLUListElement 
   />
 )
 
-export default BadgeMapFilterChip
+export default BadgeFilterMoralityChip

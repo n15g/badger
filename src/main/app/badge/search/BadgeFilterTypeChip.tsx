@@ -1,34 +1,40 @@
-import { FC, KeyboardEvent, RefObject, useState } from 'react'
+import { FC, KeyboardEvent, RefObject, useMemo, useState } from 'react'
 import { BadgeSearchOptions } from 'coh-content-db'
-import ContentProvider from '../../content/ContentProvider.tsx'
 import { Popover } from '@base-ui-components/react'
 import { Autocomplete, AutocompleteListbox, Chip, ChipDelete, Sheet, Stack } from '@mui/joy'
 import { Icons } from '../../util/Icons.tsx'
+import { BadgeTypeLabels } from '../BadgeTypeLabels.tsx'
+import { produce } from 'immer'
 
-interface Props {
+const BadgeFilterTypeChip: FC<{
   searchOptions: BadgeSearchOptions,
   onChange?: (options: BadgeSearchOptions) => void,
-}
-
-const BadgeMapFilterChip: FC<Props> = ({ searchOptions, onChange }) => {
-  const content = ContentProvider.useContent()
-
-  const zones = content.zones
-  const zone = content.getZone(searchOptions.filter?.zoneKey) ?? null
+}> = ({ searchOptions, onChange }) => {
+  const options = BadgeTypeLabels.keys
+  const value = searchOptions.filter?.type ?? null
 
   const [open, setOpen] = useState(false)
 
-  const Clear = (<ChipDelete onClick={() => {
-    onChange?.({ ...searchOptions, filter: { ...searchOptions.filter, zoneKey: undefined } })
-  }}><Icons.Cross/></ChipDelete>)
+  const Clear = useMemo(() => (
+    <ChipDelete
+      onClick={() => {
+        onChange?.(produce(searchOptions, (draft) => {
+          draft.filter ??= {}
+          draft.filter.type = undefined
+        }))
+      }}
+    >
+      <Icons.Cross/>
+    </ChipDelete>
+  ), [onChange, searchOptions])
 
   return (
     <Popover.Root open={open} onOpenChange={setOpen}>
       <Popover.Trigger render={
-        <Chip color={zone ? 'primary' : undefined} endDecorator={zone ? Clear : null}>
+        <Chip color={value ? 'primary' : undefined} endDecorator={value ? Clear : null}>
           <Stack direction="row" gap={0.5} alignItems="center">
-            <Icons.Zone/>
-            {zone?.name}
+            <Icons.Badge/>
+            {value ? BadgeTypeLabels.get(value) : null}
           </Stack>
         </Chip>
       } nativeButton={false}/>
@@ -41,22 +47,24 @@ const BadgeMapFilterChip: FC<Props> = ({ searchOptions, onChange }) => {
               autoHighlight
               autoComplete
               forcePopupIcon={false}
-              value={zone}
+              value={value}
               onKeyDown={(event) => {
                 if (event.type === 'keydown' && ((event as KeyboardEvent).key === 'Escape')) {
                   setOpen(false)
                 }
               }}
-              onChange={(_, zone) => {
-                onChange?.({ ...searchOptions, ...searchOptions.filter, filter: { zoneKey: zone?.key } })
+              onChange={(_, value) => {
+                onChange?.(produce(searchOptions, (draft) => {
+                  draft.filter ??= {}
+                  draft.filter.type = value ?? undefined
+                }))
                 setOpen(false)
               }}
               slots={{
                 listbox: ListBox
               }}
-              options={zones}
-              getOptionLabel={(zone) => zone.name}
-              getOptionKey={(zone) => zone.key}
+              options={options}
+              getOptionLabel={(value) => BadgeTypeLabels.get(value) ?? '?'}
             />
           </Popover.Popup>
         </Popover.Positioner>
@@ -74,4 +82,4 @@ const ListBox = ({ ref, ...props }: object & { ref?: RefObject<HTMLUListElement 
   />
 )
 
-export default BadgeMapFilterChip
+export default BadgeFilterTypeChip

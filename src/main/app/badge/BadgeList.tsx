@@ -2,7 +2,7 @@ import { Stack, styled, Table, Typography } from '@mui/joy'
 import { NavLink } from 'react-router'
 import { useSessionStorage } from '../util/use-session-storage.ts'
 import Pagination from '../util/Pagination.tsx'
-import { Badge, BadgeSearchOptions } from 'coh-content-db'
+import { Badge } from 'coh-content-db'
 import ContentProvider from '../content/ContentProvider.tsx'
 import BadgeSearchBar from './search/BadgeSearchBar.tsx'
 import BadgeAcquisitionSummary from './BadgeAcquisitionSummary.tsx'
@@ -13,6 +13,8 @@ import CharacterContextProvider from '../character/CharacterContextProvider.tsx'
 import { FC } from 'react'
 import BadgeIcon from './BadgeIcon.tsx'
 import AsyncCheckbox from '../util/AsyncCheckbox.tsx'
+import { BadgeSearchOptionsEx } from './search/badge-search-options-ex.ts'
+import { produce } from 'immer'
 
 const TD = styled('td')(() => ({}))
 const TH = styled('th')(() => ({}))
@@ -21,9 +23,14 @@ const hideOnSmall = { display: { xs: 'none', md: 'table-cell' } }
 
 const BadgeList: FC = () => {
   const content = ContentProvider.useContent()
-  const { character } = CharacterContextProvider.useCharacterContext()
-  const [searchOptions, setSearchOptions] = useSessionStorage<BadgeSearchOptions>('badge-list-parameters', BadgeSearchBar.defaultSearch)
-  const results = content.searchBadges({ ...searchOptions, context: character })
+  const { character, hasBadge } = CharacterContextProvider.useCharacterContext()
+  const [searchOptions, setSearchOptions] = useSessionStorage<BadgeSearchOptionsEx>('badge-list-parameters', BadgeSearchBar.defaultSearch)
+
+  const results = content.searchBadges(produce(searchOptions, (draft) => {
+    draft.context = character
+    draft.filter ??= {}
+    draft.filter.predicate = draft.filter.owned ? (badge) => !hasBadge(badge) : undefined
+  }))
 
   return (<>
     <BadgeSearchBar searchOptions={searchOptions} onChange={setSearchOptions}/>

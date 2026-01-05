@@ -1,18 +1,17 @@
-import { FC, KeyboardEvent, RefObject, useState } from 'react'
+import { FC, KeyboardEvent, RefObject, useMemo, useState } from 'react'
 import { BadgeQueryableField, BadgeSearchOptions } from 'coh-content-db'
 import { Autocomplete, AutocompleteListbox, AutocompleteOption, Chip, ChipDelete, ListItemDecorator, Sheet, Stack } from '@mui/joy'
 import { Icons } from '../../util/Icons.tsx'
 import { Popover } from '@base-ui-components/react'
 import { BadgeQueryableFields } from './BadgeQueryableFields.tsx'
+import { produce } from 'immer'
 
 const selectOptions = BadgeQueryableFields
 
-interface Props {
+const BadgeSearchFieldChip: FC<{
   searchOptions: BadgeSearchOptions,
   onChange?: (options: BadgeSearchOptions) => void,
-}
-
-const BadgeSearchFieldChip: FC<Props> = ({ searchOptions, onChange }) => {
+}> = ({ searchOptions, onChange }) => {
   const values: BadgeQueryableField [] = searchOptions.query?.fields ?? ['name']
 
   const isActive = !!values.length
@@ -20,9 +19,18 @@ const BadgeSearchFieldChip: FC<Props> = ({ searchOptions, onChange }) => {
 
   const [open, setOpen] = useState(false)
 
-  const Clear = (<ChipDelete onClick={() => {
-    onChange?.({ ...searchOptions, ...{ query: { fields: ['name'] } } })
-  }}><Icons.Reset/></ChipDelete>)
+  const Clear = useMemo(() => (
+    <ChipDelete
+      onClick={() => {
+        onChange?.(produce(searchOptions, (draft) => {
+          draft.query ??= {}
+          draft.query.fields = ['name']
+        }))
+      }}
+    >
+      <Icons.Cross/>
+    </ChipDelete>
+  ), [onChange, searchOptions])
 
   return (
     <Popover.Root open={open} onOpenChange={setOpen}>
@@ -56,7 +64,10 @@ const BadgeSearchFieldChip: FC<Props> = ({ searchOptions, onChange }) => {
                 }
               }}
               onChange={(_, newValue) => {
-                onChange?.({ ...searchOptions, ...{ query: { fields: newValue as BadgeQueryableField[] } } })
+                onChange?.(produce(searchOptions, (draft) => {
+                  draft.query ??= {}
+                  draft.query.fields = newValue as BadgeQueryableField[]
+                }))
               }}
               slots={{
                 listbox: ListBox
