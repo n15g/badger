@@ -1,6 +1,0 @@
-<div *ngIf="links" class="links">
-    <a *ngFor="let link of links" class="link" [ngClass]="getLogo(link)" [href]="link.href" target="_blank">
-        {{link.title}}
-        <fa-icon [icon]="externalLinkIcon"></fa-icon>
-    </a>
-</div>

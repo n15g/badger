@@ -1,0 +1,26 @@
+export class TypedIndex<T extends string | symbol, V> {
+  readonly index: Record<T, V>
+
+  constructor(values: Record<T, V>) {
+    this.index = values
+  }
+
+  get(key: T | undefined): V | undefined {
+    if (!key) {
+      return undefined
+    }
+    return this.index[key]
+  }
+
+  get keys(): T[] {
+    return Object.keys(this.index) as T[]
+  }
+
+  get entries(): [T, V][] {
+    return Object.entries(this.index) as [T, V][]
+  }
+
+  get values(): V[] {
+    return Object.values(this.index)
+  }
+}

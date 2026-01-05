@@ -1,0 +1,256 @@
+@import '@loadingio/loading.css/loading.css';
+
+@font-face {
+    font-family: 'Montreal';
+    font-style: normal;
+    font-weight: 400;
+    src: local('Montreal Regular'), url('../resources/fonts/montreal-regular.woff') format('woff');
+}
+
+@font-face {
+    font-family: 'Montreal';
+    font-style: normal;
+    font-weight: 700;
+    src: local('Montreal Bold'), url('../resources/fonts/montreal-bold.woff') format('woff');
+}
+
+@font-face {
+    font-family: 'Red Circle Regular';
+    font-style: normal;
+    font-weight: normal;
+    src: local('Red Circle Regular'), url('../resources/fonts/red-circle.woff') format('woff');
+}
+
+#root {
+    isolation: isolate;
+}
+
+:root {
+    --hero-color: rgb(34, 100, 255);
+    --vigilante-color: rgb(34, 100, 255);
+    --villain-color: rgb(139, 42, 34);
+    --rogue-color: rgb(139, 42, 34);
+    --praetorian--color: rgb(207, 173, 35);
+    --resistance--color: rgb(207, 173, 35);
+    --loyalist--color: rgb(207, 173, 35);
+
+    --enh-accuracy--color: rgb(208, 173, 31);
+    --enh-confuse--color: rgb(133, 40, 232);
+    --enh-damage--color: rgb(214, 0, 5);
+    --enh-defense-buff--color: rgb(153, 138, 173);
+    --enh-defense-debuff--color: rgb(105, 68, 162);
+    --enh-endurance-modification--color: rgb(0, 10, 195);
+    --enh-endurance-reduction--color: rgb(127, 167, 255);
+    --enh-fear--color: rgb(117, 27, 28);
+    --enh-fly-speed--color: rgb(120, 214, 178);
+    --enh-healing--color: rgb(6, 218, 14);
+    --enh-hold--color: rgb(252, 177, 90);
+    --enh-immobilize--color: rgb(166, 99, 23);
+    --enh-intangibility--color: rgb(255, 210, 136);
+    --enh-interrupt-duration--color: rgb(162, 142, 111);
+    --enh-jump--color: rgb(188, 152, 125);
+    --enh-knockback--color: rgb(121, 154, 175);
+    --enh-range--color: rgb(172, 193, 154);
+    --enh-recharge-reduction--color: rgb(100, 59, 13);
+    --enh-resist-damage--color: rgb(228, 178, 255);
+    --enh-run-speed--color: rgb(190, 222, 240);
+    --enh-sleep--color: rgb(183, 179, 184);
+    --enh-slow--color: rgb(109, 169, 128);
+    --enh-stun--color: rgb(145, 145, 145);
+    --enh-taunt--color: rgb(80, 80, 80);
+    --enh-to-hit-buff--color: rgb(205, 197, 119);
+    --enh-to-hit-debuff--color: rgb(185, 143, 74);
+
+    .morality {
+        &.hero {
+            color: var(--hero-color);
+        }
+
+        &.vigilante {
+            color: var(--vigilante-color);
+        }
+
+        &.villain {
+            color: var(--villain-color);
+        }
+
+        &.rogue {
+            color: var(--rogue-color);
+        }
+
+        &.praetorian {
+            color: var(--praetorian--color);
+        }
+
+        &.resistance {
+            color: var(--resistance--color);
+        }
+
+        &.loyalist {
+            color: var(--loyalist--color);
+        }
+    }
+
+    .enhancement {
+        font-weight: bold;
+
+        &.defense-debuff {
+            color: var(--enh-defense-debuff--color);
+        }
+
+        &.to-hit-debuff {
+            color: var(--enh-to-hit-debuff--color);
+        }
+
+        &.taunt {
+            color: var(--enh-taunt--color);
+        }
+
+        &.confuse {
+            color: var(--enh-confuse--color);
+        }
+
+        &.healing {
+            color: var(--enh-healing--color);
+        }
+
+        &.defense-buff {
+            color: var(--enh-defense-buff--color);
+        }
+
+        &.resist-damage {
+            color: var(--enh-resist-damage--color);
+        }
+
+        &.intangibility {
+            color: var(--enh-intangibility--color);
+        }
+
+        &.sleep {
+            color: var(--enh-sleep--color);
+        }
+
+        &.slow {
+            color: var(--enh-slow--color);
+        }
+
+        &.hold {
+            color: var(--enh-hold--color);
+        }
+
+        &.stun {
+            color: var(--enh-stun--color);
+        }
+
+        &.immobilize {
+            color: var(--enh-immobilize--color);
+        }
+
+        &.fear {
+            color: var(--enh-fear--color);
+        }
+
+        &.endurance-modification {
+            color: var(--enh-endurance-modification--color);
+        }
+
+        &.endurance-reduction {
+            color: var(--enh-endurance-reduction--color);
+        }
+
+        &.recharge-reduction {
+            color: var(--enh-recharge-reduction--color);
+        }
+
+        &.interrupt-duration {
+            color: var(--enh-interrupt-duration--color);
+        }
+
+        &.accuracy {
+            color: var(--enh-accuracy--color);
+        }
+
+        &.to-hit-buff {
+            color: var(--enh-to-hit-buff--color);
+        }
+
+        &.to-hit-debuff {
+        }
+
+        &.damage {
+            color: var(--enh-damage--color);
+        }
+
+        &.knockback {
+            color: var(--enh-knockback--color);
+        }
+
+        &.run-speed {
+            color: var(--enh-run-speed--color);
+        }
+
+        &.jump {
+            color: var(--enh-jump--color);
+        }
+
+        &.fly-speed {
+            color: var(--enh-fly-speed--color);
+        }
+
+        &.range {
+            color: var(--enh-range--color);
+        }
+    }
+
+    .hover-zoom {
+        transition: transform .2s ease-in-out;
+
+        &:hover {
+            transform: scale(1.2);
+        }
+    }
+
+    .entity {
+        font-weight: bold;
+    }
+
+    .entityLink {
+        border: rgba(128, 128, 128, 0.5) solid 1px;
+        border-radius: 8px;
+        padding: 3px 4px 1px;
+        color: inherit;
+
+        &:hover {
+            background-color: rgba(128, 128, 128, 0.25);
+        }
+    }
+
+    a {
+        text-decoration: none;
+        color: inherit;
+    }
+
+    blockquote {
+        margin: 0;
+        border-left: 4px solid; /* A nice green color */
+        padding: 0 0 0 15px;
+        font-style: italic;
+
+        &.hero {
+            border-color: var(--hero-color);
+        }
+
+        &.villain {
+            border-color: var(--villain-color);
+        }
+
+        &.praetorian {
+            border-color: var(--praetorian--color);
+        }
+    }
+
+    .no-p-padding p {
+        margin-top: 0;
+        margin-bottom: 0;
+    }
+}
