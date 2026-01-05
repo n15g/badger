@@ -23,6 +23,7 @@ const MoralityIcon: FC<{ morality: Morality, muted?: boolean } & ImgHTMLAttribut
     ? <SmartImage
       {...props}
       src={icon}
+      alt=""
       sx={{
         filter: muted ? 'grayscale(1) brightness(0.4)' : undefined,
       }}

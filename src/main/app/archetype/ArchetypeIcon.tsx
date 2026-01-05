@@ -35,7 +35,7 @@ const ArchetypeIcon: FC<{ archetypeKey: string } & ImgHTMLAttributes<HTMLImageEl
     'warshade': warshadeIcon,
   }[archetypeKey]
 
-  return icon ? <SmartImage {...props} src={icon}/> : undefined
+  return icon ? <SmartImage {...props} src={icon} alt=""/> : undefined
 }
 
 export default ArchetypeIcon

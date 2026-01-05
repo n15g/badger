@@ -5,13 +5,12 @@ import Spinner from './Spinner.tsx'
 
 const Img = styled('img')({})
 
-export const SmartImage: FC<{ sx?: SxProps } & ImgHTMLAttributes<HTMLImageElement>> = ({ src, alt, sx, ...props }) => {
+export const SmartImage: FC<{ sx?: SxProps } & ImgHTMLAttributes<HTMLImageElement>> = ({ src, sx, ...props }) => {
   const [loaded, setLoaded] = useState(!src)
 
   return <>
     <Img
       src={src}
-      alt={alt}
       onLoad={() => {
         setLoaded(true)
       }}
