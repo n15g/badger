@@ -23,7 +23,7 @@ const BadgeList: FC = () => {
   const content = ContentProvider.useContent()
   const { character } = CharacterContextProvider.useCharacterContext()
   const [searchOptions, setSearchOptions] = useSessionStorage<BadgeSearchOptions>('badge-list-parameters', BadgeSearchBar.defaultSearch)
-  const results = content.searchBadges(searchOptions)
+  const results = content.searchBadges({ ...searchOptions, context: character })
 
   return (<>
     <BadgeSearchBar searchOptions={searchOptions} onChange={setSearchOptions}/>
