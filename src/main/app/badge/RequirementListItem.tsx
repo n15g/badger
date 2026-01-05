@@ -108,17 +108,14 @@ const RequirementListItem: FC<{ badge: Badge, requirement: BadgeRequirement }> =
     <ListItem sx={{ filter: owned ? 'brightness(0.4)' : undefined }}>
       {character && (
         <ListItemDecorator>
-          {requirement.type !== 'invention' && (
-            <AsyncCheckbox checked={owned} onFrobnicate={async (next) => {
-              await updateRequirement(badge, requirement, { owned: next })
-            }}/>
-          )}
+          <AsyncCheckbox checked={owned} onFrobnicate={async (next) => {
+            await updateRequirement(badge, requirement, { owned: next })
+          }}/>
           {requirement.type === 'invention' && (
             <Input
               type="number"
-              aria-valuemin={0}
-              aria-valuemax={requirement.count}
-              sx={{ width: '4em', mr: 2 }}
+              slotProps={{ input: { min: 0, max: requirement.count } }}
+              sx={{ width: '4em', mx: 2 }}
               value={currentCount}
               onChange={(e) => {
                 void updateRequirement(badge, requirement, { count: Number(e.target.value) })

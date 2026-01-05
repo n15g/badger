@@ -28,20 +28,23 @@ const DeleteCharacterModal: FC<{ character?: Character, onClose: () => void }>
         <ModalClose/>
         <Typography level="title-lg">Delete {character.name}</Typography>
         <Typography level="body-md">Are you sure you want to delete this character?</Typography>
-        <Stack direction="row" gap={2}>
+        <Stack direction="row" justifyContent="center" gap={2}>
           <Button
-            color="primary"
-            endDecorator={<Icons.Check/>}
-            disabled={deleting}
-            onClick={() => void deleteFn()}>
-            {deleting ? <BadgerSpinner style={{ height: '1.2em' }}/> : <>Yes</>}
-          </Button>
-          <Button
-            color="danger"
+            color="neutral"
+            variant="outlined"
             endDecorator={<Icons.Cross/>}
             disabled={deleting}
             onClick={onClose}>
             No!
+          </Button>
+
+          <Button
+            color="primary"
+            endDecorator={<Icons.Check/>}
+            disabled={deleting}
+            onClick={() => void deleteFn()}
+          >
+            {deleting ? <BadgerSpinner style={{ height: '1.2em' }}/> : <>Yes</>}
           </Button>
         </Stack>
       </ModalDialog>

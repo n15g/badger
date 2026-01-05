@@ -1,5 +1,6 @@
 import { Morality, Sex, VariantContext } from 'coh-content-db'
 
+
 export interface Character extends VariantContext {
   readonly key: string;
   readonly name: string;
@@ -8,11 +9,15 @@ export interface Character extends VariantContext {
   readonly archetypeKey?: string;
   readonly sex?: Sex
 
-  readonly badges?: Record<string, {
-    readonly owned?: boolean;
-    readonly req?: Record<string, {
-      readonly owned?: boolean;
-      readonly count?: number;
-    }>
-  }>
+  readonly badges?: Record<string, CharacterBadgeRecord>
+}
+
+export interface CharacterBadgeRecord {
+  readonly owned?: boolean;
+  readonly req?: Record<string, CharacterBadgeRequirementRecord>
+}
+
+export interface CharacterBadgeRequirementRecord {
+  readonly owned?: boolean;
+  readonly count?: number;
 }

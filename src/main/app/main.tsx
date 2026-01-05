@@ -13,6 +13,7 @@ import ErrorPage from './util/ErrorPage.tsx'
 import CharacterContextProvider from './character/CharacterContextProvider.tsx'
 import { Routes } from './Routes.tsx'
 import { RouterProvider } from 'react-router'
+import LegacyCharacterMigration from './character/LegacyCharacterMigration.tsx'
 
 const root = document.getElementById('root')
 
@@ -31,7 +32,9 @@ createRoot(root).render(
             <CharacterDbProvider>
               <CharacterContextProvider>
                 <ContentLoader>
-                  <RouterProvider router={Routes}/>
+                  <LegacyCharacterMigration>
+                    <RouterProvider router={Routes}/>
+                  </LegacyCharacterMigration>
                 </ContentLoader>
               </CharacterContextProvider>
             </CharacterDbProvider>
