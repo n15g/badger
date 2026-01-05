@@ -1,19 +1,4 @@
-import {
-  Alert,
-  Box,
-  Breadcrumbs,
-  Card,
-  CardOverflow,
-  Checkbox,
-  Divider,
-  List,
-  ListDivider,
-  ListItem,
-  ListItemContent,
-  ListItemDecorator,
-  Stack,
-  Typography
-} from '@mui/joy'
+import { Alert, Box, Breadcrumbs, Card, CardOverflow, Divider, List, ListDivider, Stack, Typography } from '@mui/joy'
 import BadgeIcon from './BadgeIcon.tsx'
 import BadgerMarkdown from '../util/BadgerMarkdown.tsx'
 import { Badge } from 'coh-content-db'
@@ -54,7 +39,7 @@ const BadgeCard: FC<{ badge: Badge }> = ({ badge }) => {
   } = badge
 
   return (
-    <Card>
+    <Card color={character && owned ? 'success' : undefined}>
       <CardOverflow>
         <Breadcrumbs separator={<Icons.Breadcrumb/>}>
           <NavLink to={badgesLink} style={{ textDecoration: 'none' }}>
@@ -142,12 +127,7 @@ const BadgeCard: FC<{ badge: Badge }> = ({ badge }) => {
                 {requirements.length > 1 && <ListDivider inset="startContent"/>}
                 {requirements.map((requirement) => (
                   <div key={requirement.key}>
-                    <ListItem>
-                      <ListItemDecorator><Checkbox/></ListItemDecorator>
-                      <ListItemContent>
-                        <RequirementListItem requirement={requirement}/>
-                      </ListItemContent>
-                    </ListItem>
+                    <RequirementListItem badge={badge} requirement={requirement}/>
                     {requirements.length > 1 && <ListDivider inset="startContent"/>}
                   </div>
                 ))}

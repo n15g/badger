@@ -1,15 +1,22 @@
 import { FC, Fragment } from 'react'
-import { BadgeRequirement } from 'coh-content-db'
-import { Box, List, ListItem, Typography } from '@mui/joy'
+import { Badge, BadgeRequirement } from 'coh-content-db'
+import { Box, Input, List, ListItem, ListItemContent, ListItemDecorator, Typography } from '@mui/joy'
 import BadgeLink from './BadgeLink.tsx'
 import BadgerMarkdown from '../util/BadgerMarkdown.tsx'
 import SmartLink from '../util/SmartLink.tsx'
 import MissionLink from '../mission/MissionLink.tsx'
 import LocationLink from '../location/LocationLink.tsx'
 import EnhancementCategoryLabel from '../enhancement/EnhancementCategoryLabel.tsx'
+import AsyncCheckbox from '../util/AsyncCheckbox.tsx'
+import CharacterContextProvider from '../character/CharacterContextProvider.tsx'
 
 
-const RequirementListItem: FC<{ requirement: BadgeRequirement }> = ({ requirement }) => {
+const RequirementListItem: FC<{ badge: Badge, requirement: BadgeRequirement }> = ({ badge, requirement }) => {
+  const { character, hasRequirement, getRequirementCount, updateRequirement } = CharacterContextProvider.useCharacterContext()
+
+  const owned = hasRequirement(badge, requirement)
+  const currentCount = getRequirementCount(badge, requirement)
+
   const {
     type,
     location,
@@ -23,7 +30,7 @@ const RequirementListItem: FC<{ requirement: BadgeRequirement }> = ({ requiremen
     count,
   } = requirement
 
-  return (
+  const inner = (
     <Box sx={{
       display: 'flex',
       flexDirection: 'column',
@@ -95,6 +102,34 @@ const RequirementListItem: FC<{ requirement: BadgeRequirement }> = ({ requiremen
         </Box>
       )}
     </Box>
+  )
+
+  return (
+    <ListItem sx={{ filter: owned ? 'brightness(0.4)' : undefined }}>
+      {character && (
+        <ListItemDecorator>
+          {requirement.type !== 'invention' && (
+            <AsyncCheckbox checked={owned} onFrobnicate={async (next) => {
+              await updateRequirement(badge, requirement, { owned: next })
+            }}/>
+          )}
+          {requirement.type === 'invention' && (
+            <Input
+              type="number"
+              aria-valuemin={0}
+              aria-valuemax={requirement.count}
+              sx={{ width: '4em', mr: 2 }}
+              value={currentCount}
+              onChange={(e) => {
+                void updateRequirement(badge, requirement, { count: Number(e.target.value) })
+              }}/>
+          )}
+        </ListItemDecorator>
+      )}
+      <ListItemContent>
+        {inner}
+      </ListItemContent>
+    </ListItem>
   )
 }
 

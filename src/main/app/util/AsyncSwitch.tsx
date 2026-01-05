@@ -2,36 +2,32 @@ import { FC, useCallback, useState } from 'react'
 import { Switch, SwitchProps } from '@mui/joy'
 import Spinner from './Spinner.tsx'
 
-const AsyncSwitch: FC<{ onFrobnicate?: (value: boolean) => Promise<void> } & SwitchProps> =
-  ({ onFrobnicate, ...props }) => {
-    const [loading, setLoading] = useState(false)
-    const [innerChecked, setInnerChecked] = useState(props.checked ?? false)
+const AsyncSwitch: FC<{ checked?: boolean, onFrobnicate?: (value: boolean) => Promise<void> } & SwitchProps> =
+  ({ checked, onFrobnicate, ...props }) => {
+    const [busy, setBusy] = useState(false)
 
     const frobnicate = useCallback(async () => {
-      if (loading) {
+      if (busy) {
         return
       }
 
-      setLoading(true)
-      const next = !innerChecked
-
+      setBusy(true)
       try {
-        await onFrobnicate?.(next)
-        setInnerChecked(next)
+        await onFrobnicate?.(!checked)
       } finally {
-        setLoading(false)
+        setBusy(false)
       }
-    }, [innerChecked, loading, onFrobnicate])
+    }, [checked, busy, onFrobnicate])
 
     return (
       <Switch
         {...props}
-        checked={innerChecked}
+        checked={checked ?? false}
         onChange={() => void frobnicate()}
-        disabled={loading}
+        disabled={busy}
         slotProps={{
           thumb: {
-            children: loading ? <Spinner/> : undefined,
+            children: busy ? <Spinner/> : undefined,
           },
         }}
       />
