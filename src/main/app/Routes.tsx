@@ -51,4 +51,6 @@ export const Routes = createBrowserRouter([
       { path: '/zones/:zoneKey', element: <ZoneViewPage/> },
     ]
   },
-])
+], {
+  basename: import.meta.env.BASE_URL.slice(0, -1) || '/'
+})
