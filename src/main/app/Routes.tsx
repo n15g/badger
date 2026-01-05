@@ -15,10 +15,10 @@ import BadgeViewPage from './badge/BadgeViewPage.tsx'
 import BadgeLoader from './badge/BadgeLoader.tsx'
 import CharacterLoader from './character/CharacterLoader.tsx'
 import CharacterViewPage from './character/CharacterViewPage.tsx'
-import { createBrowserRouter } from 'react-router'
+import { createHashRouter } from 'react-router'
 import Index from './Index.tsx'
 
-export const Routes = createBrowserRouter([
+export const Routes = createHashRouter([
   {
     path: '/',
     element: <Index/>,
@@ -51,6 +51,4 @@ export const Routes = createBrowserRouter([
       { path: '/zones/:zoneKey', element: <ZoneViewPage/> },
     ]
   },
-], {
-  basename: '/badger'
-})
+])
