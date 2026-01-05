@@ -71,7 +71,7 @@ const BadgeGallery: FC<BoxProps> = ({ ...props }) => {
 const GallerySection: FC<{ badges: Badge[], title: string, showUncollected: boolean }> = ({ badges, title, showUncollected }) => {
   const { character, hasBadge, collectBadge } = CharacterContextProvider.useCharacterContext()
 
-  const owned = badges.filter((badge) => !character || hasBadge(badge.key))
+  const owned = badges.filter((badge) => !character || hasBadge(badge))
   const displayed = showUncollected ? badges : owned
 
   return (
