@@ -7,6 +7,7 @@ import villainIcon from '../../resources/images/icon/morality-villain.png'
 import rogueIcon from '../../resources/images/icon/morality-rogue.png'
 import resistanceIcon from '../../resources/images/icon/morality-resistance.png'
 import loyalistIcon from '../../resources/images/icon/morality-loyalist.png'
+import { MoralityLabels } from './MoralityLabels.tsx'
 
 const MoralityIcon: FC<{ morality: Morality, muted?: boolean } & ImgHTMLAttributes<HTMLImageElement>>
   = ({ morality, muted = false, ...props }) => {
@@ -23,7 +24,8 @@ const MoralityIcon: FC<{ morality: Morality, muted?: boolean } & ImgHTMLAttribut
     ? <SmartImage
       {...props}
       src={icon}
-      alt=""
+      alt={MoralityLabels.get(morality)}
+      title={MoralityLabels.get(morality)}
       sx={{
         filter: muted ? 'grayscale(1) brightness(0.4)' : undefined,
       }}

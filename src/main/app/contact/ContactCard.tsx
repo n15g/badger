@@ -56,7 +56,6 @@ const ContactCard: FC<{ contact: Contact }> = ({ contact }) => {
             </>)}
           </InfoPanel>
 
-          {/* Detail Panel*/}
           <Stack gap={2} flexGrow={1}>
 
             <Box>

@@ -1,5 +1,6 @@
 import { FC, ImgHTMLAttributes } from 'react'
 import { SmartImage } from '../util/SmartImage.tsx'
+import ContentProvider from '../content/ContentProvider.tsx'
 import arachnosSoldierIcon from '../../resources/images/archetype/arachnos-soldier.png'
 import arachnosWidowIcon from '../../resources/images/archetype/arachnos-widow.png'
 import blasterIcon from '../../resources/images/archetype/blaster.png'
@@ -17,6 +18,9 @@ import tankerIcon from '../../resources/images/archetype/tanker.png'
 import warshadeIcon from '../../resources/images/archetype/warshade.png'
 
 const ArchetypeIcon: FC<{ archetypeKey: string } & ImgHTMLAttributes<HTMLImageElement>> = ({ archetypeKey, ...props }) => {
+  const content = ContentProvider.useContent()
+  const archetype = content.getArchetype(archetypeKey)
+
   const icon = {
     'arachnos-soldier': arachnosSoldierIcon,
     'arachnos-widow': arachnosWidowIcon,
@@ -35,7 +39,14 @@ const ArchetypeIcon: FC<{ archetypeKey: string } & ImgHTMLAttributes<HTMLImageEl
     'warshade': warshadeIcon,
   }[archetypeKey]
 
-  return icon ? <SmartImage {...props} src={icon} alt=""/> : undefined
+  return icon
+    ? <SmartImage
+      {...props}
+      src={icon}
+      alt={archetype?.name}
+      title={archetype?.name}
+    />
+    : undefined
 }
 
 export default ArchetypeIcon

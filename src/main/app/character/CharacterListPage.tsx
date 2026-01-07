@@ -2,7 +2,7 @@ import { Box, Button, Card, ListItem } from '@mui/joy'
 import MainSection from '../util/MainSection.tsx'
 import SectionTitle from '../util/SectionTitle.tsx'
 import { Icons } from '../util/Icons.tsx'
-import { FC, useEffect, useState } from 'react'
+import { FC, useEffect, useMemo, useState } from 'react'
 import { Character } from './character.ts'
 import CharacterCard from './CharacterCard.tsx'
 import DeleteCharacterModal from './DeleteCharacterModal.tsx'
@@ -14,6 +14,11 @@ const CharacterListPage: FC<{ characters: Character[] }> = ({ characters }) => {
   const [addCharacterOpen, setAddCharacterOpen] = useState(false)
   const [characterPendingDelete, setCharacterPendingDelete] = useState<Character | undefined>()
   const [characterPendingEdit, setCharacterPendingEdit] = useState<Character | undefined>()
+
+  const list = useMemo(() => {
+    return characters
+      .sort((a, b) => a.name.localeCompare(b.name))
+  }, [characters])
 
   useEffect(() => {
     if (!editing) {
@@ -54,39 +59,37 @@ const CharacterListPage: FC<{ characters: Character[] }> = ({ characters }) => {
           )}
         </Box>
         <Box display="flex" flexDirection="row" flexWrap="wrap" gap={2} justifyContent="center" p={4}>
-          {characters
-            .sort((a, b) => a.name.localeCompare(b.name))
-            .map((character) => (
-              <ListItem key={character.key} sx={{ display: 'flex', justifyContent: 'center' }}>
-                <Box sx={{ position: 'relative' }}>
-                  <CharacterCard character={character}/>
-                  {editing && (
-                    <Box sx={{
-                      position: 'absolute',
-                      display: 'flex',
-                      justifyContent: 'flex-end',
-                      p: 2,
-                      gap: 2,
-                      alignItems: 'center',
-                      top: 2,
-                      left: 2,
-                      right: 2,
-                      bottom: 2,
-                      borderRadius: 8,
-                      backgroundColor: 'rgba(0,0,0,0.5)',
-                      backdropFilter: 'blur(1.5px)',
-                    }}>
-                      <Button color="primary" variant="outlined" onClick={() => {
-                        setCharacterPendingEdit(character)
-                      }}><Icons.Edit/></Button>
-                      <Button color="danger" variant="outlined" onClick={() => {
-                        setCharacterPendingDelete(character)
-                      }}><Icons.Delete/></Button>
-                    </Box>
-                  )}
-                </Box>
-              </ListItem>
-            ))}
+          {list.map((character) => (
+            <ListItem key={character.key} sx={{ display: 'flex', justifyContent: 'center' }}>
+              <Box sx={{ position: 'relative' }}>
+                <CharacterCard character={character}/>
+                {editing && (
+                  <Box sx={{
+                    position: 'absolute',
+                    display: 'flex',
+                    justifyContent: 'flex-end',
+                    p: 2,
+                    gap: 2,
+                    alignItems: 'center',
+                    top: 2,
+                    left: 2,
+                    right: 2,
+                    bottom: 2,
+                    borderRadius: 8,
+                    backgroundColor: 'rgba(0,0,0,0.5)',
+                    backdropFilter: 'blur(1.5px)',
+                  }}>
+                    <Button color="primary" variant="outlined" onClick={() => {
+                      setCharacterPendingEdit(character)
+                    }}><Icons.Edit/></Button>
+                    <Button color="danger" variant="outlined" onClick={() => {
+                      setCharacterPendingDelete(character)
+                    }}><Icons.Delete/></Button>
+                  </Box>
+                )}
+              </Box>
+            </ListItem>
+          ))}
         </Box>
       </Card>
 

@@ -55,7 +55,6 @@ const ZoneCard: FC<{ zone: Zone }> = ({ zone }) => {
 
           </InfoPanel>
 
-          {/* Detail Panel*/}
           <Stack gap={2} flexGrow={1}>
 
             <ZoneContactsBlock zone={zone}/>
