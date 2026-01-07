@@ -75,7 +75,6 @@ const MissionCard: FC<{ mission: Mission }> = ({ mission }) => {
           </List>
         </InfoPanel>
 
-        {/* Detail Panel*/}
         <Stack gap={2} flexGrow={1}>
 
           <NotesBlock notes={notes}/>

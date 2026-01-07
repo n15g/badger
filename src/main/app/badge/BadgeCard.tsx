@@ -16,6 +16,7 @@ import LinksBlock from '../util/LinksBlock.tsx'
 import BadgeNameList from './BadgeNameList.tsx'
 import CharacterContextProvider from '../character/CharacterContextProvider.tsx'
 import AsyncSwitch from '../util/AsyncSwitch.tsx'
+import BadgeCharactersPanel from './BadgeCharactersPanel.tsx'
 
 const BadgeCard: FC<{ badge: Badge }> = ({ badge }) => {
   const { character, hasBadge, collectBadge } = CharacterContextProvider.useCharacterContext()
@@ -57,40 +58,43 @@ const BadgeCard: FC<{ badge: Badge }> = ({ badge }) => {
         gap: 2
       }}>
 
-        <InfoPanel>
-          <Typography component="span" level="title-xl"><BadgeNameList badge={badge}/></Typography>
+        <Stack gap={2}>
+          <InfoPanel>
+            <Typography component="span" level="title-xl"><BadgeNameList badge={badge}/></Typography>
 
-          <Stack direction="row" flexWrap="wrap" gap={2}>
-            {icon.canonical.map((icon) => (
-              <BadgeIcon key={icon.value} badge={badge} context={{ morality: icon.alignment, sex: icon.sex }} muted={!owned}/>
-            ))}
-          </Stack>
+            <Stack direction="row" flexWrap="wrap" gap={2}>
+              {icon.canonical.map((icon) => (
+                <BadgeIcon key={icon.value} badge={badge} context={{ morality: icon.alignment, sex: icon.sex }} muted={!owned}/>
+              ))}
+            </Stack>
 
-          <Typography level="title-sm"><em>{BadgeTypeLabels.get(type)}</em></Typography>
+            <Typography level="title-sm"><em>{BadgeTypeLabels.get(type)}</em></Typography>
 
-          {effect && (
-            <Typography level="body-xs" textAlign="center" variant="soft" sx={{ borderRadius: 8, px: 1, py: 1.5 }}>
-              {effect}
-            </Typography>
-          )}
+            {effect && (
+              <Typography level="body-xs" textAlign="center" variant="soft" sx={{ borderRadius: 8, px: 1, py: 1.5 }}>
+                {effect}
+              </Typography>
+            )}
 
-          <MoralityListIcons moralityList={morality}/>
+            <MoralityListIcons moralityList={morality}/>
 
-          {setTitleId && (
-            <SetTitleLabel value={setTitleId}/>
-          )}
+            {setTitleId && (
+              <SetTitleLabel value={setTitleId}/>
+            )}
 
-          {ignoreInTotals && (
-            <Alert color="danger" sx={{ textAlign: 'center' }}>
-              Not counted toward badge totals
-            </Alert>
-          )}
+            {ignoreInTotals && (
+              <Alert color="danger" sx={{ textAlign: 'center' }}>
+                Not counted toward badge totals
+              </Alert>
+            )}
 
-          <Divider/>
-          <ReleaseDate value={releaseDate} format="long"/>
-        </InfoPanel>
+            <Divider/>
+            <ReleaseDate value={releaseDate} format="long"/>
+          </InfoPanel>
 
-        {/* Detail Panel*/}
+          <BadgeCharactersPanel badge={badge}/>
+        </Stack>
+
         <Stack gap={2} flexGrow={1}>
           <Box>
             {badgeText.canonical.map((variant) => (
