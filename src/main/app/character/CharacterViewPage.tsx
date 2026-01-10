@@ -12,7 +12,7 @@ import MoralityIcon from '../morality/MoralityIcon.tsx'
 import MoralitySelect from '../morality/MoralitySelect.tsx'
 import CharacterDbProvider from './CharacterDbProvider.tsx'
 import BadgeCount from './BadgeCount.tsx'
-import CharacterDownloadButton from './CharacterDownloadButton.tsx'
+import DownloadCharactersButton from '../io/DownloadCharactersButton.tsx'
 
 const CharacterViewPage: FC<{ character: Character }> = ({ character }) => {
   const content = ContentProvider.useContent()
@@ -57,7 +57,7 @@ const CharacterViewPage: FC<{ character: Character }> = ({ character }) => {
               }}/>
 
               <Stack direction="row" gap={1}>
-                <CharacterDownloadButton characters={[character]}/>
+                <DownloadCharactersButton characters={[character]}/>
                 <Button onClick={() => {
                   setEditing(true)
                 }}><Icons.Edit/></Button>
