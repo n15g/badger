@@ -8,8 +8,8 @@ import CharacterCard from './CharacterCard.tsx'
 import DeleteCharacterModal from './DeleteCharacterModal.tsx'
 import EditCharacterModal from './EditCharacterModal.tsx'
 import AddCharacterModal from './AddCharacterModal.tsx'
-import CharacterDownloadButton from './CharacterDownloadButton.tsx'
-import ImportCharactersButton from './ImportCharactersButton.tsx'
+import ImportCharactersButton from '../io/ImportCharactersButton.tsx'
+import DownloadCharactersButton from '../io/DownloadCharactersButton.tsx'
 
 const CharacterListPage: FC<{ characters: Character[] }> = ({ characters }) => {
   const [editing, setEditing] = useState(false)
@@ -54,7 +54,7 @@ const CharacterListPage: FC<{ characters: Character[] }> = ({ characters }) => {
           </Button>
           <ImportCharactersButton/>
           {characters.length > 0 && (<>
-            <CharacterDownloadButton
+            <DownloadCharactersButton
               characters={characters}
             />
             <Button
@@ -91,7 +91,7 @@ const CharacterListPage: FC<{ characters: Character[] }> = ({ characters }) => {
                       setCharacterPendingDelete(character)
                     }}><Icons.Delete/></Button>
 
-                    <CharacterDownloadButton characters={[character]}/>
+                    <DownloadCharactersButton characters={[character]}/>
 
                     <Button color="primary" variant="solid" onClick={() => {
                       setCharacterPendingEdit(character)

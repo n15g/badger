@@ -1,12 +1,12 @@
 import { FC, useCallback } from 'react'
 import { Button, ButtonProps } from '@mui/joy'
 import { Icons } from '../util/Icons.tsx'
-import { Character } from './character.ts'
-import { createCharacterEnvelope } from '../export/envelope.ts'
-import { blobify } from '../export/blobify.ts'
-import { startDownload } from '../export/download.ts'
+import { createCharacterEnvelope } from './envelope.ts'
+import { blobify } from './blobify.ts'
+import { startDownload } from './download.ts'
+import { Character } from '../character/character.ts'
 
-const CharacterDownloadButton: FC<{ characters: Character[] } & ButtonProps>
+const DownloadCharactersButton: FC<{ characters: Character[] } & ButtonProps>
   = ({ characters: characters, ...props }) => {
 
   const download = useCallback(async () => {
@@ -31,4 +31,4 @@ const CharacterDownloadButton: FC<{ characters: Character[] } & ButtonProps>
   )
 }
 
-export default CharacterDownloadButton
+export default DownloadCharactersButton

@@ -1,7 +1,7 @@
 import { FC, useState } from 'react'
 import { Button, ButtonProps, Modal, ModalClose, ModalDialog, Typography } from '@mui/joy'
 import { Icons } from '../util/Icons.tsx'
-import SettitleScriptHelpLink from '../export/SettitleScriptHelpLink.tsx'
+import SettitleScriptHelpLink from './/SettitleScriptHelpLink.tsx'
 
 const ImportCharactersButton: FC<ButtonProps>
   = ({ ...props }) => {
