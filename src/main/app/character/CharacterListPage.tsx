@@ -8,6 +8,8 @@ import CharacterCard from './CharacterCard.tsx'
 import DeleteCharacterModal from './DeleteCharacterModal.tsx'
 import EditCharacterModal from './EditCharacterModal.tsx'
 import AddCharacterModal from './AddCharacterModal.tsx'
+import ImportCharactersButton from '../io/ImportCharactersButton.tsx'
+import DownloadCharactersButton from '../io/DownloadCharactersButton.tsx'
 
 const CharacterListPage: FC<{ characters: Character[] }> = ({ characters }) => {
   const [editing, setEditing] = useState(false)
@@ -41,22 +43,28 @@ const CharacterListPage: FC<{ characters: Character[] }> = ({ characters }) => {
     <MainSection title="Characters">
       <SectionTitle><Icons.Character/> Characters</SectionTitle>
 
-      <Card sx={{ display: { xs: 'contents', md: 'flex' }, minWidth: { md: 800 }, minHeight: { md: 300 } }}>
+      <Card sx={{ display: { xs: 'contents', md: 'flex' }, minWidth: { md: 800 }, minHeight: { md: 340 } }}>
         <Box sx={{ display: 'flex', justifyContent: 'flex-end', gap: 2 }}>
-          <Button onClick={() => {
-            setAddCharacterOpen(true)
-          }}>
+          <Button
+            color="success"
+            onClick={() => {
+              setAddCharacterOpen(true)
+            }}>
             <Icons.Plus/> Add Character
           </Button>
-          {characters.length > 0 && (
+          <ImportCharactersButton/>
+          {characters.length > 0 && (<>
+            <DownloadCharactersButton
+              characters={characters}
+            />
             <Button
-              color={editing ? 'success' : 'neutral'}
+              color={editing ? 'success' : 'primary'}
               onClick={() => {
                 setEditing(!editing)
               }}>
               {editing ? <Icons.Check/> : <Icons.Edit/>}
             </Button>
-          )}
+          </>)}
         </Box>
         <Box display="flex" flexDirection="row" flexWrap="wrap" gap={2} justifyContent="center" p={4}>
           {list.map((character) => (
@@ -79,12 +87,15 @@ const CharacterListPage: FC<{ characters: Character[] }> = ({ characters }) => {
                     backgroundColor: 'rgba(0,0,0,0.5)',
                     backdropFilter: 'blur(1.5px)',
                   }}>
-                    <Button color="primary" variant="outlined" onClick={() => {
-                      setCharacterPendingEdit(character)
-                    }}><Icons.Edit/></Button>
-                    <Button color="danger" variant="outlined" onClick={() => {
+                    <Button color="danger" variant="solid" onClick={() => {
                       setCharacterPendingDelete(character)
                     }}><Icons.Delete/></Button>
+
+                    <DownloadCharactersButton characters={[character]}/>
+
+                    <Button color="primary" variant="solid" onClick={() => {
+                      setCharacterPendingEdit(character)
+                    }}><Icons.Edit/></Button>
                   </Box>
                 )}
               </Box>

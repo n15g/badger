@@ -1,4 +1,19 @@
-import { MdAdd, MdCheck, MdClose, MdContentCopy, MdDelete, MdEdit, MdLocalPolice, MdLocationOn, MdSearch, MdWarning } from 'react-icons/md'
+import {
+  MdAdd,
+  MdCheck,
+  MdClose,
+  MdContentCopy,
+  MdDelete,
+  MdDownload,
+  MdEdit,
+  MdHelp,
+  MdInfo,
+  MdLocalPolice,
+  MdLocationOn,
+  MdSearch,
+  MdUpload,
+  MdWarning
+} from 'react-icons/md'
 import { PiGenderFemale, PiGenderMale } from 'react-icons/pi'
 import { FaAward, FaExternalLinkAlt, FaSortAlphaDownAlt, FaSortAlphaUp, FaSpinner } from 'react-icons/fa'
 import { GrDocumentMissing, GrGallery } from 'react-icons/gr'
@@ -47,6 +62,10 @@ export const Icons = {
   ExternalLink: FaExternalLinkAlt,
   Acquisition: IoMdCheckboxOutline,
   Notes: TbNotes,
+  Download: MdDownload,
+  Upload: MdUpload,
+  Help: MdHelp,
+  Info: MdInfo,
 
   Sort: BiSortAlt2,
   Asc: FaSortAlphaUp,
