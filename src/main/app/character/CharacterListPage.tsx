@@ -9,6 +9,7 @@ import DeleteCharacterModal from './DeleteCharacterModal.tsx'
 import EditCharacterModal from './EditCharacterModal.tsx'
 import AddCharacterModal from './AddCharacterModal.tsx'
 import CharacterDownloadButton from './CharacterDownloadButton.tsx'
+import ImportCharactersButton from './ImportCharactersButton.tsx'
 
 const CharacterListPage: FC<{ characters: Character[] }> = ({ characters }) => {
   const [editing, setEditing] = useState(false)
@@ -51,6 +52,7 @@ const CharacterListPage: FC<{ characters: Character[] }> = ({ characters }) => {
             }}>
             <Icons.Plus/> Add Character
           </Button>
+          <ImportCharactersButton/>
           {characters.length > 0 && (<>
             <CharacterDownloadButton
               characters={characters}

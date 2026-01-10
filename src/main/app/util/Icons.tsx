@@ -6,9 +6,12 @@ import {
   MdDelete,
   MdDownload,
   MdEdit,
+  MdHelp,
+  MdInfo,
   MdLocalPolice,
   MdLocationOn,
   MdSearch,
+  MdUpload,
   MdWarning
 } from 'react-icons/md'
 import { PiGenderFemale, PiGenderMale } from 'react-icons/pi'
@@ -60,6 +63,9 @@ export const Icons = {
   Acquisition: IoMdCheckboxOutline,
   Notes: TbNotes,
   Download: MdDownload,
+  Upload: MdUpload,
+  Help: MdHelp,
+  Info: MdInfo,
 
   Sort: BiSortAlt2,
   Asc: FaSortAlphaUp,
