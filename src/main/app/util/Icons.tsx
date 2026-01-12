@@ -1,7 +1,5 @@
 import {
   MdAdd,
-  MdCheck,
-  MdClose,
   MdContentCopy,
   MdDelete,
   MdDownload,
