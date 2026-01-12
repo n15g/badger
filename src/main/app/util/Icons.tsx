@@ -1,7 +1,5 @@
 import {
   MdAdd,
-  MdCheck,
-  MdClose,
   MdContentCopy,
   MdDelete,
   MdDownload,
@@ -15,7 +13,7 @@ import {
   MdWarning
 } from 'react-icons/md'
 import { PiGenderFemale, PiGenderMale } from 'react-icons/pi'
-import { FaAward, FaExternalLinkAlt, FaSortAlphaDownAlt, FaSortAlphaUp, FaSpinner } from 'react-icons/fa'
+import { FaAward, FaCheck, FaExternalLinkAlt, FaSortAlphaDownAlt, FaSortAlphaUp, FaSpinner, FaTimes } from 'react-icons/fa'
 import { GrDocumentMissing, GrGallery } from 'react-icons/gr'
 import { GoChevronLeft, GoChevronRight, GoMoveToEnd, GoMoveToStart } from 'react-icons/go'
 import { RxChevronRight, RxReset } from 'react-icons/rx'
@@ -41,7 +39,7 @@ export const Icons = {
   Male: PiGenderMale,
   Female: PiGenderFemale,
 
-  Cross: MdClose,
+  Cross: FaTimes,
   Plus: MdAdd,
   Delete: MdDelete,
   Edit: MdEdit,
@@ -52,7 +50,7 @@ export const Icons = {
   Alert: MdWarning,
   Reset: RxReset,
   Breadcrumb: RxChevronRight,
-  Check: MdCheck,
+  Check: FaCheck,
   Copy: MdContentCopy,
   Search: MdSearch,
   Spinner: FaSpinner,

@@ -1,7 +1,7 @@
 import { FC, useCallback } from 'react'
 import { Button, ButtonProps } from '@mui/joy'
 import { Icons } from '../util/Icons.tsx'
-import { createCharacterEnvelope } from './envelope.ts'
+import { createCharacterEnvelope } from './export-envelope.ts'
 import { blobify } from './blobify.ts'
 import { startDownload } from './download.ts'
 import { Character } from '../character/character.ts'
