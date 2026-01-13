@@ -11,15 +11,23 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - [#50](https://github.com/n15g/badger/pull/50) - Character import and export, and log parser.
 
+### Changed
+
+- [#52](https://github.com/n15g/badger/issues/52) - Badge character list now links to the clicked character's badge page.
+
 ### Security
 
 - Bumped `react-router` version due to reported vulnerabilities < 7.12.0.
+
+----
 
 ## [2.0.7] - 2026-01-08
 
 ### Added
 
 - [#49](https://github.com/n15g/badger/pull/49) - Show characters that have a badge on the badge view.
+
+----
 
 ## [2.0.6] - 2026-01-05
 

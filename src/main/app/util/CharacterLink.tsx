@@ -1,7 +1,7 @@
 import { FC } from 'react'
 import { Typography } from '@mui/joy'
 import ErrorText from '../util/ErrorText.tsx'
-import { NavLink } from 'react-router'
+import { NavLink, To } from 'react-router'
 import { Character } from '../character/character.ts'
 import CharacterTooltip from './CharacterTooltip.tsx'
 import CharacterDbProvider from '../character/CharacterDbProvider.tsx'
@@ -9,7 +9,7 @@ import MoralityIcon from '../morality/MoralityIcon.tsx'
 import ArchetypeIcon from '../archetype/ArchetypeIcon.tsx'
 import { Icons } from './Icons.tsx'
 
-const CharacterLink: FC<{ value: Character | string }> = ({ value }) => {
+const CharacterLink: FC<{ value: Character | string, to?: To }> = ({ value, to }) => {
   const { characters } = CharacterDbProvider.useCharacterDb()
 
   const key = typeof value === 'string' ? value : value.key
@@ -19,7 +19,7 @@ const CharacterLink: FC<{ value: Character | string }> = ({ value }) => {
     const { morality, archetypeKey } = character
     return (
       <CharacterTooltip character={character}>
-        <NavLink to={`/characters/${key}`} className="entityLink">
+        <NavLink to={to ?? `/characters/${key}`} className="entityLink">
           {morality && <MoralityIcon morality={morality} style={{ height: '1.1em', position: 'relative', top: 2, marginRight: '0.25em' }}/>}
           {archetypeKey && <ArchetypeIcon archetypeKey={archetypeKey} style={{ height: '1.1em', position: 'relative', top: 2 }}/>}
 

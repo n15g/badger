@@ -29,7 +29,7 @@ const BadgeCharactersPanel: FC<{ badge: Badge, characters?: Character[] }> = ({ 
               <ListItemDecorator>
                 {hasBadge(character, badge) ? <CheckChip/> : <CrossChip/>}
               </ListItemDecorator>
-              <CharacterLink value={character}/>
+              <CharacterLink value={character} to={`/characters/${character.key}/badges/${badge.key}`}/>
             </ListItem>
           ))}
         </List>
