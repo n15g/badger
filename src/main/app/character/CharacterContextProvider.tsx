@@ -6,7 +6,7 @@ import { Badge, BadgeRequirement } from 'coh-content-db'
 interface ContextValue {
   character?: Character,
   hasBadge: (badge: Badge) => boolean,
-  collectBadge: (badge: Badge, owned?: boolean) => Promise<void>,
+  collectBadge: (badge: Badge | Badge[], owned?: boolean) => Promise<void>,
   hasRequirement: (badge: Badge, requirement: BadgeRequirement) => boolean,
   getRequirementCount: (badge: Badge, requirement: BadgeRequirement) => number,
   updateRequirement: (badge: Badge, requirement: BadgeRequirement, next?: { owned?: boolean, count?: number }) => Promise<void>,
@@ -22,7 +22,7 @@ const CharacterContextProvider: FC<{ character?: Character, children: ReactNode 
       return {
         character,
         hasBadge: (badge: Badge) => character ? characterDb.hasBadge(character, badge) : false,
-        collectBadge: async (badge: Badge, owned?: boolean) => {
+        collectBadge: async (badge: Badge | Badge[], owned?: boolean) => {
           if (character) {
             await characterDb.collectBadge(character, badge, owned)
           }

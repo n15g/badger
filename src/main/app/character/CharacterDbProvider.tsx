@@ -13,7 +13,7 @@ interface CharacterDbContextValue {
   mutateCharacter: (key: string, recipe: (draft: Draft<Character>) => void) => Promise<void>,
   deleteCharacter: (key: string) => Promise<void>,
   hasBadge: (character: Character, badge: Badge) => boolean,
-  collectBadge: (character: Character, badge: Badge, owned?: boolean) => Promise<void>,
+  collectBadge: (character: Character, badge: Badge | Badge[], owned?: boolean) => Promise<void>,
   hasRequirement: (character: Character, badge: Badge, requirement: BadgeRequirement) => boolean,
   getRequirementCount: (character: Character, badge: Badge, requirement: BadgeRequirement) => number,
   updateRequirement: (
@@ -61,11 +61,15 @@ const CharacterDbProvider: FC<{ children: ReactNode }> & { useCharacterDb: () =>
       return character.badges?.[badge.key]?.owned ?? false
     }, [])
 
-    const collectBadge = useCallback(async (character: Character, badge: Badge, owned = true): Promise<void> => {
+    const collectBadge = useCallback(async (character: Character, badge: Badge | Badge[], owned = true): Promise<void> => {
+      const badges = Array.isArray(badge) ? badge : [badge]
+
       await mutateCharacter(character.key, draft => {
         draft.badges ??= {}
-        const existing = draft.badges[badge.key]
-        draft.badges[badge.key] = existing ? { ...existing, owned } : { owned }
+        for (const b of badges) {
+          const existing = draft.badges[b.key]
+          draft.badges[b.key] = existing ? { ...existing, owned } : { owned }
+        }
       })
     }, [mutateCharacter])
 

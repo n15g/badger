@@ -23,7 +23,7 @@ const hideOnSmall = { display: { xs: 'none', md: 'table-cell' } }
 
 const BadgeList: FC = () => {
   const content = ContentProvider.useContent()
-  const { character, hasBadge } = CharacterContextProvider.useCharacterContext()
+  const { character, collectBadge, hasBadge } = CharacterContextProvider.useCharacterContext()
   const [searchOptions, setSearchOptions] = useSessionStorage<BadgeSearchOptionsEx>('badge-list-parameters', BadgeSearchBar.defaultSearch)
 
   const results = content.searchBadges(produce(searchOptions, (draft) => {
@@ -41,7 +41,15 @@ const BadgeList: FC = () => {
     <Table noWrap={true} hoverRow={true} borderAxis="none">
       <thead>
       <TR>
-        {character && <TH sx={{ width: 40 }}></TH>}
+        {character && <TH sx={{ width: 40 }}>
+          <AsyncCheckbox
+            checked={!results.items.some((badge) => {
+              return !hasBadge(badge)
+            })}
+            onFrobnicate={async (owned) => {
+              await collectBadge(results.items, owned)
+            }}></AsyncCheckbox>
+        </TH>}
         <TH sx={{ width: 280 }}>Badge</TH>
         <TH sx={{ ...hideOnSmall, width: 140 }}>Type</TH>
         <TH sx={{ ...hideOnSmall, width: 140 }}>Release Date</TH>
