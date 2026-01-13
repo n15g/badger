@@ -17,7 +17,7 @@ import stalkerIcon from '../../resources/images/archetype/stalker.png'
 import tankerIcon from '../../resources/images/archetype/tanker.png'
 import warshadeIcon from '../../resources/images/archetype/warshade.png'
 
-const ArchetypeIcon: FC<{ archetypeKey: string } & ImgHTMLAttributes<HTMLImageElement>> = ({ archetypeKey, ...props }) => {
+const ArchetypeIcon: FC<{ archetypeKey?: string } & ImgHTMLAttributes<HTMLImageElement>> = ({ archetypeKey, ...props }) => {
   const content = ContentProvider.useContent()
   const archetype = content.getArchetype(archetypeKey)
 
@@ -37,7 +37,7 @@ const ArchetypeIcon: FC<{ archetypeKey: string } & ImgHTMLAttributes<HTMLImageEl
     'stalker': stalkerIcon,
     'tanker': tankerIcon,
     'warshade': warshadeIcon,
-  }[archetypeKey]
+  }[archetypeKey ?? '']
 
   return icon
     ? <SmartImage

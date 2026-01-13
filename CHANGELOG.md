@@ -5,11 +5,15 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [2.1.0] - 2026-01-12
+## [2.1.0] - 2026-01-14
+
+### Added
+
+- [#50](https://github.com/n15g/badger/pull/50) - Character import and export, and log parser.
 
 ### Security
 
-- Bumped `react-router` version due to reported vulnerabilities < 7.12.0
+- Bumped `react-router` version due to reported vulnerabilities < 7.12.0.
 
 ## [2.0.7] - 2026-01-08
 
@@ -21,10 +25,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- Contact, Mission and Zone data
-- Tooltips when hovering over Badges, Contacts, Missions and Zones
-- Sort Badges by release date
-- Copy /settitle and /thumbtack commands to the clipboard
+- Contact, Mission and Zone data.
+- Tooltips when hovering over Badges, Contacts, Missions and Zones.
+- Sort Badges by release date.
+- Copy /settitle and /thumbtack commands to the clipboard.
 
 ### Changed
 
@@ -33,4 +37,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Removed
 
-- Server group management - The app is specifically designed for Homecoming now
+- Server group management - The app is specifically designed for Homecoming now.

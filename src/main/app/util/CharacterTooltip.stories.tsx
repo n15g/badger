@@ -4,6 +4,7 @@ import CharacterTooltip from './CharacterTooltip.tsx'
 import { Meta, StoryObj } from '@storybook/react-vite'
 import { Box, Typography } from '@mui/joy'
 import { Character } from '../character/character.ts'
+import { STORYBOOK_CONTENT } from '../../storybook/storybook-content.ts'
 
 const meta: Meta<typeof CharacterTooltip> = {
   title: 'Character/CharacterTooltip',
@@ -35,3 +36,5 @@ export const Popup: StoryType = {
     children: <Typography>Hover me</Typography>,
   },
 }
+
+console.log(STORYBOOK_CONTENT.badges.filter(x => x.ignoreInTotals))

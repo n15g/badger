@@ -2,7 +2,7 @@ import { FC } from 'react'
 import { Character } from './character.ts'
 import ContentProvider from '../content/ContentProvider.tsx'
 
-const BadgeCount: FC<{ character: Character }> = ({ character }) => {
+const BadgeCount: FC<{ character: Partial<Character> }> = ({ character }) => {
   const content = ContentProvider.useContent()
 
   const count = content.badges.reduce((acc, badge) => {

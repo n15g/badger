@@ -3,8 +3,8 @@ import { List, ListItem, ListItemDecorator, Typography } from '@mui/joy'
 import CharacterDbProvider from '../character/CharacterDbProvider.tsx'
 import { Character } from '../character/character.ts'
 import { Badge } from 'coh-content-db'
-import YesChip from '../util/YesChip.tsx'
-import NoChip from '../util/NoChip.tsx'
+import CheckChip from '../util/CheckChip.tsx'
+import CrossChip from '../util/CrossChip.tsx'
 import CharacterLink from '../util/CharacterLink.tsx'
 import InfoPanel from '../util/InfoPanel.tsx'
 
@@ -27,7 +27,7 @@ const BadgeCharactersPanel: FC<{ badge: Badge, characters?: Character[] }> = ({ 
           {list.map((character) => (
             <ListItem key={character.key}>
               <ListItemDecorator>
-                {hasBadge(character, badge) ? <YesChip/> : <NoChip/>}
+                {hasBadge(character, badge) ? <CheckChip/> : <CrossChip/>}
               </ListItemDecorator>
               <CharacterLink value={character}/>
             </ListItem>

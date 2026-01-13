@@ -12,6 +12,7 @@ import MoralityIcon from '../morality/MoralityIcon.tsx'
 import MoralitySelect from '../morality/MoralitySelect.tsx'
 import CharacterDbProvider from './CharacterDbProvider.tsx'
 import BadgeCount from './BadgeCount.tsx'
+import DownloadCharactersButton from '../io/DownloadCharactersButton.tsx'
 
 const CharacterViewPage: FC<{ character: Character }> = ({ character }) => {
   const content = ContentProvider.useContent()
@@ -55,12 +56,15 @@ const CharacterViewPage: FC<{ character: Character }> = ({ character }) => {
                 })
               }}/>
 
-              <Button color="primary" variant="soft" onClick={() => {
-                setEditing(true)
-              }}><Icons.Edit/></Button>
-              <EditCharacterModal character={editing ? character : undefined} onClose={() => {
-                setEditing(false)
-              }}/>
+              <Stack direction="row" gap={1}>
+                <DownloadCharactersButton characters={[character]}/>
+                <Button onClick={() => {
+                  setEditing(true)
+                }}><Icons.Edit/></Button>
+                <EditCharacterModal character={editing ? character : undefined} onClose={() => {
+                  setEditing(false)
+                }}/>
+              </Stack>
             </Stack>
           </Card>
 
