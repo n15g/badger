@@ -30,6 +30,7 @@ export function fromPartial(partial: Partial<Character>): Character {
     ...{ key: partial.key ?? shortid() },
     ...{ name: partial.name ?? 'New Character' },
   }
+  candidate.server ??= 'Unknown server'
   candidate.archetypeKey ??= 'blaster'
   candidate.morality ??= 'hero'
   candidate.sex ??= 'M'
