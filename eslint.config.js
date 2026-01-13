@@ -38,6 +38,7 @@ export default tseslint.config({ ignores: ['dist'] }, {
     '@typescript-eslint/restrict-template-expressions': ['error', {
       allowNumber: true
     }],
+    '@typescript-eslint/require-await': 'off',
   },
 }, {
   plugins: {

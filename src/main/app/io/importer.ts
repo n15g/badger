@@ -42,7 +42,7 @@ async function importFile(file: File): Promise<FileImportResult> {
   const trimmed = text.trimStart()
 
   for (const parser of PARSERS) {
-    const result = parser.onText?.(trimmed)
+    const result = await parser.onText?.(trimmed)
     if (result) {
       extraTags.push('text')
       return { file, accepted: true, ...result, tags: [...result.tags ?? [], ...extraTags] }
@@ -55,7 +55,7 @@ async function importFile(file: File): Promise<FileImportResult> {
       const json = JSON.parse(trimmed) as unknown
 
       for (const parser of PARSERS) {
-        const result = parser.onJson?.(json)
+        const result = await parser.onJson?.(json)
         if (result) {
           extraTags.push('json')
           return { file, accepted: true, ...result, tags: [...result.tags ?? [], ...extraTags] }

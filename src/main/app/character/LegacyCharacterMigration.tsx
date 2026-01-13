@@ -5,6 +5,7 @@ import { Character, CharacterBadgeRecord, CharacterBadgeRequirementRecord } from
 import { produce } from 'immer'
 import { CohContentDatabase } from 'coh-content-db'
 import CharacterDbProvider from './CharacterDbProvider.tsx'
+import { LegacyCharacter } from './legacy-character.tsx'
 
 
 const LegacyCharacterMigration: FC<{
@@ -34,21 +35,6 @@ const LegacyCharacterMigration: FC<{
   return loaded ? children : <LoadingScreen text={'Migrating characters from Badger 1'}/>
 }
 
-
-interface LegacyCharacter {
-  readonly key: string;
-  readonly name: string;
-  readonly server?: string;
-  readonly archetypeKey?: string;
-
-  readonly badges?: Record<string, {
-    readonly owned?: boolean;
-    readonly partials?: Record<string, {
-      readonly owned?: boolean;
-      readonly craftCount?: number;
-    }>
-  }>
-}
 
 function importLegacyCharacters(content: CohContentDatabase): Character[] {
   const legacyString = localStorage.getItem('ngx_characters')

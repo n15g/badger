@@ -3,7 +3,7 @@ import { CharacterExportEnvelope, isCharacterExportEnvelope } from '../export-en
 import { errorToMeatspace } from '../../util/error-to-meatspace.ts'
 
 export const BadgerV2ExportFileParser: Parser = {
-  onJson: (json: unknown): ParserResponse => {
+  onJson: async (json: unknown): Promise<ParserResponse> => {
     if (isCharacterExportEnvelope(json)) {
       if ((json as Partial<CharacterExportEnvelope>).type === 'character') {
         try {

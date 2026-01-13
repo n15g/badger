@@ -2,8 +2,8 @@ import { ImportTag } from '../import-tag.ts'
 import { Character } from '../../character/character.ts'
 
 export interface Parser {
-  onText?: (text: string) => ParserResponse
-  onJson?: (json: unknown) => ParserResponse
+  onText?: (text: string) => Promise<ParserResponse>
+  onJson?: (json: unknown) => Promise<ParserResponse>
 }
 
 export interface Parse {

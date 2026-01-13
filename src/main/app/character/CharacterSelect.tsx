@@ -42,20 +42,22 @@ const ServerSelect: FC<{
 }
 
 const CharacterOption: FC<{ character: Character, disabled?: boolean }> = ({ character, disabled }) => {
-  return <Stack direction="row" alignItems="center" sx={{ filter: disabled ? 'brightness(0.5)' : '' }}>
-    <ArchetypeIcon archetypeKey={character.archetypeKey} style={{ height: '1.4em' }}/>
-    <Stack sx={{ ml: 1, width: '10em', display: 'inline-flex' }}>
-      <Typography component="span"
-                  level="title-sm"
-                  sx={{
-                    textAlign: 'left',
-                    textOverflow: 'ellipsis',
-                    overflowX: 'hidden',
-                    textWrap: 'nowrap'
-                  }}>{character.name}</Typography>
-      <Typography component="span" level="body-xs" textAlign="left">{character.server}</Typography>
+  return (
+    <Stack direction="row" alignItems="center" sx={{ filter: disabled ? 'brightness(0.5)' : '' }}>
+      <ArchetypeIcon archetypeKey={character.archetypeKey} style={{ height: '1.4em' }}/>
+      <Stack sx={{ ml: 1, width: '10em', display: 'inline-flex' }}>
+        <Typography component="span"
+                    level="title-sm"
+                    sx={{
+                      textAlign: 'left',
+                      textOverflow: 'ellipsis',
+                      overflowX: 'hidden',
+                      textWrap: 'nowrap'
+                    }}>{character.name}</Typography>
+        <Typography component="span" level="body-xs" textAlign="left">{character.server}</Typography>
+      </Stack>
     </Stack>
-  </Stack>
+  )
 }
 
 export default ServerSelect

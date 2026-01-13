@@ -1,11 +1,13 @@
 import { FC } from 'react'
-import { Table, TableProps, Typography } from '@mui/joy'
+import { Stack, Table, TableProps, Typography } from '@mui/joy'
 import { CharacterImportPlan } from './character-import-plan.ts'
 import ImportActionSelect from './ImportActionSelect.tsx'
 import CharacterSelect from '../character/CharacterSelect.tsx'
 import { produce } from 'immer'
 import { Character } from '../character/character.ts'
 import CharacterDbProvider from '../character/CharacterDbProvider.tsx'
+import ArchetypeIcon from '../archetype/ArchetypeIcon.tsx'
+import BadgeCount from '../character/BadgeCount.tsx'
 
 
 const EditCharacterImportPlan: FC<{
@@ -29,7 +31,21 @@ const EditCharacterImportPlan: FC<{
       {Object.values(value).length > 0 && Object.entries(value).map(([key, { incoming, existing, action }]) => (
         <tr key={key}>
           <td>
-            {incoming.name}
+            <Stack direction="row" alignItems="center">
+              <ArchetypeIcon archetypeKey={incoming.archetypeKey} style={{ height: '1.4em' }}/>
+              <Stack sx={{ ml: 1, width: '10em', display: 'inline-flex' }}>
+                <Typography component="span"
+                            level="title-sm"
+                            sx={{
+                              textAlign: 'left',
+                              textOverflow: 'ellipsis',
+                              overflowX: 'hidden',
+                              textWrap: 'nowrap'
+                            }}>{incoming.name}</Typography>
+                <Typography component="span" level="body-xs" textAlign="left">{incoming.server}</Typography>
+              </Stack>
+              (<BadgeCount character={incoming}/>)
+            </Stack>
           </td>
           <td width={150}>
             <ImportActionSelect

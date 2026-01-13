@@ -11,6 +11,7 @@ import { buildCharacterImportPlan, CharacterImportPlan } from './character-impor
 import { applyPartial, Character, fromPartial } from '../character/character.ts'
 import CharacterDbProvider from '../character/CharacterDbProvider.tsx'
 import Spinner from '../util/Spinner.tsx'
+import BadgerSpinner from '../util/BadgerSpinner.tsx'
 
 const ImportCharactersModal: FC<{ open: boolean, onClose: () => void }>
   = ({ open, onClose }) => {
@@ -133,27 +134,43 @@ const ImportCharactersModal: FC<{ open: boolean, onClose: () => void }>
 
           {/* STEP 3 */}
           {step === 3 && (<>
-            <EditCharacterImportPlan value={characterImportPlan} onNewValue={(next) => {
-              setCharacterImportPlan(next)
-            }}/>
-
-            <Stack direction="row" justifyContent="space-between">
-              <Button
-                startDecorator={<Icons.Prev/>}
-                onClick={() => {
-                  setStep(2)
-                }}
-              >Back</Button>
-              <Button
-                color="success"
-                disabled={loading}
-                endDecorator={<Icons.Next/>}
-                onClick={() => {
-                  void completeImport()
+            {!loading && (
+              <EditCharacterImportPlan value={characterImportPlan} onNewValue={(next) => {
+                setCharacterImportPlan(next)
+              }}/>
+            )}
+              {loading && (
+                <Box sx={{
+                  display: 'flex',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  flexDirection: 'column',
+                  gap: 2,
+                  minHeight: 200,
+                  minWidth: 400
                 }}>
-                {!loading ? <>Done</> : <Spinner/>}
-              </Button>
-            </Stack>
+                  <BadgerSpinner style={{ height: 128, padding: '2em' }}/>
+                  Working...
+                </Box>
+              )}
+
+              <Stack direction="row" justifyContent="space-between">
+                <Button
+                  startDecorator={<Icons.Prev/>}
+                  onClick={() => {
+                    setStep(2)
+                  }}
+                >Back</Button>
+                <Button
+                  color="success"
+                  disabled={loading}
+                  endDecorator={<Icons.Next/>}
+                  onClick={() => {
+                    void completeImport()
+                  }}>
+                  {!loading ? <>Done</> : <Spinner/>}
+                </Button>
+              </Stack>
           </>)}
         </Box>
       </ModalDialog>
