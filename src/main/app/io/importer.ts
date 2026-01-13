@@ -1,16 +1,7 @@
 import { ImportTag } from './import-tag.ts'
 import { errorToMeatspace } from '../util/error-to-meatspace.ts'
 import { Parser } from './parser/parser.ts'
-import { CoHLogFileParser } from './parser/coh-log-file-parser.ts'
-import { BadgerV1ExportFileParser } from './parser/badger-v1-export-file-parser.ts'
-import { BadgerV2ExportFileParser } from './parser/badger-v2-export-file-parser.ts'
 import { Character } from '../character/character.ts'
-
-const PARSERS: Parser[] = [
-  CoHLogFileParser,
-  BadgerV1ExportFileParser,
-  BadgerV2ExportFileParser,
-]
 
 export interface FileImportResult {
   file: File
@@ -20,18 +11,18 @@ export interface FileImportResult {
   characters?: Partial<Character>[]
 }
 
-export async function importFiles(files: File[]): Promise<FileImportResult[]> {
+export async function importFiles(files: File[], parsers: Parser[]): Promise<FileImportResult[]> {
   const results = []
 
   for (const file of files) {
-    const result = await importFile(file)
+    const result = await importFile(file, parsers)
     results.push(result)
   }
 
   return results
 }
 
-async function importFile(file: File): Promise<FileImportResult> {
+async function importFile(file: File, parsers: Parser[]): Promise<FileImportResult> {
   const { text, gzipped } = await fileToText(file)
   const extraTags: ImportTag[] = []
 
@@ -41,7 +32,7 @@ async function importFile(file: File): Promise<FileImportResult> {
 
   const trimmed = text.trimStart()
 
-  for (const parser of PARSERS) {
+  for (const parser of parsers) {
     const result = await parser.onText?.(trimmed)
     if (result) {
       extraTags.push('text')
@@ -54,7 +45,7 @@ async function importFile(file: File): Promise<FileImportResult> {
     try {
       const json = JSON.parse(trimmed) as unknown
 
-      for (const parser of PARSERS) {
+      for (const parser of parsers) {
         const result = await parser.onJson?.(json)
         if (result) {
           extraTags.push('json')
