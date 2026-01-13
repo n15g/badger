@@ -6,12 +6,21 @@ import FileImportResultSummary from './FileImportResultSummary.tsx'
 import { FileImportResult } from './importer.ts'
 import ImportDropzone from './ImportDropzone.tsx'
 import { DefaultColorPalette, VariantKey } from '@mui/joy/styles/types'
+import EditCharacterImportPlan from './EditCharacterImportPlan.tsx'
+import { buildCharacterImportPlan, CharacterImportPlan } from './character-import-plan.ts'
+import { applyPartial, Character, fromPartial } from '../character/character.ts'
+import CharacterDbProvider from '../character/CharacterDbProvider.tsx'
+import Spinner from '../util/Spinner.tsx'
 
-const ImportCharactersButton: FC<{ open: boolean, onClose: () => void }>
+const ImportCharactersModal: FC<{ open: boolean, onClose: () => void }>
   = ({ open, onClose }) => {
 
+  const { characters, createCharacter, mutateCharacter, deleteCharacter } = CharacterDbProvider.useCharacterDb()
+
   const [step, setStep] = useState(1)
+  const [loading, setLoading] = useState(false)
   const [fileImportResults, setFileImportResults] = useState<FileImportResult[]>()
+  const [characterImportPlan, setCharacterImportPlan] = useState<CharacterImportPlan>()
 
   const renderStep = useCallback((idx: number, label: string) => {
     let variant: VariantKey = 'outlined'
@@ -36,59 +45,120 @@ const ImportCharactersButton: FC<{ open: boolean, onClose: () => void }>
     )
   }, [step])
 
-  return (<>
-    {open && (<Modal
-        open={open}
-        onClose={() => {
-          onClose()
-        }}>
-        <ModalDialog>
-          <ModalClose/>
-          <Box>
-            <Typography level="title-lg">Import Characters</Typography>
+  const reset = useCallback(() => {
+    setFileImportResults(undefined)
+    setCharacterImportPlan(undefined)
+    setStep(1)
+  }, [])
 
-            <Stepper sx={{ m: 2 }}>
-              {renderStep(1, 'Upload')}
-              {renderStep(2, 'Review Files')}
-              {renderStep(3, 'Review Characters')}
-            </Stepper>
+  const completeImport = useCallback(async () => {
+    setLoading(true)
+    try {
+      for (const [key, { incoming, existing, action }] of Object.entries(characterImportPlan ?? {})) {
+        if (!existing || action === 'new') {
+          if (action !== 'ignore') {
+            await createCharacter(fromPartial({ key: key, ...incoming }))
+          }
+        } else {
+          if (action === 'replace') {
+            await deleteCharacter(existing.key)
+            await createCharacter(fromPartial({ key: key, ...incoming }))
+          } else if (action === 'merge') {
+            await mutateCharacter(existing.key, applyPartial(existing))
+          }
+        }
+      }
+      reset()
+      onClose()
+    } finally {
+      setLoading(false)
+    }
+  }, [characterImportPlan, createCharacter, deleteCharacter, mutateCharacter, onClose, reset])
 
-            {step === 1 && (<>
-              <Typography>You can import characters into the app by uploading the following types of files:</Typography>
-              <ul>
-                <li>Previously exported characters as <code>.json</code> or <code>.json.gz</code> files.</li>
-                <li>CoH game log files that contain output from the <SettitleScriptHelpLink/>.</li>
-                <li>Badger 1 character exports saved to <code>.txt</code> files.</li>
-              </ul>
+  return open && (<>
+    <Modal
+      open={open}
+      onClose={() => {
+        reset()
+        onClose()
+      }}>
+      <ModalDialog>
+        <ModalClose/>
+        <Box>
+          <Typography level="title-lg">Import Characters</Typography>
 
-              <ImportDropzone onParse={(result) => {
-                setFileImportResults(result)
-                setStep(2)
-              }}/>
-            </>)}
-            {step === 2 && (<>
+          <Stepper sx={{ m: 2 }}>
+            {renderStep(1, 'Upload')}
+            {renderStep(2, 'Review Files')}
+            {renderStep(3, 'Review Characters')}
+          </Stepper>
 
-              <FileImportResultSummary fileImportResults={fileImportResults}/>
+          {/* STEP 1 */}
+          {step === 1 && (<>
+            <Typography>You can import characters into the app by uploading the following types of files:</Typography>
+            <ul>
+              <li>Previously exported characters as <code>.json</code> or <code>.json.gz</code> files.</li>
+              <li>CoH game log files that contain output from the <SettitleScriptHelpLink/>.</li>
+              <li>Badger 1 character exports saved to <code>.txt</code> files.</li>
+            </ul>
 
-              <Stack direction="row" justifyContent="space-between">
-                <Button
-                  startDecorator={<Icons.Prev/>}
-                  onClick={() => {
-                    setStep(1)
-                  }}
-                >Back</Button>
-                <Button
-                  endDecorator={<Icons.Next/>}
-                  onClick={() => {
-                    setStep(2)
-                  }}>Next</Button>
-              </Stack>
-            </>)}
-          </Box>
-        </ModalDialog>
-      </Modal>
-    )}
+            <ImportDropzone onParse={(result) => {
+              setFileImportResults(result)
+              setStep(2)
+            }}/>
+          </>)}
+
+          {/* STEP 2 */}
+          {step === 2 && (<>
+            <FileImportResultSummary fileImportResults={fileImportResults}/>
+
+            <Stack direction="row" justifyContent="space-between">
+              <Button
+                startDecorator={<Icons.Prev/>}
+                onClick={() => {
+                  setStep(1)
+                }}
+              >Back</Button>
+              <Button
+                endDecorator={<Icons.Next/>}
+                onClick={() => {
+                  const incoming = fileImportResults?.reduce<Partial<Character>[]>((acc, result) => {
+                    return [...acc, ...(result.characters ?? [])]
+                  }, []) ?? []
+                  setCharacterImportPlan(buildCharacterImportPlan(incoming, characters))
+                  setStep(3)
+                }}>Next</Button>
+            </Stack>
+          </>)}
+
+          {/* STEP 3 */}
+          {step === 3 && (<>
+            <EditCharacterImportPlan value={characterImportPlan} onNewValue={(next) => {
+              setCharacterImportPlan(next)
+            }}/>
+
+            <Stack direction="row" justifyContent="space-between">
+              <Button
+                startDecorator={<Icons.Prev/>}
+                onClick={() => {
+                  setStep(2)
+                }}
+              >Back</Button>
+              <Button
+                color="success"
+                disabled={loading}
+                endDecorator={<Icons.Next/>}
+                onClick={() => {
+                  void completeImport()
+                }}>
+                {!loading ? <>Done</> : <Spinner/>}
+              </Button>
+            </Stack>
+          </>)}
+        </Box>
+      </ModalDialog>
+    </Modal>
   </>)
 }
 
-export default ImportCharactersButton
+export default ImportCharactersModal

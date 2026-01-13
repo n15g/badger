@@ -64,8 +64,8 @@ const CharacterDbProvider: FC<{ children: ReactNode }> & { useCharacterDb: () =>
     const collectBadge = useCallback(async (character: Character, badge: Badge, owned = true): Promise<void> => {
       await mutateCharacter(character.key, draft => {
         draft.badges ??= {}
-        draft.badges[badge.key] ??= {}
-        draft.badges[badge.key].owned = owned
+        const existing = draft.badges[badge.key]
+        draft.badges[badge.key] = existing ? { ...existing, owned } : { owned }
       })
     }, [mutateCharacter])
 
