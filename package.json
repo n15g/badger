@@ -43,6 +43,7 @@
     "@types/react": "^19.2.7",
     "@types/react-dom": "^19.2.3",
     "@types/shortid": "^2.2.0",
+    "@vitejs/plugin-legacy": "^7.2.1",
     "@vitejs/plugin-react": "^5.1.1",
     "@vueless/storybook-dark-mode": "^10.0.4",
     "coh-content-db-homecoming": "^2.0.0-rc.14",
@@ -54,6 +55,7 @@
     "eslint-plugin-storybook": "^10.1.2",
     "globals": "^16.5.0",
     "storybook": "^10.1.2",
+    "terser": "^5.44.1",
     "typescript": "~5.9.3",
     "typescript-eslint": "^8.48.0",
     "vite": "^7.2.4"
