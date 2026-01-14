@@ -1,10 +1,24 @@
-import { FC, useState } from 'react'
+import { FC, useMemo, useState } from 'react'
 import { Alert, Link, LinkProps, Modal, ModalClose, ModalDialog, Typography } from '@mui/joy'
 import { Icons } from '../util/Icons.tsx'
-import settitleTxt from '../../resources/settitle.txt'
+import { startDownload } from './download.ts'
 
 const SettitleScriptHelpLink: FC<LinkProps>
   = ({ ...props }) => {
+
+  const settitleString = useMemo(() => {
+    let result = ''
+
+    for (let i = 0; i < 3000; i++) {
+      if (i % 50 === 0) {
+        result += `${i !== 0 ? '\n' : ''}settitle 0`
+      }
+      result += `$$settitle ${i + 1}`
+    }
+
+    return result
+  }, [])
+
 
   const [open, setOpen] = useState(false)
 
@@ -34,7 +48,9 @@ const SettitleScriptHelpLink: FC<LinkProps>
 
           <Typography level="h4">Step 1: Download script</Typography>
           <Typography level="body-sm">
-            Save the <Link variant="outlined" href={settitleTxt} download="settitle.txt" target="_blank" rel="noopener"
+            Save the <Link variant="outlined" onClick={() => {
+            startDownload(new Blob([settitleString]), 'settitle.txt')
+          }} download="settitle.txt" target="_blank" rel="noopener"
                            endDecorator={<Icons.Download/>}>
             settitle.txt </Link> script file to the following directory:
           </Typography>

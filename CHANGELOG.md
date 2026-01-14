@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 - [#54](https://github.com/n15g/badger/issues/54) - Links in badge tooltip are broken
+- [#55](https://github.com/n15g/badger/issues/55) - Settitle script was missing badges
 
 ## [2.1.0] - 2026-01-14
 
