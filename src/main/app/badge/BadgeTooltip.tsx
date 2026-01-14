@@ -24,13 +24,13 @@ export const BadgeTooltip: FC<{ badge: Badge, children: ReactElement } & Omit<To
         <Divider inset="context"/>
       </CardOverflow>
 
-      <NavLink to={`/badge/${badgeKey}`} style={{ textDecoration: 'none', color: 'inherit' }}>
+      <NavLink to={`/badges/${badgeKey}`} style={{ textDecoration: 'none', color: 'inherit' }}>
         <Typography component="span" textAlign="center" level="title-lg"><BadgeNameList badge={badge}/></Typography>
       </NavLink>
 
       <Stack direction="row" flexWrap="wrap" justifyContent="center" gap={2} sx={{ pt: 2 }}>
         {icon.canonical.map((icon) => (
-          <NavLink key={icon.value} to={`/badge/${badgeKey}`}>
+          <NavLink key={icon.value} to={`/badges/${badgeKey}`}>
             <BadgeIcon badge={badge} context={{ morality: icon.alignment, sex: icon.sex }}/>
           </NavLink>
         ))}
