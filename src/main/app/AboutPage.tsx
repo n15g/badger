@@ -9,7 +9,6 @@ import moment from 'moment'
 import SmartLink from './util/SmartLink.tsx'
 import { CgInfo } from 'react-icons/cg'
 import { BiImport } from 'react-icons/bi'
-import { FaExclamationTriangle } from 'react-icons/fa'
 
 function AboutPage() {
   const content = ContentProvider.useContent()
@@ -81,6 +80,7 @@ function AboutPage() {
           <ul>
             <li>Hover for quick tooltips with badge, contact, or mission details</li>
             <li>Find new badges by release date</li>
+            <li>Import characters from multiple files/logs at once</li>
             <li>Copy /settitle and /thumbtack commands to the clipboard</li>
             <li>View badge icons and names based on your character's sex and morality</li>
             <li>Use the app reasonably well on mobile and tablet</li>
@@ -97,18 +97,6 @@ function AboutPage() {
           <Typography>
             The old data for Badger 1.0 will remain in the browser history even after migration, and if you want/need to re-import for any
             reason, just delete all characters from the character page and refresh the application.
-          </Typography>
-        </Card>
-
-        <Card color="danger" sx={{ maxWidth: 800 }}>
-          <Typography level="h4" textAlign="center"><FaExclamationTriangle/> What's missing?</Typography>
-
-          <Typography>
-            Since the character data has moved to a new database method (indexedDB), character import and export, as well as reading badge
-            data from an imported log file is currently not implemented.
-          </Typography>
-          <Typography>
-            These are top of my list to re-introduce.
           </Typography>
         </Card>
 
