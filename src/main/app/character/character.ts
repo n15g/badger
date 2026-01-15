@@ -50,7 +50,7 @@ export function applyPartial(partial: Partial<Character>): (draft: Draft<Charact
     for (const [badgeKey, partialBadge] of Object.entries(partial.badges ?? {})) {
       draft.badges[badgeKey] ??= {}
       const draftBadge = draft.badges[badgeKey]
-      draftBadge.owned = partialBadge?.owned ?? !!draftBadge.owned
+      draftBadge.owned = (partialBadge?.owned ?? false) || (draftBadge.owned ?? false)
 
       for (const [reqKey, partialReq] of Object.entries(partialBadge?.req ?? {})) {
         draftBadge.req ??= {}

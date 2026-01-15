@@ -65,7 +65,7 @@ const ImportCharactersModal: FC<{ open: boolean, onClose: () => void }>
             await deleteCharacter(existing.key)
             await createCharacter(fromPartial({ key: key, ...incoming }))
           } else if (action === 'merge') {
-            await mutateCharacter(existing.key, applyPartial(existing))
+            await mutateCharacter(existing.key, applyPartial(incoming))
           }
         }
       }
@@ -139,38 +139,38 @@ const ImportCharactersModal: FC<{ open: boolean, onClose: () => void }>
                 setCharacterImportPlan(next)
               }}/>
             )}
-              {loading && (
-                <Box sx={{
-                  display: 'flex',
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                  flexDirection: 'column',
-                  gap: 2,
-                  minHeight: 200,
-                  minWidth: 400
-                }}>
-                  <BadgerSpinner style={{ height: 128, padding: '2em' }}/>
-                  Working...
-                </Box>
-              )}
+            {loading && (
+              <Box sx={{
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                flexDirection: 'column',
+                gap: 2,
+                minHeight: 200,
+                minWidth: 400
+              }}>
+                <BadgerSpinner style={{ height: 128, padding: '2em' }}/>
+                Working...
+              </Box>
+            )}
 
-              <Stack direction="row" justifyContent="space-between">
-                <Button
-                  startDecorator={<Icons.Prev/>}
-                  onClick={() => {
-                    setStep(2)
-                  }}
-                >Back</Button>
-                <Button
-                  color="success"
-                  disabled={loading}
-                  endDecorator={<Icons.Next/>}
-                  onClick={() => {
-                    void completeImport()
-                  }}>
-                  {!loading ? <>Done</> : <Spinner/>}
-                </Button>
-              </Stack>
+            <Stack direction="row" justifyContent="space-between">
+              <Button
+                startDecorator={<Icons.Prev/>}
+                onClick={() => {
+                  setStep(2)
+                }}
+              >Back</Button>
+              <Button
+                color="success"
+                disabled={loading}
+                endDecorator={<Icons.Next/>}
+                onClick={() => {
+                  void completeImport()
+                }}>
+                {!loading ? <>Done</> : <Spinner/>}
+              </Button>
+            </Stack>
           </>)}
         </Box>
       </ModalDialog>
