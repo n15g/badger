@@ -83,7 +83,7 @@ const ImportCharactersModal: FC<{ open: boolean, onClose: () => void }>
         reset()
         onClose()
       }}>
-      <ModalDialog>
+      <ModalDialog sx={{ overflow: 'scroll' }}>
         <ModalClose/>
         <Box>
           <Typography level="title-lg">Import Characters</Typography>
