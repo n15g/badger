@@ -5,13 +5,16 @@ import { Character } from './character.ts'
 import BadgeCount from './BadgeCount.tsx'
 import ArchetypeIcon from '../archetype/ArchetypeIcon.tsx'
 import MoralityIcon from '../morality/MoralityIcon.tsx'
+import { Icons } from '../util/Icons.tsx'
 
 const CharacterCard: FC<{ character: Character }> = ({ character }) => {
-  const { name, server, morality, archetypeKey } = character
+  const { name, server, origin, morality, archetypeKey, sex } = character
 
   return (
     <NavLink to={`/characters/${character.key}`}>
-      <Card sx={{ width: 280, flexDirection: 'row', alignItems: 'center', gap: 2, py: 1 }}>
+      <Card
+        color={origin === 'praetorian' ? 'warning' : 'primary'}
+        sx={{ width: 280, flexDirection: 'row', alignItems: 'center', gap: 2, py: 1 }}>
         <Stack gap={1}>
           {morality && <MoralityIcon morality={morality} height={32}/>}
           {archetypeKey && <ArchetypeIcon archetypeKey={archetypeKey} height={32}/>}
@@ -34,9 +37,19 @@ const CharacterCard: FC<{ character: Character }> = ({ character }) => {
 
           <Divider sx={{ my: 1 }}/>
 
-          <Typography level="body-xs">
-            <BadgeCount character={character}/>
-          </Typography>
+          <Stack direction="row" justifyContent="space-between">
+            <Typography level="body-xs">
+              <BadgeCount character={character}/>
+            </Typography>
+            <Typography
+              level="body-xs"
+              color={origin === 'praetorian' ? 'warning' : 'primary'}
+              sx={{ filter: 'brightness(0.6)' }}>
+              <em>{origin === 'praetorian' ? 'Praetorian' : 'Primal'}</em>
+
+              <Typography sx={{ pl: 0.4 }}>{sex === 'F' ? <Icons.Female/> : <Icons.Male/>}</Typography>
+            </Typography>
+          </Stack>
         </Stack>
 
       </Card>

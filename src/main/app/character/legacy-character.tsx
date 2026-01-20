@@ -42,7 +42,7 @@ export function migrate(legacy: Partial<LegacyCharacter>): Character {
   return {
     key: legacy.key ?? shortid(),
     name: legacy.name ?? 'New Character',
-    server: legacy.server ?? 'Unknown Server',
+    server: legacy.server ?? '- Unknown -',
     archetypeKey: legacy.archetypeKey ?? 'blaster',
     morality: 'hero',
     sex: 'M',

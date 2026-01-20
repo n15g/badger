@@ -20,6 +20,7 @@ const AddCharacterModal: FC<{ open?: boolean, onClose: () => void }>
         <EditCharacterForm onSave={async (character) => {
           await createCharacter({
             key: shortid(),
+            name: 'New Character',
             ...character
           })
           onClose()

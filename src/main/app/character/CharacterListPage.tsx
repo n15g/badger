@@ -1,4 +1,4 @@
-import { Box, Button, Card, ListItem } from '@mui/joy'
+import { Box, Button, Card, Divider, ListItem, Typography } from '@mui/joy'
 import MainSection from '../util/MainSection.tsx'
 import SectionTitle from '../util/SectionTitle.tsx'
 import { Icons } from '../util/Icons.tsx'
@@ -17,9 +17,13 @@ const CharacterListPage: FC<{ characters: Character[] }> = ({ characters }) => {
   const [characterPendingDelete, setCharacterPendingDelete] = useState<Character | undefined>()
   const [characterPendingEdit, setCharacterPendingEdit] = useState<Character | undefined>()
 
-  const list = useMemo(() => {
+  const groups = useMemo(() => {
     return characters
       .sort((a, b) => a.name.localeCompare(b.name))
+      .reduce<Partial<Record<string, Character[]>>>((acc, character) => {
+        (acc[character.server ?? '- Unknown -'] ??= []).push(character)
+        return acc
+      }, {})
   }, [characters])
 
   useEffect(() => {
@@ -66,42 +70,50 @@ const CharacterListPage: FC<{ characters: Character[] }> = ({ characters }) => {
             </Button>
           </>)}
         </Box>
-        <Box display="flex" flexDirection="row" flexWrap="wrap" gap={2} justifyContent="center" p={4}>
-          {list.map((character) => (
-            <ListItem key={character.key} sx={{ display: 'flex', justifyContent: 'center' }}>
-              <Box sx={{ position: 'relative' }}>
-                <CharacterCard character={character}/>
-                {editing && (
-                  <Box sx={{
-                    position: 'absolute',
-                    display: 'flex',
-                    justifyContent: 'flex-end',
-                    p: 2,
-                    gap: 2,
-                    alignItems: 'center',
-                    top: 2,
-                    left: 2,
-                    right: 2,
-                    bottom: 2,
-                    borderRadius: 8,
-                    backgroundColor: 'rgba(0,0,0,0.5)',
-                    backdropFilter: 'blur(1.5px)',
-                  }}>
-                    <Button color="danger" variant="solid" onClick={() => {
-                      setCharacterPendingDelete(character)
-                    }}><Icons.Delete/></Button>
+        {Object.entries(groups).map(([server, list = []]) => (
+          <section key={server}>
+            <Typography level="h3">{server}</Typography>
+            <Box display="flex" flexDirection="row" flexWrap="wrap" gap={2} justifyContent="flex-start" p={4}>
 
-                    <DownloadCharactersButton characters={[character]}/>
+              {list.map((character) => (
+                <ListItem key={character.key} sx={{ display: 'flex', justifyContent: 'center' }}>
+                  <Box sx={{ position: 'relative' }}>
+                    <CharacterCard character={character}/>
+                    {editing && (
+                      <Box sx={{
+                        position: 'absolute',
+                        display: 'flex',
+                        justifyContent: 'flex-end',
+                        p: 2,
+                        gap: 2,
+                        alignItems: 'center',
+                        top: 2,
+                        left: 2,
+                        right: 2,
+                        bottom: 2,
+                        borderRadius: 8,
+                        backgroundColor: 'rgba(0,0,0,0.5)',
+                        backdropFilter: 'blur(1.5px)',
+                      }}>
+                        <Button color="danger" variant="solid" onClick={() => {
+                          setCharacterPendingDelete(character)
+                        }}><Icons.Delete/></Button>
 
-                    <Button color="primary" variant="solid" onClick={() => {
-                      setCharacterPendingEdit(character)
-                    }}><Icons.Edit/></Button>
+                        <DownloadCharactersButton characters={[character]}/>
+
+                        <Button color="primary" variant="solid" onClick={() => {
+                          setCharacterPendingEdit(character)
+                        }}><Icons.Edit/></Button>
+                      </Box>
+                    )}
                   </Box>
-                )}
-              </Box>
-            </ListItem>
-          ))}
-        </Box>
+                </ListItem>
+              ))}
+
+            </Box>
+            <Divider/>
+          </section>
+        ))}
       </Card>
 
       <AddCharacterModal open={addCharacterOpen} onClose={() => {

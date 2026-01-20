@@ -1,25 +1,23 @@
 import { FC, useCallback, useState } from 'react'
-import { Box, Button, FormControl, FormLabel, Input, Radio, RadioGroup, Stack, Typography } from '@mui/joy'
+import { Box, Button, Divider, FormControl, FormLabel, Input, Radio, RadioGroup, Stack, Typography } from '@mui/joy'
 import BadgerSpinner from '../util/BadgerSpinner.tsx'
 import ServerSelect from './ServerSelect.tsx'
 import ArchetypeSelect from '../archetype/ArchetypeSelect.tsx'
-import { Morality, Sex } from 'coh-content-db'
+import { CharacterOrigin, Sex } from 'coh-content-db'
 import MoralitySelect from '../morality/MoralitySelect.tsx'
+import { Character } from './character.ts'
+import { Icons } from '../util/Icons.tsx'
 
-interface CharacterData {
-  name: string,
-  server?: string,
-  archetypeKey?: string
-  morality?: Morality
-  sex?: Sex
-}
-
-const EditCharacterForm: FC<{ character?: CharacterData, onSave?: (character: CharacterData) => Promise<void> }>
+const EditCharacterForm: FC<{
+  character?: Partial<Character>,
+  onSave?: (character: Partial<Character>) => Promise<void>
+}>
   = ({ character, onSave }) => {
 
-  const defaultState: CharacterData = {
+  const defaultState: Partial<Character> = {
     name: character?.name ?? '',
     server: character?.server ?? '',
+    origin: character?.origin ?? 'primal',
     archetypeKey: character?.archetypeKey ?? 'blaster',
     morality: character?.morality ?? 'hero',
     sex: character?.sex ?? 'M'
@@ -66,6 +64,24 @@ const EditCharacterForm: FC<{ character?: CharacterData, onSave?: (character: Ch
           />
         </FormControl>
 
+        <Divider/>
+        <RadioGroup value={characterState.origin} onChange={(e) => {
+          setCharacterState({ ...characterState, origin: e.target.value as CharacterOrigin })
+        }}>
+          <Stack direction="row" justifyContent="space-between">
+            <Radio
+              color="primary"
+              variant="solid"
+              label={<Typography color="primary">Primal</Typography>}
+              value="primal"/>
+            <Radio
+              color="warning"
+              variant="solid"
+              label={<Typography color="warning">Praetorian</Typography>}
+              value="praetorian"/>
+          </Stack>
+        </RadioGroup>
+
         <FormControl>
           <FormLabel><Typography level="body-xs">Morality</Typography></FormLabel>
           <MoralitySelect
@@ -90,14 +106,18 @@ const EditCharacterForm: FC<{ character?: CharacterData, onSave?: (character: Ch
           />
         </FormControl>
 
+        <Divider/>
+
         <RadioGroup value={characterState.sex} onChange={(e) => {
           setCharacterState({ ...characterState, sex: e.target.value as Sex })
         }}>
           <Stack direction="row" justifyContent="space-between">
-            <Radio label="Male" value="M"></Radio>
-            <Radio label="Female" value="F"></Radio>
+            <Radio label={<Typography endDecorator={<Icons.Male/>}>Male</Typography>} value="M"/>
+            <Radio label={<Typography endDecorator={<Icons.Male/>}>Female</Typography>} value="F"/>
           </Stack>
         </RadioGroup>
+
+        <Divider/>
 
         <Button
           disabled={!valid || saving}

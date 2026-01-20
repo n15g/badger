@@ -20,7 +20,7 @@ const CharacterViewPage: FC<{ character: Character }> = ({ character }) => {
   const { pathname } = useLocation()
   const params = useParams()
 
-  const { name, morality, archetypeKey, server } = character
+  const { name, morality, origin, archetypeKey, server, sex } = character
   const badge = content.getBadge(params.badgeKey)
 
   const [editing, setEditing] = useState(false)
@@ -39,14 +39,27 @@ const CharacterViewPage: FC<{ character: Character }> = ({ character }) => {
             <Divider inset="context"/>
           </CardOverflow>
 
-          <Card>
+          <Card color={origin === 'praetorian' ? 'warning' : 'primary'}>
             <Stack gap={1} sx={{ flexDirection: { xs: 'column', sm: 'row' } }} justifyContent="space-between" alignItems="center">
-              <Stack gap={1} direction="row">
-                {morality && <MoralityIcon morality={morality} height={32}/>}
-                {archetypeKey && <ArchetypeIcon archetypeKey={archetypeKey} height={32}/>}
+              <Stack gap={1}>
+                <Stack gap={1} direction="row">
+                  {morality && <MoralityIcon morality={morality} height={32}/>}
+                  {archetypeKey && <ArchetypeIcon archetypeKey={archetypeKey} height={32}/>}
+                </Stack>
+                <Typography
+                  level="body-xs"
+                  color={origin === 'praetorian' ? 'warning' : 'primary'}
+                  sx={{ filter: 'brightness(0.6)' }}>
+                  <em>{origin === 'praetorian' ? 'Praetorian' : 'Primal'}</em>
+
+                  <Typography sx={{ pl: 0.4 }}>{sex === 'F' ? <Icons.Female/> : <Icons.Male/>}</Typography>
+                </Typography>
               </Stack>
 
-              <Typography level="title-xl" startDecorator={<Icons.Character/>}>{name} ({server})</Typography>
+              <Stack>
+                <Typography level="title-xl">{name}</Typography>
+                <Typography level="body-xs"><em>{server}</em></Typography>
+              </Stack>
 
               <BadgeCount character={character}/>
 
