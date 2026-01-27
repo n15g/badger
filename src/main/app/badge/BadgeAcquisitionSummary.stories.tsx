@@ -43,8 +43,20 @@ export const Accomplishment: StoryType = {
   },
 }
 
-export const Invention: StoryType = {
+export const Invention_Singular: StoryType = {
   args: {
     badge: content.getBadge('decaying')
+  },
+}
+
+export const Invention_Plural: StoryType = {
+  args: {
+    badge: content.getBadge('protector')
+  },
+}
+
+export const Invention_Plus_One: StoryType = {
+  args: {
+    badge: content.getBadge('guardian')
   },
 }

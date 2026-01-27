@@ -67,21 +67,26 @@ const BadgeAcquisitionSummary: FC<{ badge: Badge }> = ({ badge }) => {
   }
 
   if (type === 'invention') {
-    const { levels, types } = requirements.reduce((accumulator, requirement) => {
+    const { levels, types } = requirements.reduce<
+      { levels: [number, number][], types: Set<EnhancementCategory> }
+    >((acc, requirement) => {
       if (requirement.inventionLevel) {
-        accumulator.levels.add(requirement.inventionLevel)
+        acc.levels.push([requirement.inventionLevel, requirement.count ?? 0])
       }
-      requirement.inventionTypes?.forEach((type) => accumulator.types.add(type))
-      return accumulator
-    }, { levels: new Set<number>(), types: new Set<EnhancementCategory>() })
+      requirement.inventionTypes?.forEach((type) => acc.types.add(type))
+      if (requirement.type === 'invention-plus-one') {
+        acc.levels.push([-1, 1])
+      }
+      return acc
+    }, { levels: [], types: new Set<EnhancementCategory>() })
 
     return (<>
-      Craft level {' '}
-      <NaturalList keys={[...levels].map((x) => x.toString())}/>
+      Craft {' '}
+      <NaturalList keys={[...levels].map((x) => x[0] !== -1 ? `${x[1]}xLv${x[0]}` : '1 extra')} renderFn={(x) => <strong>{x}</strong>}/>
       {' '}
-      <NaturalList keys={[...types]} renderFn={(key) => <EnhancementCategoryLabel value={key}/>}/>
+      <NaturalList keys={[...types]} renderFn={(key) => <EnhancementCategoryLabel value={key}/>} conjunction="or"/>
       {' '}
-      enhancements.
+      enhancement{levels.every((x) => x[1] === 1) ? '' : 's'}.
     </>)
   }
 
