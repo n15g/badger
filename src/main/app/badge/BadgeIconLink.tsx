@@ -11,7 +11,7 @@ import CharacterContextProvider from '../character/CharacterContextProvider.tsx'
 const BadgeIconLink: FC<{ value?: Badge | string, context?: VariantContext, muted?: boolean } & ImgHTMLAttributes<HTMLImageElement>>
   = ({ value, context, ...props }) => {
   const content = ContentProvider.useContent()
-  const { character } = CharacterContextProvider.useCharacterContext()
+  const { character, hasBadge } = CharacterContextProvider.useCharacterContext()
 
   const key = typeof value === 'string' ? value : value?.key
   const badge = typeof value === 'string' ? content.getBadge(key) : value
@@ -22,7 +22,7 @@ const BadgeIconLink: FC<{ value?: Badge | string, context?: VariantContext, mute
     return (
       <BadgeTooltip badge={badge}>
         <NavLink to={linkTarget}>
-          <BadgeIcon badge={badge} context={context} {...props}/>
+          <BadgeIcon badge={badge} context={context} muted={!hasBadge(badge)} {...props}/>
         </NavLink>
       </BadgeTooltip>
     )

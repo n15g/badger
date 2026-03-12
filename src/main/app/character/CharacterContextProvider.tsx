@@ -9,6 +9,7 @@ interface ContextValue {
   collectBadge: (badge: Badge | Badge[], owned?: boolean) => Promise<void>,
   hasRequirement: (badge: Badge, requirement: BadgeRequirement) => boolean,
   getRequirementCount: (badge: Badge, requirement: BadgeRequirement) => number,
+  getRequirementProgress: (badge: Badge) => number,
   updateRequirement: (badge: Badge, requirement: BadgeRequirement, next?: { owned?: boolean, count?: number }) => Promise<void>,
 }
 
@@ -32,6 +33,9 @@ const CharacterContextProvider: FC<{ character?: Character, children: ReactNode 
         },
         getRequirementCount: (badge: Badge, requirement: BadgeRequirement) => {
           return character ? characterDb.getRequirementCount(character, badge, requirement) : 0
+        },
+        getRequirementProgress: (badge: Badge) => {
+          return character ? characterDb.getRequirementProgress(character, badge) : 0
         },
         updateRequirement: async (badge: Badge, requirement: BadgeRequirement, next?: { owned?: boolean, count?: number }) => {
           if (character) {

@@ -9,9 +9,18 @@ import BadgeLink from './BadgeLink.tsx'
 import NaturalList from '../util/NaturalList.tsx'
 import BadgeIconLink from './BadgeIconLink.tsx'
 import EnhancementCategoryLabel from '../enhancement/EnhancementCategoryLabel.tsx'
+import RequirementProgressOverlay from './RequirementProgressOverlay.tsx'
 
 
 const BadgeAcquisitionSummary: FC<{ badge: Badge }> = ({ badge }) => {
+  return (
+    <RequirementProgressOverlay badge={badge}>
+      {getInner(badge)}
+    </RequirementProgressOverlay>
+  )
+}
+
+function getInner(badge: Badge) {
   const { type, acquisition, requirements, zoneKeys } = badge
 
   if (acquisition) {

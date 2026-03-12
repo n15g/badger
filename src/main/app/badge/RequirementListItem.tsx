@@ -105,7 +105,7 @@ const RequirementListItem: FC<{ badge: Badge, requirement: BadgeRequirement }> =
   )
 
   return (
-    <ListItem sx={{ filter: owned ? 'brightness(0.4)' : undefined }}>
+    <ListItem sx={{ filter: owned ? 'opacity(0.4)' : undefined }}>
       {character && (
         <ListItemDecorator>
           <AsyncCheckbox checked={owned} onFrobnicate={async (next) => {

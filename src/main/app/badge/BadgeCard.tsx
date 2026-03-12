@@ -17,12 +17,13 @@ import BadgeNameList from './BadgeNameList.tsx'
 import CharacterContextProvider from '../character/CharacterContextProvider.tsx'
 import AsyncSwitch from '../util/AsyncSwitch.tsx'
 import BadgeCharactersPanel from './BadgeCharactersPanel.tsx'
+import RequirementProgressOverlay from './RequirementProgressOverlay.tsx'
 
 const BadgeCard: FC<{ badge: Badge }> = ({ badge }) => {
   const { character, hasBadge, collectBadge } = CharacterContextProvider.useCharacterContext()
 
   const owned = !character || hasBadge(badge)
-  const badgesLink = character ? `/characters/${character.key}/badges` : `/badges`
+  const badgesLink = character ? `/characters/${character.key}` : `/badges`
 
   const {
     type,
@@ -127,15 +128,17 @@ const BadgeCard: FC<{ badge: Badge }> = ({ badge }) => {
             )}
 
             {requirements.length > 0 && (
-              <List size="sm">
-                {requirements.length > 1 && <ListDivider inset="startContent"/>}
-                {requirements.map((requirement) => (
-                  <div key={requirement.key}>
-                    <RequirementListItem badge={badge} requirement={requirement}/>
-                    {requirements.length > 1 && <ListDivider inset="startContent"/>}
-                  </div>
-                ))}
-              </List>
+              <RequirementProgressOverlay badge={badge}>
+                <List size="sm">
+                  {requirements.length > 1 && <ListDivider inset="startContent"/>}
+                  {requirements.map((requirement) => (
+                    <div key={requirement.key}>
+                      <RequirementListItem badge={badge} requirement={requirement}/>
+                      {requirements.length > 1 && <ListDivider inset="startContent"/>}
+                    </div>
+                  ))}
+                </List>
+              </RequirementProgressOverlay>
             )}
           </Box>
 

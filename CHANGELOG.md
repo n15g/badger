@@ -5,16 +5,19 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [2.2.2] - 2026-03-12
+## [2.2.2] - 2026-03-13
 
 ### Added
 
 - [2.2.2] [#60](https://github.com/n15g/badger/issues/60) - Update related badges when a badge is collected (e.g. Accolades that require that badge)
+- [2.2.2] [#60](https://github.com/n15g/badger/issues/60) - Added a progress indicator to the badge list and badge view for badges that have multiple requirements
 - [2.2.0] Sort the character list by server
 - [2.2.0] [#58](https://github.com/n15g/badger/issues/58) - Added character origins to improve Praetorian badge variant display
 
 ### Changed
 
+- [2.2.2] [#60](https://github.com/n15g/badger/issues/60) - Switched from brightness to opacity filter for better appearance of muted elements on light mode
+- [2.2.2] [#60](https://github.com/n15g/badger/issues/60) - Link from badge view to badge list under a character now shows badge list tab correctly
 - [2.2.1] [#59](https://github.com/n15g/badger/issues/59) - Display invention count requirements on badge list
 
 ---

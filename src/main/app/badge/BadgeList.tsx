@@ -75,7 +75,7 @@ const BadgeRow: FC<{ badge: Badge }> = ({ badge }) => {
   const owned = character && hasBadge(badge)
 
   return (
-    <TR sx={{ filter: owned ? 'brightness(0.4)' : '' }}>
+    <TR sx={{ filter: owned ? 'opacity(0.4)' : '' }}>
       {character && (
         <TD sx={{ textAlign: 'center' }}>
           <AsyncCheckbox checked={hasBadge(badge)} onFrobnicate={async (owned) => {

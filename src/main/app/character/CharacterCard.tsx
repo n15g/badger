@@ -43,8 +43,7 @@ const CharacterCard: FC<{ character: Character }> = ({ character }) => {
             </Typography>
             <Typography
               level="body-xs"
-              color={origin === 'praetorian' ? 'warning' : 'primary'}
-              sx={{ filter: 'brightness(0.6)' }}>
+              color={origin === 'praetorian' ? 'warning' : 'primary'}>
               <em>{origin === 'praetorian' ? 'Praetorian' : 'Primal'}</em>
 
               <Typography sx={{ pl: 0.4 }}>{sex === 'F' ? <Icons.Female/> : <Icons.Male/>}</Typography>

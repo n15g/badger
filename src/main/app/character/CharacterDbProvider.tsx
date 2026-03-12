@@ -17,6 +17,7 @@ interface CharacterDbContextValue {
   collectBadge: (character: Character, badge: Badge | Badge[], owned?: boolean) => Promise<void>,
   hasRequirement: (character: Character, badge: Badge, requirement: BadgeRequirement) => boolean,
   getRequirementCount: (character: Character, badge: Badge, requirement: BadgeRequirement) => number,
+  getRequirementProgress: (character: Character, badge: Badge) => number,
   updateRequirement: (
     character: Character,
     badge: Badge,
@@ -80,6 +81,22 @@ const CharacterDbProvider: FC<{ children: ReactNode }> & { useCharacterDb: () =>
     const getRequirementCount = useCallback((character: Character, badge: Badge, requirement: BadgeRequirement): number => {
       return character.badges?.[badge.key]?.req?.[requirement.key]?.count ?? 0
     }, [])
+
+    const getRequirementProgress = useCallback((character: Character, badge: Badge): number => {
+      let max = 0
+      let cur = 0
+      badge.requirements.forEach((requirement) => {
+        if (requirement.count) {
+          max += requirement.count
+          cur += getRequirementCount(character, badge, requirement)
+        } else {
+          max += 1
+          cur += hasRequirement(character, badge, requirement) ? 1 : 0
+        }
+      })
+
+      return cur / max
+    }, [getRequirementCount, hasRequirement])
 
     const updateRequirement = useCallback(async (
       character: Character,
@@ -147,6 +164,7 @@ const CharacterDbProvider: FC<{ children: ReactNode }> & { useCharacterDb: () =>
         collectBadge,
         hasRequirement,
         getRequirementCount,
+        getRequirementProgress,
         updateRequirement,
       } as CharacterDbContextValue
     }, [
@@ -159,6 +177,7 @@ const CharacterDbProvider: FC<{ children: ReactNode }> & { useCharacterDb: () =>
       collectBadge,
       hasRequirement,
       getRequirementCount,
+      getRequirementProgress,
       updateRequirement
     ])
 
