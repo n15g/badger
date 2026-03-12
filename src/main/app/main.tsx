@@ -29,15 +29,15 @@ createRoot(root).render(
       <ErrorProvider>
         <ErrorBoundary FallbackComponent={({ error }) => (<ErrorPage error={error as unknown}/>)}>
           <BadgerDbProvider>
-            <CharacterDbProvider>
-              <CharacterContextProvider>
-                <ContentLoader>
+            <ContentLoader>
+              <CharacterDbProvider>
+                <CharacterContextProvider>
                   <LegacyCharacterMigration>
                     <RouterProvider router={Routes}/>
                   </LegacyCharacterMigration>
-                </ContentLoader>
-              </CharacterContextProvider>
-            </CharacterDbProvider>
+                </CharacterContextProvider>
+              </CharacterDbProvider>
+            </ContentLoader>
           </BadgerDbProvider>
         </ErrorBoundary>
       </ErrorProvider>
