@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
-- [2.1.3] Fixed incorrectly muted icons on the global badge list
+- [2.2.3] Fixed incorrectly muted icons on the global badge list
 
 ### Added
 
