@@ -7,13 +7,13 @@ import CharacterContextProvider from '../character/CharacterContextProvider.tsx'
 const RequirementProgressOverlay: FC<{ badge: Badge, children: ReactNode }> = ({ badge, children }) => {
   const { character, hasBadge, getRequirementProgress } = CharacterContextProvider.useCharacterContext()
 
-  const value = getRequirementProgress(badge)
-  const owned = hasBadge(badge) || Math.abs(1 - value) <= Number.EPSILON
+  const { percent } = getRequirementProgress(badge)
+  const owned = hasBadge(badge) || percent === 100
 
   let color = 'neutral.solidBg'
   if (owned) {
     color = 'success.solidBg'
-  } else if (value > 0) {
+  } else if (percent > 0) {
     color = 'primary.solidBg'
   }
 
@@ -39,7 +39,7 @@ const RequirementProgressOverlay: FC<{ badge: Badge, children: ReactNode }> = ({
         left: 0,
         bottom: 0,
         height: '2px',
-        width: `${Math.max(value, 0.01) * 100}%`,
+        width: `${Math.max(percent, 1)}%`,
         backgroundColor: color,
         pointerEvents: 'none',
         borderRadius: '999px',

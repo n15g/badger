@@ -18,6 +18,7 @@ import CharacterContextProvider from '../character/CharacterContextProvider.tsx'
 import AsyncSwitch from '../util/AsyncSwitch.tsx'
 import BadgeCharactersPanel from './BadgeCharactersPanel.tsx'
 import RequirementProgressOverlay from './RequirementProgressOverlay.tsx'
+import RequirementProgressLabel from './RequirementProgressLabel.tsx'
 
 const BadgeCard: FC<{ badge: Badge }> = ({ badge }) => {
   const { character, hasBadge, collectBadge } = CharacterContextProvider.useCharacterContext()
@@ -138,6 +139,9 @@ const BadgeCard: FC<{ badge: Badge }> = ({ badge }) => {
                     </div>
                   ))}
                 </List>
+                <Typography textAlign="center" sx={{ pt: 1 }}>
+                  <RequirementProgressLabel badge={badge}/>
+                </Typography>
               </RequirementProgressOverlay>
             )}
           </Box>
