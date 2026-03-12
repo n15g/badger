@@ -22,7 +22,7 @@ const BadgeIconLink: FC<{ value?: Badge | string, context?: VariantContext, mute
     return (
       <BadgeTooltip badge={badge}>
         <NavLink to={linkTarget}>
-          <BadgeIcon badge={badge} context={context} muted={!hasBadge(badge)} {...props}/>
+          <BadgeIcon badge={badge} context={context} muted={character && !hasBadge(badge)} {...props}/>
         </NavLink>
       </BadgeTooltip>
     )
