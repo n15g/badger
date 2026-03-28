@@ -29,9 +29,9 @@ export class CoHBuildFileParser implements Parser {
 
   constructor(content: CohContentDatabase) {
     for (const badge of content.badges) {
-      this._badges[badge.gameId.primal] = badge.key
+      this._badges[badge.gameId.primal.toLowerCase()] = badge.key
       if (badge.gameId.praetorian) {
-        this._badges[badge.gameId.praetorian] = badge.key
+        this._badges[badge.gameId.praetorian.toLowerCase()] = badge.key
       }
     }
   }
@@ -54,7 +54,7 @@ export class CoHBuildFileParser implements Parser {
               readingBadges = true
             }
           } else {
-            const badgeKey = this._badges[line]
+            const badgeKey = this._badges[line.toLowerCase()]
             if (badgeKey) {
               draft.badges[badgeKey] = { owned: true }
             }
