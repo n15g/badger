@@ -46,6 +46,7 @@
     "@vitejs/plugin-legacy": "^7.2.1",
     "@vitejs/plugin-react": "^5.1.1",
     "@vueless/storybook-dark-mode": "^10.0.4",
+    "baseline-browser-mapping": "^2.10.11",
     "coh-content-db-homecoming": "^2.0.0-rc.14",
     "eslint": "^9.39.1",
     "eslint-plugin-react-dom": "^2.3.9",
