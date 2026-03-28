@@ -10,7 +10,7 @@ const ErrorContext = createContext<ErrorFunc | undefined>(undefined)
 const ErrorProvider: FC<{ children: ReactNode }> & { useError: () => ErrorFunc } =
   ({ children }) => {
     const [errorStr, setErrorStr] = useState<string | undefined>(undefined)
-    const [open, setOpen] = useState<boolean>(false)
+    const [open, setOpen] = useState(false)
 
     const error = useCallback((err: unknown) => {
       console.error(err)

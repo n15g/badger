@@ -2,7 +2,7 @@ import { FC } from 'react'
 import { IconButton, Snackbar } from '@mui/joy'
 import { Icons } from './Icons.tsx'
 
-const CopyNotification: FC<{ open: boolean, onClose?: () => void }> = ({ open = false, onClose = () => void 0 }) => {
+const CopyNotification: FC<{ open?: boolean, onClose?: () => void }> = ({ open = false, onClose = () => void 0 }) => {
   return (
     <Snackbar open={open}
               color="success"

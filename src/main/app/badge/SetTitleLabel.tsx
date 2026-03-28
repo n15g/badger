@@ -1,12 +1,12 @@
 import { FC, useState } from 'react'
 import { styled, Typography } from '@mui/joy'
 import { Icons } from '../util/Icons.tsx'
-import { SetTitleIds } from 'coh-content-db'
+import { OriginBased } from 'coh-content-db'
 import CopyNotification from '../util/CopyNotification.tsx'
 
 const Sup = styled('sup')(() => ({ cursor: 'pointer' }))
 
-const SetTitleLabel: FC<{ value: SetTitleIds }> = ({ value }) => {
+const SetTitleLabel: FC<{ value: OriginBased<number> }> = ({ value }) => {
   const [copyNotificationOpen, setCopyNotificationOpen] = useState(false)
 
   const { primal, praetorian } = value

@@ -20,7 +20,7 @@ const defaultSearch: BadgeSearchOptionsEx = {
   pageSize: 20
 }
 
-const BadgeSearchBar: FC<BadgeSearchBarProps> & { defaultSearch: BadgeSearchOptions } = ({ searchOptions, onChange }) => {
+const BadgeSearchBar: FC<BadgeSearchBarProps> & { defaultSearch: BadgeSearchOptionsEx } = ({ searchOptions, onChange }) => {
   return (
     <Stack direction="column" gap={1} sx={{ mb: 2 }}>
       <BadgeSearchText {...{ searchOptions, onChange }}/>

@@ -13,7 +13,6 @@ import CharacterContextProvider from '../character/CharacterContextProvider.tsx'
 import { FC } from 'react'
 import BadgeIcon from './BadgeIcon.tsx'
 import AsyncCheckbox from '../util/AsyncCheckbox.tsx'
-import { BadgeSearchOptionsEx } from './search/badge-search-options-ex.ts'
 import { produce } from 'immer'
 
 const TD = styled('td')(() => ({}))
@@ -24,7 +23,7 @@ const hideOnSmall = { display: { xs: 'none', md: 'table-cell' } }
 const BadgeList: FC = () => {
   const content = ContentProvider.useContent()
   const { character, collectBadge, hasBadge } = CharacterContextProvider.useCharacterContext()
-  const [searchOptions, setSearchOptions] = useSessionStorage<BadgeSearchOptionsEx>('badge-list-parameters', BadgeSearchBar.defaultSearch)
+  const [searchOptions, setSearchOptions] = useSessionStorage('badge-list-parameters', BadgeSearchBar.defaultSearch)
 
   const results = content.searchBadges(produce(searchOptions, (draft) => {
     draft.context = character

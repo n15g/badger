@@ -6,7 +6,7 @@ import { ErrorBoundary } from 'react-error-boundary'
 
 function Index() {
   return (<>
-    <ErrorBoundary FallbackComponent={({ error }) => (<ErrorPage error={error as unknown}/>)}>
+    <ErrorBoundary FallbackComponent={({ error }) => (<ErrorPage error={error}/>)}>
       <Header/>
       <Box
         component="main"

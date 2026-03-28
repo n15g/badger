@@ -27,7 +27,7 @@ createRoot(root).render(
     <CssVarsProvider defaultMode="system" theme={Theme}>
       <CssBaseline/>
       <ErrorProvider>
-        <ErrorBoundary FallbackComponent={({ error }) => (<ErrorPage error={error as unknown}/>)}>
+        <ErrorBoundary FallbackComponent={({ error }) => (<ErrorPage error={error}/>)}>
           <BadgerDbProvider>
             <ContentLoader>
               <CharacterDbProvider>
