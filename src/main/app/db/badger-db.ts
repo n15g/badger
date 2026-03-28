@@ -6,13 +6,19 @@ const DATABASE_NAME = 'badger-2'
 const VERSION = 1
 
 let dbInstance: BadgerDb | undefined = undefined
+let dbPromise: Promise<BadgerDb> | undefined = undefined
 
 export async function getBadgerDb(): Promise<BadgerDb> {
   if (dbInstance) {
     return dbInstance
   }
+
+  if (dbPromise) {
+    return dbPromise
+  }
+
   console.info('Connecting IDB...')
-  const db = await openDB<BadgerDbSchema>(DATABASE_NAME, VERSION, {
+  dbPromise = openDB<BadgerDbSchema>(DATABASE_NAME, VERSION, {
     upgrade(db) {
       if (!db.objectStoreNames.contains('kv-store')) {
         db.createObjectStore('kv-store', { keyPath: 'key' })
@@ -21,10 +27,16 @@ export async function getBadgerDb(): Promise<BadgerDb> {
         db.createObjectStore('characters', { keyPath: 'key' })
       }
     },
+  }).then((db) => {
+    console.info('Connected')
+    dbInstance = new BadgerDb(db)
+    return dbInstance
+  }).catch((error: unknown) => {
+    dbPromise = undefined
+    throw error
   })
-  console.info('Connected')
-  dbInstance = new BadgerDb(db)
-  return dbInstance
+
+  return dbPromise
 }
 
 export class BadgerDb {

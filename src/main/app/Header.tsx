@@ -22,6 +22,7 @@ import logo from '../resources/images/logo/badger.svg'
 import { useState } from 'react'
 import { MdOutlineMenu } from 'react-icons/md'
 import { Icons } from './util/Icons.tsx'
+import SettingsButton from './util/SettingsButton.tsx'
 
 function Header() {
   const [drawerOpen, setDrawerOpen] = useState(false)
@@ -55,7 +56,7 @@ function Header() {
         <img src={logo} alt="Badger" style={{ height: 40, marginRight: 16 }}/>
         Badger
       </Typography>
-      <Box sx={{ display: { xs: 'none', lg: 'flex' }, flexGrow: 1, justifyContent: 'space-between' }}>
+      <Box sx={{ display: { xs: 'none', lg: 'flex' }, flexGrow: 1, justifyContent: 'space-between', gap: 1 }}>
         <List role="menubar" orientation="horizontal">
           <ListDivider/>
           <NavLink to="/" end><ListItem>About</ListItem></NavLink>
@@ -96,6 +97,7 @@ function Header() {
           </Dropdown>
           <ListDivider/>
         </List>
+        <SettingsButton/>
         <PaletteButton/>
       </Box>
 
@@ -158,6 +160,7 @@ function Header() {
               </ListItemButton>
             </ListItem>
           </List>
+          <SettingsButton/>
         </Drawer>
       </Box>
 
