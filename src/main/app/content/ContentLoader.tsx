@@ -28,49 +28,44 @@ const ContentLoader: FC<{ children: ReactNode }> & { useContentLoader: () => Con
     const [bundleSource, setBundleSource] = useState<string | undefined>()
     const [content, setContent] = useState<CohContentDatabase | undefined>()
 
-    const loadBundle = useCallback(async (newSource?: BundleSource) => {
-      const loadHrefBundle = async (href: string) => {
-        const response = await axios.get(href)
-        const bundle = await response.data as BundleData
-        setContent(new CohContentDatabase(bundle))
-        setBundleSource(href)
-      }
-
-      const loadIdbBundle = async () => {
-        const savedBundle = await badgerDb.getKv<BundleData>(BUNDLE_CACHE_KEY)
-        if (!savedBundle) {
-          throw new Error(`No bundle found in IDB.`)
-        }
-        setContent(new CohContentDatabase(savedBundle))
-        setBundleSource('idb')
-      }
-
-      if (!newSource) {
-        const savedSource = await badgerDb.getKv<string>(BUNDLE_SOURCE_KEY)
-        if (savedSource === 'idb') {
-          try {
-            await loadIdbBundle()
-            setBundleSource('idb')
-          } catch (err) {
-            console.error('Error while loading bundle from IDB', err)
-            error('Error while loading cached bundle, reverting to default bundle.')
-            await loadHrefBundle(DEFAULT_BUNDLE_SOURCE)
-          }
-        } else {
-          await loadHrefBundle(savedSource ?? DEFAULT_BUNDLE_SOURCE)
-        }
-      } else if (typeof newSource === 'string') {
-        await loadHrefBundle(newSource)
+    const loadBundle = useCallback(async (newSource: BundleSource) => {
+      if (typeof newSource === 'string') {
+        const response = await axios.get(newSource)
+        const newBundle = await response.data as BundleData
+        await badgerDb.putKv(BUNDLE_SOURCE_KEY, newSource)
+        setBundleSource(newSource)
+        setContent(new CohContentDatabase(newBundle))
       } else {
-        setContent(new CohContentDatabase(newSource))
-        await badgerDb.putKv(BUNDLE_CACHE_KEY, newSource)
+        await badgerDb.putKv(BUNDLE_SOURCE_KEY, 'idb')
         setBundleSource('idb')
+        await badgerDb.putKv(BUNDLE_CACHE_KEY, newSource)
+        setContent(new CohContentDatabase(newSource))
       }
-      // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [])
+    }, [badgerDb])
+
+    const initialLoad = useCallback(async () => {
+      try {
+        const savedSource = await badgerDb.getKv<string>(BUNDLE_SOURCE_KEY)
+
+        if (savedSource === 'idb') {
+          const savedBundle = await badgerDb.getKv<BundleData>(BUNDLE_CACHE_KEY)
+          if (!savedBundle) {
+            error('No bundle found, reverting to default bundle')
+            await loadBundle(DEFAULT_BUNDLE_SOURCE)
+            return
+          }
+          await loadBundle(savedBundle)
+        } else {
+          await loadBundle(DEFAULT_BUNDLE_SOURCE)
+        }
+      } catch (err) {
+        error(err)
+        await loadBundle(DEFAULT_BUNDLE_SOURCE)
+      }
+    }, [badgerDb, error, loadBundle])
 
     useEffect(() => {
-      void loadBundle()
+      void initialLoad()
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 

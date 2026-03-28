@@ -8,6 +8,7 @@ import ContentProvider from '../content/ContentProvider.tsx'
 import { CoHLogFileParser } from './parser/coh-log-file-parser.ts'
 import { BadgerV1ExportFileParser } from './parser/badger-v1-export-file-parser.ts'
 import { BadgerV2ExportFileParser } from './parser/badger-v2-export-file-parser.ts'
+import { CoHBuildFileParser } from './parser/coh-build-file-parser.ts'
 
 const ImportDropzone: FC<{ onParse?: (result: FileImportResult[]) => void }>
   = ({ onParse }) => {
@@ -19,6 +20,7 @@ const ImportDropzone: FC<{ onParse?: (result: FileImportResult[]) => void }>
   const parsers = useMemo(() => {
     return [
       new CoHLogFileParser(content),
+      new CoHBuildFileParser(content),
       BadgerV1ExportFileParser,
       BadgerV2ExportFileParser,
     ]

@@ -10,17 +10,16 @@ const BadgerDbProvider: FC<{ children: ReactNode }> & { useBadgerDb: () => Badge
     const [badgerDb, setBadgerDb] = useState<BadgerDb | undefined>()
 
     useEffect(() => {
-      const loadDb = async () => {
-        if (!badgerDb) {
-          setBadgerDb(await getBadgerDb())
-        }
-      }
+      let cancelled = false
 
-      void loadDb()
+      void getBadgerDb().then((db) => {
+        if (!cancelled) {
+          setBadgerDb(db)
+        }
+      })
 
       return () => {
-        // Close DB on effect cleanup
-        badgerDb?.close()
+        cancelled = true
       }
     }, [badgerDb])
 

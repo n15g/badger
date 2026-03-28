@@ -9,6 +9,7 @@ import {
   MdLocalPolice,
   MdLocationOn,
   MdSearch,
+  MdSettings,
   MdUpload,
   MdWarning
 } from 'react-icons/md'
@@ -64,6 +65,7 @@ export const Icons = {
   Upload: MdUpload,
   Help: MdHelp,
   Info: MdInfo,
+  Settings: MdSettings,
 
   Sort: BiSortAlt2,
   Asc: FaSortAlphaUp,

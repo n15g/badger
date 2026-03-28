@@ -5,6 +5,7 @@ export const IMPORT_TAG = [
   'v1',
   'badger',
   'log',
+  'build',
   'unknown',
   'error',
 ] as const

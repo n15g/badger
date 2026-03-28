@@ -17,6 +17,7 @@ import CharacterLoader from './character/CharacterLoader.tsx'
 import CharacterViewPage from './character/CharacterViewPage.tsx'
 import { createHashRouter } from 'react-router'
 import Index from './Index.tsx'
+import Settings from './Settings.tsx'
 
 export const Routes = createHashRouter([
   {
@@ -49,6 +50,8 @@ export const Routes = createHashRouter([
 
       { path: '/zones', element: <ZoneListPage/> },
       { path: '/zones/:zoneKey', element: <ZoneViewPage/> },
+
+      { path: '/settings', element: <Settings/> },
     ]
   },
 ])
