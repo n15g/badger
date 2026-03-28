@@ -1,5 +1,5 @@
 import { FC, useCallback, useState } from 'react'
-import { Box, Button, Modal, ModalClose, ModalDialog, Stack, Step, StepIndicator, Stepper, Typography } from '@mui/joy'
+import { Box, Button, Chip, Link, Modal, ModalClose, ModalDialog, Stack, Step, StepIndicator, Stepper, Typography } from '@mui/joy'
 import SettitleScriptHelpLink from './/SettitleScriptHelpLink.tsx'
 import { Icons } from '../util/Icons.tsx'
 import FileImportResultSummary from './FileImportResultSummary.tsx'
@@ -99,8 +99,19 @@ const ImportCharactersModal: FC<{ open: boolean, onClose: () => void }>
             <Typography>You can import characters into the app by uploading the following types of files:</Typography>
             <ul>
               <li>Previously exported characters as <code>.json</code> or <code>.json.gz</code> files.</li>
-              <li>CoH game log files that contain output from the <SettitleScriptHelpLink/>.</li>
-              <li>Badger 1 character exports saved to <code>.txt</code> files.</li>
+              <li><Chip color="success" size="sm">New!</Chip> Build files generated with the
+                {' '}
+                <Link href="https://homecoming.wiki/wiki/Build_save_file_(Slash_Command)"
+                      target="_blank"
+                      endDecorator={<Icons.Link/>}>
+                  <code>/build_save</code>
+                </Link>
+                {' '}command.
+              </li>
+              <li>
+                <Chip color="danger" size="sm">Legacy</Chip> CoH game log files that contain output from the <SettitleScriptHelpLink/>.
+              </li>
+              <li><Chip color="danger" size="sm">Legacy</Chip> Badger 1 character exports saved to <code>.txt</code> files.</li>
             </ul>
 
             <ImportDropzone onParse={(result) => {

@@ -11,6 +11,7 @@ export const Views = new TypedIndex<ImportTag, ReactNode>({
   v1: <Chip color="warning">v1</Chip>,
   badger: <Chip color="success">badger</Chip>,
   log: <Chip color="success">log</Chip>,
+  build: <Chip color="success">build</Chip>,
 
   unknown: <Chip color="neutral">unknown</Chip>,
   error: <Chip color="danger">error</Chip>,
