@@ -19,16 +19,17 @@ import AsyncSwitch from '../util/AsyncSwitch.tsx'
 import BadgeCharactersPanel from './BadgeCharactersPanel.tsx'
 import RequirementProgressOverlay from './RequirementProgressOverlay.tsx'
 import RequirementProgressLabel from './RequirementProgressLabel.tsx'
+import GameIdList from './GameIdList.tsx'
 
 const BadgeCard: FC<{ badge: Badge }> = ({ badge }) => {
   const { character, hasBadge, collectBadge } = CharacterContextProvider.useCharacterContext()
 
   const owned = !character || hasBadge(badge)
   const badgesLink = character ? `/characters/${character.key}` : `/badges`
-
   const {
     type,
     icon,
+    gameId,
     badgeText,
     morality,
     links,
@@ -36,8 +37,8 @@ const BadgeCard: FC<{ badge: Badge }> = ({ badge }) => {
     requirements,
     notes,
     effect,
-    releaseDate,
     setTitleId,
+    releaseDate,
     ignoreInTotals
   } = badge
 
@@ -79,6 +80,8 @@ const BadgeCard: FC<{ badge: Badge }> = ({ badge }) => {
             )}
 
             <MoralityListIcons moralityList={morality}/>
+
+            <GameIdList value={gameId}/>
 
             {setTitleId && (
               <SetTitleLabel value={setTitleId}/>

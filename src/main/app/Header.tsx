@@ -79,7 +79,7 @@ function Header() {
           <ListDivider/>
           <Dropdown>
             <MenuButton slots={{ root: ListItem }} sx={{ cursor: 'pointer' }}>
-              Changelogs <Icons.ChevronDown/>
+              Release Notes <Icons.ChevronDown/>
             </MenuButton>
             <Menu>
               <MenuItem>
@@ -149,7 +149,7 @@ function Header() {
             </ListItem>
             <Divider/>
             <ListItem nested>
-              <ListSubheader>Changelogs</ListSubheader>
+              <ListSubheader>Release Notes</ListSubheader>
               <ListItemButton component={NavLink} to="https://github.com/n15g/badger/blob/master/CHANGELOG.md">
                 Badger <Icons.ExternalLink/>
               </ListItemButton>
