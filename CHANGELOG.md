@@ -11,7 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - [2.3.0] Characters can now be imported from `/build_save` exports ([#62](https://github.com/n15g/badger/issues/62))
 - [2.3.0] Support for gameIds in badge data ([#62](https://github.com/n15g/badger/issues/62))
-- [2.3.0] Settings page with the option to change where the game data is fetched from
+- [2.3.0] Settings page with the option to change where the game data is fetched from ([#70](https://github.com/n15g/badger/issues/70))
 
 ---
 
