@@ -5,7 +5,7 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [2.3.2] - 2026-04-28
+## [2.3.3] - 2026-04-28
 
 ### Fixed
 
@@ -17,6 +17,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [2.3.0] Characters can now be imported from `/build_save` exports ([#62](https://github.com/n15g/badger/issues/62))
 - [2.3.0] Support for gameIds in badge data ([#62](https://github.com/n15g/badger/issues/62))
 - [2.3.0] Settings page with the option to change where the game data is fetched from ([#70](https://github.com/n15g/badger/issues/70))
+
+### Changed
+
+- [2.3.3] Added 'Badges' to the Homecoming changelog link so that it doesn't look like a link to the Homecoming server changelog
 
 ---
 

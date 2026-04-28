@@ -90,7 +90,7 @@ function Header() {
               </MenuItem>
               <MenuItem>
                 <NavLink to="https://github.com/n15g/coh-content-db-homecoming/blob/master/CHANGELOG.md/">
-                  Homecoming <Icons.ExternalLink/>
+                  Homecoming Badges <Icons.ExternalLink/>
                 </NavLink>
               </MenuItem>
             </Menu>
@@ -156,7 +156,7 @@ function Header() {
                 Badger <Icons.ExternalLink/>
               </ListItemButton>
               <ListItemButton component={NavLink} to="https://github.com/n15g/coh-content-db-homecoming/blob/master/CHANGELOG.md">
-                Homecoming <Icons.ExternalLink/>
+                Homecoming Badges<Icons.ExternalLink/>
               </ListItemButton>
             </ListItem>
           </List>
