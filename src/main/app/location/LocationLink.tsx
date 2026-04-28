@@ -16,8 +16,8 @@ const LocationLink: FC<{ location: Location }> = ({ location }) => {
 
   return (
     <Typography component="span" display="inline-block" className="entityLink"
-                startDecorator={icon && <LocationIcon icon={icon} text={iconText}/>}
-                endDecorator={<Icons.Zone/>}
+                startDecorator={<Icons.Zone/>}
+                endDecorator={icon && <LocationIcon icon={icon} text={iconText}/>}
     >
       {zone && (
         <ZoneTooltip zone={zone}>
