@@ -6,7 +6,7 @@ const BadgeCount: FC<{ character: Partial<Character> }> = ({ character }) => {
   const content = ContentProvider.useContent()
 
   const count = content.badges.reduce((acc, badge) => {
-    return (!badge.ignoreInTotals && character.badges?.[badge.key]?.owned) ? ++acc : acc
+    return (!badge.ignoreInTotals && character.badges?.[badge.key]?.owned) ? acc + 1 : acc
   }, 0)
 
   return <>{count} badge{count !== 1 ? 's' : ''}</>

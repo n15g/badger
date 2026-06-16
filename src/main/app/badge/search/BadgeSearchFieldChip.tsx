@@ -66,7 +66,7 @@ const BadgeSearchFieldChip: FC<{
               onChange={(_, newValue) => {
                 onChange?.(produce(searchOptions, (draft) => {
                   draft.query ??= {}
-                  draft.query.fields = newValue as BadgeQueryableField[]
+                  draft.query.fields = newValue
                 }))
               }}
               slots={{
@@ -74,7 +74,6 @@ const BadgeSearchFieldChip: FC<{
               }}
               options={selectOptions.keys}
               renderOption={(props, option, { selected }) => (
-                // eslint-disable-next-line react-x/jsx-key-before-spread
                 <AutocompleteOption {...props} key={option}>
                   <ListItemDecorator>{selected && <Icons.Check/>}</ListItemDecorator>
                   {selectOptions.get(option)}

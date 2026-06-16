@@ -65,6 +65,7 @@ const ContentLoader: FC<{ children: ReactNode }> & { useContentLoader: () => Con
     }, [badgerDb, error, loadBundle])
 
     useEffect(() => {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       void initialLoad()
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])

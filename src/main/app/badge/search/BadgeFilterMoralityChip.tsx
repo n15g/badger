@@ -66,7 +66,6 @@ const BadgeFilterMoralityChip: FC<{
               }}
               options={MORALITY}
               renderOption={(props, morality) => (
-                // eslint-disable-next-line react-x/jsx-key-before-spread
                 <AutocompleteOption {...props} key={morality}>
                   <ListItemDecorator>
                     <MoralityIcon morality={morality} style={{ height: '1.2em' }}/>

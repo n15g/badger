@@ -44,7 +44,7 @@ function importLegacyCharacters(content: CohContentDatabase): Character[] {
     return []
   }
 
-  let legacyJSON: { content: Record<string, LegacyCharacter> } = { content: {} }
+  let legacyJSON: { content: Record<string, LegacyCharacter> }
   try {
     legacyJSON = JSON.parse(legacyString) as never
   } catch (err: unknown) {

@@ -157,6 +157,7 @@ const CharacterDbProvider: FC<{ children: ReactNode }> & { useCharacterDb: () =>
     }, [content, collectBadge, mutateCharacter])
 
     useEffect(() => {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       void refreshCharacters()
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
@@ -239,7 +240,7 @@ function _collectBadge(
 }
 
 /**
- * Scan the draft looking for badges that may now be complete/incomplete (Accolades, Gladiator, etc.) because the given badge owned state has changed.
+ * Scan the draft looking for badges that may now be complete/incomplete (Accolades, Gladiator, etc.) because the given badge 'owned' state has changed.
  * @param draft The draft
  * @param content ContentDB so we know what badges there are available.
  * @param badge The changed badge.
