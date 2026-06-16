@@ -44,6 +44,14 @@ See the README file in that repository for details on how to modify badge conten
 The app will now be accessible at http://localhost:5173 and storybook at http://localhost:6006.
 Most changes will be reflected automatically without needing to restart the server.
 
+### Checking dependencies
+
+Use [npm-check-updates](https://www.npmjs.com/package/npm-check-updates) to check for package updates:
+
+1. `npx npm-check-updates`
+2. `npx npm-check-updates -u`
+3. `npm install`
+
 ----
 
 # Release

@@ -3,7 +3,7 @@ import { Chip } from '@mui/joy'
 import { ImportTag } from './import-tag.ts'
 import { TypedIndex } from '../util/typed-index.ts'
 
-export const Views = new TypedIndex<ImportTag, ReactNode>({
+const Views = new TypedIndex<ImportTag, ReactNode>({
   gzip: <Chip color="primary">gzip</Chip>,
   json: <Chip color="primary">json</Chip>,
   text: <Chip color="primary">text</Chip>,

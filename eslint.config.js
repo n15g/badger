@@ -6,7 +6,6 @@ import globals from 'globals'
 import reactHooks from 'eslint-plugin-react-hooks'
 import reactRefresh from 'eslint-plugin-react-refresh'
 import tseslint from 'typescript-eslint'
-import reactX from 'eslint-plugin-react-x'
 import reactDom from 'eslint-plugin-react-dom'
 
 export default tseslint.config({ ignores: ['dist'] }, {
@@ -14,22 +13,21 @@ export default tseslint.config({ ignores: ['dist'] }, {
     js.configs.recommended,
     ...tseslint.configs.strictTypeChecked,
     ...tseslint.configs.stylisticTypeChecked,
+    reactHooks.configs.flat.recommended,
   ],
   files: ['**/*.{ts,tsx}'],
   languageOptions: {
-    ecmaVersion: 2020,
+    ecmaVersion: 'latest',
     globals: globals.browser,
     parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
+      projectService: true,
       tsconfigRootDir: import.meta.dirname,
     },
   },
   plugins: {
-    'react-hooks': reactHooks,
     'react-refresh': reactRefresh,
   },
   rules: {
-    ...reactHooks.configs.recommended.rules,
     'react-refresh/only-export-components': [
       'warn',
       { allowConstantExport: true },
@@ -41,12 +39,7 @@ export default tseslint.config({ ignores: ['dist'] }, {
     '@typescript-eslint/require-await': 'off',
   },
 }, {
-  plugins: {
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
+  extends: [
+    reactDom.configs.recommended,
+  ],
 }, storybook.configs['flat/recommended'])

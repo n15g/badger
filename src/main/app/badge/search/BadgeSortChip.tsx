@@ -65,7 +65,6 @@ const BadgeSortChip: FC<{
               groupBy={(x) => sortFields.get(x)?.label ?? ''}
               renderTags={() => null}
               renderOption={(props, option) => (
-                // eslint-disable-next-line react-x/jsx-key-before-spread
                 <AutocompleteOption {...props} key={option}>
                   <ListItemDecorator>
                     {sortFields.get(option)?.asc ? <Icons.Asc/> : <Icons.Desc/>}
