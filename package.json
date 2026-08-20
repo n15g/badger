@@ -6,16 +6,21 @@
   "packageManager": "npm@12.0.2",
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build",
+    "audit": "npm audit --audit-level=high",
+    "build": "npm run typecheck && npm run build:app",
+    "build:app": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
+    "typecheck": "tsc -b",
+    "validate": "npm run lint && npm run build && npm run storybook:build",
     "link:db": "npm link coh-content-db",
     "link:hc": "npm link coh-content-db-homecoming",
     "link:all": "npm link coh-content-db coh-content-db-homecoming",
     "upgrade:db": "npm install --save coh-content-db@latest",
     "upgrade:hc": "npm install --save-dev coh-content-db-homecoming@latest",
     "push": "git push && git push --tags",
-    "storybook": "storybook dev -p 6006 -c src/main/storybook"
+    "storybook": "storybook dev -p 6006 -c src/main/storybook",
+    "storybook:build": "storybook build -c src/main/storybook"
   },
   "repository": "https://github.com/n15g/badger",
   "dependencies": {
