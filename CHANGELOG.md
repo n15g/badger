@@ -12,6 +12,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Added explicit audit, type-check, application build, Storybook build, and aggregate validation commands.
 - Added pull-request validation and downloadable CI build artifacts.
 
+### Fixed
+
+- Excluded generated application and Storybook bundles from lint validation.
+
 ### Security
 
 - Updated application and build dependencies to resolve reported vulnerabilities in React Router, Nano ID, PostCSS, and brace expansion.
