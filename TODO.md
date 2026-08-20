@@ -4,14 +4,6 @@ This backlog records non-critical maintenance work and deliberate technical deci
 
 ## Candidate Work
 
-### Review npm install-script policy
-
-npm 12 blocks dependency install scripts unless they are explicitly covered by the project's `allowScripts` policy. The current install reports blocked scripts for `core-js` and `esbuild`, while clean installation, application builds, and Storybook builds still pass.
-
-- Review what each script does before approving or denying it.
-- Pin any approval to the reviewed package version.
-- Confirm the decision on every supported development and CI platform.
-
 ### Replace Moment
 
 [Moment](https://momentjs.com/docs/#/-project-status/) is a stable legacy project in maintenance mode. Badger uses it for relative timestamps and a small number of display formats.

@@ -21,6 +21,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Updated application and build dependencies to resolve reported vulnerabilities in React Router, Nano ID, PostCSS, and brace expansion.
 - Reduced GitHub Actions permissions to the minimum required by each job and pinned actions to immutable commits.
+- Added an explicit npm install-script policy that permits only the version-pinned esbuild installation hook.
 
 ### Changed
 
