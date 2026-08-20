@@ -1,14 +1,14 @@
-import { Alert, Box, Card, CardContent, CardOverflow, Stack, Typography } from '@mui/joy'
+import { Box, Card, CardContent, CardOverflow, Stack, Typography } from '@mui/joy'
 import BadgeIcon from './badge/BadgeIcon.tsx'
 import homecomingLogo from '../resources/images/logo/homecoming.png'
 import ContentProvider from './content/ContentProvider.tsx'
 import MainSection from './util/MainSection.tsx'
 import { NavLink } from 'react-router'
 import { MdNewReleases } from 'react-icons/md'
-import moment from 'moment'
 import SmartLink from './util/SmartLink.tsx'
 import { CgInfo } from 'react-icons/cg'
 import { BiImport } from 'react-icons/bi'
+import VersionInfo from './VersionInfo.tsx'
 
 function AboutPage() {
   const content = ContentProvider.useContent()
@@ -49,12 +49,7 @@ function AboutPage() {
           </CardOverflow>
         </Card>
 
-        <Alert color="primary">
-          <Stack direction="row" flexWrap="wrap" justifyContent="center" columnGap={4}>
-            <Typography>Content Version: {content.header.version}</Typography>
-            <Typography>Last Updated: {moment(content.header.lastUpdateTime).fromNow()}</Typography>
-          </Stack>
-        </Alert>
+        <VersionInfo/>
 
         <Card color="success" sx={{ maxWidth: 800 }}>
           <Typography level="h4" textAlign="center"><MdNewReleases/> What's changed?</Typography>

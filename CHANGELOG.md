@@ -5,22 +5,60 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [2.3.3] - 2026-04-28
-
-### Fixed
-
-- [2.3.2] Standardized location link order with other links
-- [2.3.1] Build import is no longer case-sensitive
+## [Unreleased]
 
 ### Added
 
-- [2.3.0] Characters can now be imported from `/build_save` exports ([#62](https://github.com/n15g/badger/issues/62))
-- [2.3.0] Support for gameIds in badge data ([#62](https://github.com/n15g/badger/issues/62))
-- [2.3.0] Settings page with the option to change where the game data is fetched from ([#70](https://github.com/n15g/badger/issues/70))
+- Added explicit audit, type-check, application build, Storybook build, and aggregate validation commands.
+- Added pull-request validation and downloadable CI build artifacts.
+- Documented deferred maintenance work and deliberate architecture decisions.
+- Displayed the application version and build time alongside the content metadata.
+
+### Fixed
+
+- Excluded generated application and Storybook bundles from lint validation.
+
+### Security
+
+- Updated application and build dependencies to resolve reported vulnerabilities in React Router, Nano ID, PostCSS, and brace expansion.
+- Reduced GitHub Actions permissions to the minimum required by each job and pinned actions to immutable commits.
+- Added an explicit npm install-script policy that permits only the version-pinned esbuild installation hook.
 
 ### Changed
 
-- [2.3.3] Added 'Badges' to the Homecoming changelog link so that it doesn't look like a link to the Homecoming server changelog
+- Standardized development and builds on Node.js 24 and npm 12.
+- Updated to `coh-content-db` and `coh-content-db-homecoming` 2.3.0.
+- Removed the obsolete esbuild dependency override.
+- Switched CI and release installs from `npm install` to reproducible `npm ci` installs.
+- Changed prerelease tags to retain build artifacts without deploying over the stable GitHub Pages site.
+
+---
+
+## [2.3.3] - 2026-04-28
+
+### Changed
+
+- Added "Badges" to the Homecoming changelog link so that it doesn't look like a link to the Homecoming server changelog.
+
+## [2.3.2] - 2026-04-28
+
+### Fixed
+
+- Standardized location link order with other links.
+
+## [2.3.1] - 2026-03-28
+
+### Fixed
+
+- Build import is no longer case-sensitive.
+
+## [2.3.0] - 2026-03-28
+
+### Added
+
+- Characters can now be imported from `/build_save` exports ([#62](https://github.com/n15g/badger/issues/62)).
+- Support for game IDs in badge data ([#62](https://github.com/n15g/badger/issues/62)).
+- Added a settings page with the option to change where the game data is fetched from ([#70](https://github.com/n15g/badger/issues/70)).
 
 ---
 
@@ -28,20 +66,32 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
-- [2.2.3] Fixed incorrectly muted icons on the global badge list
+- Fixed incorrectly muted icons on the global badge list.
+
+## [2.2.2] - 2026-03-13
 
 ### Added
 
-- [2.2.2] Update related badges when a badge is collected (e.g. Accolades that require that badge) ([#60](https://github.com/n15g/badger/issues/60))
-- [2.2.2] Added a progress indicator to the badge list and badge view for badges that have multiple requirements ([#60](https://github.com/n15g/badger/issues/60))
-- [2.2.0] Sort the character list by server
-- [2.2.0] Added character origins to improve Praetorian badge variant display ([#58](https://github.com/n15g/badger/issues/58))
+- Update related badges when a badge is collected, such as accolades that require that badge ([#60](https://github.com/n15g/badger/issues/60)).
+- Added a progress indicator to the badge list and badge view for badges that have multiple requirements ([#60](https://github.com/n15g/badger/issues/60)).
 
 ### Changed
 
-- [2.2.2] Switched from brightness to opacity filter for better appearance of muted elements on light mode ([#60](https://github.com/n15g/badger/issues/60))
-- [2.2.2] Link from the badge view to the badge list under a character now shows the badge list tab correctly ([#60](https://github.com/n15g/badger/issues/60))
-- [2.2.1] Display invention count requirements on badge list ([#59](https://github.com/n15g/badger/issues/59))
+- Switched from a brightness filter to opacity for a better appearance of muted elements in light mode ([#60](https://github.com/n15g/badger/issues/60)).
+- Links from the badge view to a character's badge list now show the badge-list tab correctly ([#60](https://github.com/n15g/badger/issues/60)).
+
+## [2.2.1] - 2026-01-27
+
+### Changed
+
+- Display invention-count requirements on the badge list ([#59](https://github.com/n15g/badger/issues/59)).
+
+## [2.2.0] - 2026-01-20
+
+### Added
+
+- Sort the character list by server.
+- Added character origins to improve Praetorian badge variant display ([#58](https://github.com/n15g/badger/issues/58)).
 
 ---
 
@@ -49,42 +99,61 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
-- [2.1.3] Character Import Modal Doesn't Scroll ([#57](https://github.com/n15g/badger/issues/57))
-- [2.1.2] Import merge was doing nothing ([#56](https://github.com/n15g/badger/issues/56))
-- [2.1.0] Links in badge tooltip are broken ([#54](https://github.com/n15g/badger/issues/54))
-- [2.1.0] Settitle script was missing badges ([#55](https://github.com/n15g/badger/issues/55))
+- Fixed the character-import modal not scrolling ([#57](https://github.com/n15g/badger/issues/57)).
+
+## [2.1.2] - 2026-01-15
+
+### Fixed
+
+- Fixed imported character data not being merged ([#56](https://github.com/n15g/badger/issues/56)).
+
+## [2.1.1] - 2026-01-14
+
+- No user-facing changes were documented for this release.
+
+## [2.1.0] - 2026-01-14
+
+### Fixed
+
+- Fixed broken links in badge tooltips ([#54](https://github.com/n15g/badger/issues/54)).
+- Fixed badges missing from the set-title script ([#55](https://github.com/n15g/badger/issues/55)).
 
 ### Added
 
-- [2.1.0] Character import and export, and log parser ([#50](https://github.com/n15g/badger/pull/50))
-- [2.1.0] Polyfills for pre-2023 browser support ([#51](https://github.com/n15g/badger/pull/51))
-- [2.1.0] Collect multiple badges simultaneously from the badge list ([#53](https://github.com/n15g/badger/pull/53))
+- Character import and export, and a log parser ([#50](https://github.com/n15g/badger/pull/50)).
+- Polyfills for pre-2023 browser support ([#51](https://github.com/n15g/badger/pull/51)).
+- Collect multiple badges simultaneously from the badge list ([#53](https://github.com/n15g/badger/pull/53)).
 
 ### Changed
 
-- [2.1.0] Badge character list now links to the clicked character's badge page ([#52](https://github.com/n15g/badger/issues/52))
+- The badge character list now links to the clicked character's badge page ([#52](https://github.com/n15g/badger/issues/52)).
 
 ### Security
 
-- [2.1.0] Bumped `react-router` version due to reported vulnerabilities < 7.12.0
+- Bumped `react-router` due to reported vulnerabilities in versions before 7.12.0.
 
-----
+---
 
 ## [2.0.7] - 2026-01-08
 
 ### Added
 
-- [2.0.7] Show characters that have a badge on the badge view ([#49](https://github.com/n15g/badger/pull/49))
-- [2.0.6] Contact, Mission and Zone data
-- [2.0.6] Tooltips when hovering over Badges, Contacts, Missions and Zones
-- [2.0.6] Sort Badges by release date
-- [2.0.6] Copy /settitle and /thumbtack commands to the clipboard
+- Show characters that have a badge on the badge view ([#49](https://github.com/n15g/badger/pull/49)).
+
+## [2.0.6] - 2026-01-06
+
+### Added
+
+- Contact, mission, and zone data.
+- Tooltips when hovering over badges, contacts, missions, and zones.
+- Sort badges by release date.
+- Copy `/settitle` and `/thumbtack` commands to the clipboard.
 
 ### Changed
 
-- [2.0.6] Updated to the [coh-content-db:2.0.0](https://github.com/n15g/coh-content-db) data model
-- [2.0.6] Rebuilt the application using React instead of Angular
+- Updated to the [coh-content-db 2.0.0](https://github.com/n15g/coh-content-db) data model.
+- Rebuilt the application using React instead of Angular.
 
 ### Removed
 
-- [2.0.6] Server group management— The app is specifically designed for Homecoming now
+- Server group management; the app is now specifically designed for Homecoming.

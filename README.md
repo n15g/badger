@@ -1,6 +1,6 @@
 # Badger
 
-[![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/n15g/badger/build.yml?branch=master)](https://github.com/n15g/badger/actions)
+[![CI](https://img.shields.io/github/actions/workflow/status/n15g/badger/ci.yml?branch=master&label=CI)](https://github.com/n15g/badger/actions/workflows/ci.yml)
 [![GitHub Tag](https://img.shields.io/github/v/tag/n15g/badger)](https://github.com/n15g/badger/tags)
 [![GitHub License](https://img.shields.io/github/license/n15g/badger)](LICENSE)
 
@@ -18,6 +18,12 @@ Go hunt. Kill Skuls.
 
 ----
 
+# Maintenance Backlog
+
+[TODO.md](TODO.md)
+
+----
+
 # Development
 
 If you'd like to run the app locally for development purposes, here's what you'll need:
@@ -31,13 +37,13 @@ See the README file in that repository for details on how to modify badge conten
 
 ### Requirements
 
-* [Node JS 22+](https://nodejs.org/)
+* [Node JS 24+](https://nodejs.org/)
 * [git SCM](https://git-scm.com/)
 
 ### Running locally
 
 1. Clone the project `git clone git@github.com:n15g/badger.git`
-2. Install project dependencies `npm install`
+2. Install project dependencies `npm ci`
 3. Launch the development server `npm run dev`
 4. Launch storybook `npm run storybook`
 
@@ -56,12 +62,10 @@ Use [npm-check-updates](https://www.npmjs.com/package/npm-check-updates) to chec
 
 # Release
 
-1. Determine the next [Semantic Release](https://semver.org) version, i.e. `2.0.0-rc.16`
-2. Update the version and release notes in the [CHANGELOG.md](CHANGELOG.md).
-    * Commit with the comment `Changelog <semver>`
-3. `npm version <semver>` - Updates the package.json and commits + tags new version. Use semver syntax for version number.
-4. `npm run push` - Push the commit and tags to remote.
-5. GitHub will release automatically.
+1. Determine the next [Semantic Version](https://semver.org), such as `2.4.0` or `2.4.0-rc.1`.
+2. Move the release notes from `Unreleased` into a versioned section in [CHANGELOG.md](CHANGELOG.md), then commit them.
+3. Run `npm run validate` and `npm run audit`.
+4. Run `npm version <version>` to update `package.json` and `package-lock.json`, create the version commit, and add the corresponding `v`-prefixed tag.
+5. Run `npm run push` to push the commit and tags.
 
-Tags matching the pattern `v<X>.<Y>.<Z>` will attempt to publish to npm (this can only be achieved by the package manager (n15g).
-The `npm version` command automatically prepends the `v` prefix to the version number.
+Every matching tag is validated and produces a downloadable application artifact. Stable tags such as `v2.4.0` deploy that artifact to GitHub Pages; prerelease tags such as `v2.4.0-rc.1` do not replace the production site. Badger is a private application package and is not published to npm.

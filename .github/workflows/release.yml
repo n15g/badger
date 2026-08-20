@@ -1,49 +1,93 @@
 name: Release
+
 on:
   push:
     tags:
       - "v*.*.*"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: github-pages
+  cancel-in-progress: false
+
 jobs:
-  Release:
+  build:
+    name: Validate release
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      id-token: write
+    timeout-minutes: 15
+    outputs:
+      publish_pages: ${{ steps.release_metadata.outputs.publish_pages }}
 
     steps:
+      - name: Determine release type
+        id: release_metadata
+        run: |
+          if [[ "$GITHUB_REF_NAME" == *-* ]]; then
+            echo "publish_pages=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "publish_pages=true" >> "$GITHUB_OUTPUT"
+          fi
+
       - name: Checkout
-        uses: actions/checkout@v6
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
 
       - name: Setup Node
-        uses: actions/setup-node@v6
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
         with:
-          node-version: lts/krypton
-          cache: 'npm'
-          registry-url: 'https://registry.npmjs.org'
+          node-version-file: .nvmrc
+          cache: npm
 
-      - name: Install
-        run: npm install
+      - name: Verify package version
+        run: |
+          package_version=$(node --print "require('./package.json').version")
+          if [[ "v${package_version}" != "$GITHUB_REF_NAME" ]]; then
+            echo "Tag $GITHUB_REF_NAME does not match package version v${package_version}." >&2
+            exit 1
+          fi
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Audit dependencies
+        run: npm run audit
 
       - name: Lint
         run: npm run lint
 
-      - name: Build
-        run: npm run build
+      - name: Type-check
+        run: npm run typecheck
 
-      - name: Upload Pages Artifact
-        uses: actions/upload-pages-artifact@v3
+      - name: Build application
+        run: npm run build:app
+
+      - name: Build Storybook
+        run: npm run storybook:build
+
+      - name: Upload release artifact
+        uses: actions/upload-artifact@bbbca2ddaa5d8feaa63e36b76fdaad77386f024f # v7.0.0
+        with:
+          name: badger-dist
+          path: dist/
+          if-no-files-found: error
+
+      - name: Upload Pages artifact
+        if: steps.release_metadata.outputs.publish_pages == 'true'
+        uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9 # v5.0.0
         with:
           path: dist/
 
-
   pages:
-    needs: Release
+    name: Deploy GitHub Pages
+    needs: build
+    if: needs.build.outputs.publish_pages == 'true'
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     permissions:
       contents: read
       pages: write
       id-token: write
-
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
@@ -51,4 +95,4 @@ jobs:
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@cd2ce8fcbc39b97be8ca5fce6e763baed58fa128 # v5.0.0
