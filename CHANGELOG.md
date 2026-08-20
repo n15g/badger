@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.4.0] - 2026-08-20
+
 ### Added
 
 - Added explicit audit, type-check, application build, Storybook build, and aggregate validation commands.
