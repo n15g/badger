@@ -31,7 +31,7 @@ See the README file in that repository for details on how to modify badge conten
 
 ### Requirements
 
-* [Node JS 22+](https://nodejs.org/)
+* [Node JS 24+](https://nodejs.org/)
 * [git SCM](https://git-scm.com/)
 
 ### Running locally

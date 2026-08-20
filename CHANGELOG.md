@@ -5,6 +5,20 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+### Security
+
+- Updated application and build dependencies to resolve reported vulnerabilities in React Router, Nano ID, PostCSS, and brace expansion.
+
+### Changed
+
+- Standardized development and builds on Node.js 24 and npm 12.
+- Updated to `coh-content-db` and `coh-content-db-homecoming` 2.3.0.
+- Removed the obsolete esbuild dependency override.
+
+---
+
 ## [2.3.3] - 2026-04-28
 
 ### Fixed
