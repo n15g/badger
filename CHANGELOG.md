@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Added explicit audit, type-check, application build, Storybook build, and aggregate validation commands.
 - Added pull-request validation and downloadable CI build artifacts.
 - Documented deferred maintenance work and deliberate architecture decisions.
+- Displayed the application version and build time alongside the content metadata.
 
 ### Fixed
 
