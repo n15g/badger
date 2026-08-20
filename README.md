@@ -1,6 +1,6 @@
 # Badger
 
-[![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/n15g/badger/build.yml?branch=master)](https://github.com/n15g/badger/actions)
+[![CI](https://img.shields.io/github/actions/workflow/status/n15g/badger/ci.yml?branch=master&label=CI)](https://github.com/n15g/badger/actions/workflows/ci.yml)
 [![GitHub Tag](https://img.shields.io/github/v/tag/n15g/badger)](https://github.com/n15g/badger/tags)
 [![GitHub License](https://img.shields.io/github/license/n15g/badger)](LICENSE)
 
