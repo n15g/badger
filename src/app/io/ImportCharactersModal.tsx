@@ -8,15 +8,18 @@ import ImportDropzone from './ImportDropzone.tsx'
 import { DefaultColorPalette, VariantKey } from '@mui/joy/styles/types'
 import EditCharacterImportPlan from './EditCharacterImportPlan.tsx'
 import { buildCharacterImportPlan, CharacterImportPlan } from './character-import-plan.ts'
-import { applyPartial, Character, fromPartial } from '../character/character.ts'
+import { Character } from '../character/character.ts'
 import CharacterDbProvider from '../character/CharacterDbProvider.tsx'
+import BadgerDbProvider from '../db/BadgerDbProvider.tsx'
+import { executeCharacterImportPlan } from './execute-character-import-plan.ts'
 import Spinner from '../util/Spinner.tsx'
 import BadgerSpinner from '../util/BadgerSpinner.tsx'
 
 const ImportCharactersModal: FC<{ open: boolean, onClose: () => void }>
   = ({ open, onClose }) => {
 
-  const { characters, createCharacter, mutateCharacter, deleteCharacter } = CharacterDbProvider.useCharacterDb()
+  const { characters, refreshCharacters } = CharacterDbProvider.useCharacterDb()
+  const db = BadgerDbProvider.useBadgerDb()
 
   const [step, setStep] = useState(1)
   const [loading, setLoading] = useState(false)
@@ -55,26 +58,18 @@ const ImportCharactersModal: FC<{ open: boolean, onClose: () => void }>
   const completeImport = useCallback(async () => {
     setLoading(true)
     try {
-      for (const [key, { incoming, existing, action }] of Object.entries(characterImportPlan ?? {})) {
-        if (!existing || action === 'new') {
-          if (action !== 'ignore') {
-            await createCharacter(fromPartial({ key: key, ...incoming }))
-          }
-        } else {
-          if (action === 'replace') {
-            await deleteCharacter(existing.key)
-            await createCharacter(fromPartial({ key: key, ...incoming }))
-          } else if (action === 'merge') {
-            await mutateCharacter(existing.key, applyPartial(incoming))
-          }
-        }
+      try {
+        await executeCharacterImportPlan(characterImportPlan ?? {}, db)
+      } finally {
+        // Reflect saved records even if a later entry in the batch fails.
+        await refreshCharacters()
       }
       reset()
       onClose()
     } finally {
       setLoading(false)
     }
-  }, [characterImportPlan, createCharacter, deleteCharacter, mutateCharacter, onClose, reset])
+  }, [characterImportPlan, db, refreshCharacters, onClose, reset])
 
   return open && (<>
     <Modal
