@@ -9,14 +9,13 @@ export default defineConfig({
         test: {
           name: 'unit',
           environment: 'node',
-          include: ['src/**/*.test.ts'],
+          include: ['src/**/*.test.ts', 'test/**/*.test.ts'],
           clearMocks: true,
           restoreMocks: true,
         },
       },
       {
         plugins: [storybookTest({
-          configDir: 'src/main/storybook',
           storybookScript: 'npm run storybook -- --no-open',
           tags: { include: ['interaction'] },
         })],

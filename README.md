@@ -51,6 +51,19 @@ See the README file in that repository for details on how to modify badge conten
 The app will now be accessible at http://localhost:5173 and storybook at http://localhost:6006.
 Most changes will be reflected automatically without needing to restart the server.
 
+### Repository layout
+
+| Directory | Contents |
+| --- | --- |
+| `src/app/` | Application code, organized by feature, with colocated tests and component stories |
+| `src/assets/` | Images and fonts imported by the application |
+| `.storybook/` | Storybook configuration, decorators, and character/content fixtures |
+| `test/fixtures/` | Sample files for import testing |
+| `test/support/` | Shared test helpers and small content fixtures |
+| `public/` | Files served directly without bundling |
+
+Storybook uses its default configuration location. Type-checking and linting include `.storybook/` and `test/`.
+
 ### Testing
 
 Run `npm run test:install` once after installing dependencies, and again when Playwright is updated, to install Chromium.
@@ -64,14 +77,14 @@ On Linux CI, use `npm run test:install -- --with-deps` to also install browser s
 | `npm run test:watch` | Watch and rerun affected tests |
 | `npm run validate` | Run lint, tests, type-checking, and application/Storybook builds |
 
-Vitest runs two projects: `unit` discovers `src/**/*.test.ts`, and `storybook` runs stories tagged `interaction`.
+Vitest runs two projects: `unit` discovers `*.test.ts` files under `src/` and `test/`, and `storybook` runs stories tagged `interaction`.
 For example, `npm run test:unit -- character.test.ts` runs one test file, and
 `npm run test:watch -- --project=storybook` watches browser tests only.
 The Storybook Vitest addon also runs and debugs interaction tests from the Storybook UI.
 
 Keep most assertions in ordinary TypeScript tests around domain behavior and external boundaries.
 The initial examples cover character defaults and merging, import planning, build/chat parsing, plain and gzip exports,
-and IndexedDB persistence. Parser fixtures in `src/test/support` contain small, explicit content bundles;
+and IndexedDB persistence. Parser fixtures in `test/support` contain small, explicit content bundles;
 they do not depend on a remote content server. Persistence tests use `fake-indexeddb` with the real database implementation.
 
 For UI behavior, add a `play` function and `tags: ['interaction']` to a story (or its metadata to include every story in that file).
@@ -101,14 +114,13 @@ Use [npm-check-updates](https://www.npmjs.com/package/npm-check-updates) to chec
 2. `npx npm-check-updates -u`
 3. `npm install`
 
-For Storybook upgrades, run `npm run upgrade:storybook`. This passes the repository's custom configuration directory
-to the official upgrader and updates the Storybook packages together. The equivalent command is:
+For Storybook upgrades, run `npm run upgrade:storybook`. This runs the official upgrader and updates the Storybook
+packages together. The equivalent command is:
 
 ```sh
-npx storybook@latest upgrade --config-dir src/main/storybook --package-manager npm
+npx storybook@latest upgrade
 ```
 
-The bare upgrade command searches for `.storybook` directories and does not discover `src/main/storybook` automatically.
 Review the upgrader's optional addon suggestions before accepting them, then run `npm run validate` and `npm run audit`.
 
 ----

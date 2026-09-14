@@ -23,10 +23,10 @@
     "link:all": "npm link coh-content-db coh-content-db-homecoming",
     "upgrade:db": "npm install --save coh-content-db@latest",
     "upgrade:hc": "npm install --save-dev coh-content-db-homecoming@latest",
-    "upgrade:storybook": "npx storybook@latest upgrade --config-dir src/main/storybook --package-manager npm",
+    "upgrade:storybook": "npx storybook@latest upgrade",
     "push": "git push && git push --tags",
-    "storybook": "storybook dev -p 6006 -c src/main/storybook",
-    "storybook:build": "storybook build -c src/main/storybook"
+    "storybook": "storybook dev -p 6006",
+    "storybook:build": "storybook build"
   },
   "repository": "https://github.com/n15g/badger",
   "dependencies": {
