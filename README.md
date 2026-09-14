@@ -26,6 +26,9 @@ Go hunt. Kill Skuls.
 
 # Development
 
+See [CONTRIBUTING.md](CONTRIBUTING.md) for contribution, validation, and PR guidelines, and
+[AGENTS.md](AGENTS.md) for repository-specific coding-agent instructions.
+
 If you'd like to run the app locally for development purposes, here's what you'll need:
 
 ### Modifying the badges and other data
@@ -71,9 +74,10 @@ On Linux CI, use `npm run test:install -- --with-deps` to also install browser s
 
 | Command | Purpose |
 | --- | --- |
-| `npm test` | Run all automated tests once |
+| `npm test` | Run Vitest logic and interaction tests once |
 | `npm run test:unit` | Run logic and persistence tests in Node; no browser required |
 | `npm run test:ui` | Run selected Storybook scenarios in headless Chromium |
+| `npm run test:storybook-build` | Smoke-test the existing Storybook build in Chromium |
 | `npm run test:watch` | Watch and rerun affected tests |
 | `npm run validate` | Run lint, tests, type-checking, and application/Storybook builds |
 
@@ -95,8 +99,13 @@ Decorative stories remain available for manual inspection without automatically 
 
 Every Storybook scenario starts with a fresh browser IndexedDB database seeded with `TEST_CHARACTERS`, then deletes it on cleanup.
 The database connection factory is substituted only in Storybook; character logic and persistence operations remain real.
+The `#badger-db` package import selects `.storybook/badger-db.mock.ts` under the `storybook` condition
+and the application module otherwise. The mock replaces only `getBadgerDb`, preserving the real `BadgerDb` class.
 Use `parameters: { characterKey: 'test1' }` to render a story with a selected character that updates as its database record changes.
 Storybook edits are temporary and do not use the application's saved characters.
+
+`npm run storybook:build` also smoke-tests the generated site in Chromium. This checks Storybook's
+own runtime, which can behave differently from the Vitest runner, and requires `npm run test:install` first.
 
 Vitest 4 is used because the Storybook Vitest addon currently supports Vitest 3 and 4, including in Storybook 10.6.
 Keep `vitest` and `@vitest/browser-playwright` on matching versions, and check the addon's peer dependencies before a major upgrade.

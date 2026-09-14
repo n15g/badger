@@ -6,7 +6,7 @@ import { STORYBOOK_CONTENT } from '../../../.storybook/storybook-content.ts'
 import { expect, waitFor } from 'storybook/test'
 import CharacterContextProvider from '../character/CharacterContextProvider.tsx'
 import BadgeCount from '../character/BadgeCount.tsx'
-import { getBadgerDb } from '../db/badger-db.ts'
+import { getBadgerDb } from '#badger-db'
 
 const meta: Meta<typeof BadgeCard> = {
   title: 'badge/BadgeCard',

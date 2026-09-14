@@ -1,58 +1,28 @@
 # Changelog
 
-All notable changes to this project will be documented in this file.
+This changelog records changes that affect people using Badger: features, fixes,
+game content, compatibility, and security. Development tooling and internal
+maintenance are documented in pull requests and contributor documentation.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
-### Added
-
-- Added Vitest infrastructure for logic and persistence tests and selected Storybook interaction tests in Chromium.
-- Added representative tests for character creation and merging, import planning, build and chat-log parsing, export/import round trips, database persistence, badge totals, and form and badge interactions.
-- Added test commands and included automated tests in local validation, pull-request checks, and release validation.
-- Added a Storybook upgrade command.
-
-### Changed
-
-- Isolated Storybook character data in a temporary database for each scenario, with support for selecting a reactive character fixture.
-- Updated Storybook, its React/Vite framework, Vitest addon, and ESLint plugin to 10.6.0.
-- Aligned the supported Node.js versions with npm 12: Node 24.15+ on the 24.x release line, or Node 26+.
-- Simplified the repository layout to `src/app`, `src/assets`, and `test`, with Storybook configuration and helpers in the default `.storybook` directory.
-- Removed custom Storybook configuration paths and the associated Vite root override; preserved type-checking and linting for Storybook and shared test helpers.
-
-### Fixed
-
-- Corrected the uncounted-badge Storybook example to reference Bug Hunter.
-- Updated the Storybook theme decorator to apply theme changes after rendering, avoiding React state-update warnings.
-
 ## [2.4.0] - 2026-08-20
 
 ### Added
 
-- Added explicit audit, type-check, application build, Storybook build, and aggregate validation commands.
-- Added pull-request validation and downloadable CI build artifacts.
-- Documented deferred maintenance work and deliberate architecture decisions.
 - Displayed the application version and build time alongside the content metadata.
-
-### Fixed
-
-- Excluded generated application and Storybook bundles from lint validation.
 
 ### Security
 
-- Updated application and build dependencies to resolve reported vulnerabilities in React Router, Nano ID, PostCSS, and brace expansion.
-- Reduced GitHub Actions permissions to the minimum required by each job and pinned actions to immutable commits.
-- Added an explicit npm install-script policy that permits only the version-pinned esbuild installation hook.
+- Updated application dependencies to address known security vulnerabilities.
 
 ### Changed
 
-- Standardized development and builds on Node.js 24 and npm 12.
-- Updated to `coh-content-db` and `coh-content-db-homecoming` 2.3.0.
-- Removed the obsolete esbuild dependency override.
-- Switched CI and release installs from `npm install` to reproducible `npm ci` installs.
-- Changed prerelease tags to retain build artifacts without deploying over the stable GitHub Pages site.
+- Updated Homecoming badge and game data to version 2.3.0.
+- Prerelease builds no longer replace the stable app.
 
 ---
 
@@ -79,7 +49,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - Characters can now be imported from `/build_save` exports ([#62](https://github.com/n15g/badger/issues/62)).
-- Support for game IDs in badge data ([#62](https://github.com/n15g/badger/issues/62)).
 - Added a settings page with the option to change where the game data is fetched from ([#70](https://github.com/n15g/badger/issues/70)).
 
 ---
@@ -99,7 +68,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-- Switched from a brightness filter to opacity for a better appearance of muted elements in light mode ([#60](https://github.com/n15g/badger/issues/60)).
+- Improved the appearance of muted elements in light mode ([#60](https://github.com/n15g/badger/issues/60)).
 - Links from the badge view to a character's badge list now show the badge-list tab correctly ([#60](https://github.com/n15g/badger/issues/60)).
 
 ## [2.2.1] - 2026-01-27
@@ -129,10 +98,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Fixed imported character data not being merged ([#56](https://github.com/n15g/badger/issues/56)).
 
-## [2.1.1] - 2026-01-14
-
-- No user-facing changes were documented for this release.
-
 ## [2.1.0] - 2026-01-14
 
 ### Fixed
@@ -143,7 +108,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - Character import and export, and a log parser ([#50](https://github.com/n15g/badger/pull/50)).
-- Polyfills for pre-2023 browser support ([#51](https://github.com/n15g/badger/pull/51)).
+- Improved compatibility with older browsers ([#51](https://github.com/n15g/badger/pull/51)).
 - Collect multiple badges simultaneously from the badge list ([#53](https://github.com/n15g/badger/pull/53)).
 
 ### Changed
@@ -152,7 +117,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Security
 
-- Bumped `react-router` due to reported vulnerabilities in versions before 7.12.0.
+- Updated application dependencies to address known security vulnerabilities.
 
 ---
 
@@ -170,11 +135,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Tooltips when hovering over badges, contacts, missions, and zones.
 - Sort badges by release date.
 - Copy `/settitle` and `/thumbtack` commands to the clipboard.
-
-### Changed
-
-- Updated to the [coh-content-db 2.0.0](https://github.com/n15g/coh-content-db) data model.
-- Rebuilt the application using React instead of Angular.
 
 ### Removed
 

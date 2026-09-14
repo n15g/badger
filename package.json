@@ -4,6 +4,12 @@
   "version": "2.4.0",
   "type": "module",
   "packageManager": "npm@12.0.2",
+  "imports": {
+    "#badger-db": {
+      "storybook": "./.storybook/badger-db.mock.ts",
+      "default": "./src/app/db/badger-db.ts"
+    }
+  },
   "scripts": {
     "dev": "vite",
     "audit": "npm audit --audit-level=high",
@@ -15,6 +21,7 @@
     "test": "vitest run",
     "test:unit": "vitest run --project=unit",
     "test:ui": "vitest run --project=storybook",
+    "test:storybook-build": "node --test test/storybook-smoke.ts",
     "test:watch": "vitest",
     "test:install": "playwright install chromium",
     "validate": "npm run lint && npm run test && npm run build && npm run storybook:build",
@@ -26,7 +33,7 @@
     "upgrade:storybook": "npx storybook@latest upgrade",
     "push": "git push && git push --tags",
     "storybook": "storybook dev -p 6006",
-    "storybook:build": "storybook build"
+    "storybook:build": "storybook build && npm run test:storybook-build"
   },
   "repository": "https://github.com/n15g/badger",
   "dependencies": {

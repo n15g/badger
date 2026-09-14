@@ -1,5 +1,5 @@
 import { createContext, FC, ReactNode, use, useEffect, useState } from 'react'
-import { BadgerDb, getBadgerDb } from './badger-db.ts'
+import { BadgerDb, getBadgerDb } from '#badger-db'
 import LoadingScreen from '../util/LoadingScreen.tsx'
 
 
@@ -43,4 +43,3 @@ BadgerDbProvider.useBadgerDb = (): BadgerDb => {
 }
 
 export default BadgerDbProvider
-
