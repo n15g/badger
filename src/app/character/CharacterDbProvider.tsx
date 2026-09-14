@@ -3,7 +3,7 @@ import { Character } from './character.ts'
 import BadgerDbProvider from '../db/BadgerDbProvider.tsx'
 import { Draft, produce } from 'immer'
 import LoadingScreen from '../util/LoadingScreen.tsx'
-import { Badge, BadgeRequirement, CohContentDatabase } from 'coh-content-db'
+import { Badge, BadgeRequirement } from 'coh-content-db'
 import ContentProvider from '../content/ContentProvider.tsx'
 
 interface CharacterDbContextValue {
@@ -66,9 +66,13 @@ const CharacterDbProvider: FC<{ children: ReactNode }> & { useCharacterDb: () =>
 
     const collectBadge = useCallback(async (character: Character, badge: Badge | Badge[], owned = true): Promise<void> => {
       await mutateCharacter(character.key, draft => {
-        _collectBadge(draft, content, badge, owned)
+        draft.badges ??= {}
+        for (const selectedBadge of Array.isArray(badge) ? badge : [badge]) {
+          const record = draft.badges[selectedBadge.key] ??= {}
+          record.owned = owned
+        }
       })
-    }, [content, mutateCharacter])
+    }, [mutateCharacter])
 
     const hasRequirement = useCallback((character: Character, badge: Badge, requirement: BadgeRequirement): boolean => {
       if (requirement.type === 'badge' && requirement.badgeKey) {
@@ -151,8 +155,6 @@ const CharacterDbProvider: FC<{ children: ReactNode }> & { useCharacterDb: () =>
             draftReq.owned = badgeReq.count <= (draftReq.count ?? 0)
           }
         }
-
-        _collectBadgeIfRequirementsAreMet(draft, content, badge)
       })
     }, [content, collectBadge, mutateCharacter])
 
@@ -214,61 +216,6 @@ function _hasBadge(character: Partial<Character>, badgeKey?: string) {
   return badgeKey
     ? character.badges?.[badgeKey]?.owned ?? false
     : false
-}
-
-function _collectBadge(
-  draft: Draft<Character>,
-  content: CohContentDatabase,
-  badges: Badge | Badge[],
-  owned: boolean,
-  ignoreKeys?: string[]
-) {
-  badges = Array.isArray(badges) ? badges : [badges]
-
-  draft.badges ??= {}
-  for (const badge of badges) {
-    if (ignoreKeys?.includes(badge.key)) {
-      continue
-    }
-
-    const existing = draft.badges[badge.key]
-    draft.badges[badge.key] = existing ? { ...existing, owned } : { owned }
-
-    ignoreKeys = [...ignoreKeys ?? [], badge.key]
-    _collectBadgesThatRequireThisBadge(draft, content, badge, ignoreKeys)
-  }
-}
-
-/**
- * Scan the draft looking for badges that may now be complete/incomplete (Accolades, Gladiator, etc.) because the given badge 'owned' state has changed.
- * @param draft The draft
- * @param content ContentDB so we know what badges there are available.
- * @param badge The changed badge.
- * @param ignoreKeys Ignore list for visited badges to prevent a re-entrant cyclic dependency cascade of doom.
- */
-function _collectBadgesThatRequireThisBadge(draft: Draft<Character>,
-                                            content: CohContentDatabase,
-                                            badge: Badge,
-                                            ignoreKeys?: string[]) {
-  content.badges.forEach((contentBadge) => {
-    if (contentBadge.requirements.some((req) => req.type === 'badge' && req.badgeKey === badge.key)) {
-      _collectBadgeIfRequirementsAreMet(draft, content, contentBadge, ignoreKeys)
-    }
-  })
-}
-
-function _collectBadgeIfRequirementsAreMet(draft: Draft<Character>, content: CohContentDatabase, badge: Badge, ignoreKeys?: string[]) {
-  draft.badges ??= {}
-  const draftBadge = draft.badges[badge.key] ??= {}
-
-  const owned = !badge.requirements.some((requirement) => {
-    if (requirement.type === 'badge' && requirement.badgeKey) {
-      return !_hasBadge(draft, requirement.badgeKey)
-    }
-    return !draftBadge.req?.[requirement.key]?.owned
-  })
-
-  _collectBadge(draft, content, badge, owned, ignoreKeys)
 }
 
 export default CharacterDbProvider

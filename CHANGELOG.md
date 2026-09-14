@@ -11,6 +11,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- Removed automatic badge collection and removal when requirements change.  
+  Mark completed badges manually or update them through an import. (([#88](https://github.com/n15g/badger/issues/88)))
 - Updated the build system and development tooling, including Storybook and automated tests.
 
 ## [2.4.0] - 2026-08-20
