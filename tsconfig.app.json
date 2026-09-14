@@ -25,6 +25,8 @@
     "noUncheckedSideEffectImports": true
   },
   "include": [
-    "src"
+    "src",
+    "test",
+    ".storybook/**/*"
   ]
 }

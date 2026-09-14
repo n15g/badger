@@ -20,13 +20,14 @@ Badger directly uses `@base-ui-components/react` for five popovers. The stable p
 - Verify positioning, dismissal, focus restoration, and keyboard interaction in each popover.
 - Make the change only when there is time for an interaction smoke test.
 
-### Add focused logic tests
+### Extend focused test coverage
 
-The project currently relies on TypeScript, ESLint, application builds, and Storybook builds rather than an automated test suite.
+Vitest covers representative logic and persistence behavior. Every Storybook story receives a browser render check,
+and selected scenarios exercise browser interactions.
 
-- Add tests when changing high-risk logic such as character import, merging, persistence, or content-source selection.
+- Extend tests when changing high-risk logic such as character import, merging, persistence, or content-source selection.
 - Prefer stable domain behavior over broad UI snapshots or coverage targets.
-- Introduce a test runner only when the first concrete tests justify it.
+- Add a small full-application browser suite when a routing, file-upload, or reload scenario needs coverage beyond the existing layers.
 
 ### Define the browser-support policy
 
