@@ -1,0 +1,37 @@
+import { defineConfig } from 'vitest/config'
+import { playwright } from '@vitest/browser-playwright'
+import { storybookTest } from '@storybook/addon-vitest/vitest-plugin'
+
+export default defineConfig({
+  test: {
+    projects: [
+      {
+        test: {
+          name: 'unit',
+          environment: 'node',
+          include: ['src/**/*.test.ts'],
+          clearMocks: true,
+          restoreMocks: true,
+        },
+      },
+      {
+        plugins: [storybookTest({
+          configDir: 'src/main/storybook',
+          storybookScript: 'npm run storybook -- --no-open',
+          tags: { include: ['interaction'] },
+        })],
+        test: {
+          name: 'storybook',
+          browser: {
+            enabled: true,
+            headless: true,
+            screenshotFailures: true,
+            screenshotDirectory: 'test-results/screenshots',
+            provider: playwright(),
+            instances: [{ browser: 'chromium' }],
+          },
+        },
+      },
+    ],
+  },
+})

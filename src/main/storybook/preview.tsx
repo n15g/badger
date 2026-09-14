@@ -14,9 +14,19 @@ import { BrowserRouter } from 'react-router'
 import ErrorProvider from '../app/util/ErrorProvider.tsx'
 import BadgerDbProvider from '../app/db/BadgerDbProvider.tsx'
 import CharacterDbProvider from '../app/character/CharacterDbProvider.tsx'
-import CharacterContextProvider from '../app/character/CharacterContextProvider.tsx'
+import StorybookCharacter from './StorybookCharacter.tsx'
+import { mocked, sb } from 'storybook/test'
+import { getBadgerDb } from '../app/db/badger-db.ts'
+import { createStorybookDb } from './storybook-db.ts'
+
+sb.mock(import('../app/db/badger-db.ts'), { spy: true })
 
 const preview: Preview = {
+  async beforeEach() {
+    const { db, cleanup } = await createStorybookDb()
+    mocked(getBadgerDb).mockResolvedValue(db)
+    return cleanup
+  },
   parameters: {
     layout: 'centered',
     options: {
@@ -36,13 +46,13 @@ const preview: Preview = {
         </CssVarsProvider>
       </BrowserRouter>
     ),
-    Story => (
+    (Story, { parameters }) => (
       <ContentProvider content={STORYBOOK_CONTENT}>
         <BadgerDbProvider>
           <CharacterDbProvider>
-            <CharacterContextProvider>
+            <StorybookCharacter characterKey={typeof parameters.characterKey === 'string' ? parameters.characterKey : undefined}>
               <Story/>
-            </CharacterContextProvider>
+            </StorybookCharacter>
           </CharacterDbProvider>
         </BadgerDbProvider>
       </ContentProvider>

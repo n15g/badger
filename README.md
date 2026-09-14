@@ -37,7 +37,8 @@ See the README file in that repository for details on how to modify badge conten
 
 ### Requirements
 
-* [Node JS 24+](https://nodejs.org/)
+* [Node JS](https://nodejs.org/) 24.15+ on the 24.x release line, or 26+; `.nvmrc` selects Node 24.
+* npm 12.0.2 (declared in `packageManager`)
 * [git SCM](https://git-scm.com/)
 
 ### Running locally
@@ -50,13 +51,65 @@ See the README file in that repository for details on how to modify badge conten
 The app will now be accessible at http://localhost:5173 and storybook at http://localhost:6006.
 Most changes will be reflected automatically without needing to restart the server.
 
+### Testing
+
+Run `npm run test:install` once after installing dependencies, and again when Playwright is updated, to install Chromium.
+On Linux CI, use `npm run test:install -- --with-deps` to also install browser system dependencies.
+
+| Command | Purpose |
+| --- | --- |
+| `npm test` | Run all automated tests once |
+| `npm run test:unit` | Run logic and persistence tests in Node; no browser required |
+| `npm run test:ui` | Run selected Storybook scenarios in headless Chromium |
+| `npm run test:watch` | Watch and rerun affected tests |
+| `npm run validate` | Run lint, tests, type-checking, and application/Storybook builds |
+
+Vitest runs two projects: `unit` discovers `src/**/*.test.ts`, and `storybook` runs stories tagged `interaction`.
+For example, `npm run test:unit -- character.test.ts` runs one test file, and
+`npm run test:watch -- --project=storybook` watches browser tests only.
+The Storybook Vitest addon also runs and debugs interaction tests from the Storybook UI.
+
+Keep most assertions in ordinary TypeScript tests around domain behavior and external boundaries.
+The initial examples cover character defaults and merging, import planning, build/chat parsing, plain and gzip exports,
+and IndexedDB persistence. Parser fixtures in `src/test/support` contain small, explicit content bundles;
+they do not depend on a remote content server. Persistence tests use `fake-indexeddb` with the real database implementation.
+
+For UI behavior, add a `play` function and `tags: ['interaction']` to a story (or its metadata to include every story in that file).
+Use roles, accessible names, user interactions, and observable outcomes rather than DOM snapshots or CSS selectors.
+Await rendering and state changes instead of adding fixed delays. Existing examples cover form validation and saving,
+import action selection, badge totals, and badge collection through the real providers.
+Decorative stories remain available for manual inspection without automatically becoming test cases.
+
+Every Storybook scenario starts with a fresh browser IndexedDB database seeded with `TEST_CHARACTERS`, then deletes it on cleanup.
+The database connection factory is substituted only in Storybook; character logic and persistence operations remain real.
+Use `parameters: { characterKey: 'test1' }` to render a story with a selected character that updates as its database record changes.
+Storybook edits are temporary and do not use the application's saved characters.
+
+Vitest 4 is used because the Storybook Vitest addon currently supports Vitest 3 and 4, including in Storybook 10.6.
+Keep `vitest` and `@vitest/browser-playwright` on matching versions, and check the addon's peer dependencies before a major upgrade.
+Both pull-request and release workflows run the tests before producing deployable artifacts.
+Failed browser assertions save screenshots under `test-results/`; CI uploads them as a downloadable artifact.
+
 ### Checking dependencies
+
+Run `nvm install` and `nvm use` if you manage Node with nvm. npm 12 requires a supported Node patch version;
+early Node 24 releases are not supported.
 
 Use [npm-check-updates](https://www.npmjs.com/package/npm-check-updates) to check for package updates:
 
 1. `npx npm-check-updates`
 2. `npx npm-check-updates -u`
 3. `npm install`
+
+For Storybook upgrades, run `npm run upgrade:storybook`. This passes the repository's custom configuration directory
+to the official upgrader and updates the Storybook packages together. The equivalent command is:
+
+```sh
+npx storybook@latest upgrade --config-dir src/main/storybook --package-manager npm
+```
+
+The bare upgrade command searches for `.storybook` directories and does not discover `src/main/storybook` automatically.
+Review the upgrader's optional addon suggestions before accepting them, then run `npm run validate` and `npm run audit`.
 
 ----
 

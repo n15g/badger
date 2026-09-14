@@ -7,6 +7,24 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Added Vitest infrastructure for logic and persistence tests and selected Storybook interaction tests in Chromium.
+- Added representative tests for character creation and merging, import planning, build and chat-log parsing, export/import round trips, database persistence, badge totals, and form and badge interactions.
+- Added test commands and included automated tests in local validation, pull-request checks, and release validation.
+- Added a Storybook upgrade command that explicitly locates the repository's custom configuration directory.
+
+### Changed
+
+- Isolated Storybook character data in a temporary database for each scenario, with support for selecting a reactive character fixture.
+- Updated Storybook, its React/Vite framework, Vitest addon, and ESLint plugin to 10.6.0.
+- Aligned the supported Node.js versions with npm 12: Node 24.15+ on the 24.x release line, or Node 26+.
+
+### Fixed
+
+- Corrected the uncounted-badge Storybook example to reference Bug Hunter.
+- Updated the Storybook theme decorator to apply theme changes after rendering, avoiding React state-update warnings.
+
 ## [2.4.0] - 2026-08-20
 
 ### Added
