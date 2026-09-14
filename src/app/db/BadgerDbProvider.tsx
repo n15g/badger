@@ -1,15 +1,17 @@
 import { createContext, FC, ReactNode, use, useEffect, useState } from 'react'
-import { BadgerDb, getBadgerDb } from '#badger-db'
+import { BadgerDb, getBadgerDb } from './badger-db.ts'
 import LoadingScreen from '../util/LoadingScreen.tsx'
 
 
 const IndexedDbContext = createContext<BadgerDb | undefined>(undefined)
 
-const BadgerDbProvider: FC<{ children: ReactNode }> & { useBadgerDb: () => BadgerDb } =
-  ({ children }) => {
+// Supplied connections belong to the caller; the provider does not close them.
+const BadgerDbProvider: FC<{ children: ReactNode, db?: BadgerDb }> & { useBadgerDb: () => BadgerDb } =
+  ({ children, db }) => {
     const [badgerDb, setBadgerDb] = useState<BadgerDb | undefined>()
 
     useEffect(() => {
+      if (db) return
       let cancelled = false
 
       void getBadgerDb().then((db) => {
@@ -21,11 +23,12 @@ const BadgerDbProvider: FC<{ children: ReactNode }> & { useBadgerDb: () => Badge
       return () => {
         cancelled = true
       }
-    }, [badgerDb])
+    }, [db])
 
-    if (badgerDb) {
+    const value = db ?? badgerDb
+    if (value) {
       return (
-        <IndexedDbContext value={badgerDb}>
+        <IndexedDbContext value={value}>
           {children}
         </IndexedDbContext>
       )

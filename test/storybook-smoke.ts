@@ -4,7 +4,7 @@ import { chromium } from 'playwright'
 import { preview } from 'vite'
 
 // Vitest uses a different mock runtime. Check the bundle that Storybook actually serves, too.
-void test('built Storybook renders a story with its isolated database', { timeout: 30_000 }, async (t) => {
+void test('built Storybook supplies only the dependencies each story requests', { timeout: 30_000 }, async (t) => {
   const server = await preview({
     configFile: false,
     build: { outDir: 'storybook-static' },
@@ -16,17 +16,27 @@ void test('built Storybook renders a story with its isolated database', { timeou
 
   const browser = await chromium.launch()
   t.after(() => browser.close())
-  const page = await browser.newPage()
-  page.on('pageerror', error => {
-    console.error(error)
-  })
-  page.on('console', message => {
-    if (message.type() === 'error') console.error(message.text())
+  await t.test('a display story does not open a database', async (t) => {
+    const page = await browser.newPage()
+    t.after(() => page.close())
+    await page.goto(`${url}iframe.html?id=character-badgecount--none&viewMode=story`)
+    await page.getByText('0 badges', { exact: true }).waitFor({ timeout: 15_000 })
+    assert.deepEqual(await page.evaluate(() => indexedDB.databases()), [])
   })
 
-  await page.goto(`${url}iframe.html?id=character-badgecount--none&viewMode=story`)
-  await page.getByText('0 badges', { exact: true }).waitFor({ timeout: 15_000 })
-  const databases = await page.evaluate(() => indexedDB.databases())
-  assert.equal(databases.length, 1)
-  assert.ok(databases[0].name?.startsWith('badger-story-'))
+  await t.test('a connected story renders its isolated character fixtures', async (t) => {
+    const page = await browser.newPage()
+    t.after(() => page.close())
+    const errors: string[] = []
+    page.on('pageerror', error => errors.push(error.message))
+    page.on('console', message => {
+      if (message.type() === 'error') errors.push(message.text())
+    })
+    await page.goto(`${url}iframe.html?id=badge-badgecard--exploration&viewMode=story`)
+    await page.getByText('My Character', { exact: true }).waitFor({ timeout: 15_000 })
+    const databases = await page.evaluate(() => indexedDB.databases())
+    assert.equal(databases.length, 1)
+    assert.ok(databases[0].name?.startsWith('badger-story-'))
+    assert.deepEqual(errors, [])
+  })
 })

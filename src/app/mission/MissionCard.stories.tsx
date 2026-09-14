@@ -1,12 +1,14 @@
 // noinspection JSUnusedGlobalSymbols
 
+import { storyParameters } from '../../../.storybook/storybook-scenario.ts'
 import MissionCard from './MissionCard.tsx'
-import { STORYBOOK_CONTENT } from '../../../.storybook/storybook-content.ts'
+import { STORYBOOK_CONTENT, TEST_CHARACTERS } from '../../../.storybook/storybook-content.ts'
 import { Meta, StoryObj } from '@storybook/react-vite'
 
 const meta: Meta<typeof MissionCard> = {
   title: 'mission/MissionCard',
   component: MissionCard,
+  parameters: storyParameters({ characters: TEST_CHARACTERS }),
 }
 export default meta
 type StoryType = StoryObj<typeof meta.component>

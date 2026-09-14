@@ -1,5 +1,6 @@
 // noinspection JSUnusedGlobalSymbols
 
+import { storyParameters } from '../../../.storybook/storybook-scenario.ts'
 import CharacterSelect from './CharacterSelect.tsx'
 import { Meta, StoryObj } from '@storybook/react-vite'
 import { TEST_CHARACTERS } from '../../../.storybook/storybook-content.ts'
@@ -7,6 +8,7 @@ import { TEST_CHARACTERS } from '../../../.storybook/storybook-content.ts'
 const meta: Meta<typeof CharacterSelect> = {
   title: 'character/CharacterSelect',
   component: CharacterSelect,
+  parameters: storyParameters({ characters: TEST_CHARACTERS }),
 }
 export default meta
 type StoryType = StoryObj<typeof meta.component>

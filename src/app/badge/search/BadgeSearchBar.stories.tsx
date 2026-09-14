@@ -1,11 +1,14 @@
 // noinspection JSUnusedGlobalSymbols
 
+import { storyParameters } from '../../../../.storybook/storybook-scenario.ts'
+import { TEST_CHARACTERS } from '../../../../.storybook/storybook-content.ts'
 import BadgeSearchBar from './BadgeSearchBar.tsx'
 import { Meta, StoryObj } from '@storybook/react-vite'
 
 const meta: Meta<typeof BadgeSearchBar> = {
   title: 'badge/BadgeSearchBar',
   component: BadgeSearchBar,
+  parameters: storyParameters({ characters: TEST_CHARACTERS }),
 }
 export default meta
 type StoryType = StoryObj<typeof meta.component>
@@ -43,9 +46,7 @@ export const AllFilters: StoryType = {
 }
 
 export const Long_man: StoryType = {
-  parameters: {
-    xl: true,
-  },
+  parameters: storyParameters({ characters: TEST_CHARACTERS, width: 'wide' }),
   args: {
     searchOptions: {},
   },

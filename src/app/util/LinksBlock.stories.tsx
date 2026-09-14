@@ -1,11 +1,14 @@
 // noinspection JSUnusedGlobalSymbols
 
+import { storyParameters } from '../../../.storybook/storybook-scenario.ts'
+import { TEST_CHARACTERS } from '../../../.storybook/storybook-content.ts'
 import LinksBlock from './LinksBlock.tsx'
 import { Meta, StoryObj } from '@storybook/react-vite'
 
 const meta: Meta<typeof LinksBlock> = {
   title: 'util/LinksBlock',
   component: LinksBlock,
+  parameters: storyParameters({ characters: TEST_CHARACTERS }),
 }
 export default meta
 type StoryType = StoryObj<typeof meta.component>

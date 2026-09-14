@@ -97,12 +97,40 @@ Await rendering and state changes instead of adding fixed delays. Existing examp
 import action selection, badge totals, and badge collection through the real providers.
 Decorative stories remain available for manual inspection without automatically becoming test cases.
 
-Every Storybook scenario starts with a fresh browser IndexedDB database seeded with `TEST_CHARACTERS`, then deletes it on cleanup.
-The database connection factory is substituted only in Storybook; character logic and persistence operations remain real.
-The `#badger-db` package import selects `.storybook/badger-db.mock.ts` under the `storybook` condition
-and the application module otherwise. The mock replaces only `getBadgerDb`, preserving the real `BadgerDb` class.
-Use `parameters: { characterKey: 'test1' }` to render a story with a selected character that updates as its database record changes.
-Storybook edits are temporary and do not use the application's saved characters.
+`StorybookProviders` supplies the theme, error notifications, content, and a memory router in one
+explicit provider tree. Every Joy UI wrapper is inside the theme. Routing starts at `/` and stays
+inside the story, without changing Storybook's URL. Keep dependent providers in this component;
+use component decorators for independent presentation, such as displaying inline text in a sentence.
+
+Display stories use component `args` and do not open IndexedDB. Connected stories opt into real
+character providers and persistence with the typed `storyParameters` helper, at component or story level:
+
+```tsx
+import { storyParameters } from '../../../.storybook/storybook-scenario.ts'
+import { TEST_CHARACTERS } from '../../../.storybook/storybook-content.ts'
+
+// Inside the component's metadata or an individual story:
+parameters: storyParameters({
+  characters: TEST_CHARACTERS,
+  characterKey: 'test1',
+  initialRoute: '/characters/test1',
+  width: 'wide',
+})
+```
+
+Only `characters` is needed to enable persistence; `characters: []` creates an empty database.
+Omitting it leaves persistence disabled. The selected character, initial route, and wide Card wrapper
+are optional. Duplicate fixture keys and unknown selected character keys fail during setup. Use
+fixtures matching the records that a story edits; the selected character updates when its stored record changes.
+Storybook merges component and story parameters. Keep persistence at individual-story level when
+only some variants need it; use component metadata when every variant needs character providers.
+
+Each connected story owns a temporary database, passed directly to `BadgerDbProvider` and deleted
+on cleanup. Play functions can use `getStorybookDb(loaded)` to verify persisted results. There are
+no database module mocks; the app still opens its normal database when no instance is supplied.
+Storybook edits are temporary and do not use the application's saved characters. The global router
+is declarative; if a story needs loaders or actions, extend the harness with a memory data-router
+mode instead of nesting another router inside it.
 
 `npm run storybook:build` also smoke-tests the generated site in Chromium. This checks Storybook's
 own runtime, which can behave differently from the Vitest runner, and requires `npm run test:install` first.

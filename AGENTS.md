@@ -78,9 +78,12 @@ for contribution and PR conventions, [README.md](README.md) for setup and comman
 - Use Storybook `play` functions tagged `interaction` for selected browser scenarios. Await named
   elements and observable state using the test library's async utilities. Avoid fixed delays,
   custom polling loops, CSS selectors, and broad DOM snapshots.
-- Keep storage and character fixtures isolated. The Storybook connection factory is substituted,
-  but the character providers and persistence operations remain real. Do not replace the behavior
-  under test with a mock that can only confirm its own implementation.
+- Keep storage and character fixtures isolated. Use `storyParameters` to opt into an isolated
+  database through character fixtures; display stories should not open storage. Inject the real
+  database into `BadgerDbProvider` and retain the real character providers and persistence operations.
+  Keep dependent wrappers together in `StorybookProviders`, with the theme outside all Joy UI.
+  Use memory routing for stories and keep scenario settings separate from component args. Do not
+  replace the behavior under test with a mock that can only confirm its own implementation.
 - Add a focused regression test when fixing a bug, demonstrating the failure before the fix where
   practical. Do not encode speculative future behavior in the suite.
 - Update `CHANGELOG.md` under `Unreleased` only for changes that affect end users: features,

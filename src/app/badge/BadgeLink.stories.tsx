@@ -1,13 +1,15 @@
 // noinspection JSUnusedGlobalSymbols
 
+import { storyParameters } from '../../../.storybook/storybook-scenario.ts'
 import { Meta, StoryObj } from '@storybook/react-vite'
-import { STORYBOOK_CONTENT } from '../../../.storybook/storybook-content.ts'
+import { STORYBOOK_CONTENT, TEST_CHARACTERS } from '../../../.storybook/storybook-content.ts'
 import BadgeLink from './BadgeLink.tsx'
 import { Typography } from '@mui/joy'
 
 const meta: Meta<typeof BadgeLink> = {
   title: 'badge/BadgeLink',
   component: BadgeLink,
+  parameters: storyParameters({ characters: TEST_CHARACTERS }),
 }
 export default meta
 type StoryType = StoryObj<typeof meta.component>

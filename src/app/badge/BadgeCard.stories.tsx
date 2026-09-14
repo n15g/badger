@@ -1,16 +1,18 @@
 // noinspection JSUnusedGlobalSymbols
 
+import { storyParameters } from '../../../.storybook/storybook-scenario.ts'
 import BadgeCard from './BadgeCard.tsx'
 import { Meta, StoryObj } from '@storybook/react-vite'
-import { STORYBOOK_CONTENT } from '../../../.storybook/storybook-content.ts'
+import { STORYBOOK_CONTENT, TEST_CHARACTERS } from '../../../.storybook/storybook-content.ts'
 import { expect, waitFor } from 'storybook/test'
 import CharacterContextProvider from '../character/CharacterContextProvider.tsx'
 import BadgeCount from '../character/BadgeCount.tsx'
-import { getBadgerDb } from '#badger-db'
+import { getStorybookDb } from '../../../.storybook/storybook-db.ts'
 
 const meta: Meta<typeof BadgeCard> = {
   title: 'badge/BadgeCard',
   component: BadgeCard,
+  parameters: storyParameters({ characters: TEST_CHARACTERS }),
 }
 export default meta
 type StoryType = StoryObj<typeof BadgeCard>
@@ -23,7 +25,7 @@ export const Exploration: StoryType = {
 
 export const Collect_For_Character: StoryType = {
   tags: ['interaction'],
-  parameters: { characterKey: 'test1' },
+  parameters: storyParameters({ characters: TEST_CHARACTERS, characterKey: 'test1' }),
   args: { badge: STORYBOOK_CONTENT.getBadge('hangman') },
   render: function Render(args) {
     const { character } = CharacterContextProvider.useCharacterContext()
@@ -32,14 +34,14 @@ export const Collect_For_Character: StoryType = {
       <BadgeCard {...args}/>
     </>
   },
-  play: async ({ canvas, userEvent }) => {
+  play: async ({ canvas, userEvent, loaded }) => {
     const complete = await canvas.findByRole('switch')
     await expect(complete).not.toBeChecked()
     await expect(canvas.getByText('0 badges')).toBeVisible()
     await userEvent.click(complete)
     await waitFor(() => expect(complete).toBeChecked())
     await expect(await canvas.findByText('1 badge')).toBeVisible()
-    const db = await getBadgerDb()
+    const db = getStorybookDb(loaded)
     await expect((await db.getCharacter('test1'))?.badges?.hangman?.owned).toBe(true)
     await userEvent.click(complete)
     await waitFor(() => expect(complete).not.toBeChecked())
