@@ -74,14 +74,14 @@ On Linux CI, use `npm run test:install -- --with-deps` to also install browser s
 
 | Command | Purpose |
 | --- | --- |
-| `npm test` | Run Vitest logic and interaction tests once |
+| `npm test` | Run logic tests, all story render checks, and interaction tests once |
 | `npm run test:unit` | Run logic and persistence tests in Node; no browser required |
-| `npm run test:ui` | Run selected Storybook scenarios in headless Chromium |
+| `npm run test:ui` | Render every Storybook story and run its interactions in headless Chromium |
 | `npm run test:storybook-build` | Smoke-test the existing Storybook build in Chromium |
 | `npm run test:watch` | Watch and rerun affected tests |
 | `npm run validate` | Run lint, tests, type-checking, and application/Storybook builds |
 
-Vitest runs two projects: `unit` discovers `*.test.ts` files under `src/` and `test/`, and `storybook` runs stories tagged `interaction`.
+Vitest runs two projects: `unit` discovers `*.test.ts` files under `src/` and `test/`, and `storybook` renders every story and runs any `play` function.
 For example, `npm run test:unit -- character.test.ts` runs one test file, and
 `npm run test:watch -- --project=storybook` watches browser tests only.
 The Storybook Vitest addon also runs and debugs interaction tests from the Storybook UI.
@@ -91,11 +91,13 @@ The initial examples cover character defaults and merging, import planning, buil
 and IndexedDB persistence. Parser fixtures in `test/support` contain small, explicit content bundles;
 they do not depend on a remote content server. Persistence tests use `fake-indexeddb` with the real database implementation.
 
-For UI behavior, add a `play` function and `tags: ['interaction']` to a story (or its metadata to include every story in that file).
+For UI behavior, add a `play` function. Use `tags: ['interaction']` to identify stories with interaction assertions;
+the tag is descriptive and is not required for test discovery.
 Use roles, accessible names, user interactions, and observable outcomes rather than DOM snapshots or CSS selectors.
 Await rendering and state changes instead of adding fixed delays. Existing examples cover form validation and saving,
 import action selection, badge totals, and badge collection through the real providers.
-Decorative stories remain available for manual inspection without automatically becoming test cases.
+Stories without a `play` function receive a render smoke test automatically. This catches rendering failures;
+it does not verify visual appearance or interactions that have no assertions.
 
 `StorybookProviders` supplies the theme, error notifications, content, and a memory router in one
 explicit provider tree. Every Joy UI wrapper is inside the theme. Routing starts at `/` and stays

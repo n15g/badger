@@ -75,7 +75,8 @@ for contribution and PR conventions, [README.md](README.md) for setup and comman
   Run focused tests during iteration and the full gate for code, configuration, or dependency changes.
 - Test stable observable behavior and important boundaries. Prefer small deterministic fixtures;
   do not make tests depend on live content servers or personal browser data.
-- Use Storybook `play` functions tagged `interaction` for selected browser scenarios. Await named
+- Render every Storybook story in the browser suite; add `play` functions tagged `interaction` for
+  behavior that needs assertions. The tag is descriptive, not a test-discovery filter. Await named
   elements and observable state using the test library's async utilities. Avoid fixed delays,
   custom polling loops, CSS selectors, and broad DOM snapshots.
 - Keep storage and character fixtures isolated. Use `storyParameters` to opt into an isolated

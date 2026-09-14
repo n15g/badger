@@ -17,7 +17,6 @@ export default defineConfig({
       {
         plugins: [storybookTest({
           storybookScript: 'npm run storybook -- --no-open',
-          tags: { include: ['interaction'] },
         })],
         test: {
           name: 'storybook',

@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- Updated the build system and development tooling, including Storybook and automated tests.
+
 ## [2.4.0] - 2026-08-20
 
 ### Added

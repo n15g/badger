@@ -93,9 +93,9 @@ has been verified separately.
   domain behavior. Colocate `*.test.ts` with the subject; reusable fixtures belong in `test/support`.
 - Use the real database implementation with `fake-indexeddb` for Node persistence tests. Keep
   each test's stored state independent and close owned connections during cleanup.
-- Use Storybook interaction tests for user actions and their observable outcomes. A story needs
-  a `play` function and the `interaction` tag to join the selected browser suite. The README
-  describes the isolated database and reactive character fixtures.
+- Every Storybook story receives a browser render smoke test. Add a `play` function for user actions
+  and their observable outcomes; the `interaction` tag identifies these stories but does not control
+  test discovery. The README describes the isolated database and reactive character fixtures.
 - Query controls by accessible role or name. Await rendering and state changes with supported
   async assertions; avoid sleeps, custom polling loops, DOM structure assertions, and blanket snapshots.
 - When fixing a bug, add a focused regression test that would fail without the fix where practical.

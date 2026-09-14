@@ -22,7 +22,8 @@ Badger directly uses `@base-ui-components/react` for five popovers. The stable p
 
 ### Extend focused test coverage
 
-Vitest covers representative logic and persistence behavior, and selected Storybook scenarios exercise browser interactions.
+Vitest covers representative logic and persistence behavior. Every Storybook story receives a browser render check,
+and selected scenarios exercise browser interactions.
 
 - Extend tests when changing high-risk logic such as character import, merging, persistence, or content-source selection.
 - Prefer stable domain behavior over broad UI snapshots or coverage targets.
