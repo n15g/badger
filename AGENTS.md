@@ -1,8 +1,9 @@
 # Badger agent guidance
 
 These instructions apply to the entire repository. Read [CONTRIBUTING.md](CONTRIBUTING.md)
-for contribution and PR conventions, [README.md](README.md) for setup and commands, and
-[TODO.md](TODO.md) before revisiting deliberate technical decisions.
+for contribution and PR conventions, [Development](docs/development.md) for setup,
+[Testing](docs/testing.md) for commands and fixtures, and [Maintenance](docs/maintenance.md)
+for dependency updates. Read [TODO.md](TODO.md) before revisiting deliberate technical decisions.
 
 ## Working agreement
 
@@ -26,7 +27,8 @@ for contribution and PR conventions, [README.md](README.md) for setup and comman
 - Keep application code under `src/app`, organized by feature. Keep component stories and focused
   logic tests beside their subjects. Imported images and fonts belong in `src/assets`.
 - Use `.storybook` for Storybook configuration, decorators, and fixtures. Shared test helpers and
-  sample import files belong in `test/support` and `test/fixtures`. See the README for the full layout.
+  sample import files belong in `test/support` and `test/fixtures`. See the
+  [development guide](docs/development.md#repository-layout) for the full layout.
 - `coh-content-db` provides the content model and query behavior. Homecoming badge, mission, zone,
   and contact data is maintained in `coh-content-db-homecoming`, not this repository. Reuse those
   contracts instead of duplicating content rules or adding hardcoded badge corrections to the UI.

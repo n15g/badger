@@ -5,7 +5,8 @@ application; badge and other game content is maintained in
 [coh-content-db-homecoming](https://github.com/n15g/coh-content-db-homecoming). Content-model and
 query changes belong in [coh-content-db](https://github.com/n15g/coh-content-db).
 
-See [README.md](README.md#development) for setup, the repository layout, and the command reference.
+See [Development](docs/development.md) for setup and the repository layout, and
+[Testing](docs/testing.md) for test commands and Storybook fixtures.
 [AGENTS.md](AGENTS.md) supplies additional instructions for coding agents.
 
 ## Working agreement
@@ -95,7 +96,8 @@ has been verified separately.
   each test's stored state independent and close owned connections during cleanup.
 - Every Storybook story receives a browser render smoke test. Add a `play` function for user actions
   and their observable outcomes; the `interaction` tag identifies these stories but does not control
-  test discovery. The README describes the isolated database and reactive character fixtures.
+  test discovery. The [testing guide](docs/testing.md#storybook-providers-and-fixtures) describes
+  the isolated database and reactive character fixtures.
 - Query controls by accessible role or name. Await rendering and state changes with supported
   async assertions; avoid sleeps, custom polling loops, DOM structure assertions, and blanket snapshots.
 - When fixing a bug, add a focused regression test that would fail without the fix where practical.
@@ -140,6 +142,6 @@ for every PR.
 
 ## Releases
 
-Follow the [release procedure](README.md#release). Do not bump the application version or publish
+Follow the [release procedure](docs/releasing.md). Do not bump the application version or publish
 a tag as an incidental part of a feature or documentation PR. Stable version tags deploy to
 GitHub Pages; prerelease tags retain build artifacts without replacing the stable site.
