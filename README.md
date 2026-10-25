@@ -137,8 +137,8 @@ mode instead of nesting another router inside it.
 `npm run storybook:build` also smoke-tests the generated site in Chromium. This checks Storybook's
 own runtime, which can behave differently from the Vitest runner, and requires `npm run test:install` first.
 
-Vitest 4 is used because the Storybook Vitest addon currently supports Vitest 3 and 4, including in Storybook 10.6.
-Keep `vitest` and `@vitest/browser-playwright` on matching versions, and check the addon's peer dependencies before a major upgrade.
+Keep `vitest` and `@vitest/browser-playwright` on matching versions compatible with the Storybook
+Vitest addon's peer dependencies. Upgrade the Storybook package family together.
 Both pull-request and release workflows run the tests before producing deployable artifacts.
 Failed browser assertions save screenshots under `test-results/`; CI uploads them as a downloadable artifact.
 
